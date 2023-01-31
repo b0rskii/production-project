@@ -1,4 +1,4 @@
-export const someFn = (arg: number): string => {
+export const someFn = (arg: number) => {
   console.log('work!');
-  return `${arg}`;
+  document.body.innerHTML = `<div>${arg}</div>`;
 };
