@@ -12,7 +12,7 @@ export const buildWebpackConfig = (options: BuildOptions): Configuration => {
     mode,
     entry: paths.entry,
     module: {
-      rules: buildLoaders(),
+      rules: buildLoaders(options),
     },
     resolve: buildResolve(),
     output: {
@@ -20,7 +20,7 @@ export const buildWebpackConfig = (options: BuildOptions): Configuration => {
       path: paths.build,
       clean: true,
     },
-    plugins: buildPlugins(paths),
+    plugins: buildPlugins(options),
     devtool: isDev ? 'inline-source-map' : undefined,
     devServer: isDev ? buildDevServer(options) : undefined,
   };

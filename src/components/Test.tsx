@@ -1,9 +1,9 @@
-import './Test.scss';
+import style from './Test.module.scss';
 
 export function Test() {
   return (
-    <div className='test'>
-      5
+    <div className={style.test}>
+      Work!
     </div>
   );
 }
