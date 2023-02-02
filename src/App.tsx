@@ -3,6 +3,7 @@ import { Suspense } from 'react';
 import { MainPageLazy } from './pages/MainPage/MainPage.lazy';
 import { AboutPageLazy } from './pages/AboutPage/AboutPage.lazy';
 import { useTheme } from './theme/useTheme';
+import { getClassNames } from './utils/classNames/getClassNames';
 import './styles/index.scss';
 
 enum AppRoute {
@@ -14,7 +15,7 @@ function App() {
   const {theme, toggleTheme} = useTheme();
 
   return (
-    <div className={`app ${theme}`}>
+    <div className={getClassNames('app', {}, [theme])}>
       <button onClick={toggleTheme}>ToggleTheme</button>
       <Link to={AppRoute.MAIN}>Main</Link>
       <Link to={AppRoute.ABOUT}>About</Link>
