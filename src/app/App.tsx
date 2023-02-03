@@ -1,9 +1,9 @@
 import { Routes, Route, Link } from 'react-router-dom';
 import { Suspense } from 'react';
-import { MainPageLazy } from './pages/MainPage/MainPage.lazy';
-import { AboutPageLazy } from './pages/AboutPage/AboutPage.lazy';
-import { useTheme } from './theme/useTheme';
-import { getClassNames } from './utils/classNames/getClassNames';
+import { MainPage } from 'pages/MainPage';
+import { AboutPage } from 'pages/AboutPage';
+import { useTheme } from 'shared/utils/theme';
+import { getClassNames } from 'shared/utils/classNames/getClassNames';
 import './styles/index.scss';
 
 enum AppRoute {
@@ -21,8 +21,8 @@ function App() {
       <Link to={AppRoute.ABOUT}>About</Link>
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
-          <Route path={AppRoute.MAIN} element={<MainPageLazy />} />
-          <Route path={AppRoute.ABOUT} element={<AboutPageLazy />} />
+          <Route path={AppRoute.MAIN} element={<MainPage />} />
+          <Route path={AppRoute.ABOUT} element={<AboutPage />} />
         </Routes>
       </Suspense>
     </div>
