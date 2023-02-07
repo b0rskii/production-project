@@ -17,12 +17,14 @@ export const routes: RouteProps[] = [
 
 export const Routing = () => {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <Routes>
-        {routes.map(({path, element}) => (
-          <Route path={path} element={element} key={path} />
-        ))}
-      </Routes>
-    </Suspense>
+    <div className='page-wrapper'>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
+          {routes.map(({path, element}) => (
+            <Route path={path} element={element} key={path} />
+          ))}
+        </Routes>
+      </Suspense>
+    </div>
   );
 };
