@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import { Routing } from 'pages';
 import { useTheme } from 'shared/utils/theme';
-import { getClassNames } from 'shared/utils/classNames/getClassNames';
+import { getClassNames } from 'shared/utils/classNames';
 import { Navbar } from 'widgets/Navbar';
 import { Sidebar } from 'widgets/Sidebar';
 import './styles/index.scss';

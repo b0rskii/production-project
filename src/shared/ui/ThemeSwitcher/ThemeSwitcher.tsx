@@ -1,4 +1,4 @@
-import { getClassNames } from 'shared/utils/classNames/getClassNames';
+import { getClassNames } from 'shared/utils/classNames';
 import { useTheme, Theme } from 'shared/utils/theme';
 import { Button, ThemeButton } from 'shared/ui/Button';
 import LightIcon from 'shared/assets/icons/theme-light.svg';

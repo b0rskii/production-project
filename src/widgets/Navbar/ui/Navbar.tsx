@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { RoutePath } from 'shared/config/routing';
-import { getClassNames } from 'shared/utils/classNames/getClassNames';
+import { getClassNames } from 'shared/utils/classNames';
 import { AppLink } from 'shared/ui/AppLink';
 import style from './Navbar.module.scss';
 
