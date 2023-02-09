@@ -8,22 +8,22 @@ import { MainPage } from './MainPage';
 export const routes: RouteProps[] = [
   {
     path: RoutePath.MAIN,
-    element: <MainPage />
+    element: <MainPage />,
   },
   {
     path: RoutePath.ABOUT,
-    element: <AboutPage />
-  }
+    element: <AboutPage />,
+  },
 ];
 
 export const Routing = () => {
-  const {t} = useTranslation();
+  const { t } = useTranslation();
 
   return (
-    <div className='page-wrapper'>
+    <div className="page-wrapper">
       <Suspense fallback={<div>{t('Загрузка')}</div>}>
         <Routes>
-          {routes.map(({path, element}) => (
+          {routes.map(({ path, element }) => (
             <Route path={path} element={element} key={path} />
           ))}
         </Routes>

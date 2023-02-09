@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { RoutePath } from 'shared/config/routing';
 import { getClassNames } from 'shared/utils/classNames';
@@ -8,9 +9,9 @@ type NavbarProps = {
   className?: string;
 };
 
-export const Navbar: React.FC<NavbarProps> = (props: NavbarProps) => {
-  const {className} = props;
-  const {t} = useTranslation();
+export const Navbar: FC<NavbarProps> = (props: NavbarProps) => {
+  const { className } = props;
+  const { t } = useTranslation();
 
   return (
     <nav className={getClassNames(style.navbar, {}, [className])}>
@@ -20,4 +21,4 @@ export const Navbar: React.FC<NavbarProps> = (props: NavbarProps) => {
       </div>
     </nav>
   );
-}
+};

@@ -5,5 +5,5 @@ import { useTheme } from './useTheme';
 export {
   ThemeProvider,
   useTheme,
-  Theme
+  Theme,
 };

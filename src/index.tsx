@@ -11,5 +11,5 @@ render(
       <App />
     </ThemeProvider>
   </BrowserRouter>,
-  document.querySelector('#root')
+  document.querySelector('#root'),
 );

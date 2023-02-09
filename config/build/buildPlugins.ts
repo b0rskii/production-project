@@ -1,10 +1,10 @@
-import { WebpackPluginInstance, ProgressPlugin, DefinePlugin } from 'webpack';
-import { BuildOptions } from './types/config';
 import HTMLWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import { WebpackPluginInstance, ProgressPlugin, DefinePlugin } from 'webpack';
+import { BuildOptions } from './types/config';
 
 export const buildPlugins = (options: BuildOptions): WebpackPluginInstance[] => {
-  const {paths, isDev} = options;
+  const { paths, isDev } = options;
 
   return [
     new HTMLWebpackPlugin({

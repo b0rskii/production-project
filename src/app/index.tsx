@@ -7,13 +7,13 @@ import { Sidebar } from 'widgets/Sidebar';
 import './styles/index.scss';
 
 export const App = () => {
-  const {theme} = useTheme();
+  const { theme } = useTheme();
 
   return (
     <div className={getClassNames('app', {}, [theme])}>
-      <Suspense fallback=''>
+      <Suspense fallback="">
         <Navbar />
-        <div className='page-content'>
+        <div className="page-content">
           <Sidebar />
           <Routing />
         </div>

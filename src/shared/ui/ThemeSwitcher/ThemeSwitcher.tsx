@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import { getClassNames } from 'shared/utils/classNames';
 import { useTheme, Theme } from 'shared/utils/theme';
 import { Button, ThemeButton } from 'shared/ui/Button';
@@ -9,9 +10,9 @@ type ThemeSwitcherProps = {
   className?: string;
 };
 
-export const ThemeSwitcher: React.FC<ThemeSwitcherProps> = (props) => {
+export const ThemeSwitcher: FC<ThemeSwitcherProps> = (props) => {
   const { className } = props;
-  const {theme, toggleTheme} = useTheme();
+  const { theme, toggleTheme } = useTheme();
 
   return (
     <Button
@@ -21,5 +22,5 @@ export const ThemeSwitcher: React.FC<ThemeSwitcherProps> = (props) => {
     >
       {theme === Theme.LIGHT ? <LightIcon /> : <DarkIcon />}
     </Button>
- );
-}
+  );
+};
