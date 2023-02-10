@@ -22,7 +22,7 @@ export const Sidebar: FC<SidebarProps> = (props) => {
         type="button"
         onClick={onToggleButtonClick}
       >
-        Toggle
+        ***
       </button>
       <div className={style.switchers}>
         <ThemeSwitcher />
