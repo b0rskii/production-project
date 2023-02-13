@@ -12,6 +12,7 @@ const paths: BuildPaths = {
 export default (env: BuildEnv) => {
   const PORT = env.port || 3000;
   const MODE = env.mode || 'development';
+  const IS_ANALYZE = Boolean(env.isAnalyze);
 
   const isDev = MODE === 'development';
 
@@ -20,6 +21,7 @@ export default (env: BuildEnv) => {
     paths,
     isDev,
     port: PORT,
+    isAnalyze: IS_ANALYZE,
   });
 
   return config;

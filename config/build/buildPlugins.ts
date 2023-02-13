@@ -1,12 +1,13 @@
 import HTMLWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { WebpackPluginInstance, ProgressPlugin, DefinePlugin } from 'webpack';
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import { BuildOptions } from './types/config';
 
 export const buildPlugins = (options: BuildOptions): WebpackPluginInstance[] => {
-  const { paths, isDev } = options;
+  const { paths, isDev, isAnalyze } = options;
 
-  return [
+  const plugins = [
     new HTMLWebpackPlugin({
       template: paths.html,
     }),
@@ -19,4 +20,10 @@ export const buildPlugins = (options: BuildOptions): WebpackPluginInstance[] => 
       __IS_DEV__: JSON.stringify(isDev),
     }),
   ];
+
+  if (isAnalyze) {
+    plugins.push(new BundleAnalyzerPlugin());
+  }
+
+  return plugins;
 };
