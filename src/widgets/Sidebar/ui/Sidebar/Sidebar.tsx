@@ -17,10 +17,14 @@ export const Sidebar: FC<SidebarProps> = (props) => {
   };
 
   return (
-    <div className={getClassNames(style.sidebar, { [style.collapsed]: collapsed }, [className])}>
+    <div
+      className={getClassNames(style.sidebar, { [style.collapsed]: collapsed }, [className])}
+      data-testid="sidebar"
+    >
       <button
         type="button"
         onClick={onToggleButtonClick}
+        data-testid="sidebar-toggler"
       >
         ***
       </button>

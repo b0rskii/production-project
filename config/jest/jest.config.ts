@@ -1,21 +1,8 @@
-/*
- * For a detailed explanation regarding each configuration property and type check, visit:
- * https://jestjs.io/docs/configuration
- */
+import path from 'path';
 
 export default {
-  // All imported modules in your tests should be mocked automatically
-  // automock: false,
-
-  // Stop running tests after `n` failures
-  // bail: 0,
-
-  // The directory where Jest should store its cached dependency information
-  // cacheDirectory: "C:\\Users\\Borskii\\AppData\\Local\\Temp\\jest",
-
-  // Automatically clear mock calls, instances and results before every test
   clearMocks: true,
-  coverageProvider: 'v8',
+  testEnvironment: 'jsdom',
   coveragePathIgnorePatterns: [
     '\\\\node_modules\\\\',
   ],
@@ -30,14 +17,18 @@ export default {
   moduleDirectories: [
     'node_modules',
   ],
-  testEnvironment: 'jsdom',
+  modulePaths: [
+    '<rootDir>src',
+  ],
+  moduleNameMapper: {
+    '\\.s?css$': 'identity-obj-proxy',
+    '\\.svg': path.resolve(__dirname, 'JestEmptyComponent.tsx'),
+  },
   testMatch: [
     '<rootDir>src/**/*(*.)@(spec|test).[tj]s?(x)',
-    // '**/__tests__/**/*.[jt]s?(x)',
-    // '**/?(*.)+(spec|test).[tj]s?(x)',
   ],
-  preset: 'ts-jest',
-
+  rootDir: '../../',
+  setupFilesAfterEnv: ['<rootDir>config/jest/setupTests.ts'],
   // Indicates whether the coverage information should be collected while executing the test
   // collectCoverage: false,
 
@@ -50,6 +41,7 @@ export default {
   // An array of regexp pattern strings used to skip coverage collection
 
   // Indicates which provider should be used to instrument code for coverage
+  // coverageProvider: "babel",
 
   // A list of reporter names that Jest uses when writing coverage reports
   // coverageReporters: [
@@ -100,6 +92,7 @@ export default {
   // notifyMode: "failure-change",
 
   // A preset that is used as a base for Jest's configuration
+  // preset: undefined,
 
   // Run tests from one or more projects
   // projects: undefined,
@@ -120,7 +113,6 @@ export default {
   // restoreMocks: false,
 
   // The root directory that Jest should scan for tests and modules within
-  // rootDir: undefined,
 
   // A list of paths to directories that Jest should use to search for files in
   // roots: [
