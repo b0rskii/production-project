@@ -4,6 +4,7 @@ import style from './Button.module.scss';
 
 export enum ThemeButton {
   CLEAR = 'clear',
+  OUTLINE = 'outline',
   DEFAULT = 'default',
 }
 
