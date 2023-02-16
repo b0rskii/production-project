@@ -15,5 +15,17 @@ export default ({ config }: {config: webpack.Configuration}) => {
   config.resolve?.extensions?.push('ts', 'tsx');
   config.module?.rules?.push(buildCssLoader(true));
 
+  // eslint-disable-next-line no-param-reassign
+  config.module!.rules = config.module!.rules!.map((rule: any) => {
+    if (/svg/i.test(rule.test as string)) {
+      return {
+        test: /\.svg$/,
+        use: ['@svgr/webpack'],
+      };
+    }
+
+    return rule;
+  });
+
   return config;
 };
