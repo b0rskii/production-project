@@ -17,34 +17,30 @@ export default {
 const Template: ComponentStory<typeof Button> = (args) => <Button {...args} />;
 
 export const Default = Template.bind({});
-Default.args = {
-  them: ThemeButton.DEFAULT,
-};
+Default.args = {};
 
 export const Clear = Template.bind({});
 Clear.args = {
-  them: ThemeButton.CLEAR,
+  theme: ThemeButton.CLEAR,
 };
 
 export const Outline = Template.bind({});
 Outline.args = {
-  them: ThemeButton.OUTLINE,
+  theme: ThemeButton.OUTLINE,
 };
 
 export const DefaultDark = Template.bind({});
-DefaultDark.args = {
-  them: ThemeButton.DEFAULT,
-};
+DefaultDark.args = {};
 DefaultDark.decorators = [ThemeDecorator(Theme.DARK)];
 
 export const ClearDark = Template.bind({});
 ClearDark.args = {
-  them: ThemeButton.CLEAR,
+  theme: ThemeButton.CLEAR,
 };
 ClearDark.decorators = [ThemeDecorator(Theme.DARK)];
 
 export const OutlineDark = Template.bind({});
 OutlineDark.args = {
-  them: ThemeButton.OUTLINE,
+  theme: ThemeButton.OUTLINE,
 };
 OutlineDark.decorators = [ThemeDecorator(Theme.DARK)];
