@@ -1,17 +1,15 @@
 import { fireEvent, screen } from '@testing-library/react';
-import {
-  renderWithTranslation,
-} from 'shared/utils/tests/renderWithTranslation/renderWithTranslation';
+import { renderComponent } from 'shared/utils/tests/renderComponent';
 import { Sidebar } from './Sidebar';
 
 describe('Sidebar', () => {
   it('should render correctly', () => {
-    renderWithTranslation(<Sidebar />);
+    renderComponent(<Sidebar />);
     expect(screen.getByTestId('sidebar')).toBeInTheDocument();
   });
 
   it('should toggle sidebar mode on toggler click', () => {
-    renderWithTranslation(<Sidebar />);
+    renderComponent(<Sidebar />);
 
     const toggler = screen.getByTestId('sidebar-toggler');
     fireEvent.click(toggler);

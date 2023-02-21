@@ -2,30 +2,44 @@ import { FC, ButtonHTMLAttributes } from 'react';
 import { getClassNames } from 'shared/utils/classNames';
 import style from './Button.module.scss';
 
-export enum ThemeButton {
+export enum ButtonTheme {
+  DEFAULT = 'default',
   CLEAR = 'clear',
   OUTLINE = 'outline',
-  DEFAULT = 'default',
+  BACKGROUND = 'background',
+  BACKGROUND_INVERTED = 'backgroundInverted',
 }
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
-  theme?: ThemeButton;
+  theme?: ButtonTheme;
+  square?: boolean;
+  size?: 'm' | 'l' | 'xl';
 }
 
 export const Button: FC<ButtonProps> = (props) => {
   const {
     className,
     children,
-    theme = ThemeButton.DEFAULT,
+    theme = ButtonTheme.DEFAULT,
+    square,
+    size = 'm',
     ...otherProps
   } = props;
+
+  const modes = {
+    [style.square]: square,
+  };
 
   return (
     <button
       {...otherProps}
       type="button"
-      className={getClassNames(style.button, {}, [className, style[theme]])}
+      className={getClassNames(
+        style.button,
+        modes,
+        [className, style[theme], style[`size_${size}`]],
+      )}
     >
       {children}
     </button>
