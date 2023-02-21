@@ -64,6 +64,7 @@ export const Sidebar: FC<SidebarProps> = (props) => {
           <AppLink
             className={style.link}
             to={route}
+            key={route}
           >
             {icon}
             {collapsed ? null : t(translationKey)}
