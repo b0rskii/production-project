@@ -1,10 +1,12 @@
 import {
   FC,
-  // useEffect,
+  useCallback,
+  useEffect,
   useRef,
   useState,
 } from 'react';
 import { getClassNames } from 'shared/utils/classNames/getClassNames';
+import { Key } from 'shared/const';
 import { Portal } from 'shared/ui/Portal';
 import style from './Modal.module.scss';
 
@@ -32,7 +34,7 @@ export const Modal: FC<ModalProps> = (props) => {
     [style.closing]: isClosing,
   };
 
-  const closeHandler = () => {
+  const closeHandler = useCallback(() => {
     if (onClose) {
       setIsClosing(true);
 
@@ -41,11 +43,24 @@ export const Modal: FC<ModalProps> = (props) => {
         setIsClosing(false);
       }, CLOSING_ANIMATION_DURATION);
     }
-  };
+  }, [onClose]);
 
-  // useEffect(() => () => {
-  //   clearTimeout(timeoutRef.current);
-  // });
+  const escKeydownHandler = useCallback((evt: KeyboardEvent) => {
+    if (evt.key === Key.ESCAPE) {
+      closeHandler();
+    }
+  }, [closeHandler]);
+
+  useEffect(() => {
+    if (isOpen) {
+      document.addEventListener('keydown', escKeydownHandler);
+    }
+
+    return () => {
+      clearTimeout(timeoutRef.current);
+      document.removeEventListener('keydown', escKeydownHandler);
+    };
+  }, [isOpen, escKeydownHandler]);
 
   return (
     <Portal>

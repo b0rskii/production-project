@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, ButtonTheme } from 'shared/ui/Button';
 import { Modal } from 'shared/ui/Modal';
@@ -14,6 +14,8 @@ export const Navbar: FC<NavbarProps> = (props: NavbarProps) => {
   const { t } = useTranslation();
   const [isAuthModalOpened, setIsAuthModalOpened] = useState(false);
 
+  const onCloseModal = useCallback(() => setIsAuthModalOpened(false), []);
+
   return (
     <nav className={getClassNames(style.navbar, {}, [className])}>
       <div className={style.links} />
@@ -25,9 +27,11 @@ export const Navbar: FC<NavbarProps> = (props: NavbarProps) => {
       </Button>
       <Modal
         isOpen={isAuthModalOpened}
-        onClose={() => setIsAuthModalOpened(false)}
+        onClose={onCloseModal}
       >
-        <div style={{ width: '300px', height: '200px', background: 'gray' }} />
+        {/* eslint-disable-next-line i18next/no-literal-string */}
+        {/* eslint-disable-next-line max-len */}
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto, est dignissimos, quisquam dolorem animi aspernatur vitae expedita eveniet quasi exercitationem natus totam libero maiores quidem soluta veritatis beatae qui vero!
       </Modal>
     </nav>
   );
