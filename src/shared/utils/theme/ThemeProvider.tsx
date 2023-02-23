@@ -13,8 +13,11 @@ const ThemeProvider: FC<ThemeProviderProps> = (props) => {
 
   const [theme, setTheme] = useState(
     initialTheme
-    || localStorage.getItem(LOCAL_STORAGE_THEME_KEY) as Theme,
+    || localStorage.getItem(LOCAL_STORAGE_THEME_KEY) as Theme
+    || Theme.LIGHT,
   );
+
+  document.body.className = theme;
 
   const defaultProps = useMemo(() => ({
     theme,
