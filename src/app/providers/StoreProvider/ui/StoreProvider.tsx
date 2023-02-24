@@ -1,9 +1,9 @@
 import { FC } from 'react';
 import { Provider } from 'react-redux';
-import { StateSchema } from '../config/StateSchema';
+import { StateSchema } from '../config/stateSchema';
 import { createReduxStore } from '../config/store';
 
-export type StoreProviderProps = {
+type StoreProviderProps = {
   initialState?: StateSchema;
 };
 
