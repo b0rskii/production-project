@@ -17,10 +17,10 @@ export const Counter: FC = () => {
   };
 
   return (
-    <div>
-      <h1>{value}</h1>
-      <Button onClick={onIncrementClick}>+</Button>
-      <Button onClick={onDecrementClick}>-</Button>
+    <div data-testid="counter">
+      <h1 data-testid="counter-value">{value}</h1>
+      <Button data-testid="counter-increment-button" onClick={onIncrementClick}>+</Button>
+      <Button data-testid="counter-decrement-button" onClick={onDecrementClick}>-</Button>
     </div>
   );
 };
