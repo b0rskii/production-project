@@ -1,5 +1,5 @@
-import { CounterSchema, COUNTER_NAME } from 'entities/Counter';
+import { CounterSchema } from 'entities/Counter';
 
 export type StateSchema = {
-  [COUNTER_NAME]: CounterSchema;
+  counter: CounterSchema;
 };
