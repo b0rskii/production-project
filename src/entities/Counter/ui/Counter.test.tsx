@@ -1,3 +1,4 @@
+import { DeepPartial } from '@reduxjs/toolkit';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { StateSchema } from 'app/providers/StoreProvider';
@@ -5,7 +6,7 @@ import { renderComponent } from 'shared/utils/tests/renderComponent';
 import { Counter } from './Counter';
 
 const VALUE = 10;
-const initialState: StateSchema = { counter: { value: VALUE } };
+const initialState: DeepPartial<StateSchema> = { counter: { value: VALUE } };
 
 describe('Counter', () => {
   it('should render correctly', () => {

@@ -10,7 +10,7 @@ import { Key } from 'shared/const';
 import { Portal } from 'shared/ui/Portal';
 import style from './Modal.module.scss';
 
-const CLOSING_ANIMATION_DURATION = 100;
+const ANIMATION_DURATION = 100;
 
 type ModalProps = {
   className?: string;
@@ -26,22 +26,19 @@ export const Modal: FC<ModalProps> = (props) => {
     onClose,
   } = props;
 
+  const [isOpening, setIsOpening] = useState(true);
   const [isClosing, setIsClosing] = useState(false);
-  const timeoutRef = useRef<ReturnType<typeof setTimeout>>();
-
-  const modes = {
-    [style.opened]: isOpen,
-    [style.closing]: isClosing,
-  };
+  const closingTimeoutRef = useRef<ReturnType<typeof setTimeout>>();
+  const openingTmeoutRef = useRef<ReturnType<typeof setTimeout>>();
 
   const closeHandler = useCallback(() => {
     if (onClose) {
       setIsClosing(true);
 
-      timeoutRef.current = setTimeout(() => {
+      closingTimeoutRef.current = setTimeout(() => {
         onClose();
         setIsClosing(false);
-      }, CLOSING_ANIMATION_DURATION);
+      }, ANIMATION_DURATION);
     }
   }, [onClose]);
 
@@ -52,15 +49,32 @@ export const Modal: FC<ModalProps> = (props) => {
   }, [closeHandler]);
 
   useEffect(() => {
+    if (isOpening) {
+      openingTmeoutRef.current = setTimeout(() => {
+        setIsOpening(false);
+      }, ANIMATION_DURATION);
+    }
+
+    return () => {
+      clearTimeout(openingTmeoutRef.current);
+    };
+  }, [isOpening]);
+
+  useEffect(() => {
     if (isOpen) {
       document.addEventListener('keydown', escKeydownHandler);
     }
 
     return () => {
-      clearTimeout(timeoutRef.current);
+      clearTimeout(closingTimeoutRef.current);
       document.removeEventListener('keydown', escKeydownHandler);
     };
   }, [isOpen, escKeydownHandler]);
+
+  const modes = {
+    [style.opened]: !isOpening,
+    [style.closing]: isClosing,
+  };
 
   return (
     <Portal>
