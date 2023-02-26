@@ -28,8 +28,8 @@ export const Modal: FC<ModalProps> = (props) => {
 
   const [isOpening, setIsOpening] = useState(true);
   const [isClosing, setIsClosing] = useState(false);
-  const closingTimeoutRef = useRef<ReturnType<typeof setTimeout>>();
   const openingTmeoutRef = useRef<ReturnType<typeof setTimeout>>();
+  const closingTimeoutRef = useRef<ReturnType<typeof setTimeout>>();
 
   const closeHandler = useCallback(() => {
     if (onClose) {
@@ -52,7 +52,7 @@ export const Modal: FC<ModalProps> = (props) => {
     if (isOpening) {
       openingTmeoutRef.current = setTimeout(() => {
         setIsOpening(false);
-      }, ANIMATION_DURATION);
+      });
     }
 
     return () => {
