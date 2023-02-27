@@ -1,10 +1,12 @@
 import { FC, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginActions, loginSelectors } from 'features/AuthByUsername';
-import { Button } from 'shared/ui/Button';
+import { Button, ButtonTheme } from 'shared/ui/Button';
 import { Input } from 'shared/ui/Input';
 import { getClassNames } from 'shared/utils/classNames/getClassNames';
+import { loginSelectors } from '../../model/selectors';
+import { loginActions } from '../../model/slice/loginSlice';
+import { loginByUserName } from '../../model/services/loginByUserName/loginByUserName';
 import style from './LoginForm.module.scss';
 
 type LoginFormProps = {
@@ -15,7 +17,12 @@ export const LoginForm: FC<LoginFormProps> = (props) => {
   const { className } = props;
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const { username, password } = useSelector(loginSelectors.getLoginState);
+  const {
+    username,
+    password,
+    isLoading,
+    error,
+  } = useSelector(loginSelectors.getLoginState);
 
   const usernameChangeHandler = useCallback((value: string) => {
     dispatch(loginActions.setUsername(value));
@@ -26,11 +33,12 @@ export const LoginForm: FC<LoginFormProps> = (props) => {
   }, [dispatch]);
 
   const loginButtonClickHandler = useCallback(() => {
-
-  }, []);
+    dispatch(loginByUserName());
+  }, [dispatch]);
 
   return (
     <div className={getClassNames(style.loginForm, {}, [className])}>
+      {error && <span className={style.error}>{error}</span>}
       <Input
         className={style.input}
         type="text"
@@ -48,7 +56,9 @@ export const LoginForm: FC<LoginFormProps> = (props) => {
 
       <Button
         className={style.button}
+        theme={ButtonTheme.OUTLINE}
         onClick={loginButtonClickHandler}
+        disabled={isLoading}
       >
         {t('Войти')}
       </Button>

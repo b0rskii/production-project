@@ -75,6 +75,12 @@ SquareSizeXL.args = {
   square: true,
 };
 
+export const Disabled = Template.bind({});
+Disabled.args = {
+  theme: ButtonTheme.OUTLINE,
+  disabled: true,
+};
+
 export const DefaultDark = Template.bind({});
 DefaultDark.args = {};
 DefaultDark.decorators = [ThemeDecorator(Theme.DARK)];
@@ -108,3 +114,10 @@ BackgroundInvertedDark.args = {
   theme: ButtonTheme.BACKGROUND_INVERTED,
 };
 BackgroundInvertedDark.decorators = [ThemeDecorator(Theme.DARK)];
+
+export const DisabledDark = Template.bind({});
+DisabledDark.args = {
+  theme: ButtonTheme.OUTLINE,
+  disabled: true,
+};
+DisabledDark.decorators = [ThemeDecorator(Theme.DARK)];

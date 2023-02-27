@@ -3,6 +3,10 @@
   color: var(--inverted-primary-color);
   border-radius: 4px;
   cursor: pointer;
+
+  &:disabled {
+    opacity: 0.5;
+  }
 }
 
 .clear,

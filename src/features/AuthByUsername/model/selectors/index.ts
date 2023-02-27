@@ -1,1 +1,1 @@
-export { getLoginState } from './getLoginState/getLoginState';
+export * as loginSelectors from './getLoginState/getLoginState';
