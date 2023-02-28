@@ -40,7 +40,7 @@ export const LoginForm: FC<LoginFormProps> = (props) => {
   return (
     <div className={getClassNames(style.loginForm, {}, [className])}>
       <Text title={t('Форма авторизации')} />
-      {error && <Text text={error} theme={TextTheme.ERROR} />}
+      {error && <Text text={t('Неверный логин или пароль')} theme={TextTheme.ERROR} />}
       <Input
         className={style.input}
         type="text"

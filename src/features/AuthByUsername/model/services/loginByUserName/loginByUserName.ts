@@ -2,7 +2,6 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { StateSchema } from 'app/providers/StoreProvider';
 import { User, userActions } from 'entities/User';
-import { i18n } from 'shared/utils/i18n';
 import { LocalStorageKey } from 'shared/const/localStorage';
 import { NAME } from '../../slice/loginSlice';
 
@@ -31,7 +30,7 @@ export const loginByUserName = createAsyncThunk<User, undefined, ThunkAPI>(
 
       return data;
     } catch (error) {
-      return rejectWithValue(i18n.t('Неверный логин или пароль'));
+      return rejectWithValue('error');
     }
   },
 );
