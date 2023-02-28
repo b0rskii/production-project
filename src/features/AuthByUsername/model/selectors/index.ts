@@ -1,1 +1,5 @@
-export * as loginSelectors from './getLoginState/getLoginState';
+import { getLoginState } from './getLoginState/getLoginState';
+
+export const loginSelectors = {
+  getLoginState,
+};

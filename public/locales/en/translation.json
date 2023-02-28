@@ -8,5 +8,7 @@
   "Войти": "Login",
   "Имя пользователя": "User name",
   "Пароль": "Password",
-  "Форма авторизации": "Login form"
+  "Форма авторизации": "Login form",
+  "Неверный логин или пароль": "Wrong login or password",
+  "Выйти": "Logout"
 }

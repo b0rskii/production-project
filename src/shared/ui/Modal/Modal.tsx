@@ -6,7 +6,7 @@ import {
   useState,
 } from 'react';
 import { getClassNames } from 'shared/utils/classNames/getClassNames';
-import { Key } from 'shared/const';
+import { Key } from 'shared/const/keys';
 import { Portal } from 'shared/ui/Portal';
 import style from './Modal.module.scss';
 
