@@ -2,6 +2,7 @@ import { FC, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, ButtonTheme } from 'shared/ui/Button';
+import { Text, TextTheme } from 'shared/ui/Text';
 import { Input } from 'shared/ui/Input';
 import { getClassNames } from 'shared/utils/classNames/getClassNames';
 import { loginSelectors } from '../../model/selectors';
@@ -38,7 +39,8 @@ export const LoginForm: FC<LoginFormProps> = (props) => {
 
   return (
     <div className={getClassNames(style.loginForm, {}, [className])}>
-      {error && <span className={style.error}>{error}</span>}
+      <Text title={t('Форма авторизации')} />
+      {error && <Text text={error} theme={TextTheme.ERROR} />}
       <Input
         className={style.input}
         type="text"
