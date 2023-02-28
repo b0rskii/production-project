@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { getClassNames } from 'shared/utils/classNames/getClassNames';
-import { Button } from 'shared/ui/Button';
+import { Button, ButtonTheme } from 'shared/ui/Button';
 import style from './PageError.module.scss';
 
 type PageErrorProps = {
@@ -21,7 +21,12 @@ export const PageError: FC<PageErrorProps> = (props) => {
   return (
     <div className={getClassNames(style.pageError, {}, [className])}>
       <p>{t('Произошла непредвиденная ошибка')}</p>
-      <Button onClick={onRefreshButtonClick}>{t('Обновить страницу')}</Button>
+      <Button
+        onClick={onRefreshButtonClick}
+        theme={ButtonTheme.OUTLINE}
+      >
+        {t('Обновить страницу')}
+      </Button>
     </div>
   );
 };

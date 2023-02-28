@@ -1,7 +1,7 @@
 import { FC, ReactNode, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { RoutePath } from 'shared/config/routing';
-import { AppLink } from 'shared/ui/AppLink';
+import { AppLink, AppLinkTheme } from 'shared/ui/AppLink';
 import { getClassNames } from 'shared/utils/classNames';
 import { ThemeSwitcher } from 'shared/ui/ThemeSwitcher';
 import { LangSwitcher } from 'shared/ui/LangSwitcher';
@@ -50,7 +50,7 @@ export const Sidebar: FC<SidebarProps> = (props) => {
       <Button
         className={style.toggler}
         type="button"
-        theme={ButtonTheme.OUTLINE}
+        theme={ButtonTheme.OUTLINE_INVERTED}
         size="xl"
         square
         onClick={onToggleButtonClick}
@@ -64,6 +64,7 @@ export const Sidebar: FC<SidebarProps> = (props) => {
           <AppLink
             className={style.link}
             to={route}
+            theme={AppLinkTheme.PRIMARY_INVERTED}
             key={route}
           >
             {icon}

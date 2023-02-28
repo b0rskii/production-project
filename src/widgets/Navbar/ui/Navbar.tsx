@@ -37,7 +37,7 @@ export const Navbar: FC<NavbarProps> = (props: NavbarProps) => {
 
       {userAuthData ? (
         <Button
-          theme={ButtonTheme.OUTLINE}
+          theme={ButtonTheme.OUTLINE_INVERTED}
           onClick={logoutButtonClickHandler}
         >
           {t('Выйти')}
@@ -45,7 +45,7 @@ export const Navbar: FC<NavbarProps> = (props: NavbarProps) => {
       ) : (
         <Button
           onClick={loginButtonClickHandler}
-          theme={ButtonTheme.OUTLINE}
+          theme={ButtonTheme.OUTLINE_INVERTED}
         >
           {t('Войти')}
         </Button>
