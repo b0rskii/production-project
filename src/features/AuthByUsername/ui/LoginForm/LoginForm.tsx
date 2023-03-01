@@ -5,16 +5,17 @@ import { Button, ButtonTheme } from 'shared/ui/Button';
 import { Text, TextTheme } from 'shared/ui/Text';
 import { Input } from 'shared/ui/Input';
 import { getClassNames } from 'shared/utils/classNames/getClassNames';
+import { useAsyncReducer } from 'shared/utils/useAsyncReducer';
 import { loginSelectors } from '../../model/selectors';
-import { loginActions } from '../../model/slice/loginSlice';
+import { loginActions, loginReducer, NAME } from '../../model/slice/loginSlice';
 import { loginByUserName } from '../../model/services/loginByUserName/loginByUserName';
 import style from './LoginForm.module.scss';
 
-type LoginFormProps = {
+export type LoginFormProps = {
   className?: string;
 };
 
-export const LoginForm: FC<LoginFormProps> = (props) => {
+const LoginForm: FC<LoginFormProps> = (props) => {
   const { className } = props;
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -24,6 +25,8 @@ export const LoginForm: FC<LoginFormProps> = (props) => {
     isLoading,
     error,
   } = useSelector(loginSelectors.getLoginState);
+
+  useAsyncReducer(NAME, loginReducer);
 
   const usernameChangeHandler = useCallback((value: string) => {
     dispatch(loginActions.setUsername(value));
@@ -67,3 +70,5 @@ export const LoginForm: FC<LoginFormProps> = (props) => {
     </div>
   );
 };
+
+export default LoginForm;

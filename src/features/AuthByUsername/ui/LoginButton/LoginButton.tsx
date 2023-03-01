@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { userSelectors, userActions } from 'entities/User';
 import { Button, ButtonTheme } from 'shared/ui/Button';
-import { loginActions } from '../../model/slice/loginSlice';
 import { LoginModal } from '../LoginModal/LoginModal';
 
 type LoginButtonProps = {
@@ -19,8 +18,7 @@ export const LoginButton: FC<LoginButtonProps> = (props: LoginButtonProps) => {
 
   const onCloseModal = useCallback(() => {
     setIsAuthModalOpened(false);
-    dispatch(loginActions.clearData());
-  }, [dispatch]);
+  }, []);
 
   const loginButtonClickHandler = useCallback(() => {
     setIsAuthModalOpened(true);
