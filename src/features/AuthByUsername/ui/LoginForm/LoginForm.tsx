@@ -13,10 +13,11 @@ import style from './LoginForm.module.scss';
 
 export type LoginFormProps = {
   className?: string;
+  onSuccess: () => void;
 };
 
 const LoginForm: FC<LoginFormProps> = (props) => {
-  const { className } = props;
+  const { className, onSuccess } = props;
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const {
@@ -36,9 +37,13 @@ const LoginForm: FC<LoginFormProps> = (props) => {
     dispatch(loginActions.setPassword(value));
   }, [dispatch]);
 
-  const loginButtonClickHandler = useCallback(() => {
-    dispatch(loginByUserName({ username, password }));
-  }, [dispatch, username, password]);
+  const loginButtonClickHandler = useCallback(async () => {
+    const result = await dispatch(loginByUserName({ username, password }));
+
+    if (result.meta.requestStatus === 'fulfilled') {
+      onSuccess();
+    }
+  }, [dispatch, username, password, onSuccess]);
 
   return (
     <div className={getClassNames(style.loginForm, {}, [className])}>

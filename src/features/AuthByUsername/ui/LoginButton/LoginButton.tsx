@@ -27,7 +27,6 @@ export const LoginButton: FC<LoginButtonProps> = (props: LoginButtonProps) => {
 
   const logoutButtonClickHandler = useCallback(() => {
     dispatch(userActions.logout());
-    setIsAuthModalOpened(false);
   }, [dispatch]);
 
   return (
@@ -47,7 +46,7 @@ export const LoginButton: FC<LoginButtonProps> = (props: LoginButtonProps) => {
           {t('Войти')}
         </Button>
       )}
-      {isAuthModalOpened && !userAuthData && (
+      {isAuthModalOpened && (
         <LoginModal
           isOpen={isAuthModalOpened}
           onClose={onCloseModal}
