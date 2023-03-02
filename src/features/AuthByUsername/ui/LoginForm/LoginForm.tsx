@@ -37,8 +37,8 @@ const LoginForm: FC<LoginFormProps> = (props) => {
   }, [dispatch]);
 
   const loginButtonClickHandler = useCallback(() => {
-    dispatch(loginByUserName());
-  }, [dispatch]);
+    dispatch(loginByUserName({ username, password }));
+  }, [dispatch, username, password]);
 
   return (
     <div className={getClassNames(style.loginForm, {}, [className])}>

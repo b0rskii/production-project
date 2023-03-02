@@ -27,7 +27,7 @@ Default.decorators = [StoreDecorator({
 export const Logged = Template.bind({});
 Logged.args = {};
 Logged.decorators = [StoreDecorator({
-  user: { authData: { id: 'name', name: 'name', password: 'pass' } },
+  user: { authData: { id: 'name', name: 'name' } },
 })];
 
 export const DefaultDark = Template.bind({});
@@ -44,6 +44,6 @@ LoggedDark.args = {};
 LoggedDark.decorators = [
   ThemeDecorator(Theme.DARK),
   StoreDecorator({
-    user: { authData: { id: 'name', name: 'name', password: 'pass' } },
+    user: { authData: { id: 'name', name: 'name' } },
   }),
 ];

@@ -10,11 +10,14 @@ type ThunkAPI = {
   rejectValue: string;
 };
 
-export const loginByUserName = createAsyncThunk<User, undefined, ThunkAPI>(
-  `${NAME}/loginByUserName`,
-  async (_args, { getState, rejectWithValue, dispatch }) => {
-    const { username, password } = getState().login;
+type LoginByUsernameArg = {
+  username: string;
+  password: string;
+};
 
+export const loginByUserName = createAsyncThunk<User, LoginByUsernameArg, ThunkAPI>(
+  `${NAME}/loginByUserName`,
+  async ({ username, password }, { rejectWithValue, dispatch }) => {
     try {
       const { data } = await axios.post<User>(
         'http://localhost:8000/login',
