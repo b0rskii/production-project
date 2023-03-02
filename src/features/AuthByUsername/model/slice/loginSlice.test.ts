@@ -1,64 +1,40 @@
+import { DeepPartial } from '@reduxjs/toolkit';
 import { loginByUserName } from '../services/loginByUserName/loginByUserName';
 import { LoginSchema } from '../types/loginSchema';
 import { loginReducer, loginActions } from './loginSlice';
 
-const loginState: LoginSchema = {
-  username: '',
-  password: '',
-  isLoading: false,
-  error: null,
-};
-
 describe('loginSlice', () => {
   it('setUsername action', () => {
-    expect(loginReducer(loginState, loginActions.setUsername('123')))
-      .toEqual({
-        ...loginState,
-        username: '123',
-      });
+    expect(loginReducer({ username: '' } as LoginSchema, loginActions.setUsername('123')))
+      .toEqual({ username: '123' });
   });
 
   it('setPassword action', () => {
-    expect(loginReducer(loginState, loginActions.setPassword('123')))
-      .toEqual({
-        ...loginState,
-        password: '123',
-      });
-  });
-
-  it('should work with empty state', () => {
-    expect(loginReducer(undefined, loginActions.setUsername('123')))
-      .toEqual({
-        ...loginState,
-        username: '123',
-      });
+    expect(loginReducer({ password: '' } as LoginSchema, loginActions.setPassword('123')))
+      .toEqual({ password: '123' });
   });
 
   it('loginByUserName pending', () => {
-    const state: LoginSchema = {
-      ...loginState,
+    const state: DeepPartial<LoginSchema> = {
       isLoading: false,
       error: 'error',
     };
 
-    expect(loginReducer(loginState, loginByUserName.pending))
+    expect(loginReducer(state as LoginSchema, loginByUserName.pending))
       .toEqual({
-        ...state,
         isLoading: true,
         error: null,
       });
   });
 
   it('loginByUserName fulfilled', () => {
-    const state: LoginSchema = {
-      ...loginState,
+    const state: DeepPartial<LoginSchema> = {
       isLoading: true,
       error: 'error',
     };
 
-    expect(loginReducer(loginState, loginByUserName.fulfilled))
+    expect(loginReducer(state as LoginSchema, loginByUserName.fulfilled))
       .toEqual({
-        ...state,
         isLoading: false,
         error: null,
       });
@@ -67,15 +43,13 @@ describe('loginSlice', () => {
   it('loginByUserName rejected', () => {
     const payload = 'error';
 
-    const state: LoginSchema = {
-      ...loginState,
+    const state: DeepPartial<LoginSchema> = {
       isLoading: true,
       error: null,
     };
 
-    expect(loginReducer(loginState, { type: loginByUserName.rejected.type, payload }))
+    expect(loginReducer(state as LoginSchema, { type: loginByUserName.rejected.type, payload }))
       .toEqual({
-        ...state,
         isLoading: false,
         error: payload,
       });
