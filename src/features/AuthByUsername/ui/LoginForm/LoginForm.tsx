@@ -1,11 +1,11 @@
 import { FC, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Button, ButtonTheme } from 'shared/ui/Button';
 import { Text, TextTheme } from 'shared/ui/Text';
 import { Input } from 'shared/ui/Input';
 import { getClassNames } from 'shared/utils/classNames';
-import { useAsyncReducer } from 'shared/utils/redux';
+import { useAppDispatch, useAsyncReducer } from 'shared/utils/redux';
 import { loginSelectors } from '../../model/selectors';
 import { loginActions, loginReducer, NAME } from '../../model/slice/loginSlice';
 import { loginByUserName } from '../../model/services/loginByUserName/loginByUserName';
@@ -18,7 +18,7 @@ export type LoginFormProps = {
 const LoginForm: FC<LoginFormProps> = (props) => {
   const { className } = props;
   const { t } = useTranslation();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const {
     username,
     password,

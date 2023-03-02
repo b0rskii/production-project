@@ -1,7 +1,8 @@
 import { FC, useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { userSelectors, userActions } from 'entities/User';
+import { useAppDispatch } from 'shared/utils/redux';
 import { Button, ButtonTheme } from 'shared/ui/Button';
 import { LoginModal } from '../LoginModal/LoginModal';
 
@@ -11,7 +12,7 @@ type LoginButtonProps = {
 
 export const LoginButton: FC<LoginButtonProps> = (props: LoginButtonProps) => {
   const { theme = ButtonTheme.DEFAULT } = props;
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const [isAuthModalOpened, setIsAuthModalOpened] = useState(false);
   const userAuthData = useSelector(userSelectors.getUserAuthData);

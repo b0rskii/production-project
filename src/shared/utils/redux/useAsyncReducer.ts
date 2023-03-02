@@ -2,7 +2,8 @@ import { Reducer } from '@reduxjs/toolkit';
 import { StoreWithManager } from 'app/providers/StoreProvider';
 import { StateSchemaKey } from 'app/providers/StoreProvider/config/StateSchema';
 import { useEffect } from 'react';
-import { useDispatch, useStore } from 'react-redux';
+import { useStore } from 'react-redux';
+import { useAppDispatch } from './useAppDispatch';
 
 export const useAsyncReducer = (
   key: StateSchemaKey,
@@ -10,7 +11,7 @@ export const useAsyncReducer = (
   removeAfterUnmount = true,
 ) => {
   const store = useStore() as StoreWithManager;
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     store.reducerManager.add(key, reducer);
