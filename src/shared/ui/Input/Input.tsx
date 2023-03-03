@@ -1,4 +1,4 @@
-import { FC, InputHTMLAttributes, memo } from 'react';
+import { InputHTMLAttributes, memo } from 'react';
 import { getClassNames } from 'shared/utils/classNames/getClassNames';
 
 type HTMLInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange'>
@@ -9,7 +9,7 @@ interface InputProps extends HTMLInputProps {
   onChange?: (value: string) => void;
 }
 
-export const Input: FC<InputProps> = memo((props: InputProps) => {
+export const Input = memo((props: InputProps) => {
   const {
     className,
     value,

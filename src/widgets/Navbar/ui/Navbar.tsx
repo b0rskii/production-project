@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { memo } from 'react';
 import { LoginButton } from 'features/AuthByUsername';
 import { ButtonTheme } from 'shared/ui/Button';
 import { getClassNames } from 'shared/utils/classNames';
@@ -8,7 +8,7 @@ type NavbarProps = {
   className?: string;
 };
 
-export const Navbar: FC<NavbarProps> = (props: NavbarProps) => {
+export const Navbar = memo((props: NavbarProps) => {
   const { className } = props;
 
   return (
@@ -17,4 +17,4 @@ export const Navbar: FC<NavbarProps> = (props: NavbarProps) => {
       <LoginButton theme={ButtonTheme.OUTLINE_INVERTED} />
     </nav>
   );
-};
+});

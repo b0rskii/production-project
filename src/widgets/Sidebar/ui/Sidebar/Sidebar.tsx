@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { memo, useState } from 'react';
 import { getClassNames } from 'shared/utils/classNames';
 import { ThemeSwitcher } from 'shared/ui/ThemeSwitcher';
 import { LangSwitcher } from 'shared/ui/LangSwitcher';
@@ -11,7 +11,7 @@ type SidebarProps = {
   className?: string;
 };
 
-export const Sidebar: FC<SidebarProps> = (props) => {
+export const Sidebar = memo((props: SidebarProps) => {
   const { className } = props;
   const [collapsed, setCollapsed] = useState(false);
 
@@ -52,4 +52,4 @@ export const Sidebar: FC<SidebarProps> = (props) => {
       </div>
     </div>
   );
-};
+});

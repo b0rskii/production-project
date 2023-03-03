@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { getClassNames } from 'shared/utils/classNames';
 import { Button, ButtonTheme } from 'shared/ui/Button';
@@ -7,7 +7,7 @@ type LangSwitcherProps = {
   className?: string;
 };
 
-export const LangSwitcher: FC<LangSwitcherProps> = (props) => {
+export const LangSwitcher = memo((props: LangSwitcherProps) => {
   const { className } = props;
   const { t, i18n } = useTranslation();
 
@@ -24,4 +24,4 @@ export const LangSwitcher: FC<LangSwitcherProps> = (props) => {
       {t('Язык')}
     </Button>
   );
-};
+});

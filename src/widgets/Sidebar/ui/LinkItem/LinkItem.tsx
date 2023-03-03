@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { AppLink, AppLinkTheme } from 'shared/ui/AppLink';
 import { getClassNames } from 'shared/utils/classNames/getClassNames';
@@ -11,7 +11,7 @@ type LinkItemProps = {
   isCollapsed: boolean;
 };
 
-export const LinkItem: FC<LinkItemProps> = (props) => {
+export const LinkItem = memo((props: LinkItemProps) => {
   const { className, linkItem, isCollapsed } = props;
   const { Icon, route, translationKey } = linkItem;
   const { t } = useTranslation();
@@ -26,4 +26,4 @@ export const LinkItem: FC<LinkItemProps> = (props) => {
       {isCollapsed ? null : t(translationKey)}
     </AppLink>
   );
-};
+});
