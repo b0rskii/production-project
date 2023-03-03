@@ -1,0 +1,10 @@
+.linkItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+
+  svg {
+    fill: var(--inverted-primary-color);
+  }
+}

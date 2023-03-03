@@ -14,17 +14,6 @@
   margin-left: 20px;
 }
 
-.link {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  text-decoration: none;
-
-  svg {
-    fill: var(--inverted-primary-color);
-  }
-}
-
 .switchers {
   display: flex;
   justify-content: center;

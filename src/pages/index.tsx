@@ -4,6 +4,7 @@ import { RoutePath } from 'shared/config/routing';
 import { PageLoader } from 'widgets/PageLoader';
 import { AboutPage } from './AboutPage';
 import { MainPage } from './MainPage';
+import { ProfilePage } from './ProfilePage';
 import { NotFoundPage } from './NotFoundPage';
 
 export const routes: RouteProps[] = [
@@ -14,6 +15,10 @@ export const routes: RouteProps[] = [
   {
     path: RoutePath.ABOUT,
     element: <AboutPage />,
+  },
+  {
+    path: RoutePath.PROFILE,
+    element: <ProfilePage />,
   },
   {
     path: RoutePath.NOT_FOUNT,
