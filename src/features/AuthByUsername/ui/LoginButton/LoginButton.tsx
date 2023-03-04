@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { userSelectors, userActions } from 'entities/User';
 import { Button, ButtonTheme } from 'shared/ui/Button';
 import { useAppDispatch } from 'shared/utils/redux';
+import { LocalStorageKey } from 'shared/const/localStorage';
 import { LoginModal } from '../LoginModal/LoginModal';
 
 type LoginButtonProps = {
@@ -27,6 +28,7 @@ export const LoginButton = memo((props: LoginButtonProps) => {
 
   const logoutButtonClickHandler = useCallback(() => {
     dispatch(userActions.logout());
+    localStorage.removeItem(LocalStorageKey.USER);
   }, [dispatch]);
 
   return (
