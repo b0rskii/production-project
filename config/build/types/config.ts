@@ -11,6 +11,7 @@ export type BuildEnv = {
   port: number;
   mode: BuildMode;
   isAnalyze: boolean;
+  apiUrl: string;
 };
 
 export type BuildOptions = {
@@ -19,4 +20,5 @@ export type BuildOptions = {
   isDev: boolean;
   port: number;
   isAnalyze: boolean;
+  apiUrl: string;
 };

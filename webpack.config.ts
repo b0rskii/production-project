@@ -12,6 +12,7 @@ const paths: BuildPaths = {
 export default (env: BuildEnv) => {
   const PORT = env.port || 3000;
   const MODE = env.mode || 'development';
+  const API_URL = env.apiUrl || 'http://localhost:8000';
   const IS_ANALYZE = Boolean(env.isAnalyze);
 
   const isDev = MODE === 'development';
@@ -22,6 +23,7 @@ export default (env: BuildEnv) => {
     isDev,
     port: PORT,
     isAnalyze: IS_ANALYZE,
+    apiUrl: API_URL,
   });
 
   return config;

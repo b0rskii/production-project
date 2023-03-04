@@ -1,8 +1,8 @@
 import { Suspense } from 'react';
 import { Routing } from 'pages';
-import { getClassNames } from 'shared/utils/classNames';
 import { Navbar } from 'widgets/Navbar';
 import { Sidebar } from 'widgets/Sidebar';
+import { getClassNames } from 'shared/utils/classNames';
 
 export const App = () => (
   <div className={getClassNames('app', {}, [])}>
