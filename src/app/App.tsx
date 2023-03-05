@@ -11,9 +11,13 @@ export const App = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(userActions.setAuthData(
-      JSON.parse(localStorage.getItem(LocalStorageKey.USER)) || null,
-    ));
+    const userLocalData = localStorage.getItem(LocalStorageKey.USER);
+
+    if (userLocalData) {
+      dispatch(userActions.setAuthData(
+        JSON.parse(userLocalData),
+      ));
+    }
   }, [dispatch]);
 
   return (

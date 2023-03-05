@@ -1,5 +1,6 @@
 import {
   FC,
+  MutableRefObject,
   useCallback,
   useEffect,
   useRef,
@@ -28,8 +29,8 @@ export const Modal: FC<ModalProps> = (props) => {
 
   const [isOpening, setIsOpening] = useState(true);
   const [isClosing, setIsClosing] = useState(false);
-  const openingTmeoutRef = useRef<ReturnType<typeof setTimeout>>();
-  const closingTimeoutRef = useRef<ReturnType<typeof setTimeout>>();
+  const openingTmeoutRef = useRef() as MutableRefObject<ReturnType<typeof setTimeout>>;
+  const closingTimeoutRef = useRef() as MutableRefObject<ReturnType<typeof setTimeout>>;
 
   const closeHandler = useCallback(() => {
     if (onClose) {

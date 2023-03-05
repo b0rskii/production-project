@@ -1,4 +1,3 @@
-import { DeepPartial } from '@reduxjs/toolkit';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { StateSchema } from 'app/providers/StoreProvider';

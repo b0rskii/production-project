@@ -1,9 +1,9 @@
-type Mode = Record<string, string | boolean>;
+type Mode = Record<string, string | boolean | undefined>;
 
 export const getClassNames = (
   className: string,
   modes: Mode = {},
-  additional: string[] = [],
+  additional: Array<string | undefined> = [],
 ): string => [
   className,
   ...additional.filter(Boolean),
