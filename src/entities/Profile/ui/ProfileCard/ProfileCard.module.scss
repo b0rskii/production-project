@@ -3,27 +3,23 @@
   border: 2px solid var(--primary-color);
 }
 
-.header {
-  display: flex;
-}
-
-.editButton {
-  margin-left: auto;
-}
-
 .data {
   display: flex;
   flex-direction: column;
-  margin-top: 30px;
+  gap: 15px;
 }
 
 .input {
-  margin-top: 10px;
   width: 200px;
 }
 
-.loaderWrapper {
+.loading,
+.error {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.loading {
+  min-height: 150px;
 }

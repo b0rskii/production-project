@@ -1,5 +1,6 @@
 export { profileActions, profileReducer, NAME as PROFILE_SLICE } from './model/slice/profileSlice';
-export { Profile as ProfileType, ProfileSchema } from './model/types/profileSchema';
+export { Profile, ProfileSchema } from './model/types/profileSchema';
 export { fetchProfileData } from './model/services/fetchProfileData/fetchProfileData';
+export { updateProfileData } from './model/services/updateProfileData/updateProfileData';
 export { profileSelectors } from './model/selectors';
-export { ProfileCard } from './ui/ProfileCard/ProfileCard';
+export { ProfileCard, ProfileHandlers } from './ui/ProfileCard/ProfileCard';

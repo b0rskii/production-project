@@ -41,5 +41,6 @@ export type ThunkExtra = {
 
 export type ThunkAPI<T> = {
   rejectValue: T;
+  state: StateSchema;
   extra: ThunkExtra;
 };

@@ -22,12 +22,18 @@
 }
 
 .outline,
+.outlineRed,
 .outlineInverted {
   background: none;
 }
 
 .outline {
   border: 1px solid var(--primary-color);
+}
+
+.outlineRed {
+  border: 1px solid var(--red-light);
+  color: var(--red-light);
 }
 
 .outlineInverted {

@@ -25,3 +25,7 @@ declare const __API__: string;
 type DeepPartial<T> = T extends object ? {
   [P in keyof T]?: DeepPartial<T[P]>;
 } : T;
+
+type Entries<T> = {
+  [K in keyof T]: [K, T[K]];
+}[keyof T][];

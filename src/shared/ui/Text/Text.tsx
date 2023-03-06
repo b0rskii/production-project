@@ -7,11 +7,14 @@ export enum TextTheme {
   ERROR = 'error',
 }
 
+type TextAlign = 'start' | 'center' | 'end';
+
 type TextProps = {
   className?: string;
   title?: string;
   text?: string;
   theme?: TextTheme;
+  align?: TextAlign;
 };
 
 export const Text = memo((props: TextProps) => {
@@ -20,10 +23,11 @@ export const Text = memo((props: TextProps) => {
     title,
     text,
     theme = TextTheme.DEFAULT,
+    align = 'left',
   } = props;
 
   return (
-    <div className={getClassNames(style.text, {}, [className, style[theme]])}>
+    <div className={getClassNames(style.text, {}, [className, style[theme], style[align]])}>
       {title && <p className={style.title}>{title}</p>}
       {text && <p className={style.text}>{text}</p>}
     </div>
