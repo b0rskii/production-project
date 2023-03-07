@@ -1,7 +1,11 @@
 import { PropsWithChildren, useCallback, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { EditProfileButton } from 'features/EditProfile';
+import {
+  editProfileActions,
+  EditProfileButton,
+  editProfileSelectors,
+} from 'features/EditProfile';
 import {
   ProfileCard,
   PROFILE_SLICE,
@@ -9,7 +13,6 @@ import {
   fetchProfileData,
   profileSelectors,
   ProfileHandlers,
-  profileActions,
 } from 'entities/Profile';
 import { Text } from 'shared/ui/Text';
 import { getClassNames } from 'shared/utils/classNames';
@@ -24,11 +27,14 @@ export const ProfileBlock = (props: ProfileBlockProps) => {
   const { className } = props;
   const { t } = useTranslation('profile');
   const dispatch = useAppDispatch();
+
   const profile = useSelector(profileSelectors.getProfile);
-  const profileForm = useSelector(profileSelectors.getProfileForm);
   const isLoading = useSelector(profileSelectors.getIsLoading);
   const error = useSelector(profileSelectors.getError);
-  const isReadonly = useSelector(profileSelectors.getIsReadonly);
+
+  const profileForm = useSelector(editProfileSelectors.getProfileForm);
+  const isReadonly = useSelector(editProfileSelectors.getIsReadonly);
+  const isUpdating = useSelector(editProfileSelectors.getIsLoading);
 
   useAsyncReducer(PROFILE_SLICE, profileReducer);
 
@@ -37,15 +43,15 @@ export const ProfileBlock = (props: ProfileBlockProps) => {
   }, [dispatch]);
 
   const onFirstNameChange = useCallback((value: string) => {
-    dispatch(profileActions.updateProfileForm({ firstname: value }));
+    dispatch(editProfileActions.updateProfileForm({ firstname: value }));
   }, [dispatch]);
 
   const onLastNameChange = useCallback((value: string) => {
-    dispatch(profileActions.updateProfileForm({ lastname: value }));
+    dispatch(editProfileActions.updateProfileForm({ lastname: value }));
   }, [dispatch]);
 
   const onAgeChange = useCallback((value: string) => {
-    dispatch(profileActions.updateProfileForm({ age: Number(value) }));
+    dispatch(editProfileActions.updateProfileForm({ age: Number(value) }));
   }, [dispatch]);
 
   const profileHandlers: ProfileHandlers = useMemo(() => ({
@@ -61,14 +67,12 @@ export const ProfileBlock = (props: ProfileBlockProps) => {
         {profile && (
           <EditProfileButton
             className={style.editButton}
-            disabled={isLoading}
           />
         )}
       </div>
       <ProfileCard
-        profile={profile}
-        profileForm={profileForm}
-        isLoading={isLoading}
+        profile={profileForm || profile}
+        isLoading={isLoading || isUpdating}
         error={error}
         isReadonly={isReadonly}
         handlers={profileHandlers}

@@ -28,7 +28,6 @@ export type ProfileHandlers = {
 type ProfileProps = PropsWithChildren<{
   className?: string;
   profile: Profile | null;
-  profileForm: Profile | null;
   isLoading: boolean;
   error: string | null;
   isReadonly: boolean;
@@ -39,7 +38,6 @@ export const ProfileCard = memo((props: ProfileProps) => {
   const {
     className,
     profile,
-    profileForm,
     isLoading,
     error,
     isReadonly,
@@ -92,7 +90,7 @@ export const ProfileCard = memo((props: ProfileProps) => {
         >
           <Input
             className={style.input}
-            value={profileForm?.firstname}
+            value={profile.firstname}
             onChange={onFirstNameChange}
             name={ProfileTranslationKey.firstname}
           />
@@ -105,7 +103,7 @@ export const ProfileCard = memo((props: ProfileProps) => {
         >
           <Input
             className={style.input}
-            value={profileForm?.lastname}
+            value={profile.lastname}
             onChange={onLastNameChange}
             name={ProfileTranslationKey.lastname}
           />
@@ -118,7 +116,7 @@ export const ProfileCard = memo((props: ProfileProps) => {
         >
           <Input
             className={style.input}
-            value={profileForm?.age}
+            value={profile.age}
             onChange={onAgeChange}
             name={ProfileTranslationKey.age}
             type="number"

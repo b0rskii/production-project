@@ -13,8 +13,6 @@ export type Profile = {
 
 export type ProfileSchema = {
   profile: Profile | null;
-  form: Profile | null;
-  isReadonly: boolean;
   isLoading: boolean;
   error: string | null;
 };

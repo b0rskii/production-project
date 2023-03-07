@@ -6,16 +6,18 @@ import {
   ReducersMapObject,
 } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
+import { LoginSchema, LOGIN_SLICE } from 'features/AuthByUsername';
+import { EditProfileSchema, EDIT_PROFILE_SLICE } from 'features/EditProfile';
 import { CounterSchema, COUNTER_SLICE } from 'entities/Counter';
 import { ProfileSchema, PROFILE_SLICE } from 'entities/Profile';
 import { UserSchema, USER_SLICE } from 'entities/User';
-import { LoginSchema, LOGIN_SLICE } from 'features/AuthByUsername';
 
 export type StateSchema = {
   [COUNTER_SLICE]: CounterSchema;
   [USER_SLICE]: UserSchema;
   [LOGIN_SLICE]?: LoginSchema;
   [PROFILE_SLICE]?: ProfileSchema;
+  [EDIT_PROFILE_SLICE]?: EditProfileSchema;
 };
 
 export type StateSchemaKey = keyof StateSchema;

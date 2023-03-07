@@ -1,34 +1,40 @@
 import { memo, PropsWithChildren, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { profileActions, profileSelectors, updateProfileData } from 'entities/Profile';
+import { profileSelectors } from 'entities/Profile';
 import { Button, ButtonTheme } from 'shared/ui/Button';
 import { getClassNames } from 'shared/utils/classNames';
-import { useAppDispatch } from 'shared/utils/redux';
+import { useAppDispatch, useAsyncReducer } from 'shared/utils/redux';
+import { editProfileActions, NAME, editProfileReducer } from '../model/slice/editProfileSlice';
+import { editProfileSelectors } from '../model/selectors';
+import { updateProfileData } from '../model/services/updateProfileData/updateProfileData';
 import style from './EditProfileButton.module.scss';
 
 type EditProfileProps = PropsWithChildren<{
   className?: string;
-  disabled?: boolean;
 }>;
 
 export const EditProfileButton = memo((props: EditProfileProps) => {
-  const {
-    className,
-    disabled,
-  } = props;
-
-  const dispatch = useAppDispatch();
+  const { className } = props;
   const { t } = useTranslation('profile');
-  const isReadonly = useSelector(profileSelectors.getIsReadonly);
+  const dispatch = useAppDispatch();
+
+  const profile = useSelector(profileSelectors.getProfile);
+
+  const isReadonly = useSelector(editProfileSelectors.getIsReadonly);
+  const isLoading = useSelector(editProfileSelectors.getIsLoading);
+
+  useAsyncReducer(NAME, editProfileReducer);
 
   const editButtonClickHandler = useCallback(() => {
-    dispatch(profileActions.startEdit());
-  }, [dispatch]);
+    dispatch(editProfileActions.setProfileForm(profile));
+    dispatch(editProfileActions.startEdit());
+  }, [dispatch, profile]);
 
   const cancelButtonClickHandler = useCallback(() => {
-    dispatch(profileActions.cancelEdit());
-  }, [dispatch]);
+    dispatch(editProfileActions.setProfileForm(profile));
+    dispatch(editProfileActions.cancelEdit());
+  }, [dispatch, profile]);
 
   const saveButtonClickHandler = useCallback(() => {
     dispatch(updateProfileData());
@@ -52,7 +58,7 @@ export const EditProfileButton = memo((props: EditProfileProps) => {
         className={getClassNames('', {}, [className])}
         theme={ButtonTheme.OUTLINE_RED}
         onClick={cancelButtonClickHandler}
-        disabled={disabled}
+        disabled={isLoading}
       >
         {t('Отменить редактирование')}
       </Button>
@@ -60,7 +66,7 @@ export const EditProfileButton = memo((props: EditProfileProps) => {
         className={getClassNames('', {}, [className])}
         theme={ButtonTheme.OUTLINE}
         onClick={saveButtonClickHandler}
-        disabled={disabled}
+        disabled={isLoading}
       >
         {t('Сохранить')}
       </Button>
