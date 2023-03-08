@@ -2,10 +2,10 @@ import { Suspense, useEffect } from 'react';
 import { Routing } from 'pages';
 import { Navbar } from 'widgets/Navbar';
 import { Sidebar } from 'widgets/Sidebar';
+import { userActions } from 'entities/User';
 import { getClassNames } from 'shared/utils/classNames';
 import { useAppDispatch } from 'shared/utils/redux';
 import { LocalStorageKey } from 'shared/const/localStorage';
-import { userActions } from 'entities/User';
 
 export const App = () => {
   const dispatch = useAppDispatch();

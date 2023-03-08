@@ -14,6 +14,8 @@ import {
   profileSelectors,
   ProfileHandlers,
 } from 'entities/Profile';
+import { Country } from 'entities/Country';
+import { Currency } from 'entities/Currency';
 import { Text } from 'shared/ui/Text';
 import { getClassNames } from 'shared/utils/classNames';
 import { useAppDispatch, useAsyncReducer } from 'shared/utils/redux';
@@ -50,15 +52,52 @@ export const ProfileBlock = (props: ProfileBlockProps) => {
     dispatch(editProfileActions.updateProfileForm({ lastname: value }));
   }, [dispatch]);
 
+  const onUsernameChange = useCallback((value: string) => {
+    dispatch(editProfileActions.updateProfileForm({ username: value }));
+  }, [dispatch]);
+
   const onAgeChange = useCallback((value: string) => {
     dispatch(editProfileActions.updateProfileForm({ age: Number(value) }));
   }, [dispatch]);
 
-  const profileHandlers: ProfileHandlers = useMemo(() => ({
-    onFirstNameChange,
-    onLastNameChange,
-    onAgeChange,
-  }), [onFirstNameChange, onLastNameChange, onAgeChange]);
+  const onCityChange = useCallback((value: string) => {
+    dispatch(editProfileActions.updateProfileForm({ city: value }));
+  }, [dispatch]);
+
+  const onCountryChange = useCallback((value: Country) => {
+    dispatch(editProfileActions.updateProfileForm({ country: value }));
+  }, [dispatch]);
+
+  const onCurrencyChange = useCallback((value: Currency) => {
+    dispatch(editProfileActions.updateProfileForm({ currency: value }));
+  }, [dispatch]);
+
+  const onAvatarChange = useCallback((value: string) => {
+    dispatch(editProfileActions.updateProfileForm({ avatar: value }));
+  }, [dispatch]);
+
+  const profileHandlers: ProfileHandlers = useMemo(
+    () => ({
+      onFirstNameChange,
+      onLastNameChange,
+      onUsernameChange,
+      onAgeChange,
+      onCityChange,
+      onCountryChange,
+      onCurrencyChange,
+      onAvatarChange,
+    }),
+    [
+      onFirstNameChange,
+      onLastNameChange,
+      onUsernameChange,
+      onAgeChange,
+      onCityChange,
+      onCountryChange,
+      onCurrencyChange,
+      onAvatarChange,
+    ],
+  );
 
   return (
     <div className={getClassNames('', {}, [className])}>
@@ -71,7 +110,8 @@ export const ProfileBlock = (props: ProfileBlockProps) => {
         )}
       </div>
       <ProfileCard
-        profile={profileForm || profile}
+        profile={profile}
+        profileForm={profileForm}
         isLoading={isLoading || isUpdating}
         error={error}
         isReadonly={isReadonly}

@@ -32,9 +32,8 @@ export const EditProfileButton = memo((props: EditProfileProps) => {
   }, [dispatch, profile]);
 
   const cancelButtonClickHandler = useCallback(() => {
-    dispatch(editProfileActions.setProfileForm(profile));
     dispatch(editProfileActions.cancelEdit());
-  }, [dispatch, profile]);
+  }, [dispatch]);
 
   const saveButtonClickHandler = useCallback(() => {
     dispatch(updateProfileData());
