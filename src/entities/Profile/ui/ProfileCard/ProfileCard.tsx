@@ -7,6 +7,7 @@ import { Input } from 'shared/ui/Input';
 import { Loader } from 'shared/ui/Loader';
 import { Text, TextTheme } from 'shared/ui/Text';
 import { getClassNames } from 'shared/utils/classNames';
+import { getKeysMap } from 'shared/utils/getKeysMap';
 import { Profile } from '../../model/types/profileSchema';
 import { ProfileRow } from '../ProfileRow/ProfileRow';
 import style from './ProfileCard.module.scss';
@@ -52,15 +53,8 @@ export const ProfileCard = memo((props: ProfileProps) => {
     if (!profile) {
       return;
     }
-
-    const newProfileMap: Record<string, string> = {};
-
-    Object.keys(profile).forEach((key) => {
-      newProfileMap[key] = key;
-    });
-
     // eslint-disable-next-line consistent-return
-    return newProfileMap as Record<keyof Profile, keyof Profile>;
+    return getKeysMap<Profile>(profile);
   }, [profile]);
 
   if (isLoading) {
