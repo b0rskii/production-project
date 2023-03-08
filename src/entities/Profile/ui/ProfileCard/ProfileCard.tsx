@@ -1,4 +1,4 @@
-import { memo, PropsWithChildren } from 'react';
+import { memo, PropsWithChildren, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Country, CountrySelect } from 'entities/Country';
 import { Currency, CurrencySelect } from 'entities/Currency';
@@ -12,14 +12,10 @@ import { ProfileRow } from '../ProfileRow/ProfileRow';
 import style from './ProfileCard.module.scss';
 
 export type ProfileHandlers = {
-  onFirstNameChange?: (value: string) => void,
-  onLastNameChange?: (value: string) => void,
+  onInputChange?: (value: string, name?: string) => void,
   onAgeChange?: (value: string) => void;
-  onCityChange?: (value: string) => void;
   onCountryChange?: (value: Country) => void;
   onCurrencyChange?: (value: Currency) => void;
-  onUsernameChange?: (value: string) => void;
-  onAvatarChange?: (value: string) => void;
 };
 
 type ProfileProps = PropsWithChildren<{
@@ -46,15 +42,26 @@ export const ProfileCard = memo((props: ProfileProps) => {
   const { t } = useTranslation('profile');
 
   const {
-    onFirstNameChange,
-    onLastNameChange,
+    onInputChange,
     onAgeChange,
-    onCityChange,
     onCountryChange,
     onCurrencyChange,
-    onUsernameChange,
-    onAvatarChange,
   } = handlers;
+
+  const profileMap = useMemo(() => {
+    if (!profile) {
+      return;
+    }
+
+    const newProfileMap: Record<string, string> = {};
+
+    Object.keys(profile).forEach((key) => {
+      newProfileMap[key] = key;
+    });
+
+    // eslint-disable-next-line consistent-return
+    return newProfileMap as Record<keyof Profile, keyof Profile>;
+  }, [profile]);
 
   if (isLoading) {
     return (
@@ -101,8 +108,9 @@ export const ProfileCard = memo((props: ProfileProps) => {
           <Input
             className={style.input}
             value={profileForm?.firstname}
-            onChange={onFirstNameChange}
+            onChange={onInputChange}
             size={profileForm?.firstname?.length}
+            name={profileMap?.firstname}
           />
         </ProfileRow>
 
@@ -114,8 +122,9 @@ export const ProfileCard = memo((props: ProfileProps) => {
           <Input
             className={style.input}
             value={profileForm?.lastname}
-            onChange={onLastNameChange}
+            onChange={onInputChange}
             size={profileForm?.lastname?.length}
+            name={profileMap?.lastname}
           />
         </ProfileRow>
 
@@ -127,8 +136,9 @@ export const ProfileCard = memo((props: ProfileProps) => {
           <Input
             className={style.input}
             value={profileForm?.username}
-            onChange={onUsernameChange}
+            onChange={onInputChange}
             size={profileForm?.username?.length}
+            name={profileMap?.username}
           />
         </ProfileRow>
 
@@ -154,8 +164,9 @@ export const ProfileCard = memo((props: ProfileProps) => {
           <Input
             className={style.input}
             value={profileForm?.city}
-            onChange={onCityChange}
+            onChange={onInputChange}
             size={profileForm?.city?.length}
+            name={profileMap?.city}
           />
         </ProfileRow>
 
@@ -190,8 +201,9 @@ export const ProfileCard = memo((props: ProfileProps) => {
             <Input
               className={style.input}
               value={profileForm?.avatar}
-              onChange={onAvatarChange}
+              onChange={onInputChange}
               size={profileForm?.avatar?.length}
+              name={profileMap?.avatar}
             />
           </ProfileRow>
         )}

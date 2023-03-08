@@ -44,24 +44,15 @@ export const ProfileBlock = (props: ProfileBlockProps) => {
     dispatch(fetchProfileData());
   }, [dispatch]);
 
-  const onFirstNameChange = useCallback((value: string) => {
-    dispatch(editProfileActions.updateProfileForm({ firstname: value }));
-  }, [dispatch]);
-
-  const onLastNameChange = useCallback((value: string) => {
-    dispatch(editProfileActions.updateProfileForm({ lastname: value }));
-  }, [dispatch]);
-
-  const onUsernameChange = useCallback((value: string) => {
-    dispatch(editProfileActions.updateProfileForm({ username: value }));
+  const onInputChange = useCallback((value: string, name?: string) => {
+    if (!name) {
+      return;
+    }
+    dispatch(editProfileActions.updateProfileForm({ [name]: value }));
   }, [dispatch]);
 
   const onAgeChange = useCallback((value: string) => {
     dispatch(editProfileActions.updateProfileForm({ age: Number(value) }));
-  }, [dispatch]);
-
-  const onCityChange = useCallback((value: string) => {
-    dispatch(editProfileActions.updateProfileForm({ city: value }));
   }, [dispatch]);
 
   const onCountryChange = useCallback((value: Country) => {
@@ -72,30 +63,18 @@ export const ProfileBlock = (props: ProfileBlockProps) => {
     dispatch(editProfileActions.updateProfileForm({ currency: value }));
   }, [dispatch]);
 
-  const onAvatarChange = useCallback((value: string) => {
-    dispatch(editProfileActions.updateProfileForm({ avatar: value }));
-  }, [dispatch]);
-
   const profileHandlers: ProfileHandlers = useMemo(
     () => ({
-      onFirstNameChange,
-      onLastNameChange,
-      onUsernameChange,
+      onInputChange,
       onAgeChange,
-      onCityChange,
       onCountryChange,
       onCurrencyChange,
-      onAvatarChange,
     }),
     [
-      onFirstNameChange,
-      onLastNameChange,
-      onUsernameChange,
+      onInputChange,
       onAgeChange,
-      onCityChange,
       onCountryChange,
       onCurrencyChange,
-      onAvatarChange,
     ],
   );
 

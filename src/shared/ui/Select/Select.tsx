@@ -1,4 +1,4 @@
-import { ChangeEvent, memo, PropsWithChildren } from 'react';
+import { ChangeEvent, memo, SelectHTMLAttributes } from 'react';
 import { getClassNames } from 'shared/utils/classNames';
 import style from './Select.module.scss';
 
@@ -7,16 +7,28 @@ export type SelectOption = {
   content: string;
 };
 
-type SelectProps = PropsWithChildren<{
+export type HTMLSelectProps = Omit<
+  SelectHTMLAttributes<HTMLSelectElement>,
+  'value' | 'onChange' | 'label'
+>;
+
+interface SelectProps extends HTMLSelectProps {
   options: SelectOption[];
   className?: string;
   label?: string;
   value?: string;
   onChange?: (value: string) => void;
-}>;
+}
 
 export const Select = memo((props: SelectProps) => {
-  const { className, label, options, value, onChange } = props;
+  const {
+    className,
+    label,
+    options,
+    value,
+    onChange,
+    ...otherProps
+  } = props;
 
   const changeHandler = (evt: ChangeEvent<HTMLSelectElement>) => {
     onChange?.(evt.target.value);
@@ -31,6 +43,7 @@ export const Select = memo((props: SelectProps) => {
         </span>
       )}
       <select
+        {...otherProps}
         className={style.select}
         value={value}
         onChange={changeHandler}
