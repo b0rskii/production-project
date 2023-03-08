@@ -3,11 +3,11 @@ import { Select, SelectOption } from 'shared/ui/Select';
 import { getClassNames } from 'shared/utils/classNames';
 import { Country } from '../../model/types/country';
 
-const countries: SelectOption[] = (Object.values(Country)
+const countries: SelectOption[] = Object.values(Country)
   .map((country) => ({
     value: country,
     content: country,
-  })));
+  }));
 
 type CountrySelectProps = PropsWithChildren<{
   className?: string;

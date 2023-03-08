@@ -27,8 +27,7 @@ export const EditProfileButton = memo((props: EditProfileProps) => {
   useAsyncReducer(NAME, editProfileReducer);
 
   const editButtonClickHandler = useCallback(() => {
-    dispatch(editProfileActions.setProfileForm(profile));
-    dispatch(editProfileActions.startEdit());
+    dispatch(editProfileActions.startEdit(profile));
   }, [dispatch, profile]);
 
   const cancelButtonClickHandler = useCallback(() => {

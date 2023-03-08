@@ -16,14 +16,12 @@ export const editProfileSlice = createSlice({
   name: NAME,
   initialState,
   reducers: {
-    startEdit: (state) => {
+    startEdit: (state, action: PayloadAction<Profile | null>) => {
       state.isReadonly = false;
+      state.profileForm = action.payload;
     },
     cancelEdit: (state) => {
       state.isReadonly = true;
-    },
-    setProfileForm: (state, action: PayloadAction<Profile | null>) => {
-      state.profileForm = action.payload;
     },
     updateProfileForm: (state, action: PayloadAction<Profile>) => {
       state.profileForm = {

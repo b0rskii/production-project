@@ -3,11 +3,11 @@ import { Select, SelectOption } from 'shared/ui/Select';
 import { getClassNames } from 'shared/utils/classNames';
 import { Currency } from '../../model/types/currency';
 
-const currencies: SelectOption[] = (Object.values(Currency)
+const currencies: SelectOption[] = Object.values(Currency)
   .map((currency) => ({
     value: currency,
     content: currency,
-  })));
+  }));
 
 type CurrencySelectProps = PropsWithChildren<{
   className?: string;

@@ -2,7 +2,7 @@ import { memo, PropsWithChildren, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Country, CountrySelect } from 'entities/Country';
 import { Currency, CurrencySelect } from 'entities/Currency';
-import { Avatar } from 'shared/ui/Avatar/Avatar';
+import { Avatar } from 'shared/ui/Avatar';
 import { Input } from 'shared/ui/Input';
 import { Loader } from 'shared/ui/Loader';
 import { Text, TextTheme } from 'shared/ui/Text';
@@ -40,8 +40,6 @@ export const ProfileCard = memo((props: ProfileProps) => {
     handlers,
   } = props;
 
-  const { t } = useTranslation('profile');
-
   const {
     onInputChange,
     onAgeChange,
@@ -49,11 +47,13 @@ export const ProfileCard = memo((props: ProfileProps) => {
     onCurrencyChange,
   } = handlers;
 
+  const { t } = useTranslation('profile');
+
   const profileMap = useMemo(() => {
     if (!profile) {
-      return;
+      return null;
     }
-    // eslint-disable-next-line consistent-return
+
     return getKeysMap<Profile>(profile);
   }, [profile]);
 
