@@ -8,6 +8,7 @@ export type LinkItem = {
   route: string;
   Icon: VFC<SVGProps<SVGSVGElement>>;
   translationKey: string,
+  authOnly?: boolean;
 };
 
 export const linkItems: LinkItem[] = [
@@ -25,5 +26,6 @@ export const linkItems: LinkItem[] = [
     route: RoutePath.PROFILE,
     Icon: ProfileIcon,
     translationKey: 'На страницу профиля',
+    authOnly: true,
   },
 ];

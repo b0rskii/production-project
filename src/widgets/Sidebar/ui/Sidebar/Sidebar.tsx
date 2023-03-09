@@ -1,4 +1,6 @@
+import { useSelector } from 'react-redux';
 import { memo, useState } from 'react';
+import { userSelectors } from 'entities/User';
 import { getClassNames } from 'shared/utils/classNames';
 import { ThemeSwitcher } from 'shared/ui/ThemeSwitcher';
 import { LangSwitcher } from 'shared/ui/LangSwitcher';
@@ -14,6 +16,7 @@ type SidebarProps = {
 export const Sidebar = memo((props: SidebarProps) => {
   const { className } = props;
   const [collapsed, setCollapsed] = useState(false);
+  const isAuth = useSelector(userSelectors.getUserAuthData);
 
   const onToggleButtonClick = () => {
     setCollapsed((prev) => !prev);
@@ -37,13 +40,19 @@ export const Sidebar = memo((props: SidebarProps) => {
       </Button>
 
       <div className={style.linksList}>
-        {linkItems.map((linkItem) => (
-          <LinkItem
-            linkItem={linkItem}
-            isCollapsed={collapsed}
-            key={linkItem.route}
-          />
-        ))}
+        {linkItems.map((linkItem) => {
+          if (!isAuth && linkItem.authOnly) {
+            return null;
+          }
+
+          return (
+            <LinkItem
+              linkItem={linkItem}
+              isCollapsed={collapsed}
+              key={linkItem.route}
+            />
+          );
+        })}
       </div>
 
       <div className={style.switchers}>
