@@ -12,7 +12,9 @@ export default {
   },
   decorators: [
     StoreDecorator({
-      profile: {},
+      profile: {
+        profile: {},
+      },
     }),
   ],
 } as ComponentMeta<typeof ProfilePage>;

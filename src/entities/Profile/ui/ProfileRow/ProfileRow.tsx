@@ -6,12 +6,12 @@ import style from './ProfileRow.module.scss';
 type ProfileRowProps = PropsWithChildren<{
   className?: string;
   name: string;
-  isReadonly: boolean;
+  isReadonly?: boolean;
   value?: string;
 }>;
 
 export const ProfileRow = memo((props: ProfileRowProps) => {
-  const { className, name, isReadonly, value, children } = props;
+  const { className, name, value, children, isReadonly = true } = props;
   const { t } = useTranslation();
 
   return (
