@@ -9,7 +9,7 @@ import { Text, TextTheme } from 'shared/ui/Text';
 import { getClassNames } from 'shared/utils/classNames';
 import { getKeysMap } from 'shared/utils/getKeysMap';
 import { Profile } from '../../model/types/profileSchema';
-import { ProfileRow } from '../ProfileRow/ProfileRow';
+import { ProfileRow } from '../ProfileRow';
 import style from './ProfileCard.module.scss';
 
 export type ProfileHandlers = {
