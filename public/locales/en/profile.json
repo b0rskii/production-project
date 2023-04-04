@@ -12,5 +12,9 @@
   "Город": "City",
   "Страна": "Country",
   "Валюта": "Currency",
-  "Имя пользователя": "Username"
+  "Имя пользователя": "Username",
+  "Введите ваше имя": "Enter your name",
+  "Введите вашу фамилию": "Enter your lastname",
+  "Неверный возраст": "Incorrect age",
+  "Нет данных": "No data"
 }
