@@ -50,6 +50,10 @@ export const ProfileBlock = (props: ProfileBlockProps) => {
   useAsyncReducer(PROFILE_SLICE, profileReducer);
 
   useEffect(() => {
+    if (__PROJECT__ === 'storybook') {
+      return;
+    }
+
     dispatch(fetchProfileData());
   }, [dispatch]);
 
