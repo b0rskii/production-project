@@ -1,21 +1,8 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { Country } from 'entities/Country';
-import { Currency } from 'entities/Currency';
 import { ThemeDecorator } from 'shared/config/storybook/ThemeDecorator';
 import { Theme } from 'shared/utils/theme';
-import { Profile } from '../../model/types/profileSchema';
+import { mockProfile } from '../../model/mocks';
 import { ProfileCard } from './ProfileCard';
-
-const PROFILE: Profile = {
-  age: 30,
-  avatar: 'https://pic.rutubelist.ru/user/3b/27/3b2758ad5492a76b578f7ee072e4e894.jpg',
-  city: 'City-17',
-  country: Country.Russia,
-  currency: Currency.RUB,
-  firstname: 'Гордон',
-  lastname: 'Фримен',
-  username: 'HALF-LIFE',
-};
 
 export default {
   title: 'entities/ProfileCard',
@@ -37,7 +24,7 @@ const Template: ComponentStory<typeof ProfileCard> = (args) => <ProfileCard {...
 
 export const Default = Template.bind({});
 Default.args = {
-  profile: PROFILE,
+  profile: mockProfile,
   isReadonly: true,
 };
 
@@ -58,7 +45,7 @@ Empty.args = {
 
 export const DefaultDark = Template.bind({});
 DefaultDark.args = {
-  profile: PROFILE,
+  profile: mockProfile,
   isReadonly: true,
 };
 DefaultDark.decorators = [ThemeDecorator(Theme.DARK)];

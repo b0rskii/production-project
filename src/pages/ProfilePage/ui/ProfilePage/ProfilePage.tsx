@@ -1,4 +1,4 @@
-import { ProfileBlock } from '../ProfileBlock/ProfileBlock';
+import { ProfileBlock } from 'widgets/ProfileBlock';
 
 function ProfilePage() {
   return (

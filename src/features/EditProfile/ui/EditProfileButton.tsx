@@ -35,6 +35,10 @@ export const EditProfileButton = memo((props: EditProfileProps) => {
   }, [dispatch]);
 
   const saveButtonClickHandler = useCallback(() => {
+    if (__PROJECT__ === 'storybook') {
+      return;
+    }
+
     dispatch(updateProfileData());
   }, [dispatch]);
 
