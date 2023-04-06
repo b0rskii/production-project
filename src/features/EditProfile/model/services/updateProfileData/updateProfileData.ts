@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkAPI } from 'app/providers/StoreProvider';
 import { Profile, profileActions } from 'entities/Profile';
 import { NAME, editProfileActions } from '../../slice/editProfileSlice';
-import { validateProfileData } from '../validateProfile';
+import { validateProfileData } from '../validateProfile/validateProfile';
 
 export const updateProfileData = createAsyncThunk<
   Profile,
@@ -22,6 +22,10 @@ export const updateProfileData = createAsyncThunk<
 
     try {
       const { data } = await api.put<Profile>('/profile', profileForm);
+
+      if (!data) {
+        throw new Error();
+      }
 
       dispatch(profileActions.setProfile(data));
 

@@ -1,5 +1,6 @@
 import { Profile } from 'entities/Profile';
-import { ValidateProfileError } from '../types/editProfileSchema';
+import { ValidateProfileError } from '../../types/editProfileSchema';
+import { AgeLimit } from '../../const';
 
 export const validateProfileData = (profile?: Profile | null) => {
   if (!profile) {
@@ -17,7 +18,7 @@ export const validateProfileData = (profile?: Profile | null) => {
     errors.push(ValidateProfileError.INCORRECT_LAST_NAME);
   }
 
-  if (!age || !Number.isInteger(age) || age < 18 || age > 100) {
+  if (!age || !Number.isInteger(age) || age < AgeLimit.MIN || age > AgeLimit.MAX) {
     errors.push(ValidateProfileError.INCORRECT_AGE);
   }
 
