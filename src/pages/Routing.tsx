@@ -34,7 +34,12 @@ export const routes: AppRouteProps[] = [
 ];
 
 export const Routing = memo(() => {
+  const isAuthChecked = useSelector(userSelectors.getIsInited);
   const isAuth = useSelector(userSelectors.getUserAuthData);
+
+  if (!isAuthChecked) {
+    return null;
+  }
 
   return (
     <Routes>
