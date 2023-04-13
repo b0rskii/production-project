@@ -5,4 +5,5 @@ export type User = {
 
 export type UserSchema = {
   authData: User | null;
+  isInited: boolean;
 };
