@@ -1,12 +1,14 @@
 import { memo, Suspense } from 'react';
 import { useSelector } from 'react-redux';
 import { Routes, Route, RouteProps } from 'react-router-dom';
-import { RequireAuth, RoutePath } from 'shared/config/routing';
 import { PageLoader } from 'widgets/PageLoader';
 import { userSelectors } from 'entities/User';
+import { RequireAuth, RoutePath } from 'shared/config/routing';
 import { AboutPage } from './AboutPage';
 import { MainPage } from './MainPage';
 import { ProfilePage } from './ProfilePage';
+import { ArticlesPage } from './ArticlesPage';
+import { ArticleDetailsPage } from './ArticleDetailsPage';
 import { NotFoundPage } from './NotFoundPage';
 
 type AppRouteProps = RouteProps & {
@@ -25,6 +27,16 @@ export const routes: AppRouteProps[] = [
   {
     path: RoutePath.PROFILE,
     element: <ProfilePage />,
+    authOnly: true,
+  },
+  {
+    path: RoutePath.ARTICLES,
+    element: <ArticlesPage />,
+    authOnly: true,
+  },
+  {
+    path: `${RoutePath.ARTICLE_DETAILS}:id`,
+    element: <ArticleDetailsPage />,
     authOnly: true,
   },
   {
