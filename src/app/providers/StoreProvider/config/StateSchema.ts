@@ -11,6 +11,7 @@ import { EditProfileSchema, EDIT_PROFILE_SLICE } from 'features/EditProfile';
 import { CounterSchema, COUNTER_SLICE } from 'entities/Counter';
 import { ProfileSchema, PROFILE_SLICE } from 'entities/Profile';
 import { UserSchema, USER_SLICE } from 'entities/User';
+import { ArticleSchema, ARTICLE_SLICE } from 'entities/Article';
 
 export type StateSchema = {
   [COUNTER_SLICE]: CounterSchema;
@@ -18,6 +19,7 @@ export type StateSchema = {
   [LOGIN_SLICE]?: LoginSchema;
   [PROFILE_SLICE]?: ProfileSchema;
   [EDIT_PROFILE_SLICE]?: EditProfileSchema;
+  [ARTICLE_SLICE]?: ArticleSchema;
 };
 
 export type StateSchemaKey = keyof StateSchema;

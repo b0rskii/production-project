@@ -1,4 +1,5 @@
 import { PropsWithChildren, memo } from 'react';
+import { ArticleDetails } from 'entities/Article';
 import { getClassNames } from 'shared/utils/classNames';
 // import style from './ArticleDetailsPage.module.scss';
 
@@ -10,9 +11,8 @@ const ArticleDetailsPage = (props: ArticleDetailsPageProps) => {
   const { className } = props;
 
   return (
-    // eslint-disable-next-line i18next/no-literal-string
     <div className={getClassNames('', {}, [className])}>
-      Article Details Page
+      <ArticleDetails />
     </div>
   );
 };
