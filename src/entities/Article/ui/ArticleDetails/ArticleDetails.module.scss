@@ -1,3 +1,14 @@
 .articleDetails {
 
 }
+
+.loading,
+.error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading {
+  min-height: 150px;
+}

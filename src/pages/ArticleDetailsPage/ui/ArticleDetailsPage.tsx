@@ -1,6 +1,6 @@
 import { PropsWithChildren, memo } from 'react';
-import { ArticleDetails } from 'entities/Article';
 import { getClassNames } from 'shared/utils/classNames';
+import { ArticleDetailsBlock } from './ArticleDetailsBlock';
 // import style from './ArticleDetailsPage.module.scss';
 
 type ArticleDetailsPageProps = PropsWithChildren<{
@@ -12,7 +12,7 @@ const ArticleDetailsPage = (props: ArticleDetailsPageProps) => {
 
   return (
     <div className={getClassNames('', {}, [className])}>
-      <ArticleDetails />
+      <ArticleDetailsBlock />
     </div>
   );
 };
