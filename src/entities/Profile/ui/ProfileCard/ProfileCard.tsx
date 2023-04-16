@@ -8,6 +8,7 @@ import { Loader } from 'shared/ui/Loader';
 import { Text, TextTheme } from 'shared/ui/Text';
 import { getClassNames } from 'shared/utils/classNames';
 import { getKeysMap } from 'shared/utils/getKeysMap';
+import { TranslationNameSpace } from 'shared/utils/i18n';
 import { Profile } from '../../model/types/profileSchema';
 import { ProfileRow } from '../ProfileRow';
 import style from './ProfileCard.module.scss';
@@ -47,7 +48,7 @@ export const ProfileCard = memo((props: ProfileProps) => {
     onCurrencyChange,
   } = handlers;
 
-  const { t } = useTranslation('profile');
+  const { t } = useTranslation([TranslationNameSpace.Translation, TranslationNameSpace.Profile]);
 
   const profileMap = useMemo(() => {
     if (!profile) {
@@ -69,7 +70,7 @@ export const ProfileCard = memo((props: ProfileProps) => {
     return (
       <div className={getClassNames(style.profileCard, {}, [className, style.error])}>
         <Text
-          title={t('При загрузке профиля произошла ошибка')}
+          title={t('При загрузке профиля произошла ошибка', { ns: TranslationNameSpace.Profile })}
           text={t('Попробуйте обновить страницу')}
           theme={TextTheme.ERROR}
           align="center"

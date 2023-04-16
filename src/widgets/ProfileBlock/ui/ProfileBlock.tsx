@@ -20,6 +20,7 @@ import { Currency } from 'entities/Currency';
 import { Text, TextTheme } from 'shared/ui/Text';
 import { getClassNames } from 'shared/utils/classNames';
 import { useAppDispatch, useAsyncReducer } from 'shared/utils/redux';
+import { TranslationNameSpace } from 'shared/utils/i18n';
 import style from './ProfileBlock.module.scss';
 
 type ProfileBlockProps = PropsWithChildren<{
@@ -28,7 +29,7 @@ type ProfileBlockProps = PropsWithChildren<{
 
 export const ProfileBlock = (props: ProfileBlockProps) => {
   const { className } = props;
-  const { t } = useTranslation('profile');
+  const { t } = useTranslation(TranslationNameSpace.Profile);
   const dispatch = useAppDispatch();
 
   const profile = useSelector(profileSelectors.getProfile);
