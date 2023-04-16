@@ -20,7 +20,7 @@ export const ArticleDetails = memo((props: ArticleDetailsProps) => {
 
   if (isLoading) {
     return (
-      <div className={getClassNames(style.articleDetails, {}, [className])}>
+      <div className={getClassNames('', {}, [className])}>
         <Skeleton className={style.avatar} width={200} height={200} borderRadius="50%" />
         <Skeleton className={style.title} width={300} height={32} />
         <Skeleton className={style.skeleton} width={600} height={24} />
@@ -32,7 +32,7 @@ export const ArticleDetails = memo((props: ArticleDetailsProps) => {
 
   if (error) {
     return (
-      <div className={getClassNames(style.articleDetails, {}, [className, style.error])}>
+      <div className={getClassNames('', {}, [className, style.error])}>
         <Text
           title={t('При загрузке статьи произошла ошибка', { ns: I18nNameSpace.Article })}
           text={t('Попробуйте обновить страницу')}
@@ -44,7 +44,7 @@ export const ArticleDetails = memo((props: ArticleDetailsProps) => {
   }
 
   return (
-    <div className={getClassNames(style.articleDetails, {}, [className])}>
+    <div className={getClassNames('', {}, [className])}>
       {article?.title}
     </div>
   );

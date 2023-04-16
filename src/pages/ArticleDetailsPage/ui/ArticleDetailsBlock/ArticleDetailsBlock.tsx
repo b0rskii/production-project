@@ -6,7 +6,7 @@ import {
 } from 'entities/Article';
 import { getClassNames } from 'shared/utils/classNames';
 import { useAppDispatch, useAsyncReducer } from 'shared/utils/redux';
-import style from './ArticleDetailsBlock.module.scss';
+// import style from './ArticleDetailsBlock.module.scss';
 
 type ArticleDetailsBlockProps = PropsWithChildren<{
   className?: string;
@@ -30,7 +30,7 @@ export const ArticleDetailsBlock = memo((props: ArticleDetailsBlockProps) => {
   }, [dispatch, id]);
 
   return (
-    <div className={getClassNames(style.articleDetailsBlock, {}, [className])}>
+    <div className={getClassNames('', {}, [className])}>
       <ArticleDetails
         article={article}
         isLoading={isLoading}
