@@ -1,8 +1,8 @@
 import { useTranslation } from 'react-i18next';
-import { TranslationNameSpace } from 'shared/utils/i18n';
+import { I18nNameSpace } from 'shared/utils/i18n/nameSpace';
 
 function MainPage() {
-  const { t } = useTranslation(TranslationNameSpace.Main);
+  const { t } = useTranslation(I18nNameSpace.Main);
 
   return (
     <div>

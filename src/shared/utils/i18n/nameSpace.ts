@@ -1,4 +1,4 @@
-export const NameSpace = {
+export const I18nNameSpace = {
   Translation: 'translation',
   About: 'about',
   Article: 'article',

@@ -5,7 +5,7 @@ import { profileSelectors } from 'entities/Profile';
 import { Button, ButtonTheme } from 'shared/ui/Button';
 import { getClassNames } from 'shared/utils/classNames';
 import { useAppDispatch, useAsyncReducer } from 'shared/utils/redux';
-import { TranslationNameSpace } from 'shared/utils/i18n';
+import { I18nNameSpace } from 'shared/utils/i18n/nameSpace';
 import { editProfileActions, NAME, editProfileReducer } from '../model/slice/editProfileSlice';
 import { editProfileSelectors } from '../model/selectors';
 import { updateProfileData } from '../model/services/updateProfileData/updateProfileData';
@@ -17,7 +17,7 @@ type EditProfileProps = PropsWithChildren<{
 
 export const EditProfileButton = memo((props: EditProfileProps) => {
   const { className } = props;
-  const { t } = useTranslation(TranslationNameSpace.Profile);
+  const { t } = useTranslation(I18nNameSpace.Profile);
   const dispatch = useAppDispatch();
 
   const profile = useSelector(profileSelectors.getProfile);
