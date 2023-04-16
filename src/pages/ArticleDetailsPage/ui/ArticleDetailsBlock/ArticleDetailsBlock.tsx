@@ -24,7 +24,7 @@ export const ArticleDetailsBlock = memo((props: ArticleDetailsBlockProps) => {
   useAsyncReducer(ARTICLE_SLICE, articleReducer);
 
   useEffect(() => {
-    if (id) {
+    if (id && __PROJECT__ !== 'storybook') {
       dispatch(fetchArticleById(id));
     }
   }, [dispatch, id]);

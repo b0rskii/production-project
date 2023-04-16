@@ -1,8 +1,8 @@
 import { PropsWithChildren, memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { getClassNames } from 'shared/utils/classNames';
-import { Loader } from 'shared/ui/Loader';
 import { Text, TextTheme } from 'shared/ui/Text';
+import { Skeleton } from 'shared/ui/Skeleton';
 import { TranslationNameSpace } from 'shared/utils/i18n';
 import { Article } from '../../model/types/articleSchema';
 import style from './ArticleDetails.module.scss';
@@ -20,8 +20,12 @@ export const ArticleDetails = memo((props: ArticleDetailsProps) => {
 
   if (isLoading) {
     return (
-      <div className={getClassNames(style.articleDetails, {}, [className, style.loading])}>
-        <Loader />
+      <div className={getClassNames(style.articleDetails, {}, [className])}>
+        <Skeleton className={style.avatar} width={200} height={200} borderRadius="50%" />
+        <Skeleton className={style.title} width={300} height={32} />
+        <Skeleton className={style.skeleton} width={600} height={24} />
+        <Skeleton className={style.skeleton} width="100%" height={200} />
+        <Skeleton className={style.skeleton} width="100%" height={200} />
       </div>
     );
   }

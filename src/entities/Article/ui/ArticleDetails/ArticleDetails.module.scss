@@ -2,13 +2,20 @@
 
 }
 
-.loading,
+.avatar {
+  margin: 0 auto;
+}
+
+.title {
+  margin-top: 20px;
+}
+
+.skeleton {
+  margin-top: 15px;
+}
+
 .error {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.loading {
-  min-height: 150px;
 }
