@@ -1,12 +1,10 @@
 import { PropsWithChildren, memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { getClassNames } from 'shared/utils/classNames';
-import { useAsyncReducer } from 'shared/utils/redux';
 import { Loader } from 'shared/ui/Loader';
 import { Text, TextTheme } from 'shared/ui/Text';
 import { TranslationNameSpace } from 'shared/utils/i18n';
 import { Article } from '../../model/types/articleSchema';
-import { NAME, articleReducer } from '../../model/slice/articleSlice';
 import style from './ArticleDetails.module.scss';
 
 type ArticleDetailsProps = PropsWithChildren<{
@@ -19,8 +17,6 @@ type ArticleDetailsProps = PropsWithChildren<{
 export const ArticleDetails = memo((props: ArticleDetailsProps) => {
   const { article, isLoading, error, className } = props;
   const { t } = useTranslation([TranslationNameSpace.Translation, TranslationNameSpace.Article]);
-
-  useAsyncReducer(NAME, articleReducer);
 
   if (isLoading) {
     return (
