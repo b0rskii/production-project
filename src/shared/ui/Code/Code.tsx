@@ -12,9 +12,17 @@ type CodeProps = PropsWithChildren<{
 export const Code = memo((props: CodeProps) => {
   const { className, code } = props;
 
+  const copyButtonClickHandler = () => {
+    navigator.clipboard.writeText(code);
+  };
+
   return (
     <pre className={getClassNames(style.code, {}, [className])}>
-      <Button className={style.copyButton} theme={ButtonTheme.CLEAR}>
+      <Button
+        className={style.copyButton}
+        theme={ButtonTheme.CLEAR}
+        onClick={copyButtonClickHandler}
+      >
         <CopyIcon className={style.icon} />
       </Button>
       <code>
