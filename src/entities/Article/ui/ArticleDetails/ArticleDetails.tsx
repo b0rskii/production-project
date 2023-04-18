@@ -3,8 +3,15 @@ import { useTranslation } from 'react-i18next';
 import { getClassNames } from 'shared/utils/classNames';
 import { Text, TextTheme } from 'shared/ui/Text';
 import { Skeleton } from 'shared/ui/Skeleton';
+import { Avatar } from 'shared/ui/Avatar';
 import { I18nNameSpace } from 'shared/utils/i18n/nameSpace';
-import { Article } from '../../model/types/articleSchema';
+import { Icon } from 'shared/ui/Icon';
+import EyeIcon from 'shared/assets/icons/eye.svg';
+import CalendarIcon from 'shared/assets/icons/calendar.svg';
+import { Article, ArticleBlockType } from '../../model/types/articleSchema';
+import { ArticleTextBlock } from '../ArticleTextBlock';
+import { ArticleCodeBlock } from '../ArticleCodeBlock';
+import { ArticleImageBlock } from '../ArticleImageBlock';
 import style from './ArticleDetails.module.scss';
 
 type ArticleDetailsProps = PropsWithChildren<{
@@ -43,9 +50,50 @@ export const ArticleDetails = memo((props: ArticleDetailsProps) => {
     );
   }
 
+  if (!article) {
+    return null;
+  }
+
+  const { img, title, subtitle, views, createdAt, blocks } = article;
+
   return (
     <div className={getClassNames('', {}, [className])}>
-      {article?.title}
+      <div className={style.avatarWrapper}>
+        <Avatar
+          src={img}
+          size={200}
+          alt={title}
+        />
+      </div>
+
+      <Text
+        className={style.title}
+        title={title}
+        text={subtitle}
+        size="l"
+      />
+
+      <div className={style.info}>
+        <Icon Svg={EyeIcon} />
+        {views}
+      </div>
+      <div className={style.info}>
+        <Icon Svg={CalendarIcon} />
+        {createdAt}
+      </div>
+
+      {blocks.map((block) => {
+        switch (block.type) {
+        case ArticleBlockType.TEXT:
+          return <ArticleTextBlock className={style.block} content={block} key={block.id} />;
+        case ArticleBlockType.CODE:
+          return <ArticleCodeBlock className={style.block} content={block} key={block.id} />;
+        case ArticleBlockType.IMAGE:
+          return <ArticleImageBlock className={style.block} content={block} key={block.id} />;
+        default:
+          return null;
+        }
+      })}
     </div>
   );
 });
