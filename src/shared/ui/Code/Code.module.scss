@@ -15,3 +15,17 @@
 .icon {
   stroke: var(--primary-color);
 }
+
+.statusIcon {
+  position: absolute;
+  top: 20px;
+  right: 50px;
+
+  &Success {
+    fill: var(--green-light);
+  }
+
+  &Error {
+    fill: var(--red-light);
+  }
+}
