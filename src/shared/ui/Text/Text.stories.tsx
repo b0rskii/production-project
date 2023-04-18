@@ -36,6 +36,13 @@ Error.args = {
   theme: TextTheme.ERROR,
 };
 
+export const SizeL = Template.bind({});
+SizeL.args = {
+  title: 'Title',
+  text: 'text',
+  size: 'l',
+};
+
 export const DefaultDark = Template.bind({});
 DefaultDark.args = {
   title: 'Title',
@@ -62,3 +69,11 @@ ErrorDark.args = {
   theme: TextTheme.ERROR,
 };
 ErrorDark.decorators = [ThemeDecorator(Theme.DARK)];
+
+export const SizeLDark = Template.bind({});
+SizeLDark.args = {
+  title: 'Title',
+  text: 'text',
+  size: 'l',
+};
+SizeLDark.decorators = [ThemeDecorator(Theme.DARK)];
