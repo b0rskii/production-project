@@ -3,11 +3,11 @@ import { mockArticle } from 'entities/Article';
 import { ThemeDecorator } from 'shared/config/storybook/ThemeDecorator';
 import { StoreDecorator } from 'shared/config/storybook/StoreDecorator';
 import { Theme } from 'shared/utils/theme';
-import { ArticleDetailsBlock } from './ArticleDetailsBlock';
+import ArticleDetailsPage from './ArticleDetailsPage';
 
 export default {
-  title: 'pages/ArticleDetailsPage/ArticleDetailsBlock',
-  component: ArticleDetailsBlock,
+  title: 'pages/ArticleDetailsPage',
+  component: ArticleDetailsPage,
   argTypes: {
     backgroundColor: { control: 'color' },
   },
@@ -18,9 +18,9 @@ export default {
       },
     }),
   ],
-} as ComponentMeta<typeof ArticleDetailsBlock>;
+} as ComponentMeta<typeof ArticleDetailsPage>;
 
-const Template: ComponentStory<typeof ArticleDetailsBlock> = (args) => <ArticleDetailsBlock {...args} />;
+const Template: ComponentStory<typeof ArticleDetailsPage> = (args) => <ArticleDetailsPage {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {};
