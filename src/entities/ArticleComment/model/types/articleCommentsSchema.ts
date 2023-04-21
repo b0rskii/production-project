@@ -6,7 +6,7 @@ export type ArticleComment = {
 };
 
 export type ArticleCommentsSchema = {
-  comments: ArticleComment[];
+  data: ArticleComment[];
   isLoading: boolean;
   error: string | null;
 };
