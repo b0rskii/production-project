@@ -13,5 +13,6 @@
   "Пароль": "Password",
   "Форма авторизации": "Login form",
   "Неверный логин или пароль": "Wrong login or password",
-  "Выйти": "Logout"
+  "Выйти": "Logout",
+  "Комментариев нет": "No comments"
 }
