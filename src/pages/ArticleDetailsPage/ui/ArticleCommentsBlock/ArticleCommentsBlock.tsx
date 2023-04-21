@@ -1,11 +1,13 @@
 import { PropsWithChildren, memo, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import { CommentCardsList } from 'widgets/CommentCard';
 import {
   ARTICLE_COMMENTS_SLICE, articleCommentsReducer, articleCommentsSelectors, fetchArticleComments,
 } from 'entities/ArticleComment';
 import { getClassNames } from 'shared/utils/classNames';
 import { useAppDispatch, useAsyncReducer } from 'shared/utils/redux';
+import { Text } from 'shared/ui/Text';
 import style from './ArticleCommentsBlock.module.scss';
 
 type ArticleCommentsBlockProps = PropsWithChildren<{
@@ -15,6 +17,7 @@ type ArticleCommentsBlockProps = PropsWithChildren<{
 
 export const ArticleCommentsBlock = memo((props: ArticleCommentsBlockProps) => {
   const { className, articleId } = props;
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
 
   useAsyncReducer(ARTICLE_COMMENTS_SLICE, articleCommentsReducer);
@@ -31,6 +34,7 @@ export const ArticleCommentsBlock = memo((props: ArticleCommentsBlockProps) => {
 
   return (
     <div className={getClassNames(style.articleCommentsBlock, {}, [className])}>
+      <Text title={`${t('Комментарии')}:`} />
       <CommentCardsList
         comments={comments}
         isLoading={isLoading}

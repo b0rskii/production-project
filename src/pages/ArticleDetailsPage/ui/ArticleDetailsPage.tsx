@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { getClassNames } from 'shared/utils/classNames';
 import { ArticleDetailsBlock } from './ArticleDetailsBlock';
 import { ArticleCommentsBlock } from './ArticleCommentsBlock';
+import style from './ArticleDetailsPage.module.scss';
 
 type ArticleDetailsPageProps = PropsWithChildren<{
   className?: string;
@@ -15,7 +16,7 @@ const ArticleDetailsPage = (props: ArticleDetailsPageProps) => {
   return (
     <div className={getClassNames('', {}, [className])}>
       <ArticleDetailsBlock articleId={id} />
-      <ArticleCommentsBlock articleId={id} />
+      <ArticleCommentsBlock className={style.comments} articleId={id} />
     </div>
   );
 };
