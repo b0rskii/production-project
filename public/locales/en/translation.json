@@ -14,5 +14,6 @@
   "Форма авторизации": "Login form",
   "Неверный логин или пароль": "Wrong login or password",
   "Выйти": "Logout",
-  "Комментариев нет": "No comments"
+  "Комментариев нет": "No comments",
+  "При загрузке комментариев произошла ошибка": "Comments loading error"
 }

@@ -1,7 +1,3 @@
-import { User } from 'entities/User';
+import { ArticleComment } from 'entities/ArticleComment';
 
-export type Comment = {
-  id: string;
-  user: User;
-  text: string;
-};
+export type Comment = ArticleComment;

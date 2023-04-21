@@ -32,26 +32,9 @@ export const ArticleCommentsBlock = memo((props: ArticleCommentsBlockProps) => {
   return (
     <div className={getClassNames(style.articleCommentsBlock, {}, [className])}>
       <CommentCardsList
-        isLoading
-        comments={[
-          {
-            id: '1',
-            user: {
-              id: '1',
-              name: 'Вася',
-            },
-            text: 'freghrthhrthrt',
-          },
-          {
-            id: '2',
-            user: {
-              id: '2',
-              name: 'Jhon',
-              avatar: 'https://pic.rutubelist.ru/user/3b/27/3b2758ad5492a76b578f7ee072e4e894.jpg',
-            },
-            text: 'rererthjtykjtyujtyhrtgrt',
-          },
-        ]}
+        comments={comments}
+        isLoading={isLoading}
+        error={error}
       />
     </div>
   );
