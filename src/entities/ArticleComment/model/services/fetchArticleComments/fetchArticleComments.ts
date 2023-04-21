@@ -9,7 +9,11 @@ export const fetchArticleComments = createAsyncThunk<ArticleComment[], string, T
     const { api } = extra;
 
     try {
-      const { data } = await api.get<ArticleComment[]>(`/comments/${articleId}`);
+      const { data } = await api.get<ArticleComment[]>(`/articles/${articleId}/comments`, {
+        params: {
+          _expand: 'user',
+        },
+      });
 
       if (!data) {
         throw new Error();
