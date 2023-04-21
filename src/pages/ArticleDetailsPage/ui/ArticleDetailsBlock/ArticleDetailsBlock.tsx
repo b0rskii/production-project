@@ -9,12 +9,12 @@ import { useAppDispatch, useAsyncReducer } from 'shared/utils/redux';
 
 type ArticleDetailsBlockProps = PropsWithChildren<{
   className?: string;
+  articleId?: string;
 }>;
 
 export const ArticleDetailsBlock = memo((props: ArticleDetailsBlockProps) => {
-  const { className } = props;
+  const { className, articleId } = props;
   const dispatch = useAppDispatch();
-  const { id } = useParams();
 
   const article = useSelector(articleSelectors.getArticle);
   const isLoading = useSelector(articleSelectors.getIsLoading);
@@ -23,10 +23,10 @@ export const ArticleDetailsBlock = memo((props: ArticleDetailsBlockProps) => {
   useAsyncReducer(ARTICLE_SLICE, articleReducer);
 
   useEffect(() => {
-    if (id && __PROJECT__ !== 'storybook') {
-      dispatch(fetchArticleById(id));
+    if (articleId && __PROJECT__ !== 'storybook') {
+      dispatch(fetchArticleById(articleId));
     }
-  }, [dispatch, id]);
+  }, [dispatch, articleId]);
 
   return (
     <div className={getClassNames('', {}, [className])}>
