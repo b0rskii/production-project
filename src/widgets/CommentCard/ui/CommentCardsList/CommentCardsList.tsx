@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { getClassNames } from 'shared/utils/classNames';
 import { Text, TextTheme } from 'shared/ui/Text';
 import { Loader } from 'shared/ui/Loader';
-import { Comment } from '../../model/types/comment';
+import { Comment } from 'shared/types/comment';
 import { CommentCard } from '../CommentCard';
 import style from './CommentCardsList.module.scss';
 
