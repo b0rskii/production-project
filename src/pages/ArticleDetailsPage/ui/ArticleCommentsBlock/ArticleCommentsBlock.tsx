@@ -2,6 +2,7 @@ import { PropsWithChildren, memo, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { CommentCardsList } from 'widgets/CommentCard';
+import { articleSelectors } from 'entities/Article';
 import {
   ARTICLE_COMMENTS_SLICE, articleCommentsReducer, articleCommentsSelectors, fetchArticleComments,
 } from 'entities/ArticleComment';
@@ -20,6 +21,8 @@ export const ArticleCommentsBlock = memo((props: ArticleCommentsBlockProps) => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
 
+  const article = useSelector(articleSelectors.getArticle);
+
   useAsyncReducer(ARTICLE_COMMENTS_SLICE, articleCommentsReducer);
 
   const comments = useSelector(articleCommentsSelectors.getArticleComments);
@@ -27,10 +30,14 @@ export const ArticleCommentsBlock = memo((props: ArticleCommentsBlockProps) => {
   const error = useSelector(articleCommentsSelectors.getError);
 
   useEffect(() => {
-    if (articleId && __PROJECT__ !== 'storybook') {
+    if (articleId && article && __PROJECT__ !== 'storybook') {
       dispatch(fetchArticleComments(articleId));
     }
-  }, [dispatch, articleId]);
+  }, [dispatch, articleId, article]);
+
+  if (!article) {
+    return null;
+  }
 
   return (
     <div className={getClassNames(style.articleCommentsBlock, {}, [className])}>
