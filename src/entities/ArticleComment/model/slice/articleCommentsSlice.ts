@@ -18,6 +18,7 @@ export const articleCommentsSlice = createSlice({
     builder
       .addCase(fetchArticleComments.pending, (state) => {
         state.error = null;
+        state.data = [];
         state.isLoading = true;
       })
       .addCase(fetchArticleComments.fulfilled, (state, action) => {

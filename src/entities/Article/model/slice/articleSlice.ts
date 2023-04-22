@@ -18,6 +18,7 @@ export const articleSlice = createSlice({
     builder
       .addCase(fetchArticleById.pending, (state) => {
         state.error = null;
+        state.data = null;
         state.isLoading = true;
       })
       .addCase(fetchArticleById.fulfilled, (state, action) => {

@@ -22,6 +22,7 @@ export const profileSlice = createSlice({
     builder
       .addCase(fetchProfileData.pending, (state) => {
         state.error = null;
+        state.profile = null;
         state.isLoading = true;
       })
       .addCase(fetchProfileData.fulfilled, (state, action) => {
