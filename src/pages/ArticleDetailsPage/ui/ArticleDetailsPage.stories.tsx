@@ -1,5 +1,6 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { mockArticle } from 'entities/Article';
+import { mockArticleComments } from 'entities/ArticleComment';
 import { ThemeDecorator } from 'shared/config/storybook/ThemeDecorator';
 import { StoreDecorator } from 'shared/config/storybook/StoreDecorator';
 import { Theme } from 'shared/utils/theme';
@@ -15,6 +16,9 @@ export default {
     StoreDecorator({
       article: {
         data: mockArticle,
+      },
+      articleComments: {
+        data: mockArticleComments(3),
       },
     }),
   ],
