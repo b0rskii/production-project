@@ -1,12 +1,12 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { mockArticle } from 'entities/Article';
-import { mockArticleComments } from 'entities/ArticleComment';
+import { mockNormalizedArticleComments } from 'entities/ArticleComment';
 import { ThemeDecorator } from 'shared/config/storybook/ThemeDecorator';
 import { StoreDecorator } from 'shared/config/storybook/StoreDecorator';
 import { Theme } from 'shared/utils/theme';
 import { ArticleCommentsBlock } from './ArticleCommentsBlock';
 
-const articleComments = mockArticleComments(3);
+const { ids, entities } = mockNormalizedArticleComments(3);
 
 export default {
   title: 'pages/ArticleDetailsPage/ArticleCommentsBlock',
@@ -23,7 +23,7 @@ Default.args = {};
 Default.decorators = [
   StoreDecorator({
     article: { data: mockArticle },
-    articleComments: { data: articleComments },
+    articleComments: { ids, entities },
   }),
 ];
 
@@ -32,7 +32,7 @@ NoArticle.args = {};
 NoArticle.decorators = [
   StoreDecorator({
     article: { data: null },
-    articleComments: { data: articleComments },
+    articleComments: { ids, entities },
   }),
 ];
 
@@ -41,7 +41,7 @@ DefaultDark.args = {};
 DefaultDark.decorators = [
   StoreDecorator({
     article: { data: mockArticle },
-    articleComments: { data: articleComments },
+    articleComments: { ids, entities },
   }),
   ThemeDecorator(Theme.DARK),
 ];

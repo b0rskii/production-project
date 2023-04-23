@@ -1,3 +1,4 @@
+import { EntityState } from '@reduxjs/toolkit';
 import { ArticleComment } from './types/articleCommentsSchema';
 
 const mockArticleComment = ({ id = '1' } = {}): ArticleComment => (
@@ -19,6 +20,23 @@ export const mockArticleComments = (count: number) => {
 
   for (let i = 1; i <= count; i += 1) {
     commentsList.push(mockArticleComment({ id: String(i) }));
+  }
+
+  return commentsList;
+};
+
+export const mockNormalizedArticleComments = (count: number) => {
+  const commentsList: EntityState<ArticleComment> = {
+    ids: [],
+    entities: {},
+  };
+
+  let id: string;
+
+  for (let i = 1; i <= count; i += 1) {
+    id = String(i);
+    commentsList.ids.push(id);
+    commentsList.entities[id] = mockArticleComment({ id });
   }
 
   return commentsList;

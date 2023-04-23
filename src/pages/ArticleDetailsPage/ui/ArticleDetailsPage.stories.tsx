@@ -1,10 +1,12 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { mockArticle } from 'entities/Article';
-import { mockArticleComments } from 'entities/ArticleComment';
+import { mockNormalizedArticleComments } from 'entities/ArticleComment';
 import { ThemeDecorator } from 'shared/config/storybook/ThemeDecorator';
 import { StoreDecorator } from 'shared/config/storybook/StoreDecorator';
 import { Theme } from 'shared/utils/theme';
 import ArticleDetailsPage from './ArticleDetailsPage';
+
+const { ids, entities } = mockNormalizedArticleComments(3);
 
 export default {
   title: 'pages/ArticleDetailsPage',
@@ -18,7 +20,8 @@ export default {
         data: mockArticle,
       },
       articleComments: {
-        data: mockArticleComments(3),
+        ids,
+        entities,
       },
     }),
   ],
