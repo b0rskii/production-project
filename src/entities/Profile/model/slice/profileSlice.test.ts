@@ -13,12 +13,14 @@ describe('profileSlice', () => {
 
   it('fetchProfileData pending', () => {
     const state: DeepPartial<ProfileSchema> = {
+      profile: mockProfile,
       isLoading: false,
       error: 'error',
     };
 
     expect(profileReducer(state as ProfileSchema, fetchProfileData.pending))
       .toEqual({
+        profile: null,
         isLoading: true,
         error: null,
       });

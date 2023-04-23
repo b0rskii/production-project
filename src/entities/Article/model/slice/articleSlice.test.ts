@@ -6,12 +6,14 @@ import { articleReducer } from './articleSlice';
 describe('articleSlice', () => {
   it('fetchArticleById pending', () => {
     const state: DeepPartial<ArticleSchema> = {
+      data: mockArticle,
       isLoading: false,
       error: 'error',
     };
 
     expect(articleReducer(state as ArticleSchema, fetchArticleById.pending))
       .toEqual({
+        data: null,
         isLoading: true,
         error: null,
       });
