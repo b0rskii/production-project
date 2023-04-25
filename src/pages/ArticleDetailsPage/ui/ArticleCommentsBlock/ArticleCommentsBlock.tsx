@@ -7,7 +7,6 @@ import {
   ARTICLE_COMMENTS_SLICE,
   articleCommentsReducer,
   articleCommentsSelectors,
-  getArticleComments,
   fetchArticleComments,
 } from 'entities/ArticleComment';
 import { getClassNames } from 'shared/utils/classNames';
@@ -28,7 +27,7 @@ export const ArticleCommentsBlock = memo((props: ArticleCommentsBlockProps) => {
 
   useAsyncReducer(ARTICLE_COMMENTS_SLICE, articleCommentsReducer);
 
-  const comments = useSelector(getArticleComments.selectAll);
+  const comments = useSelector(articleCommentsSelectors.getArticleComments.selectAll);
   const isLoading = useSelector(articleCommentsSelectors.getIsLoading);
   const error = useSelector(articleCommentsSelectors.getError);
 
