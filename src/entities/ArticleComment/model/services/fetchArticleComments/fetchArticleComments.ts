@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkAPI } from 'app/providers/StoreProvider';
+import { ApiRoutes } from 'shared/api';
 import { NAME } from '../../slice/articleCommentsSlice';
 import { ArticleComment } from '../../types/articleCommentsSchema';
 
@@ -9,11 +10,14 @@ export const fetchArticleComments = createAsyncThunk<ArticleComment[], string, T
     const { api } = extra;
 
     try {
-      const { data } = await api.get<ArticleComment[]>(`/articles/${articleId}/comments`, {
-        params: {
-          _expand: 'user',
+      const { data } = await api.get<ArticleComment[]>(
+        `${ApiRoutes.ARTICLES}/${articleId}/comments`,
+        {
+          params: {
+            _expand: 'user',
+          },
         },
-      });
+      );
 
       if (!data) {
         throw new Error();

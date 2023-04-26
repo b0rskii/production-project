@@ -2,6 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkAPI } from 'app/providers/StoreProvider';
 import { User, userActions } from 'entities/User';
 import { LocalStorageKey } from 'shared/const/localStorage';
+import { ApiRoutes } from 'shared/api';
 import { NAME } from '../../slice/loginSlice';
 
 type LoginByUsernameArg = {
@@ -15,7 +16,7 @@ export const loginByUserName = createAsyncThunk<User, LoginByUsernameArg, ThunkA
     const { api } = extra;
 
     try {
-      const { data } = await api.post<User>('/login', authData);
+      const { data } = await api.post<User>(ApiRoutes.LOGIN, authData);
 
       if (!data) {
         throw new Error();
