@@ -24,6 +24,7 @@ export const AddCommentForm = memo((props: AddCommentFormProps) => {
   useAsyncReducer(SLICE_NAME, addCommentReducer);
 
   const text = useSelector(addCommentSelectors.getText);
+  const isLoading = useSelector(addCommentSelectors.getIsLoading);
 
   const textChangeHandler = useCallback((value: string) => {
     dispatch(addCommentActions.setText(value));
@@ -37,10 +38,12 @@ export const AddCommentForm = memo((props: AddCommentFormProps) => {
         onChange={textChangeHandler}
         placeholder={t('Введите комментарий')}
         size={text.length}
+        disabled={isLoading}
       />
       <Button
         theme={ButtonTheme.OUTLINE}
         onClick={onSendComment}
+        disabled={isLoading}
       >
         {t('Отправить')}
       </Button>

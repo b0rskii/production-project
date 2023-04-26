@@ -1,5 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { AddCommentSchema } from '../types/addCommentSchema';
+import { sendArticleComment } from '../services/sendArticleComment/sendArticleComment';
 
 export const initialState: AddCommentSchema = {
   text: '',
@@ -16,6 +17,22 @@ export const addCommentSlice = createSlice({
     setText: (state, action: PayloadAction<string>) => {
       state.text = action.payload;
     },
+  },
+  extraReducers(builder) {
+    builder
+      .addCase(sendArticleComment.pending, (state) => {
+        state.error = null;
+        state.isLoading = true;
+      })
+      .addCase(sendArticleComment.fulfilled, (state) => {
+        state.error = null;
+        state.isLoading = false;
+        state.text = '';
+      })
+      .addCase(sendArticleComment.rejected, (state, action) => {
+        state.error = action.payload || null;
+        state.isLoading = false;
+      });
   },
 });
 

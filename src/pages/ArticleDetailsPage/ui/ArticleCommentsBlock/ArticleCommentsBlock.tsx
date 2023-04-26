@@ -2,7 +2,7 @@ import { PropsWithChildren, memo, useCallback, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { CommentCardsList } from 'widgets/CommentCard';
-import { AddCommentForm } from 'features/AddComment';
+import { AddCommentForm, sendArticleComment } from 'features/AddComment';
 import { articleSelectors } from 'entities/Article';
 import {
   ARTICLE_COMMENTS_SLICE,
@@ -39,8 +39,8 @@ export const ArticleCommentsBlock = memo((props: ArticleCommentsBlockProps) => {
   }, [dispatch, articleId, article]);
 
   const sendCommentHandler = useCallback(() => {
-    console.log('Комментарий отправлен');
-  }, []);
+    dispatch(sendArticleComment());
+  }, [dispatch]);
 
   if (!article) {
     return null;
