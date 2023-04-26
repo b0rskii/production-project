@@ -1,8 +1,11 @@
 import { testAsyncThunk } from 'shared/utils/tests';
 import { Profile, mockProfile, profileActions } from 'entities/Profile';
+import { mockUser } from 'entities/User';
 import { updateProfileData } from './updateProfileData';
 import { editProfileActions } from '../../slice/editProfileSlice';
 import { validateProfileData } from '../validateProfile/validateProfile';
+
+const USER_DATA = mockUser();
 
 describe('updateProfileData', () => {
   it('fulfilled', async () => {
@@ -10,6 +13,7 @@ describe('updateProfileData', () => {
 
     const thunk = testAsyncThunk(updateProfileData, {
       editProfile: { profileForm: mockProfile },
+      user: { authData: USER_DATA },
     });
 
     thunk.api.put.mockReturnValue(
@@ -28,6 +32,7 @@ describe('updateProfileData', () => {
   it('rejected', async () => {
     const thunk = testAsyncThunk(updateProfileData, {
       editProfile: { profileForm: mockProfile },
+      user: { authData: USER_DATA },
     });
 
     thunk.api.put.mockReturnValue(
@@ -47,6 +52,7 @@ describe('updateProfileData', () => {
 
     const thunk = testAsyncThunk(updateProfileData, {
       editProfile: { profileForm: invalidProfileData },
+      user: { authData: USER_DATA },
     });
 
     const result = await thunk.callThunk(undefined);
