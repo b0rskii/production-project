@@ -8,6 +8,7 @@ import {
 import { AxiosInstance } from 'axios';
 import { LoginSchema, LOGIN_SLICE } from 'features/AuthByUsername';
 import { EditProfileSchema, EDIT_PROFILE_SLICE } from 'features/EditProfile';
+import { AddCommentSchema, ADD_COMMENT_SLICE } from 'features/AddComment';
 import { CounterSchema, COUNTER_SLICE } from 'entities/Counter';
 import { ProfileSchema, PROFILE_SLICE } from 'entities/Profile';
 import { UserSchema, USER_SLICE } from 'entities/User';
@@ -22,6 +23,7 @@ export type StateSchema = {
   [EDIT_PROFILE_SLICE]?: EditProfileSchema;
   [ARTICLE_SLICE]?: ArticleSchema;
   [ARTICLE_COMMENTS_SLICE]?: ArticleCommentsSchema;
+  [ADD_COMMENT_SLICE]?: AddCommentSchema;
 };
 
 export type StateSchemaKey = keyof StateSchema;

@@ -1,7 +1,8 @@
-import { PropsWithChildren, memo, useEffect } from 'react';
+import { PropsWithChildren, memo, useCallback, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { CommentCardsList } from 'widgets/CommentCard';
+import { AddCommentForm } from 'features/AddComment';
 import { articleSelectors } from 'entities/Article';
 import {
   ARTICLE_COMMENTS_SLICE,
@@ -37,13 +38,18 @@ export const ArticleCommentsBlock = memo((props: ArticleCommentsBlockProps) => {
     }
   }, [dispatch, articleId, article]);
 
+  const sendCommentHandler = useCallback(() => {
+    console.log('Комментарий отправлен');
+  }, []);
+
   if (!article) {
     return null;
   }
 
   return (
     <div className={getClassNames('', {}, [className])}>
-      <Text title={`${t('Комментарии')}:`} />
+      <Text title={t('Комментарии')} />
+      <AddCommentForm onSendComment={sendCommentHandler} />
       <CommentCardsList
         comments={comments}
         isLoading={isLoading}

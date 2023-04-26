@@ -16,7 +16,7 @@ const ArticleDetailsPage = (props: ArticleDetailsPageProps) => {
   return (
     <div className={getClassNames('', {}, [className])}>
       <ArticleDetailsBlock articleId={id} />
-      <ArticleCommentsBlock className={style.comments} articleId={id} />
+      <ArticleCommentsBlock className={style.block} articleId={id} />
     </div>
   );
 };
