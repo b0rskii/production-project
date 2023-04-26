@@ -96,7 +96,7 @@ export const ProfileCard = memo((props: ProfileProps) => {
         )}
 
         <ProfileRow
-          name={t('Имя')}
+          name={t('Имя', { ns: I18nNameSpace.Profile })}
           value={profile.firstname}
           isReadonly={isReadonly}
         >
@@ -110,7 +110,7 @@ export const ProfileCard = memo((props: ProfileProps) => {
         </ProfileRow>
 
         <ProfileRow
-          name={t('Фамилия')}
+          name={t('Фамилия', { ns: I18nNameSpace.Profile })}
           value={profile.lastname}
           isReadonly={isReadonly}
         >
@@ -138,7 +138,7 @@ export const ProfileCard = memo((props: ProfileProps) => {
         </ProfileRow>
 
         <ProfileRow
-          name={t('Возраст')}
+          name={t('Возраст', { ns: I18nNameSpace.Profile })}
           value={String(profile.age)}
           isReadonly={isReadonly}
         >
@@ -152,7 +152,7 @@ export const ProfileCard = memo((props: ProfileProps) => {
         </ProfileRow>
 
         <ProfileRow
-          name={t('Город')}
+          name={t('Город', { ns: I18nNameSpace.Profile })}
           value={profile.city}
           isReadonly={isReadonly}
         >
@@ -166,7 +166,7 @@ export const ProfileCard = memo((props: ProfileProps) => {
         </ProfileRow>
 
         <ProfileRow
-          name={t('Страна')}
+          name={t('Страна', { ns: I18nNameSpace.Profile })}
           value={profile.country}
           isReadonly={isReadonly}
         >
@@ -177,7 +177,7 @@ export const ProfileCard = memo((props: ProfileProps) => {
         </ProfileRow>
 
         <ProfileRow
-          name={t('Валюта')}
+          name={t('Валюта', { ns: I18nNameSpace.Profile })}
           value={profile.currency}
           isReadonly={isReadonly}
         >
@@ -189,7 +189,7 @@ export const ProfileCard = memo((props: ProfileProps) => {
 
         {!isReadonly && (
           <ProfileRow
-            name={t('Аватар')}
+            name={t('Аватар', { ns: I18nNameSpace.Profile })}
             value={profile.avatar}
             isReadonly={isReadonly}
           >
