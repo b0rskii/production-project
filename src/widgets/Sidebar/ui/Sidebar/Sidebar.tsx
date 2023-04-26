@@ -5,7 +5,7 @@ import { getClassNames } from 'shared/utils/classNames';
 import { ThemeSwitcher } from 'shared/ui/ThemeSwitcher';
 import { LangSwitcher } from 'shared/ui/LangSwitcher';
 import { Button, ButtonTheme } from 'shared/ui/Button';
-import { linkItems } from '../../model/linkItems';
+import { getLinkItems } from '../../model/linkItems';
 import { LinkItem } from '../LinkItem/LinkItem';
 import style from './Sidebar.module.scss';
 
@@ -16,7 +16,7 @@ type SidebarProps = {
 export const Sidebar = memo((props: SidebarProps) => {
   const { className } = props;
   const [collapsed, setCollapsed] = useState(false);
-  const isAuth = useSelector(userSelectors.getUserAuthData);
+  const userData = useSelector(userSelectors.getUserAuthData);
 
   const onToggleButtonClick = () => {
     setCollapsed((prev) => !prev);
@@ -40,8 +40,8 @@ export const Sidebar = memo((props: SidebarProps) => {
       </Button>
 
       <div className={style.linksList}>
-        {linkItems.map((linkItem) => {
-          if (!isAuth && linkItem.authOnly) {
+        {getLinkItems(userData?.id).map((linkItem) => {
+          if (!userData && linkItem.authOnly) {
             return null;
           }
 

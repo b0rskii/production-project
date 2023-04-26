@@ -25,7 +25,7 @@ export const routes: AppRouteProps[] = [
     element: <AboutPage />,
   },
   {
-    path: RoutePath.PROFILE,
+    path: `${RoutePath.PROFILES}:id`,
     element: <ProfilePage />,
     authOnly: true,
   },

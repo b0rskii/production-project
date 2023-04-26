@@ -3,13 +3,13 @@ import { ThunkAPI } from 'app/providers/StoreProvider';
 import { NAME } from '../../slice/profileSlice';
 import { Profile } from '../../types/profileSchema';
 
-export const fetchProfileData = createAsyncThunk<Profile, undefined, ThunkAPI<string>>(
+export const fetchProfileData = createAsyncThunk<Profile, string, ThunkAPI<string>>(
   `${NAME}/fetchProfileData`,
-  async (_arg, { rejectWithValue, extra }) => {
+  async (profileId, { rejectWithValue, extra }) => {
     const { api } = extra;
 
     try {
-      const { data } = await api.get<Profile>('/profile');
+      const { data } = await api.get<Profile>(`/profiles/${profileId}`);
 
       if (!data) {
         throw new Error();

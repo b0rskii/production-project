@@ -1,9 +1,12 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { mockUser } from 'entities/User';
 import { StoreDecorator } from 'shared/config/storybook/StoreDecorator';
 import { ThemeDecorator } from 'shared/config/storybook/ThemeDecorator';
 import { ButtonTheme } from 'shared/ui/Button';
 import { Theme } from 'shared/utils/theme';
 import { LoginButton } from './LoginButton';
+
+const USER = mockUser();
 
 export default {
   title: 'features/LoginButton',
@@ -27,7 +30,7 @@ Default.decorators = [StoreDecorator({
 export const Logged = Template.bind({});
 Logged.args = {};
 Logged.decorators = [StoreDecorator({
-  user: { authData: { id: 'name', name: 'name' } },
+  user: { authData: USER },
 })];
 
 export const DefaultDark = Template.bind({});
@@ -44,6 +47,6 @@ LoggedDark.args = {};
 LoggedDark.decorators = [
   ThemeDecorator(Theme.DARK),
   StoreDecorator({
-    user: { authData: { id: 'name', name: 'name' } },
+    user: { authData: USER },
   }),
 ];

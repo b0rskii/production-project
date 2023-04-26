@@ -1,10 +1,10 @@
 import { testAsyncThunk } from 'shared/utils/tests';
-import { User, userActions } from 'entities/User';
+import { User, mockUser, userActions } from 'entities/User';
 import { loginByUserName } from './loginByUserName';
 
 describe('loginByUserName', () => {
   it('fulfilled', async () => {
-    const RESPONSE_DATA: User = { id: '1', name: 'user' };
+    const RESPONSE_DATA: User = mockUser();
 
     const thunk = testAsyncThunk(loginByUserName);
 

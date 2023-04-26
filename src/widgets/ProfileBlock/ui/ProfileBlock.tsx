@@ -1,6 +1,7 @@
 import { PropsWithChildren, useCallback, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import {
   editProfileActions,
   EditProfileButton,
@@ -30,6 +31,7 @@ type ProfileBlockProps = PropsWithChildren<{
 export const ProfileBlock = (props: ProfileBlockProps) => {
   const { className } = props;
   const { t } = useTranslation(I18nNameSpace.Profile);
+  const { id } = useParams();
   const dispatch = useAppDispatch();
 
   const profile = useSelector(profileSelectors.getProfile);
@@ -51,12 +53,12 @@ export const ProfileBlock = (props: ProfileBlockProps) => {
   useAsyncReducer(PROFILE_SLICE, profileReducer);
 
   useEffect(() => {
-    if (__PROJECT__ === 'storybook') {
+    if (!id || __PROJECT__ === 'storybook') {
       return;
     }
 
-    dispatch(fetchProfileData());
-  }, [dispatch]);
+    dispatch(fetchProfileData(id));
+  }, [dispatch, id]);
 
   const onInputChange = useCallback((value: string, name?: string) => {
     if (!name) {

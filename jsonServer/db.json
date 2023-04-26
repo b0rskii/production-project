@@ -107,27 +107,41 @@
   "users": [
     {
       "id": "1",
-      "name": "admin",
+      "username": "admin",
       "password": "123",
       "role": "ADMIN",
       "avatar": "https://pic.rutubelist.ru/user/3b/27/3b2758ad5492a76b578f7ee072e4e894.jpg"
     },
     {
       "id": "2",
-      "name": "user",
+      "username": "user",
       "password": "123",
       "role": "USER",
       "avatar": "https://pic.rutubelist.ru/user/3b/27/3b2758ad5492a76b578f7ee072e4e894.jpg"
     }
   ],
-  "profile": {
-    "firstname": "Вася",
-    "lastname": "Пупкин",
-    "age": 30,
-    "currency": "RUB",
-    "country": "Russia",
-    "city": "Krasnoyarsk",
-    "username": "admin",
-    "avatar": "https://pic.rutubelist.ru/user/3b/27/3b2758ad5492a76b578f7ee072e4e894.jpg"
-  }
+  "profiles": [
+    {
+      "id": "1",
+      "firstname": "Вася",
+      "lastname": "Пупкин",
+      "age": 30,
+      "currency": "RUB",
+      "country": "Russia",
+      "city": "Krasnoyarsk",
+      "username": "admin",
+      "avatar": "https://pic.rutubelist.ru/user/3b/27/3b2758ad5492a76b578f7ee072e4e894.jpg"
+    },
+    {
+      "id": "2",
+      "firstname": "Гордон",
+      "lastname": "Фримен",
+      "age": 50,
+      "currency": "USD",
+      "country": "Russia",
+      "city": "Black Mesa",
+      "username": "user",
+      "avatar": "https://upload.wikimedia.org/wikipedia/ru/3/30/Freeman_face_concept.jpeg"
+    }
+  ]
 }

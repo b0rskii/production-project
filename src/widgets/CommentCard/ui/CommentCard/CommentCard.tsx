@@ -18,9 +18,9 @@ export const CommentCard = memo((props: CommentCardProps) => {
     <div className={getClassNames(style.commentCard, {}, [className])}>
       <div className={style.header}>
         {user.avatar && (
-          <Avatar src={user.avatar} alt={user.name} size={30} />
+          <Avatar src={user.avatar} alt={user.username} size={30} />
         )}
-        <Text title={user.name} />
+        <Text title={user.username} />
       </div>
       <Text text={text} />
     </div>

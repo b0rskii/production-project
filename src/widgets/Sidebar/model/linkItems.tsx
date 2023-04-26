@@ -12,7 +12,7 @@ export type LinkItem = {
   authOnly?: boolean;
 };
 
-export const linkItems: LinkItem[] = [
+export const getLinkItems = (userId?: string): LinkItem[] => [
   {
     route: RoutePath.MAIN,
     Icon: MainIcon,
@@ -24,7 +24,7 @@ export const linkItems: LinkItem[] = [
     translationKey: 'На страницу о нас',
   },
   {
-    route: RoutePath.PROFILE,
+    route: `${RoutePath.PROFILES}${userId}`,
     Icon: ProfileIcon,
     translationKey: 'На страницу профиля',
     authOnly: true,

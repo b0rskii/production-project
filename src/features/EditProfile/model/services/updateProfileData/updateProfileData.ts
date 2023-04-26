@@ -13,6 +13,7 @@ export const updateProfileData = createAsyncThunk<
   async (_arg, { rejectWithValue, getState, extra, dispatch }) => {
     const { api } = extra;
     const profileForm = getState().editProfile?.profileForm;
+    const userId = getState().user.authData?.id;
     const profileErrors = validateProfileData(profileForm);
 
     if (profileErrors.length) {
@@ -21,7 +22,7 @@ export const updateProfileData = createAsyncThunk<
     }
 
     try {
-      const { data } = await api.put<Profile>('/profile', profileForm);
+      const { data } = await api.put<Profile>(`/profiles/${userId}`, profileForm);
 
       if (!data) {
         throw new Error();
