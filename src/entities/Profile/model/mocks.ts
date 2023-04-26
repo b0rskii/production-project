@@ -2,6 +2,7 @@ import { Country } from 'entities/Country';
 import { Currency } from 'entities/Currency';
 
 export const mockProfile = {
+  id: '1',
   age: 30,
   avatar: 'https://pic.rutubelist.ru/user/3b/27/3b2758ad5492a76b578f7ee072e4e894.jpg',
   city: 'City-17',
