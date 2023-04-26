@@ -18,6 +18,7 @@ import {
 } from 'entities/Profile';
 import { Country } from 'entities/Country';
 import { Currency } from 'entities/Currency';
+import { userSelectors } from 'entities/User';
 import { Text, TextTheme } from 'shared/ui/Text';
 import { getClassNames } from 'shared/utils/classNames';
 import { useAppDispatch, useAsyncReducer } from 'shared/utils/redux';
@@ -42,6 +43,8 @@ export const ProfileBlock = (props: ProfileBlockProps) => {
   const isReadonly = useSelector(editProfileSelectors.getIsReadonly);
   const isUpdating = useSelector(editProfileSelectors.getIsLoading);
   const validateErrors = useSelector(editProfileSelectors.getValidateErrors);
+
+  const userData = useSelector(userSelectors.getUserAuthData);
 
   const ValidateErrorTranslation = {
     [ValidateProfileError.INCORRECT_FIRST_NAME]: t('Введите ваше имя'),
@@ -98,7 +101,7 @@ export const ProfileBlock = (props: ProfileBlockProps) => {
     <div className={getClassNames('', {}, [className])}>
       <div className={style.header}>
         <Text title={t('Профиль')} />
-        {profile && (
+        {profile && userData && profile.id === userData.id && (
           <EditProfileButton
             className={style.editButton}
           />
