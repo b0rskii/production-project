@@ -45,7 +45,7 @@ export const AddCommentForm = memo((props: AddCommentFormProps) => {
         onClick={onSendComment}
         disabled={isLoading}
       >
-        {t('Отправить')}
+        {isLoading ? t('Отправка...') : t('Отправить')}
       </Button>
     </div>
   );
