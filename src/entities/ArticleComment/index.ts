@@ -5,4 +5,5 @@ export { mockArticleComments, mockNormalizedArticleComments } from './model/mock
 export {
   NAME as ARTICLE_COMMENTS_SLICE,
   articleCommentsReducer,
+  articleCommentsActions,
 } from './model/slice/articleCommentsSlice';

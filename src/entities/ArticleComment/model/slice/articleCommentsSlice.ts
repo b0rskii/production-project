@@ -1,4 +1,4 @@
-import { createEntityAdapter, createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createEntityAdapter, createSlice } from '@reduxjs/toolkit';
 import { ArticleComment, ArticleCommentsSchema } from '../types/articleCommentsSchema';
 import { fetchArticleComments } from '../services/fetchArticleComments/fetchArticleComments';
 
@@ -16,7 +16,11 @@ export const articleCommentsSlice = createSlice({
     isLoading: false,
     error: null,
   }),
-  reducers: {},
+  reducers: {
+    addComment: (state, action: PayloadAction<ArticleComment>) => {
+      articleCommentsAdapter.setOne(state, action.payload);
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(fetchArticleComments.pending, (state) => {

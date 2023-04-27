@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkAPI } from 'app/providers/StoreProvider';
-import { fetchArticleComments } from 'entities/ArticleComment';
+import { ArticleComment, articleCommentsActions } from 'entities/ArticleComment';
 import { Comment } from 'shared/types/comment';
 import { ApiRoutes } from 'shared/api';
 import { SLICE_NAME } from '../../slice/addCommentSlice';
@@ -17,26 +17,33 @@ export const sendArticleComment = createAsyncThunk<
 
     const text = state.addComment?.text;
     const articleId = state.article?.data?.id;
-    const userId = state.user.authData?.id;
+    const user = state.user.authData;
 
-    if (!text || !articleId || !userId) {
+    if (!text || !articleId || !user) {
       return rejectWithValue('no data');
     }
 
+    const newCommentData = {
+      text,
+      articleId,
+      userId: user.id,
+    };
+
     try {
-      const { data } = await api.post<Comment>(ApiRoutes.COMMENTS, {
-        text,
-        articleId,
-        userId,
-      });
+      const { data } = await api.post<ArticleComment>(ApiRoutes.COMMENTS, newCommentData);
 
       if (!data) {
         throw new Error();
       }
 
-      dispatch(fetchArticleComments(articleId));
+      const addedComment: ArticleComment = {
+        ...data,
+        user,
+      };
 
-      return data;
+      dispatch(articleCommentsActions.addComment(addedComment));
+
+      return addedComment;
     } catch (error) {
       return rejectWithValue('error');
     }
