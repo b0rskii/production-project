@@ -17,6 +17,9 @@ export const addCommentSlice = createSlice({
     setText: (state, action: PayloadAction<string>) => {
       state.text = action.payload;
     },
+    setError: (state, action: PayloadAction<string | null>) => {
+      state.error = action.payload;
+    },
   },
   extraReducers(builder) {
     builder

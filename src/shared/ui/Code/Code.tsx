@@ -1,5 +1,6 @@
 import { PropsWithChildren, memo, useState } from 'react';
 import { getClassNames } from 'shared/utils/classNames';
+import { Timer } from 'shared/const/timers';
 import { Button, ButtonTheme } from 'shared/ui/Button';
 import CopyIcon from 'shared/assets/icons/copy.svg';
 import SuccessIcon from 'shared/assets/icons/check-mark.svg';
@@ -27,7 +28,7 @@ export const Code = memo((props: CodeProps) => {
 
     setTimeout(() => {
       setCopyStatus('initial');
-    }, 3000);
+    }, Timer.NOTIFICATION);
   };
 
   return (
