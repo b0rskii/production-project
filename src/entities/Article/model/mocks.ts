@@ -10,6 +10,8 @@ export const mockArticle: Article = {
   createdAt: '26.02.2022',
   type: [
     ArticleType.IT,
+    ArticleType.ECONOMY,
+    ArticleType.SCIENCE,
   ],
   blocks: [
     {

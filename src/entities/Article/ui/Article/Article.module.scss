@@ -1,0 +1,60 @@
+.tilesItem {
+  width: 230px;
+  transition: opacity, scale 0.2s;
+  cursor: pointer;
+
+  .date {
+    display: none;
+    position: absolute;
+    top: 2px;
+    right: 2px;
+  }
+
+  &:hover {
+    opacity: 0.8;
+    scale: 1.01;
+
+    .date {
+      display: block;
+    }
+  }
+
+  .imgWrapper {
+    position: relative;
+    width: 200px;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  .infoWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 8px;
+
+    svg {
+      margin-left: 8px;
+    }
+  }
+
+  .types p {
+    width: 125px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  .views {
+    display: flex;
+    align-items: center;
+  }
+
+  .title p {
+    width: 200px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+}

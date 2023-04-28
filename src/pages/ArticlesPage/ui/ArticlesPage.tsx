@@ -1,6 +1,6 @@
 import { PropsWithChildren, memo } from 'react';
+import { ArticlesList, mockArticle } from 'entities/Article';
 import { getClassNames } from 'shared/utils/classNames';
-// import style from './ArticlesPage.module.scss';
 
 type ArticlesPageProps = PropsWithChildren<{
   className?: string;
@@ -10,9 +10,12 @@ const ArticlesPage = (props: ArticlesPageProps) => {
   const { className } = props;
 
   return (
-    // eslint-disable-next-line i18next/no-literal-string
     <div className={getClassNames('', {}, [className])}>
-      Articles Page
+      <ArticlesList
+        articles={new Array(16).fill(0).map((_, index) => ({ ...mockArticle, id: String(index) }))}
+        isLoading={false}
+        error={null}
+      />
     </div>
   );
 };
