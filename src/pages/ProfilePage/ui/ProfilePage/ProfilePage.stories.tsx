@@ -1,5 +1,6 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { mockProfile } from 'entities/Profile';
+import { mockUser } from 'entities/User';
 import { StoreDecorator } from 'shared/config/storybook/StoreDecorator';
 import { ThemeDecorator } from 'shared/config/storybook/ThemeDecorator';
 import { Theme } from 'shared/utils/theme';
@@ -15,6 +16,9 @@ export default {
     StoreDecorator({
       profile: {
         profile: mockProfile,
+      },
+      user: {
+        authData: mockUser(),
       },
     }),
   ],
