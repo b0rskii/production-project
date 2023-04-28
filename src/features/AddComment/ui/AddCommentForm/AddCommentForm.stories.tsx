@@ -1,13 +1,18 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { action } from '@storybook/addon-actions';
+import { StoreDecorator } from 'shared/config/storybook/StoreDecorator';
 import { ThemeDecorator } from 'shared/config/storybook/ThemeDecorator';
 import { Theme } from 'shared/utils/theme';
 import { AddCommentForm } from './AddCommentForm';
 
 export default {
-  title: 'entities/AddCommentForm',
+  title: 'features/AddCommentForm',
   component: AddCommentForm,
   argTypes: {
     backgroundColor: { control: 'color' },
+  },
+  args: {
+    onSendComment: action('sendComment'),
   },
 } as ComponentMeta<typeof AddCommentForm>;
 
@@ -15,7 +20,75 @@ const Template: ComponentStory<typeof AddCommentForm> = (args) => <AddCommentFor
 
 export const Default = Template.bind({});
 Default.args = {};
+Default.decorators = [
+  StoreDecorator({
+    addComment: {
+      text: 'comment text',
+      isLoading: false,
+      error: null,
+    },
+  }),
+];
+
+export const Loading = Template.bind({});
+Loading.args = {};
+Loading.decorators = [
+  StoreDecorator({
+    addComment: {
+      text: 'comment text',
+      isLoading: true,
+      error: null,
+    },
+  }),
+];
+
+export const Error = Template.bind({});
+Error.args = {};
+Error.decorators = [
+  StoreDecorator({
+    addComment: {
+      text: 'comment text',
+      isLoading: false,
+      error: 'error',
+    },
+  }),
+];
 
 export const DefaultDark = Template.bind({});
 DefaultDark.args = {};
-DefaultDark.decorators = [ThemeDecorator(Theme.DARK)];
+DefaultDark.decorators = [
+  StoreDecorator({
+    addComment: {
+      text: 'comment text',
+      isLoading: false,
+      error: null,
+    },
+  }),
+  ThemeDecorator(Theme.DARK),
+];
+
+export const LoadingDark = Template.bind({});
+LoadingDark.args = {};
+LoadingDark.decorators = [
+  StoreDecorator({
+    addComment: {
+      text: 'comment text',
+      isLoading: true,
+      error: null,
+    },
+  }),
+  ThemeDecorator(Theme.DARK),
+];
+
+export const ErrorDark = Template.bind({});
+ErrorDark.args = {};
+ErrorDark.decorators = [
+  StoreDecorator({
+    addComment: {
+      text: 'comment text',
+      isLoading: false,
+      error: 'error',
+    },
+  }),
+  ThemeDecorator(Theme.DARK),
+];
