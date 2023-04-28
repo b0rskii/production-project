@@ -35,6 +35,8 @@ export const ProfileBlock = (props: ProfileBlockProps) => {
   const { id } = useParams();
   const dispatch = useAppDispatch();
 
+  useAsyncReducer(PROFILE_SLICE, profileReducer);
+
   const profile = useSelector(profileSelectors.getProfile);
   const isLoading = useSelector(profileSelectors.getIsLoading);
   const error = useSelector(profileSelectors.getError);
@@ -52,8 +54,6 @@ export const ProfileBlock = (props: ProfileBlockProps) => {
     [ValidateProfileError.INCORRECT_AGE]: t('Неверный возраст'),
     [ValidateProfileError.NO_DATA]: t('Нет данных'),
   } as const;
-
-  useAsyncReducer(PROFILE_SLICE, profileReducer);
 
   useEffect(() => {
     if (!id || __PROJECT__ === 'storybook') {

@@ -20,14 +20,15 @@ const LoginForm: FC<LoginFormProps> = (props) => {
   const { className, onSuccess } = props;
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
+
+  useAsyncReducer(NAME, loginReducer);
+
   const {
     username,
     password,
     isLoading,
     error,
   } = useSelector(loginSelectors.getLoginState);
-
-  useAsyncReducer(NAME, loginReducer);
 
   const usernameChangeHandler = useCallback((value: string) => {
     dispatch(loginActions.setUsername(value));

@@ -22,10 +22,10 @@ export const EditProfileButton = memo((props: EditProfileProps) => {
 
   const profile = useSelector(profileSelectors.getProfile);
 
+  useAsyncReducer(NAME, editProfileReducer);
+
   const isReadonly = useSelector(editProfileSelectors.getIsReadonly);
   const isLoading = useSelector(editProfileSelectors.getIsLoading);
-
-  useAsyncReducer(NAME, editProfileReducer);
 
   const editButtonClickHandler = useCallback(() => {
     dispatch(editProfileActions.startEdit(profile));

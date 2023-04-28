@@ -1,5 +1,4 @@
 import { PropsWithChildren, memo, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import {
   ARTICLE_SLICE, ArticleDetails, articleReducer, articleSelectors, fetchArticleById,
@@ -16,11 +15,11 @@ export const ArticleDetailsBlock = memo((props: ArticleDetailsBlockProps) => {
   const { className, articleId } = props;
   const dispatch = useAppDispatch();
 
+  useAsyncReducer(ARTICLE_SLICE, articleReducer);
+
   const article = useSelector(articleSelectors.getArticle);
   const isLoading = useSelector(articleSelectors.getIsLoading);
   const error = useSelector(articleSelectors.getError);
-
-  useAsyncReducer(ARTICLE_SLICE, articleReducer);
 
   useEffect(() => {
     if (articleId && __PROJECT__ !== 'storybook') {
