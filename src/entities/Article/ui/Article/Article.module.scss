@@ -33,10 +33,6 @@
     justify-content: space-between;
     align-items: center;
     margin-top: 8px;
-
-    svg {
-      margin-left: 8px;
-    }
   }
 
   .types p {
@@ -49,6 +45,10 @@
   .views {
     display: flex;
     align-items: center;
+
+    svg {
+      margin-left: 4px;
+    }
   }
 
   .title p {
@@ -56,5 +56,51 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+  }
+}
+
+.listItem {
+  .header {
+    display: flex;
+    align-items: center;
+
+    .avatar {
+      margin-right: 10px;
+    }
+
+    .date {
+      margin-left: auto;
+    }
+  }
+
+  .imgWrapper {
+    width: 100%;
+
+    img {
+      max-height: 250px;
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .previewText {
+    max-height: 250px;
+    overflow-y: hidden;
+  }
+
+  .footer {
+    display: flex;
+    align-items: center;
+    margin-top: 30px;
+
+    .views {
+      display: flex;
+      align-items: center;
+      margin-left: auto;
+
+      svg {
+        margin-left: 6px;
+      }
+    }
   }
 }
