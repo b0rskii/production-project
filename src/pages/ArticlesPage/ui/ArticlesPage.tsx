@@ -15,7 +15,7 @@ const ArticlesPage = (props: ArticlesPageProps) => {
     <div className={getClassNames('', {}, [className])}>
       <ArticlesList
         articles={articles}
-        isLoading
+        isLoading={false}
         error={null}
       />
     </div>
