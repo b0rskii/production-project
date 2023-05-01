@@ -59,6 +59,21 @@
   }
 }
 
+.tileSkeleton {
+  width: 230px;
+
+  .infoWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 8px;
+  }
+
+  .title {
+    margin-top: 8px;
+  }
+}
+
 .listItem {
   .header {
     display: flex;
@@ -102,5 +117,34 @@
         margin-left: 6px;
       }
     }
+  }
+}
+
+.listSkeleton {
+  width: 100%;
+
+  .header {
+    display: flex;
+    align-items: center;
+
+    .avatar {
+      margin-right: 10px;
+    }
+  }
+
+  .title {
+    margin-top: 8px;
+  }
+
+  .types {
+    margin-top: 8px;
+  }
+
+  .img {
+    margin-top: 8px;
+  }
+
+  .footer {
+    margin-top: 30px;
   }
 }
