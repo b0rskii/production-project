@@ -1,6 +1,7 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { ThemeDecorator } from 'shared/config/storybook/ThemeDecorator';
 import { Theme } from 'shared/utils/theme';
+import { mockArticle } from '../../model/mocks';
 import { Article } from './Article';
 
 export default {
@@ -9,13 +10,31 @@ export default {
   argTypes: {
     backgroundColor: { control: 'color' },
   },
+  args: {
+    data: mockArticle(),
+  },
 } as ComponentMeta<typeof Article>;
 
 const Template: ComponentStory<typeof Article> = (args) => <Article {...args} />;
 
-export const Default = Template.bind({});
-Default.args = {};
+export const TileArticle = Template.bind({});
+TileArticle.args = {
+  view: 'tiles',
+};
 
-export const DefaultDark = Template.bind({});
-DefaultDark.args = {};
-DefaultDark.decorators = [ThemeDecorator(Theme.DARK)];
+export const ListArticle = Template.bind({});
+ListArticle.args = {
+  view: 'list',
+};
+
+export const TileArticleDark = Template.bind({});
+TileArticleDark.args = {
+  view: 'tiles',
+};
+TileArticleDark.decorators = [ThemeDecorator(Theme.DARK)];
+
+export const ListArticleDark = Template.bind({});
+ListArticleDark.args = {
+  view: 'list',
+};
+ListArticleDark.decorators = [ThemeDecorator(Theme.DARK)];
