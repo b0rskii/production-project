@@ -22,7 +22,7 @@ export const Default = Template.bind({});
 Default.args = {};
 Default.decorators = [
   StoreDecorator({
-    article: { data: mockArticle },
+    article: { data: mockArticle() },
     articleComments: { ids, entities },
   }),
 ];
@@ -40,7 +40,7 @@ export const DefaultDark = Template.bind({});
 DefaultDark.args = {};
 DefaultDark.decorators = [
   StoreDecorator({
-    article: { data: mockArticle },
+    article: { data: mockArticle() },
     articleComments: { ids, entities },
   }),
   ThemeDecorator(Theme.DARK),

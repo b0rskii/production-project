@@ -13,13 +13,13 @@ describe('sendArticleComment', () => {
     const RESPONSE_DATA = {
       id: '55',
       text: 'comment text',
-      articleId: mockArticle.id,
+      articleId: mockArticle().id,
       userId: USER_DATA.id,
     };
 
     const thunk = testAsyncThunk(sendArticleComment, {
       addComment: { text: 'comment text' },
-      article: { data: mockArticle },
+      article: { data: mockArticle() },
       user: { authData: USER_DATA },
     });
 
@@ -41,7 +41,7 @@ describe('sendArticleComment', () => {
   it('rejected', async () => {
     const thunk = testAsyncThunk(sendArticleComment, {
       addComment: { text: 'comment text' },
-      article: { data: mockArticle },
+      article: { data: mockArticle() },
       user: { authData: USER_DATA },
     });
 

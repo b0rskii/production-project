@@ -14,7 +14,7 @@ export default {
   decorators: [
     StoreDecorator({
       article: {
-        data: mockArticle,
+        data: mockArticle(),
       },
     }),
   ],

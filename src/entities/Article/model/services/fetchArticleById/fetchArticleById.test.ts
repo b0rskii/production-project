@@ -7,7 +7,7 @@ const ARTICLE_ID = '1';
 
 describe('fetchArticleById', () => {
   it('fulfilled', async () => {
-    const RESPONSE_DATA: Article = mockArticle;
+    const RESPONSE_DATA: Article = mockArticle();
 
     const thunk = testAsyncThunk(fetchArticleById);
 

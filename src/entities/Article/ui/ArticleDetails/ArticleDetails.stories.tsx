@@ -16,7 +16,7 @@ const Template: ComponentStory<typeof ArticleDetails> = (args) => <ArticleDetail
 
 export const Default = Template.bind({});
 Default.args = {
-  article: mockArticle,
+  article: mockArticle(),
 };
 
 export const Loading = Template.bind({});
@@ -31,7 +31,7 @@ Error.args = {
 
 export const DefaultDark = Template.bind({});
 DefaultDark.args = {
-  article: mockArticle,
+  article: mockArticle(),
 };
 DefaultDark.decorators = [ThemeDecorator(Theme.DARK)];
 

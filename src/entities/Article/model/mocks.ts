@@ -2,8 +2,8 @@ import { mockUser } from 'entities/User';
 import { Article, ArticleBlockType, ArticleType } from './types/articleSchema';
 
 /* eslint-disable max-len */
-export const mockArticle: Article = {
-  id: '1',
+export const mockArticle = (id: string = '1'): Article => ({
+  id,
   title: 'Javascript news',
   subtitle: 'Что нового в JS за 2022 год?',
   img: 'https://teknotower.com/wp-content/uploads/2020/11/js.png',
@@ -75,4 +75,14 @@ export const mockArticle: Article = {
       ],
     },
   ],
+});
+
+export const mockArticles = (count: number) => {
+  const articles = [];
+
+  for (let i = 1; i <= count; i += 1) {
+    articles.push(mockArticle(String(i)));
+  }
+
+  return articles;
 };

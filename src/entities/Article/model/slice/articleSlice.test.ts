@@ -6,7 +6,7 @@ import { articleReducer } from './articleSlice';
 describe('articleSlice', () => {
   it('fetchArticleById pending', () => {
     const state: DeepPartial<ArticleSchema> = {
-      data: mockArticle,
+      data: mockArticle(),
       isLoading: false,
       error: 'error',
     };
@@ -26,7 +26,7 @@ describe('articleSlice', () => {
       error: 'error',
     };
 
-    const payload = mockArticle;
+    const payload = mockArticle();
 
     expect(articleReducer(state as ArticleSchema, { type: fetchArticleById.fulfilled.type, payload }))
       .toEqual({
