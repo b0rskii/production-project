@@ -1,1 +1,2 @@
-export * as articleSelectors from './selectors';
+export * as articleSelectors from './articleSelectors';
+export * as articlesSelectors from './articlesSelectors';

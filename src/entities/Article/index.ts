@@ -1,7 +1,10 @@
 export { ArticleDetails } from './ui/ArticleDetails';
 export { ArticlesList } from './ui/ArticlesList';
 export { Article, ArticleSchema } from './model/types/articleSchema';
+export { ArticlesSchema } from './model/types/articlesSchema';
 export { NAME as ARTICLE_SLICE, articleReducer } from './model/slice/articleSlice';
-export { articleSelectors } from './model/selectors';
+export { SLICE_NAME as ARTICLES_SLICE, articlesReducer } from './model/slice/articlesSlice';
+export { articleSelectors, articlesSelectors } from './model/selectors';
 export { fetchArticleById } from './model/services/fetchArticleById/fetchArticleById';
+export { fetchArticles } from './model/services/fetchArticles/fetchArticles';
 export { mockArticle, mockArticles } from './model/mocks';
