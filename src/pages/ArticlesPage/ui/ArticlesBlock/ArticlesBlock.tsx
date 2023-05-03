@@ -10,7 +10,11 @@ import {
 } from 'entities/Article';
 import { getClassNames } from 'shared/utils/classNames';
 import { useAppDispatch, useAsyncReducer } from 'shared/utils/redux';
+import { LocalStorageKey } from 'shared/const/localStorage';
+import { ListView } from 'shared/ui/ListViewSwitcher';
 import style from './ArticlesBlock.module.scss';
+
+let isInit = true;
 
 type ArticlesBlockProps = PropsWithChildren<{
   className?: string;
@@ -30,7 +34,16 @@ export const ArticlesBlock = (props: ArticlesBlockProps) => {
   useEffect(() => {
     if (__PROJECT__ !== 'storybook') {
       dispatch(fetchArticles());
-      dispatch(articlesActions.initState());
+
+      if (isInit) {
+        const localArticlesView = localStorage.getItem(
+          LocalStorageKey.ARTICLES_VIEW,
+        ) as ListView | null;
+
+        if (localArticlesView) dispatch(articlesActions.setView(localArticlesView));
+
+        isInit = false;
+      }
     }
 
     return () => {

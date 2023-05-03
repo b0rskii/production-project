@@ -1,6 +1,5 @@
 import { PayloadAction, createEntityAdapter, createSlice } from '@reduxjs/toolkit';
 import { ListView } from 'shared/ui/ListViewSwitcher';
-import { LocalStorageKey } from 'shared/const/localStorage';
 import { ArticlesSchema } from '../types/articlesSchema';
 import { Article } from '../types/articleSchema';
 import { fetchArticles } from '../services/fetchArticles/fetchArticles';
@@ -23,14 +22,8 @@ export const articlesSlice = createSlice({
   name: SLICE_NAME,
   initialState,
   reducers: {
-    initState: (state) => {
-      const localViewValue = localStorage.getItem(LocalStorageKey.ARTICLES_VIEW) as ListView | null;
-      if (localViewValue) state.view = localViewValue;
-    },
     setView: (state, action: PayloadAction<ListView>) => {
-      const newValue = action.payload;
-      state.view = newValue;
-      localStorage.setItem(LocalStorageKey.ARTICLES_VIEW, newValue);
+      state.view = action.payload;
     },
     resetArticles: (state) => {
       articlesAdapter.removeAll(state);
