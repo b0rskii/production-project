@@ -13,11 +13,16 @@ export const Header = memo((props: HeaderProps) => {
   const { className } = props;
   const dispatch = useAppDispatch();
 
+  const articlesTotal = useSelector(articlesSelectors.getArticles.selectTotal);
   const articleView = useSelector(articlesSelectors.getView);
 
   const onViewControlClick = useCallback((view: ListView) => {
     dispatch(articlesActions.setView(view));
   }, [dispatch]);
+
+  if (!articlesTotal) {
+    return null;
+  }
 
   return (
     <div className={getClassNames('', {}, [className])}>
