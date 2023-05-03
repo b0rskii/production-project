@@ -30,6 +30,7 @@ export const ArticlesBlock = (props: ArticlesBlockProps) => {
   useEffect(() => {
     if (__PROJECT__ !== 'storybook') {
       dispatch(fetchArticles());
+      dispatch(articlesActions.initState());
     }
 
     return () => {
