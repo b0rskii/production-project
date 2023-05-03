@@ -14,8 +14,10 @@ export const useAsyncReducer = (
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    store.reducerManager.add(key, reducer);
-    dispatch({ type: `@INIT ${key} reducer` });
+    if (!store.getState()[key]) {
+      store.reducerManager.add(key, reducer);
+      dispatch({ type: `@INIT ${key} reducer` });
+    }
 
     return () => {
       if (removeAfterUnmount) {
