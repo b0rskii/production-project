@@ -1,8 +1,9 @@
 import { EntityState } from '@reduxjs/toolkit';
-import { Article, ArticlesView } from './articleSchema';
+import { ListView } from 'shared/ui/ListViewSwitcher';
+import { Article } from './articleSchema';
 
 export interface ArticlesSchema extends EntityState<Article> {
   isLoading: boolean;
   error: string | null;
-  view: ArticlesView;
+  view: ListView;
 }

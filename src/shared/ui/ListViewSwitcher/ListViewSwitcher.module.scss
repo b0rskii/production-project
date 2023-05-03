@@ -1,0 +1,19 @@
+.listViewSwitcher {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.control {
+  svg {
+    width: 20px;
+    height: 20px;
+    fill: var(--secondary-color);
+  }
+}
+
+.active {
+  svg {
+    fill: var(--primary-color);
+  }
+}

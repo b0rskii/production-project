@@ -8,9 +8,10 @@ import { Icon } from 'shared/ui/Icon';
 import { Card } from 'shared/ui/Card';
 import { Avatar } from 'shared/ui/Avatar';
 import { Button, ButtonTheme } from 'shared/ui/Button';
+import { ListView } from 'shared/ui/ListViewSwitcher';
 import EyeIcon from 'shared/assets/icons/eye.svg';
 import {
-  ArticleBlockType, ArticleTextBlock as ArticleTextBlockType, Article as ArticleType, ArticlesView,
+  ArticleBlockType, ArticleTextBlock as ArticleTextBlockType, Article as ArticleType,
 } from '../../model/types/articleSchema';
 import { ArticleTextBlock } from '../ArticleTextBlock';
 import style from './Article.module.scss';
@@ -18,7 +19,7 @@ import style from './Article.module.scss';
 type ArticleProps = PropsWithChildren<{
   className?: string;
   data: ArticleType;
-  view: ArticlesView;
+  view: ListView;
 }>;
 
 export const Article = memo((props: ArticleProps) => {

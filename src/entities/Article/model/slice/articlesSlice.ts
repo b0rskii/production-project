@@ -1,4 +1,5 @@
-import { createEntityAdapter, createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createEntityAdapter, createSlice } from '@reduxjs/toolkit';
+import { ListView } from 'shared/ui/ListViewSwitcher';
 import { ArticlesSchema } from '../types/articlesSchema';
 import { Article } from '../types/articleSchema';
 import { fetchArticles } from '../services/fetchArticles/fetchArticles';
@@ -20,7 +21,11 @@ export const SLICE_NAME = 'articles';
 export const articlesSlice = createSlice({
   name: SLICE_NAME,
   initialState,
-  reducers: {},
+  reducers: {
+    setView: (state, action: PayloadAction<ListView>) => {
+      state.view = action.payload;
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(fetchArticles.pending, (state) => {

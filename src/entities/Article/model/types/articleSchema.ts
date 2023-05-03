@@ -48,8 +48,6 @@ export interface Article {
   blocks: ArticleBlock[];
 }
 
-export type ArticlesView = 'tiles' | 'list';
-
 export type ArticleSchema = {
   data: Article | null;
   isLoading: boolean;

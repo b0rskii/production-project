@@ -2,12 +2,12 @@ import { PropsWithChildren } from 'react';
 import { getClassNames } from 'shared/utils/classNames';
 import { Skeleton } from 'shared/ui/Skeleton';
 import { Card } from 'shared/ui/Card';
-import { ArticlesView } from '../../model/types/articleSchema';
+import { ListView } from 'shared/ui/ListViewSwitcher';
 import style from './Article.module.scss';
 
 type ArticleSkeletonProps = PropsWithChildren<{
   className?: string;
-  view: ArticlesView;
+  view: ListView;
 }>;
 
 export const ArticleSkeleton = (props: ArticleSkeletonProps) => {

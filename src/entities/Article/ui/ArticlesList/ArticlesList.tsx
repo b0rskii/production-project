@@ -4,7 +4,8 @@ import { useTranslation } from 'react-i18next';
 import { getClassNames } from 'shared/utils/classNames';
 import { I18nNameSpace } from 'shared/utils/i18n/nameSpace';
 import { Text, TextTheme } from 'shared/ui/Text';
-import { ArticlesView, Article as ArticleType } from '../../model/types/articleSchema';
+import { ListView } from 'shared/ui/ListViewSwitcher';
+import { Article as ArticleType } from '../../model/types/articleSchema';
 import { Article } from '../Article';
 import { ArticleSkeleton } from '../Article/ArticleSkeleton';
 import style from './ArticlesList.module.scss';
@@ -19,7 +20,7 @@ type ArticlesListProps = PropsWithChildren<{
   articles: ArticleType[];
   isLoading: boolean;
   error: string | null;
-  view?: ArticlesView;
+  view?: ListView;
 }>;
 
 export const ArticlesList = memo((props: ArticlesListProps) => {
