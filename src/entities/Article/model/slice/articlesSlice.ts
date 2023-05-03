@@ -25,6 +25,9 @@ export const articlesSlice = createSlice({
     setView: (state, action: PayloadAction<ListView>) => {
       state.view = action.payload;
     },
+    resetArticles: (state) => {
+      articlesAdapter.removeAll(state);
+    },
   },
   extraReducers(builder) {
     builder

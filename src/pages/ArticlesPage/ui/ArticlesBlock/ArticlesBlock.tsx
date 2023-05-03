@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import {
   ARTICLES_SLICE,
   ArticlesList,
+  articlesActions,
   articlesReducer,
   articlesSelectors,
   fetchArticles,
@@ -19,7 +20,7 @@ export const ArticlesBlock = (props: ArticlesBlockProps) => {
   const { className } = props;
   const dispatch = useAppDispatch();
 
-  useAsyncReducer(ARTICLES_SLICE, articlesReducer);
+  useAsyncReducer(ARTICLES_SLICE, articlesReducer, false);
 
   const articles = useSelector(articlesSelectors.getArticles.selectAll);
   const view = useSelector(articlesSelectors.getView);
@@ -30,6 +31,10 @@ export const ArticlesBlock = (props: ArticlesBlockProps) => {
     if (__PROJECT__ !== 'storybook') {
       dispatch(fetchArticles());
     }
+
+    return () => {
+      dispatch(articlesActions.resetArticles());
+    };
   }, [dispatch]);
 
   return (
