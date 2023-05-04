@@ -1,5 +1,6 @@
 import { PropsWithChildren, memo } from 'react';
 import { getClassNames } from 'shared/utils/classNames';
+import { Page } from 'shared/ui/Page';
 import { Header } from './Header';
 import { ArticlesBlock } from './ArticlesBlock';
 
@@ -11,10 +12,10 @@ const ArticlesPage = (props: ArticlesPageProps) => {
   const { className } = props;
 
   return (
-    <div className={getClassNames('', {}, [className])}>
+    <Page className={getClassNames('', {}, [className])}>
       <Header />
       <ArticlesBlock />
-    </div>
+    </Page>
   );
 };
 

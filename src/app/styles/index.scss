@@ -17,14 +17,6 @@ body {
   display: flex;
 }
 
-.page-wrapper {
-  flex-grow: 1;
-  height: calc(100vh - var(--navbar-height));
-  overflow-y: auto;
-  padding: 20px;
-  width: 100%;
-}
-
 /* stylelint-disable-next-line selector-no-vendor-prefix */
 input::-webkit-input-placeholder {
   color: var(--secondary-color);

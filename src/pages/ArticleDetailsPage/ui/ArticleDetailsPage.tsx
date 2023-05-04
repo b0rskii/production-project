@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { I18nNameSpace } from 'shared/utils/i18n/nameSpace';
 import { getClassNames } from 'shared/utils/classNames';
 import { RoutePath } from 'shared/config/routing';
+import { Page } from 'shared/ui/Page';
 import { Button, ButtonTheme } from 'shared/ui/Button';
 import { ArticleDetailsBlock } from './ArticleDetailsBlock';
 import { ArticleCommentsBlock } from './ArticleCommentsBlock';
@@ -24,7 +25,7 @@ const ArticleDetailsPage = (props: ArticleDetailsPageProps) => {
   }, [navigate]);
 
   return (
-    <div className={getClassNames('', {}, [className])}>
+    <Page className={getClassNames('', {}, [className])}>
       <Button
         theme={ButtonTheme.OUTLINE}
         onClick={toArticlesListButtonHandler}
@@ -33,7 +34,7 @@ const ArticleDetailsPage = (props: ArticleDetailsPageProps) => {
       </Button>
       <ArticleDetailsBlock articleId={id} />
       <ArticleCommentsBlock className={style.block} articleId={id} />
-    </div>
+    </Page>
   );
 };
 

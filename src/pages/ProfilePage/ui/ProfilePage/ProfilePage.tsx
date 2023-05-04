@@ -1,10 +1,11 @@
 import { ProfileBlock } from 'widgets/ProfileBlock';
+import { Page } from 'shared/ui/Page';
 
 function ProfilePage() {
   return (
-    <div>
+    <Page>
       <ProfileBlock />
-    </div>
+    </Page>
   );
 }
 

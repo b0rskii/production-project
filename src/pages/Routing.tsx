@@ -57,11 +57,9 @@ export const Routing = memo(() => {
     <Routes>
       {routes.map((route) => {
         const element = (
-          <div className="page-wrapper">
-            <Suspense fallback={<PageLoader />}>
-              {route.element}
-            </Suspense>
-          </div>
+          <Suspense fallback={<PageLoader />}>
+            {route.element}
+          </Suspense>
         );
 
         return (
