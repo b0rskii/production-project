@@ -22,3 +22,7 @@ render(
   </BrowserRouter>,
   document.querySelector('#root'),
 );
+
+// TODO Семантика
+// TODO Уведомления
+// TODO Добавить в ошибки кнопку повторить запрос

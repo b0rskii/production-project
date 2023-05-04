@@ -33,8 +33,6 @@ export const ArticlesBlock = (props: ArticlesBlockProps) => {
 
   useEffect(() => {
     if (__PROJECT__ !== 'storybook') {
-      dispatch(fetchArticles());
-
       if (isInit) {
         const localArticlesView = localStorage.getItem(
           LocalStorageKey.ARTICLES_VIEW,
@@ -44,6 +42,8 @@ export const ArticlesBlock = (props: ArticlesBlockProps) => {
 
         isInit = false;
       }
+
+      dispatch(fetchArticles(1));
     }
 
     return () => {
