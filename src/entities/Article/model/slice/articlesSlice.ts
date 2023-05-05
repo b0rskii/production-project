@@ -19,9 +19,9 @@ export const initialState = articlesAdapter.getInitialState<ArticlesSchema>({
   isLoading: false,
   error: null,
   view: 'tiles',
-  page: 1,
+  page: 0,
   limit: ArticlesLimit.TILES,
-  isHasMore: true,
+  isHasMore: false,
 });
 
 export const SLICE_NAME = 'articles';
@@ -38,27 +38,24 @@ export const articlesSlice = createSlice({
     setPage: (state, action: PayloadAction<number>) => {
       state.page = action.payload;
     },
-    setLimit: (state, action: PayloadAction<number>) => {
-      state.limit = action.payload;
-    },
-    setIsHasMore: (state, action: PayloadAction<boolean>) => {
-      state.isHasMore = action.payload;
-    },
     resetArticles: (state) => {
       articlesAdapter.removeAll(state);
+      state.page = 0;
+      state.isHasMore = false;
     },
   },
   extraReducers(builder) {
     builder
       .addCase(fetchArticles.pending, (state) => {
         state.error = null;
-        articlesAdapter.removeAll(state);
         state.isLoading = true;
       })
       .addCase(fetchArticles.fulfilled, (state, action) => {
+        const { data, totalCount } = action.payload;
         state.error = null;
         state.isLoading = false;
-        articlesAdapter.setAll(state, action.payload);
+        articlesAdapter.addMany(state, data);
+        state.isHasMore = state.ids.length < Number(totalCount);
       })
       .addCase(fetchArticles.rejected, (state, action) => {
         state.error = action.payload || null;

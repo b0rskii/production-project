@@ -43,7 +43,7 @@ export const ArticlesBlock = (props: ArticlesBlockProps) => {
         isInit = false;
       }
 
-      dispatch(fetchArticles(1));
+      dispatch(fetchArticles());
     }
 
     return () => {
