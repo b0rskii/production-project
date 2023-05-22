@@ -1,3 +1,4 @@
+import { EntityState } from '@reduxjs/toolkit';
 import { mockUser } from 'entities/User';
 import { Article, ArticleBlockType, ArticleType } from './types/articleSchema';
 
@@ -77,12 +78,29 @@ export const mockArticle = (id: string = '1'): Article => ({
   ],
 });
 
-export const mockArticles = (count: number) => {
+export const mockArticles = (count: number, startId = 1) => {
   const articles = [];
 
-  for (let i = 1; i <= count; i += 1) {
+  for (let i = startId; i <= count; i += 1) {
     articles.push(mockArticle(String(i)));
   }
 
   return articles;
+};
+
+export const mockNormalizedArticles = (count: number) => {
+  const articlesList: EntityState<Article> = {
+    ids: [],
+    entities: {},
+  };
+
+  let id: string;
+
+  for (let i = 1; i <= count; i += 1) {
+    id = String(i);
+    articlesList.ids.push(id);
+    articlesList.entities[id] = mockArticle(id);
+  }
+
+  return articlesList;
 };
