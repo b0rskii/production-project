@@ -4,7 +4,7 @@ import { Theme } from 'shared/utils/theme';
 import { ListViewSwitcher } from './ListViewSwitcher';
 
 export default {
-  title: 'entities/ListViewSwitcher',
+  title: 'shared/ListViewSwitcher',
   component: ListViewSwitcher,
   argTypes: {
     backgroundColor: { control: 'color' },
@@ -13,9 +13,24 @@ export default {
 
 const Template: ComponentStory<typeof ListViewSwitcher> = (args) => <ListViewSwitcher {...args} />;
 
-export const Default = Template.bind({});
-Default.args = {};
+export const ListActive = Template.bind({});
+ListActive.args = {
+  activeControl: 'list',
+};
 
-export const DefaultDark = Template.bind({});
-DefaultDark.args = {};
-DefaultDark.decorators = [ThemeDecorator(Theme.DARK)];
+export const TilesActive = Template.bind({});
+TilesActive.args = {
+  activeControl: 'tiles',
+};
+
+export const ListActiveDark = Template.bind({});
+ListActiveDark.args = {
+  activeControl: 'list',
+};
+ListActiveDark.decorators = [ThemeDecorator(Theme.DARK)];
+
+export const TilesActiveDark = Template.bind({});
+TilesActiveDark.args = {
+  activeControl: 'tiles',
+};
+TilesActiveDark.decorators = [ThemeDecorator(Theme.DARK)];

@@ -9,4 +9,4 @@ export {
 export { articleSelectors, articlesSelectors } from './model/selectors';
 export { fetchArticleById } from './model/services/fetchArticleById/fetchArticleById';
 export { fetchArticles } from './model/services/fetchArticles/fetchArticles';
-export { mockArticle, mockArticles } from './model/mocks';
+export { mockArticle, mockArticles, mockNormalizedArticles } from './model/mocks';
