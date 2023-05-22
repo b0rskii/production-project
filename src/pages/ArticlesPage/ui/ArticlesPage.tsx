@@ -27,7 +27,7 @@ const ArticlesPage = (props: ArticlesPageProps) => {
   return (
     <Page
       className={getClassNames('', {}, [className])}
-      callback={scrollToPageBottomHandler}
+      onScrollToPageBottom={scrollToPageBottomHandler}
     >
       <Header />
       <ArticlesBlock />

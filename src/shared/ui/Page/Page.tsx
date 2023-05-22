@@ -5,18 +5,18 @@ import style from './Page.module.scss';
 
 type PageProps = PropsWithChildren<{
   className?: string;
-  callback?: () => void;
+  onScrollToPageBottom?: () => void;
 }>;
 
 export const Page = (props: PageProps) => {
-  const { className, children, callback } = props;
+  const { className, children, onScrollToPageBottom } = props;
   const wrapperRef = useRef() as MutableRefObject<HTMLElement>;
   const triggerRef = useRef() as MutableRefObject<HTMLDivElement>;
 
   useInfiniteScroll({
     wrapperRef,
     triggerRef,
-    callback,
+    callback: onScrollToPageBottom,
   });
 
   return (
