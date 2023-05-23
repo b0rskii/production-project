@@ -52,13 +52,13 @@ export const ArticlesBlock = (props: ArticlesBlockProps) => {
   }, [dispatch]);
 
   return (
-    <div className={getClassNames(style.articlesBlock, {}, [className])}>
+    <section className={getClassNames(style.articlesBlock, {}, [className])}>
       <ArticlesList
         articles={articles}
         view={view}
         isLoading={isLoading}
         error={error}
       />
-    </div>
+    </section>
   );
 };

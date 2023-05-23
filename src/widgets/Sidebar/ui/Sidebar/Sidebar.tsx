@@ -23,7 +23,7 @@ export const Sidebar = memo((props: SidebarProps) => {
   };
 
   return (
-    <div
+    <aside
       className={getClassNames(style.sidebar, { [style.collapsed]: collapsed }, [className])}
       data-testid="sidebar"
     >
@@ -39,7 +39,7 @@ export const Sidebar = memo((props: SidebarProps) => {
         {collapsed ? '>' : '<'}
       </Button>
 
-      <div className={style.linksList}>
+      <nav className={style.linksList}>
         {getLinkItems(userData?.id).map((linkItem) => {
           if (!userData && linkItem.authOnly) {
             return null;
@@ -53,12 +53,12 @@ export const Sidebar = memo((props: SidebarProps) => {
             />
           );
         })}
-      </div>
+      </nav>
 
       <div className={style.switchers}>
         <ThemeSwitcher />
         <LangSwitcher />
       </div>
-    </div>
+    </aside>
   );
 });

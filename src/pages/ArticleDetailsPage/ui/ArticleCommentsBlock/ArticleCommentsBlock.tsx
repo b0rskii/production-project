@@ -47,7 +47,7 @@ export const ArticleCommentsBlock = memo((props: ArticleCommentsBlockProps) => {
   }
 
   return (
-    <div className={getClassNames('', {}, [className])}>
+    <section className={getClassNames('', {}, [className])}>
       <Text title={t('Комментарии')} />
       <AddCommentForm onSendComment={sendCommentHandler} />
       <CommentCardsList
@@ -55,6 +55,6 @@ export const ArticleCommentsBlock = memo((props: ArticleCommentsBlockProps) => {
         isLoading={isLoading}
         error={error}
       />
-    </div>
+    </section>
   );
 });

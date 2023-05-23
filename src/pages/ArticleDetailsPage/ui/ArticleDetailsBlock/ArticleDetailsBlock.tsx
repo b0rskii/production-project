@@ -28,12 +28,12 @@ export const ArticleDetailsBlock = memo((props: ArticleDetailsBlockProps) => {
   }, [dispatch, articleId]);
 
   return (
-    <div className={getClassNames('', {}, [className])}>
+    <section className={getClassNames('', {}, [className])}>
       <ArticleDetails
         article={article}
         isLoading={isLoading}
         error={error}
       />
-    </div>
+    </section>
   );
 });

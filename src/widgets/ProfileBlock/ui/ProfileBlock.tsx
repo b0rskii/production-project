@@ -98,7 +98,7 @@ export const ProfileBlock = (props: ProfileBlockProps) => {
   );
 
   return (
-    <div className={getClassNames('', {}, [className])}>
+    <section className={getClassNames('', {}, [className])}>
       <div className={style.header}>
         <Text title={t('Профиль')} />
         {profile && userData && profile.id === userData.id && (
@@ -120,6 +120,6 @@ export const ProfileBlock = (props: ProfileBlockProps) => {
         isReadonly={isReadonly}
         handlers={profileHandlers}
       />
-    </div>
+    </section>
   );
 };

@@ -12,9 +12,9 @@ export const Navbar = memo((props: NavbarProps) => {
   const { className } = props;
 
   return (
-    <nav className={getClassNames(style.navbar, {}, [className])}>
-      <div className={style.links} />
+    <header className={getClassNames(style.navbar, {}, [className])}>
+      <nav className={style.links} />
       <LoginButton theme={ButtonTheme.OUTLINE_INVERTED} />
-    </nav>
+    </header>
   );
 });

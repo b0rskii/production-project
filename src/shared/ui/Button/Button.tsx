@@ -27,6 +27,7 @@ export const Button = memo((props: ButtonProps) => {
     theme = ButtonTheme.DEFAULT,
     square,
     size = 'm',
+    type = 'button',
     ...otherProps
   } = props;
 
@@ -37,7 +38,8 @@ export const Button = memo((props: ButtonProps) => {
   return (
     <button
       {...otherProps}
-      type="button"
+      // eslint-disable-next-line react/button-has-type
+      type={type}
       className={getClassNames(
         style.button,
         modes,

@@ -1,4 +1,4 @@
-import { PropsWithChildren, memo, useCallback, useEffect } from 'react';
+import { FormEvent, PropsWithChildren, memo, useCallback, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { getClassNames } from 'shared/utils/classNames';
@@ -41,8 +41,16 @@ export const AddCommentForm = memo((props: AddCommentFormProps) => {
     dispatch(addCommentActions.setText(value));
   }, [dispatch]);
 
+  const formSubmitHandler = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+    onSendComment();
+  };
+
   return (
-    <div className={getClassNames(style.addCommentForm, {}, [className])}>
+    <form
+      className={getClassNames(style.addCommentForm, {}, [className])}
+      onSubmit={formSubmitHandler}
+    >
       {error && (
         <Text
           className={style.error}
@@ -60,11 +68,11 @@ export const AddCommentForm = memo((props: AddCommentFormProps) => {
       />
       <Button
         theme={ButtonTheme.OUTLINE}
-        onClick={onSendComment}
         disabled={isLoading}
+        type="submit"
       >
         {isLoading ? t('Отправка...') : t('Отправить')}
       </Button>
-    </div>
+    </form>
   );
 });

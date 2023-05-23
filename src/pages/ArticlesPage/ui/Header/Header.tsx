@@ -25,11 +25,11 @@ export const Header = memo((props: HeaderProps) => {
   }
 
   return (
-    <div className={getClassNames('', {}, [className])}>
+    <section className={getClassNames('', {}, [className])}>
       <ListViewSwitcher
         activeControl={articleView}
         onControlClick={onViewControlClick}
       />
-    </div>
+    </section>
   );
 });

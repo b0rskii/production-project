@@ -1,4 +1,4 @@
-import { FC, useCallback } from 'react';
+import { FC, FormEvent, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { Button, ButtonTheme } from 'shared/ui/Button';
@@ -38,16 +38,21 @@ const LoginForm: FC<LoginFormProps> = (props) => {
     dispatch(loginActions.setPassword(value));
   }, [dispatch]);
 
-  const loginButtonClickHandler = useCallback(async () => {
+  const formSubmitHandler = async (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+
     const result = await dispatch(loginByUserName({ username, password }));
 
     if (result.meta.requestStatus === 'fulfilled') {
       onSuccess();
     }
-  }, [dispatch, username, password, onSuccess]);
+  };
 
   return (
-    <div className={getClassNames(style.loginForm, {}, [className])}>
+    <form
+      className={getClassNames(style.loginForm, {}, [className])}
+      onSubmit={formSubmitHandler}
+    >
       <Text title={t('Форма авторизации')} />
       {error && <Text text={t('Неверный логин или пароль')} theme={TextTheme.ERROR} />}
       <Input
@@ -68,12 +73,12 @@ const LoginForm: FC<LoginFormProps> = (props) => {
       <Button
         className={style.button}
         theme={ButtonTheme.OUTLINE}
-        onClick={loginButtonClickHandler}
         disabled={isLoading}
+        type="submit"
       >
         {t('Войти')}
       </Button>
-    </div>
+    </form>
   );
 };
 
