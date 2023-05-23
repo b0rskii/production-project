@@ -1,5 +1,4 @@
 import { configureStore, ReducersMapObject, Reducer, AnyAction } from '@reduxjs/toolkit';
-import { counterReducer, COUNTER_SLICE } from 'entities/Counter';
 import { userReducer, USER_SLICE } from 'entities/User';
 import { api } from 'shared/api';
 import { createReducerManager } from './reducerManager';
@@ -11,7 +10,6 @@ export const createReduxStore = (
 ) => {
   const rootReducer: ReducersMapObject<StateSchema> = {
     ...asyncReducers,
-    [COUNTER_SLICE]: counterReducer,
     [USER_SLICE]: userReducer,
   };
 

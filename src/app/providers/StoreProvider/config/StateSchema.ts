@@ -9,14 +9,12 @@ import { AxiosInstance } from 'axios';
 import { LoginSchema, LOGIN_SLICE } from 'features/AuthByUsername';
 import { EditProfileSchema, EDIT_PROFILE_SLICE } from 'features/EditProfile';
 import { AddCommentSchema, ADD_COMMENT_SLICE } from 'features/AddComment';
-import { CounterSchema, COUNTER_SLICE } from 'entities/Counter';
 import { ProfileSchema, PROFILE_SLICE } from 'entities/Profile';
 import { UserSchema, USER_SLICE } from 'entities/User';
 import { ArticleSchema, ARTICLE_SLICE, ArticlesSchema, ARTICLES_SLICE } from 'entities/Article';
 import { ArticleCommentsSchema, ARTICLE_COMMENTS_SLICE } from 'entities/ArticleComment';
 
 export type StateSchema = {
-  [COUNTER_SLICE]: CounterSchema;
   [USER_SLICE]: UserSchema;
   [LOGIN_SLICE]?: LoginSchema;
   [PROFILE_SLICE]?: ProfileSchema;
