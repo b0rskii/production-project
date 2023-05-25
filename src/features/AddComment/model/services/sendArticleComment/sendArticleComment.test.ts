@@ -34,7 +34,7 @@ describe('sendArticleComment', () => {
     expect(thunk.api.post).toHaveBeenCalled();
     expect(result.meta.requestStatus).toBe('fulfilled');
     expect(thunk.dispatch).toHaveBeenCalledWith(articleCommentsActions.addComment(addedComment));
-    expect(thunk.dispatch).toHaveBeenCalledTimes(3);
+    expect(thunk.dispatch).toHaveBeenCalledTimes(4);
     expect(result.payload).toEqual(addedComment);
   });
 

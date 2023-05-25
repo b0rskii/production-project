@@ -1,8 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkAPI } from 'app/providers/StoreProvider';
 import { ArticleComment, articleCommentsActions } from 'entities/ArticleComment';
+import { notificationsActions } from 'shared/ui/Notifications';
 import { Comment } from 'shared/types/comment';
 import { ApiRoutes } from 'shared/api';
+import { i18n } from 'shared/utils/i18n';
 import { SLICE_NAME } from '../../slice/addCommentSlice';
 
 export const sendArticleComment = createAsyncThunk<
@@ -42,6 +44,7 @@ export const sendArticleComment = createAsyncThunk<
       };
 
       dispatch(articleCommentsActions.addComment(addedComment));
+      dispatch(notificationsActions.notify(i18n.t('Комментарий добавлен')));
 
       return addedComment;
     } catch (error) {

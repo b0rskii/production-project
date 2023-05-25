@@ -6,6 +6,7 @@ import { userActions } from 'entities/User';
 import { getClassNames } from 'shared/utils/classNames';
 import { useAppDispatch } from 'shared/utils/redux';
 import { LocalStorageKey } from 'shared/const/localStorage';
+import { NotificationsContainer } from 'shared/ui/Notifications';
 
 export const App = () => {
   const dispatch = useAppDispatch();
@@ -30,6 +31,7 @@ export const App = () => {
           <Sidebar />
           <Routing />
         </div>
+        <NotificationsContainer />
       </Suspense>
     </div>
   );

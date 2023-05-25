@@ -25,7 +25,7 @@ describe('updateProfileData', () => {
     expect(thunk.api.put).toHaveBeenCalled();
     expect(result.meta.requestStatus).toBe('fulfilled');
     expect(thunk.dispatch).toHaveBeenCalledWith(profileActions.setProfile(RESPONSE_DATA));
-    expect(thunk.dispatch).toHaveBeenCalledTimes(3);
+    expect(thunk.dispatch).toHaveBeenCalledTimes(4);
     expect(result.payload).toEqual(RESPONSE_DATA);
   });
 

@@ -1,6 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkAPI } from 'app/providers/StoreProvider';
 import { Profile, profileActions } from 'entities/Profile';
+import { notificationsActions } from 'shared/ui/Notifications';
+import { i18n } from 'shared/utils/i18n';
 import { ApiRoutes } from 'shared/api';
 import { NAME, editProfileActions } from '../../slice/editProfileSlice';
 import { validateProfileData } from '../validateProfile/validateProfile';
@@ -30,6 +32,7 @@ export const updateProfileData = createAsyncThunk<
       }
 
       dispatch(profileActions.setProfile(data));
+      dispatch(notificationsActions.notify(i18n.t('Профиль изменен')));
 
       return data;
     } catch (error) {
