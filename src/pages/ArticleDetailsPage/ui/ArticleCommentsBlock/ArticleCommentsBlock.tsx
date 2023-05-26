@@ -39,8 +39,15 @@ export const ArticleCommentsBlock = memo((props: ArticleCommentsBlockProps) => {
   }, [dispatch, articleId, article]);
 
   const sendCommentHandler = useCallback(() => {
-    dispatch(sendArticleComment());
-  }, [dispatch]);
+    if (__PROJECT__ === 'storybook') {
+      return;
+    }
+
+    dispatch(sendArticleComment({
+      success: t('Комментарий добавлен'),
+      error: t('Не удалось добавить комментарий'),
+    }));
+  }, [dispatch, t]);
 
   if (!article) {
     return null;

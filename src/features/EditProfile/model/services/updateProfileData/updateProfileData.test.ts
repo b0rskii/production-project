@@ -1,6 +1,8 @@
 import { testAsyncThunk } from 'shared/utils/tests';
 import { Profile, mockProfile, profileActions } from 'entities/Profile';
 import { mockUser } from 'entities/User';
+import { notificationsActions } from 'shared/utils/notifications';
+import { StatusMessage } from 'shared/const/mocks';
 import { updateProfileData } from './updateProfileData';
 import { editProfileActions } from '../../slice/editProfileSlice';
 import { validateProfileData } from '../validateProfile/validateProfile';
@@ -20,11 +22,12 @@ describe('updateProfileData', () => {
       Promise.resolve({ data: RESPONSE_DATA }),
     );
 
-    const result = await thunk.callThunk(undefined);
+    const result = await thunk.callThunk(StatusMessage);
 
     expect(thunk.api.put).toHaveBeenCalled();
     expect(result.meta.requestStatus).toBe('fulfilled');
     expect(thunk.dispatch).toHaveBeenCalledWith(profileActions.setProfile(RESPONSE_DATA));
+    expect(thunk.dispatch).toHaveBeenCalledWith(notificationsActions.notify(StatusMessage.success));
     expect(thunk.dispatch).toHaveBeenCalledTimes(4);
     expect(result.payload).toEqual(RESPONSE_DATA);
   });
@@ -39,10 +42,11 @@ describe('updateProfileData', () => {
       Promise.resolve({ status: 403 }),
     );
 
-    const result = await thunk.callThunk(undefined);
+    const result = await thunk.callThunk(StatusMessage);
 
     expect(thunk.api.put).toHaveBeenCalled();
     expect(result.meta.requestStatus).toBe('rejected');
+    expect(thunk.dispatch).toHaveBeenCalledWith(notificationsActions.notifyError(StatusMessage.error));
     expect(thunk.dispatch).toHaveBeenCalledTimes(3);
     expect(result.payload).toBe('error');
   });
@@ -55,7 +59,7 @@ describe('updateProfileData', () => {
       user: { authData: USER_DATA },
     });
 
-    const result = await thunk.callThunk(undefined);
+    const result = await thunk.callThunk(StatusMessage);
 
     expect(thunk.api.put).not.toHaveBeenCalled();
 

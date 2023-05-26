@@ -2,18 +2,18 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkAPI } from 'app/providers/StoreProvider';
 import { Profile, profileActions } from 'entities/Profile';
 import { notificationsActions } from 'shared/utils/notifications';
-import { i18n } from 'shared/utils/i18n';
 import { ApiRoutes } from 'shared/api';
+import { StatusMessage } from 'shared/types/common';
 import { NAME, editProfileActions } from '../../slice/editProfileSlice';
 import { validateProfileData } from '../validateProfile/validateProfile';
 
 export const updateProfileData = createAsyncThunk<
   Profile,
-  undefined,
+  StatusMessage,
   ThunkAPI<string | null>
 >(
   `${NAME}/updateProfileData`,
-  async (_arg, { rejectWithValue, getState, extra, dispatch }) => {
+  async (statusMessage, { rejectWithValue, getState, extra, dispatch }) => {
     const { api } = extra;
     const profileForm = getState().editProfile?.profileForm;
     const userId = getState().user.authData?.id;
@@ -32,11 +32,11 @@ export const updateProfileData = createAsyncThunk<
       }
 
       dispatch(profileActions.setProfile(data));
-      dispatch(notificationsActions.notify(i18n.t('Профиль изменен')));
+      dispatch(notificationsActions.notify(statusMessage.success));
 
       return data;
     } catch (error) {
-      dispatch(notificationsActions.notifyError(i18n.t('Не удалось изменить профиль')));
+      dispatch(notificationsActions.notifyError(statusMessage.error));
       return rejectWithValue('error');
     }
   },

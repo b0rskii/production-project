@@ -2,6 +2,8 @@ import { testAsyncThunk } from 'shared/utils/tests';
 import { articleCommentsActions } from 'entities/ArticleComment';
 import { mockArticle } from 'entities/Article';
 import { mockUser } from 'entities/User';
+import { notificationsActions } from 'shared/utils/notifications';
+import { StatusMessage } from 'shared/const/mocks';
 import { sendArticleComment } from './sendArticleComment';
 
 const USER_DATA = mockUser(
@@ -27,13 +29,14 @@ describe('sendArticleComment', () => {
       Promise.resolve({ data: RESPONSE_DATA }),
     );
 
-    const result = await thunk.callThunk(undefined);
+    const result = await thunk.callThunk(StatusMessage);
 
     const addedComment = { ...RESPONSE_DATA, user: USER_DATA };
 
     expect(thunk.api.post).toHaveBeenCalled();
     expect(result.meta.requestStatus).toBe('fulfilled');
     expect(thunk.dispatch).toHaveBeenCalledWith(articleCommentsActions.addComment(addedComment));
+    expect(thunk.dispatch).toHaveBeenCalledWith(notificationsActions.notify(StatusMessage.success));
     expect(thunk.dispatch).toHaveBeenCalledTimes(4);
     expect(result.payload).toEqual(addedComment);
   });
@@ -49,10 +52,11 @@ describe('sendArticleComment', () => {
       Promise.resolve({ status: 403 }),
     );
 
-    const result = await thunk.callThunk(undefined);
+    const result = await thunk.callThunk(StatusMessage);
 
     expect(thunk.api.post).toHaveBeenCalled();
     expect(result.meta.requestStatus).toBe('rejected');
+    expect(thunk.dispatch).toHaveBeenCalledWith(notificationsActions.notifyError(StatusMessage.error));
     expect(thunk.dispatch).toHaveBeenCalledTimes(3);
     expect(result.payload).toBe('error');
   });

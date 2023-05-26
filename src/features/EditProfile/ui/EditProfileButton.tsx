@@ -40,8 +40,11 @@ export const EditProfileButton = memo((props: EditProfileProps) => {
       return;
     }
 
-    dispatch(updateProfileData());
-  }, [dispatch]);
+    dispatch(updateProfileData({
+      success: t('Профиль изменен'),
+      error: t('Не удалось изменить профиль'),
+    }));
+  }, [dispatch, t]);
 
   if (isReadonly) {
     return (

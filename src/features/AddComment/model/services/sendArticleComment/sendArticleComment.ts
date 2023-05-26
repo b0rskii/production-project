@@ -3,17 +3,17 @@ import { ThunkAPI } from 'app/providers/StoreProvider';
 import { ArticleComment, articleCommentsActions } from 'entities/ArticleComment';
 import { notificationsActions } from 'shared/utils/notifications';
 import { Comment } from 'shared/types/comment';
+import { StatusMessage } from 'shared/types/common';
 import { ApiRoutes } from 'shared/api';
-import { i18n } from 'shared/utils/i18n';
 import { SLICE_NAME } from '../../slice/addCommentSlice';
 
 export const sendArticleComment = createAsyncThunk<
   Comment,
-  undefined,
+  StatusMessage,
   ThunkAPI<string | null>
 >(
   `${SLICE_NAME}/sendArticleComment`,
-  async (_arg, { rejectWithValue, getState, extra, dispatch }) => {
+  async (statusMessage, { rejectWithValue, getState, extra, dispatch }) => {
     const { api } = extra;
     const state = getState();
 
@@ -44,11 +44,11 @@ export const sendArticleComment = createAsyncThunk<
       };
 
       dispatch(articleCommentsActions.addComment(addedComment));
-      dispatch(notificationsActions.notify(i18n.t('Комментарий добавлен')));
+      dispatch(notificationsActions.notify(statusMessage.success));
 
       return addedComment;
     } catch (error) {
-      dispatch(notificationsActions.notifyError(i18n.t('Не удалось добавить комментарий')));
+      dispatch(notificationsActions.notifyError(statusMessage.error));
       return rejectWithValue('error');
     }
   },
