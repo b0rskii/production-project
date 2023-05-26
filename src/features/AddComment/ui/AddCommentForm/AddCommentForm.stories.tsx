@@ -42,18 +42,6 @@ Loading.decorators = [
   }),
 ];
 
-export const Error = Template.bind({});
-Error.args = {};
-Error.decorators = [
-  StoreDecorator({
-    addComment: {
-      text: 'comment text',
-      isLoading: false,
-      error: 'error',
-    },
-  }),
-];
-
 export const DefaultDark = Template.bind({});
 DefaultDark.args = {};
 DefaultDark.decorators = [
@@ -75,19 +63,6 @@ LoadingDark.decorators = [
       text: 'comment text',
       isLoading: true,
       error: null,
-    },
-  }),
-  ThemeDecorator(Theme.DARK),
-];
-
-export const ErrorDark = Template.bind({});
-ErrorDark.args = {};
-ErrorDark.decorators = [
-  StoreDecorator({
-    addComment: {
-      text: 'comment text',
-      isLoading: false,
-      error: 'error',
     },
   }),
   ThemeDecorator(Theme.DARK),
