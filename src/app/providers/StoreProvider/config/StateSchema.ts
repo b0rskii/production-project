@@ -13,7 +13,7 @@ import { ProfileSchema, PROFILE_SLICE } from 'entities/Profile';
 import { UserSchema, USER_SLICE } from 'entities/User';
 import { ArticleSchema, ARTICLE_SLICE, ArticlesSchema, ARTICLES_SLICE } from 'entities/Article';
 import { ArticleCommentsSchema, ARTICLE_COMMENTS_SLICE } from 'entities/ArticleComment';
-import { NOTIFICATION_SLICE, NotificationsSchema } from 'shared/ui/Notifications';
+import { NOTIFICATION_SLICE, NotificationsSchema } from 'shared/utils/notifications';
 
 export type StateSchema = {
   [USER_SLICE]: UserSchema;

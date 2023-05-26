@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkAPI } from 'app/providers/StoreProvider';
 import { ArticleComment, articleCommentsActions } from 'entities/ArticleComment';
-import { notificationsActions } from 'shared/ui/Notifications';
+import { notificationsActions } from 'shared/utils/notifications';
 import { Comment } from 'shared/types/comment';
 import { ApiRoutes } from 'shared/api';
 import { i18n } from 'shared/utils/i18n';
@@ -48,6 +48,7 @@ export const sendArticleComment = createAsyncThunk<
 
       return addedComment;
     } catch (error) {
+      dispatch(notificationsActions.notifyError(i18n.t('Не удалось добавить комментарий')));
       return rejectWithValue('error');
     }
   },

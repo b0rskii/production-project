@@ -12,7 +12,16 @@ export const notificationsSlice = createSlice({
   initialState,
   reducers: {
     notify: (state, action: PayloadAction<string>) => {
-      state.data.push({ text: action.payload });
+      state.data.push({
+        text: action.payload,
+        type: 'success',
+      });
+    },
+    notifyError: (state, action: PayloadAction<string>) => {
+      state.data.push({
+        text: action.payload,
+        type: 'error',
+      });
     },
     removeFirstNotification: (state) => {
       state.data.splice(0, 1);

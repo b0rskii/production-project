@@ -53,7 +53,7 @@ describe('sendArticleComment', () => {
 
     expect(thunk.api.post).toHaveBeenCalled();
     expect(result.meta.requestStatus).toBe('rejected');
-    expect(thunk.dispatch).toHaveBeenCalledTimes(2);
+    expect(thunk.dispatch).toHaveBeenCalledTimes(3);
     expect(result.payload).toBe('error');
   });
 });

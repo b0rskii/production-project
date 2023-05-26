@@ -6,7 +6,7 @@ import { userActions } from 'entities/User';
 import { getClassNames } from 'shared/utils/classNames';
 import { useAppDispatch } from 'shared/utils/redux';
 import { LocalStorageKey } from 'shared/const/localStorage';
-import { NotificationsContainer } from 'shared/ui/Notifications';
+import { NotificationsContainer } from 'shared/utils/notifications';
 
 export const App = () => {
   const dispatch = useAppDispatch();

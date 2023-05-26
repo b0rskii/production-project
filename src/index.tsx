@@ -23,5 +23,4 @@ render(
   document.querySelector('#root'),
 );
 
-// TODO Уведомления
 // TODO Добавить в ошибки кнопку повторить запрос

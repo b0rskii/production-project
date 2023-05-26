@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkAPI } from 'app/providers/StoreProvider';
 import { Profile, profileActions } from 'entities/Profile';
-import { notificationsActions } from 'shared/ui/Notifications';
+import { notificationsActions } from 'shared/utils/notifications';
 import { i18n } from 'shared/utils/i18n';
 import { ApiRoutes } from 'shared/api';
 import { NAME, editProfileActions } from '../../slice/editProfileSlice';
@@ -36,6 +36,7 @@ export const updateProfileData = createAsyncThunk<
 
       return data;
     } catch (error) {
+      dispatch(notificationsActions.notifyError(i18n.t('Не удалось изменить профиль')));
       return rejectWithValue('error');
     }
   },

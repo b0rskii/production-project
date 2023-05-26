@@ -1,4 +1,4 @@
-export { NotificationsContainer } from './NotificationsContainer/NotificationsContainer';
+export { NotificationsContainer } from './ui/NotificationsContainer/NotificationsContainer';
 export { NotificationsSchema } from './model/types/notificationsSchema';
 export {
   SLICE_NAME as NOTIFICATION_SLICE,
