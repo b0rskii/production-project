@@ -7,8 +7,6 @@ import { Comment } from 'shared/types/comment';
 import { RoutePath } from 'shared/config/routing';
 import style from './CommentCard.module.scss';
 
-// TODO Отделить комментарий от пользователя
-
 type CommentCardProps = PropsWithChildren<{
   className?: string;
   comment: Comment;

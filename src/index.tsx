@@ -22,5 +22,3 @@ render(
   </BrowserRouter>,
   document.querySelector('#root'),
 );
-
-// TODO Добавить в ошибки кнопку повторить запрос
