@@ -50,7 +50,7 @@ export const AddCommentForm = memo((props: AddCommentFormProps) => {
       />
       <Button
         theme={ButtonTheme.OUTLINE}
-        disabled={isLoading}
+        disabled={isLoading || !text.length}
         type="submit"
       >
         {isLoading ? t('Отправка...') : t('Отправить')}

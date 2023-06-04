@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { CommentCardsList } from 'widgets/CommentCard';
 import { AddCommentForm, sendArticleComment } from 'features/AddComment';
-import { articleSelectors } from 'entities/Article';
 import {
   ARTICLE_COMMENTS_SLICE,
   articleCommentsReducer,
@@ -24,8 +23,6 @@ export const ArticleCommentsBlock = memo((props: ArticleCommentsBlockProps) => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
 
-  const article = useSelector(articleSelectors.getArticle);
-
   useAsyncReducer(ARTICLE_COMMENTS_SLICE, articleCommentsReducer);
 
   const comments = useSelector(articleCommentsSelectors.getArticleComments.selectAll);
@@ -33,10 +30,10 @@ export const ArticleCommentsBlock = memo((props: ArticleCommentsBlockProps) => {
   const error = useSelector(articleCommentsSelectors.getError);
 
   useEffect(() => {
-    if (articleId && article && __PROJECT__ !== 'storybook') {
+    if (articleId && __PROJECT__ !== 'storybook') {
       dispatch(fetchArticleComments(articleId));
     }
-  }, [dispatch, articleId, article]);
+  }, [dispatch, articleId]);
 
   const sendCommentHandler = useCallback(() => {
     if (__PROJECT__ === 'storybook') {
@@ -48,10 +45,6 @@ export const ArticleCommentsBlock = memo((props: ArticleCommentsBlockProps) => {
       error: t('Не удалось добавить комментарий'),
     }));
   }, [dispatch, t]);
-
-  if (!article) {
-    return null;
-  }
 
   return (
     <section className={getClassNames('', {}, [className])}>
