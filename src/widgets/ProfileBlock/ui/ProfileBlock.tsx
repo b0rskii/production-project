@@ -35,7 +35,7 @@ export const ProfileBlock = (props: ProfileBlockProps) => {
   const { id } = useParams();
   const dispatch = useAppDispatch();
 
-  useAsyncReducer(PROFILE_SLICE, profileReducer);
+  useAsyncReducer(PROFILE_SLICE, profileReducer, false);
 
   const profile = useSelector(profileSelectors.getProfile);
   const isLoading = useSelector(profileSelectors.getIsLoading);
@@ -60,8 +60,10 @@ export const ProfileBlock = (props: ProfileBlockProps) => {
       return;
     }
 
-    dispatch(fetchProfileData(id));
-  }, [dispatch, id]);
+    if (id !== profile?.id) {
+      dispatch(fetchProfileData(id));
+    }
+  }, [dispatch, id, profile?.id]);
 
   const onInputChange = useCallback((value: string, name?: string) => {
     if (!name) {
