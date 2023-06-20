@@ -27,15 +27,6 @@ Default.decorators = [
   }),
 ];
 
-export const NoArticle = Template.bind({});
-NoArticle.args = {};
-NoArticle.decorators = [
-  StoreDecorator({
-    article: { data: null },
-    articleComments: { ids, entities },
-  }),
-];
-
 export const DefaultDark = Template.bind({});
 DefaultDark.args = {};
 DefaultDark.decorators = [
