@@ -1,4 +1,5 @@
 import { configureStore, ReducersMapObject, Reducer, AnyAction } from '@reduxjs/toolkit';
+import { UI_SLICE, uiReducer } from 'widgets/Page';
 import { userReducer, USER_SLICE } from 'entities/User';
 import { notificationsReducer, NOTIFICATION_SLICE } from 'shared/utils/notifications';
 import { api } from 'shared/api';
@@ -13,6 +14,7 @@ export const createReduxStore = (
     ...asyncReducers,
     [USER_SLICE]: userReducer,
     [NOTIFICATION_SLICE]: notificationsReducer,
+    [UI_SLICE]: uiReducer,
   };
 
   const reducerManager = createReducerManager(rootReducer);

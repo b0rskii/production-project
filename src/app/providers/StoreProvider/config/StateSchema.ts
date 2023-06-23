@@ -6,6 +6,7 @@ import {
   ReducersMapObject,
 } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
+import { UISchema, UI_SLICE } from 'widgets/Page';
 import { LoginSchema, LOGIN_SLICE } from 'features/AuthByUsername';
 import { EditProfileSchema, EDIT_PROFILE_SLICE } from 'features/EditProfile';
 import { AddCommentSchema, ADD_COMMENT_SLICE } from 'features/AddComment';
@@ -18,6 +19,7 @@ import { NOTIFICATION_SLICE, NotificationsSchema } from 'shared/utils/notificati
 export type StateSchema = {
   [USER_SLICE]: UserSchema;
   [NOTIFICATION_SLICE]: NotificationsSchema;
+  [UI_SLICE]: UISchema;
   [LOGIN_SLICE]?: LoginSchema;
   [PROFILE_SLICE]?: ProfileSchema;
   [EDIT_PROFILE_SLICE]?: EditProfileSchema;
