@@ -1,5 +1,5 @@
 import { ProfileBlock } from 'widgets/ProfileBlock';
-import { Page } from 'shared/ui/Page';
+import { Page } from 'widgets/Page';
 
 function ProfilePage() {
   return (

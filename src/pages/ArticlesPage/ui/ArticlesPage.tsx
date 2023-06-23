@@ -1,9 +1,9 @@
 import { PropsWithChildren, memo } from 'react';
 import { useSelector } from 'react-redux';
+import { Page } from 'widgets/Page';
 import { articlesSelectors, fetchArticles } from 'entities/Article';
 import { useAppDispatch } from 'shared/utils/redux';
 import { getClassNames } from 'shared/utils/classNames';
-import { Page } from 'shared/ui/Page';
 import { Header } from './Header';
 import { ArticlesBlock } from './ArticlesBlock';
 
