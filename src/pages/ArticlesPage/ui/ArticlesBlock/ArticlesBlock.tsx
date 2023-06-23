@@ -40,15 +40,11 @@ export const ArticlesBlock = (props: ArticlesBlockProps) => {
 
         if (localArticlesView) dispatch(articlesActions.setView(localArticlesView));
 
+        dispatch(fetchArticles());
+
         isInit = false;
       }
-
-      dispatch(fetchArticles());
     }
-
-    return () => {
-      dispatch(articlesActions.resetArticles());
-    };
   }, [dispatch]);
 
   return (

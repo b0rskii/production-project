@@ -1,5 +1,5 @@
 import { StateSchema } from 'app/providers/StoreProvider';
 
-export const getPageScrollData = (state: StateSchema, path: string) => (
+export const getPageScrollData = (path: string) => (state: StateSchema) => (
   state.ui.scrollData[path] ?? 0
 );
