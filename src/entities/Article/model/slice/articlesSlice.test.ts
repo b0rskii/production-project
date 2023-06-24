@@ -1,7 +1,7 @@
 import { fetchArticles } from '../services/fetchArticles/fetchArticles';
 import { ArticlesSchema } from '../types/articlesSchema';
 import { mockArticle, mockNormalizedArticles } from '../mocks';
-import { articlesReducer, articlesActions, ArticlesLimit } from './articlesSlice';
+import { articlesReducer, articlesActions, ARTICLES_LIMIT } from './articlesSlice';
 
 const ARTICLES_COUNT = 10;
 const normalizedArticles = mockNormalizedArticles(ARTICLES_COUNT);
@@ -10,14 +10,14 @@ describe('articlesSlice', () => {
   it('setView action', () => {
     const state: DeepPartial<ArticlesSchema> = {
       view: 'list',
-      limit: ArticlesLimit.LIST,
+      limit: ARTICLES_LIMIT,
     };
 
     expect(articlesReducer(state as ArticlesSchema, articlesActions.setView('tiles')))
       .toEqual({
         ...state,
         view: 'tiles',
-        limit: ArticlesLimit.TILES,
+        limit: ARTICLES_LIMIT,
       });
   });
 

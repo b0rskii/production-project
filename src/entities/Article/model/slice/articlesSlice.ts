@@ -4,10 +4,7 @@ import { ArticlesSchema } from '../types/articlesSchema';
 import { Article } from '../types/articleSchema';
 import { fetchArticles } from '../services/fetchArticles/fetchArticles';
 
-export const ArticlesLimit = {
-  TILES: 16,
-  LIST: 5,
-} as const;
+export const ARTICLES_LIMIT = 12;
 
 export const articlesAdapter = createEntityAdapter<Article>({
   selectId: (article: Article) => article.id,
@@ -20,7 +17,7 @@ export const initialState = articlesAdapter.getInitialState<ArticlesSchema>({
   error: null,
   view: 'tiles',
   page: 0,
-  limit: ArticlesLimit.TILES,
+  limit: ARTICLES_LIMIT,
   isHasMore: false,
 });
 
@@ -33,7 +30,6 @@ export const articlesSlice = createSlice({
     setView: (state, action: PayloadAction<ListView>) => {
       const view = action.payload;
       state.view = view;
-      state.limit = view === 'tiles' ? ArticlesLimit.TILES : ArticlesLimit.LIST;
     },
     setPage: (state, action: PayloadAction<number>) => {
       state.page = action.payload;
@@ -51,11 +47,11 @@ export const articlesSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(fetchArticles.fulfilled, (state, action) => {
-        const data = action.payload;
+        const { data, totalCount } = action.payload;
         state.error = null;
         state.isLoading = false;
-        state.isHasMore = data.length === state.limit;
         articlesAdapter.addMany(state, data);
+        state.isHasMore = state.ids.length < Number(totalCount);
       })
       .addCase(fetchArticles.rejected, (state, action) => {
         state.error = action.payload || null;

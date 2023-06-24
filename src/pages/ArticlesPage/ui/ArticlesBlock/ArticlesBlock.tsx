@@ -1,6 +1,7 @@
 import { PropsWithChildren, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import {
+  ARTICLES_LIMIT,
   ARTICLES_SLICE,
   ArticlesList,
   articlesActions,
@@ -54,6 +55,7 @@ export const ArticlesBlock = (props: ArticlesBlockProps) => {
         view={view}
         isLoading={isLoading}
         error={error}
+        skeletonsCount={ARTICLES_LIMIT}
       />
     </section>
   );

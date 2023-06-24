@@ -6,7 +6,6 @@ import { I18nNameSpace } from 'shared/utils/i18n/nameSpace';
 import { Text, TextTheme } from 'shared/ui/Text';
 import { ListView } from 'shared/ui/ListViewSwitcher';
 import { Article as ArticleType } from '../../model/types/articleSchema';
-import { ArticlesLimit } from '../../model/slice/articlesSlice';
 import { Article } from '../Article';
 import { ArticleSkeleton } from '../Article/ArticleSkeleton';
 import style from './ArticlesList.module.scss';
@@ -16,11 +15,12 @@ type ArticlesListProps = PropsWithChildren<{
   articles: ArticleType[];
   isLoading: boolean;
   error: string | null;
+  skeletonsCount: number;
   view?: ListView;
 }>;
 
 export const ArticlesList = memo((props: ArticlesListProps) => {
-  const { className, articles, isLoading, error, view = 'tiles' } = props;
+  const { className, articles, isLoading, error, skeletonsCount, view = 'tiles' } = props;
   const { t } = useTranslation([I18nNameSpace.Translation, I18nNameSpace.Article]);
 
   if (error) {
@@ -37,7 +37,7 @@ export const ArticlesList = memo((props: ArticlesListProps) => {
   }
 
   const getSkeletons = () => (
-    new Array(view === 'tiles' ? ArticlesLimit.TILES : ArticlesLimit.LIST)
+    new Array(skeletonsCount)
       .fill(0)
       .map((_, index) => <ArticleSkeleton view={view} key={index} />)
   );
