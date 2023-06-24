@@ -5,12 +5,7 @@ import { NAME } from '../../slice/articleSlice';
 import { Article } from '../../types/articleSchema';
 import { articlesActions } from '../../slice/articlesSlice';
 
-type Returned = {
-  data: Article[];
-  totalCount: string;
-};
-
-export const fetchArticles = createAsyncThunk<Returned, undefined, ThunkAPI<string>>(
+export const fetchArticles = createAsyncThunk<Article[], undefined, ThunkAPI<string>>(
   `${NAME}/fetchArticles`,
   async (_, { rejectWithValue, extra, getState, dispatch }) => {
     const { api } = extra;
@@ -25,7 +20,7 @@ export const fetchArticles = createAsyncThunk<Returned, undefined, ThunkAPI<stri
     const currentPage = page + 1;
 
     try {
-      const { data, headers } = await api.get<Article[]>(ApiRoutes.ARTICLES, { params: {
+      const { data } = await api.get<Article[]>(ApiRoutes.ARTICLES, { params: {
         _expand: 'user',
         _page: currentPage,
         _limit: limit,
@@ -37,10 +32,7 @@ export const fetchArticles = createAsyncThunk<Returned, undefined, ThunkAPI<stri
 
       dispatch(articlesActions.setPage(currentPage));
 
-      return {
-        data,
-        totalCount: headers['x-total-count'],
-      };
+      return data;
     } catch (error) {
       return rejectWithValue('error');
     }

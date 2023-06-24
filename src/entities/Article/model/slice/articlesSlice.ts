@@ -51,11 +51,11 @@ export const articlesSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(fetchArticles.fulfilled, (state, action) => {
-        const { data, totalCount } = action.payload;
+        const data = action.payload;
         state.error = null;
         state.isLoading = false;
+        state.isHasMore = data.length === state.limit;
         articlesAdapter.addMany(state, data);
-        state.isHasMore = state.ids.length < Number(totalCount);
       })
       .addCase(fetchArticles.rejected, (state, action) => {
         state.error = action.payload || null;

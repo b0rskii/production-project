@@ -6,7 +6,6 @@ import { mockArticles } from '../../mocks';
 
 const PAGE = 1;
 const LIMIT = 5;
-const HEADERS = { 'x-total-count': 10 };
 
 describe('fetchArticles', () => {
   it('fulfilled', async () => {
@@ -20,7 +19,7 @@ describe('fetchArticles', () => {
     });
 
     thunk.api.get.mockReturnValue(
-      Promise.resolve({ data: RESPONSE_DATA, headers: HEADERS }),
+      Promise.resolve({ data: RESPONSE_DATA }),
     );
 
     const result = await thunk.callThunk(undefined);
@@ -29,7 +28,7 @@ describe('fetchArticles', () => {
     expect(result.meta.requestStatus).toBe('fulfilled');
     expect(thunk.dispatch).toHaveBeenCalledWith(articlesActions.setPage(PAGE + 1));
     expect(thunk.dispatch).toHaveBeenCalledTimes(3);
-    expect(result.payload).toEqual({ data: RESPONSE_DATA, totalCount: HEADERS['x-total-count'] });
+    expect(result.payload).toEqual(RESPONSE_DATA);
   });
 
   it('rejected', async () => {
