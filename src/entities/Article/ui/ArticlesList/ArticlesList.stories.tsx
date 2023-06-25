@@ -37,6 +37,7 @@ TilesViewLoading.args = {
   articles: [],
   view: 'tiles',
   isLoading: true,
+  skeletonsCount: tilesArticles.length,
 };
 
 export const ListViewLoading = Template.bind({});
@@ -44,6 +45,7 @@ ListViewLoading.args = {
   articles: [],
   view: 'list',
   isLoading: true,
+  skeletonsCount: listArticles.length,
 };
 
 export const Error = Template.bind({});
