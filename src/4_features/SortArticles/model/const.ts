@@ -1,10 +1,10 @@
 export const SortingType = {
-  VIEWS: 'VIEWS',
-  DATE: 'DATE',
-  TITLE: 'TITLE',
+  VIEWS: 'views',
+  DATE: 'createdAt',
+  TITLE: 'title',
 } as const;
 
 export const SortingOrder = {
-  ASC: 'ASC',
-  DESC: 'DESC',
+  ASC: 'asc',
+  DESC: 'desc',
 } as const;

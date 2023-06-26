@@ -17,6 +17,8 @@ export const fetchArticles = createAsyncThunk<Returned, undefined, ThunkAPI<stri
     const state = getState();
     const page = state.articles?.page;
     const limit = state.articles?.limit;
+    const sortingType = state.sortArticles?.sortingType;
+    const sortingOrder = state.sortArticles?.sortingOrder;
 
     if (page === undefined || !limit) {
       return rejectWithValue('error');
@@ -29,6 +31,8 @@ export const fetchArticles = createAsyncThunk<Returned, undefined, ThunkAPI<stri
         _expand: 'user',
         _page: currentPage,
         _limit: limit,
+        _sort: sortingType,
+        _order: sortingOrder,
       } });
 
       if (!data) {

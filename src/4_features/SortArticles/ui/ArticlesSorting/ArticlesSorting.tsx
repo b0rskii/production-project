@@ -42,7 +42,7 @@ export const ArticlesSorting = memo((props: Props) => {
   ], [t]);
 
   return (
-    <div className={getClassNames('', {}, [className])}>
+    <div className={getClassNames(style.el, {}, [className])}>
       <Select
         className={style.select}
         options={SortingTypes}

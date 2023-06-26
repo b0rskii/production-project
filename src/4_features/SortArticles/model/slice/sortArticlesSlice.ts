@@ -3,7 +3,7 @@ import { SortArticlesSchema, TSortingOrder, TSortingType } from '../types/sortAr
 import { SortingType, SortingOrder } from '../const';
 
 export const initialState: SortArticlesSchema = {
-  sortingType: SortingType.TITLE,
+  sortingType: SortingType.DATE,
   sortingOrder: SortingOrder.ASC,
 };
 
