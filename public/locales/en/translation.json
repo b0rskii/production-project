@@ -22,5 +22,12 @@
   "Отправка...": "Sending...",
   "Не удалось добавить комментарий": "Failed to add comment",
   "Читать далее": "Read more",
-  "Комментарий добавлен": "Comment added"
+  "Комментарий добавлен": "Comment added",
+  "Сортировать по": "Sort by",
+  "По": "By",
+  "дате создания": "creation date",
+  "названию": "name",
+  "количеству просмотров": "number of views",
+  "возрастанию": "ascending",
+  "убыванию": "descending"
 }

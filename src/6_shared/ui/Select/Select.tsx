@@ -1,9 +1,9 @@
-import { ChangeEvent, memo, SelectHTMLAttributes } from 'react';
+import { ChangeEvent, SelectHTMLAttributes } from 'react';
 import { getClassNames } from '6_shared/utils/classNames';
 import style from './Select.module.scss';
 
-export type SelectOption = {
-  value: string;
+export type SelectOption<T extends string> = {
+  value: T;
   content: string;
 };
 
@@ -12,15 +12,16 @@ export type HTMLSelectProps = Omit<
   'value' | 'onChange' | 'label'
 >;
 
-interface SelectProps extends HTMLSelectProps {
-  options: SelectOption[];
+interface SelectProps<T extends string> extends HTMLSelectProps {
+  options: SelectOption<T>[];
   className?: string;
   label?: string;
-  value?: string;
-  onChange?: (value: string) => void;
+  value?: T;
+  // eslint-disable-next-line no-unused-vars
+  onChange?: (value: T) => void;
 }
 
-export const Select = memo((props: SelectProps) => {
+export const Select = <T extends string>(props: SelectProps<T>) => {
   const {
     className,
     label,
@@ -31,7 +32,7 @@ export const Select = memo((props: SelectProps) => {
   } = props;
 
   const changeHandler = (evt: ChangeEvent<HTMLSelectElement>) => {
-    onChange?.(evt.target.value);
+    onChange?.(evt.target.value as T);
   };
 
   return (
@@ -43,6 +44,7 @@ export const Select = memo((props: SelectProps) => {
         </span>
       )}
       <select
+        // eslint-disable-next-line react/jsx-props-no-spreading
         {...otherProps}
         className={style.select}
         value={value}
@@ -60,4 +62,4 @@ export const Select = memo((props: SelectProps) => {
       </select>
     </div>
   );
-});
+};

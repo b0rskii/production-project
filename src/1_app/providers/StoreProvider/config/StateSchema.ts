@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import {
   AnyAction,
   CombinedState,
@@ -10,6 +11,7 @@ import { UISchema, UI_SLICE } from '3_widgets/Page';
 import { LoginSchema, LOGIN_SLICE } from '4_features/AuthByUsername';
 import { EditProfileSchema, EDIT_PROFILE_SLICE } from '4_features/EditProfile';
 import { AddCommentSchema, ADD_COMMENT_SLICE } from '4_features/AddComment';
+import { SortArticlesSchema, SORT_ARTICLES_SLICE } from '4_features/SortArticles';
 import { ProfileSchema, PROFILE_SLICE } from '5_entities/Profile';
 import { UserSchema, USER_SLICE } from '5_entities/User';
 import { ArticleSchema, ARTICLE_SLICE, ArticlesSchema, ARTICLES_SLICE } from '5_entities/Article';
@@ -27,6 +29,7 @@ export type StateSchema = {
   [ARTICLE_COMMENTS_SLICE]?: ArticleCommentsSchema;
   [ADD_COMMENT_SLICE]?: AddCommentSchema;
   [ARTICLES_SLICE]?: ArticlesSchema;
+  [SORT_ARTICLES_SLICE]?: SortArticlesSchema;
 };
 
 export type StateSchemaKey = keyof StateSchema;
