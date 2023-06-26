@@ -12,6 +12,7 @@ import { LoginSchema, LOGIN_SLICE } from '4_features/AuthByUsername';
 import { EditProfileSchema, EDIT_PROFILE_SLICE } from '4_features/EditProfile';
 import { AddCommentSchema, ADD_COMMENT_SLICE } from '4_features/AddComment';
 import { SortArticlesSchema, SORT_ARTICLES_SLICE } from '4_features/SortArticles';
+import { FilterArticlesSchema, FILTER_ARTICLES_SLICE } from '4_features/FilterArticles';
 import { ProfileSchema, PROFILE_SLICE } from '5_entities/Profile';
 import { UserSchema, USER_SLICE } from '5_entities/User';
 import { ArticleSchema, ARTICLE_SLICE, ArticlesSchema, ARTICLES_SLICE } from '5_entities/Article';
@@ -30,6 +31,7 @@ export type StateSchema = {
   [ADD_COMMENT_SLICE]?: AddCommentSchema;
   [ARTICLES_SLICE]?: ArticlesSchema;
   [SORT_ARTICLES_SLICE]?: SortArticlesSchema;
+  [FILTER_ARTICLES_SLICE]?: FilterArticlesSchema;
 };
 
 export type StateSchemaKey = keyof StateSchema;

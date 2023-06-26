@@ -1,6 +1,7 @@
 import { PropsWithChildren, memo } from 'react';
 import { getClassNames } from '6_shared/utils/classNames';
 import { Button, ButtonTheme } from '6_shared/ui/Button';
+import { Card } from '6_shared/ui/Card';
 import TilesIcon from '6_shared/assets/icons/tiles.svg';
 import ListIcon from '6_shared/assets/icons/list.svg';
 import style from './ListViewSwitcher.module.scss';
@@ -26,6 +27,7 @@ const controls: ViewControl[] = [
 type ListViewSwitcherProps = PropsWithChildren<{
   className?: string;
   activeControl: ListView;
+  // eslint-disable-next-line no-unused-vars
   onControlClick: (view: ListView) => void;
 }>;
 
@@ -33,7 +35,7 @@ export const ListViewSwitcher = memo((props: ListViewSwitcherProps) => {
   const { className, activeControl, onControlClick } = props;
 
   return (
-    <div className={getClassNames(style.listViewSwitcher, {}, [className])}>
+    <Card className={getClassNames(style.listViewSwitcher, {}, [className])}>
       {controls.map(({ Icon, view }) => (
         <Button
           className={getClassNames(style.control, { [style.active]: activeControl === view }, [])}
@@ -44,6 +46,6 @@ export const ListViewSwitcher = memo((props: ListViewSwitcherProps) => {
           <Icon />
         </Button>
       ))}
-    </div>
+    </Card>
   );
 });

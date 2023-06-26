@@ -9,6 +9,13 @@ import {
   TSortingType,
   TSortingOrder,
 } from '4_features/SortArticles';
+import {
+  ArticlesSearch,
+  FILTER_ARTICLES_SLICE,
+  filterArticlesReducer,
+  filterArticlesActions,
+  filterArticlesSelectors,
+} from '4_features/FilterArticles';
 import { articlesActions, articlesSelectors, fetchArticles } from '5_entities/Article';
 import { getClassNames } from '6_shared/utils/classNames';
 import { useAppDispatch, useAsyncReducer } from '6_shared/utils/redux';
@@ -29,9 +36,11 @@ export const Header = memo((props: HeaderProps) => {
   const articleView = useSelector(articlesSelectors.getView);
 
   useAsyncReducer(SORT_ARTICLES_SLICE, sortArticlesReducer, false);
-
   const sortingType = useSelector(sortArticlesSelectors.getSortingType);
   const sortingOrder = useSelector(sortArticlesSelectors.getSortingOrder);
+
+  useAsyncReducer(FILTER_ARTICLES_SLICE, filterArticlesReducer, false);
+  const search = useSelector(filterArticlesSelectors.getSearch);
 
   useEffect(() => {
     isInit = false;
@@ -53,6 +62,12 @@ export const Header = memo((props: HeaderProps) => {
     dispatch(fetchArticles());
   }, [dispatch]);
 
+  const onSearchChange = useCallback((value: string) => {
+    dispatch(filterArticlesActions.setSearch(value));
+    dispatch(articlesActions.resetArticles());
+    dispatch(fetchArticles());
+  }, [dispatch]);
+
   if (isInit && !articlesTotal) {
     return null;
   }
@@ -64,6 +79,11 @@ export const Header = memo((props: HeaderProps) => {
         order={sortingOrder}
         onTypeChange={onSortingTypeChange}
         onOrderChange={onSortingOrderChange}
+      />
+      <ArticlesSearch
+        className={style.search}
+        search={search}
+        onChange={onSearchChange}
       />
       <ListViewSwitcher
         activeControl={articleView}

@@ -19,6 +19,7 @@ export const fetchArticles = createAsyncThunk<Returned, undefined, ThunkAPI<stri
     const limit = state.articles?.limit;
     const sortingType = state.sortArticles?.sortingType;
     const sortingOrder = state.sortArticles?.sortingOrder;
+    const search = state.filterArticles?.search;
 
     if (page === undefined || !limit) {
       return rejectWithValue('error');
@@ -33,6 +34,7 @@ export const fetchArticles = createAsyncThunk<Returned, undefined, ThunkAPI<stri
         _limit: limit,
         _sort: sortingType,
         _order: sortingOrder,
+        q: search,
       } });
 
       if (!data) {
