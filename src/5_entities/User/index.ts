@@ -2,3 +2,4 @@ export { userReducer, userActions, NAME as USER_SLICE } from './model/slice/user
 export { userSelectors } from './model/selectors';
 export { UserSchema, User } from './model/types/userSchema';
 export { mockUser } from './model/mocks';
+export { useInitUserData } from './model/services/initUserData';
