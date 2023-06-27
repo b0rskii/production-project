@@ -8,3 +8,8 @@ export const SortingOrder = {
   ASC: 'asc',
   DESC: 'desc',
 } as const;
+
+export const SearchParam = {
+  SORTING_TYPE: 'sorting',
+  SORTING_ORDER: 'order',
+} as const;

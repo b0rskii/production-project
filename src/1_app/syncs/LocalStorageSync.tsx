@@ -17,7 +17,7 @@ export const LocalStorageSync = () => {
   }, [articlesView]);
 
   useEffect(() => {
-    if (isInit) isInit = false;
+    isInit = false;
   }, []);
 
   return null;

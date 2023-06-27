@@ -7,3 +7,4 @@ export {
 export { SortArticlesSchema, TSortingOrder, TSortingType } from './model/types/sortArticlesSchema';
 export { sortArticlesSelectors } from './model/selectors';
 export { ArticlesSorting } from './ui/ArticlesSorting';
+export { SearchParam as SortArticlesSearchParam } from './model/const';

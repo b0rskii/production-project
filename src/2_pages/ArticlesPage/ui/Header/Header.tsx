@@ -21,7 +21,10 @@ import { getClassNames } from '6_shared/utils/classNames';
 import { useAppDispatch, useAsyncReducer } from '6_shared/utils/redux';
 import { useDebounce } from '6_shared/utils/debounce';
 import { ListView, ListViewSwitcher } from '6_shared/ui/ListViewSwitcher';
+import { usePageSearchParams } from '../../model/usePageSearchParams';
 import style from './Header.module.scss';
+
+const DEBOUNCE_DELAY = 500;
 
 let isInit = true;
 
@@ -43,6 +46,8 @@ export const Header = memo((props: HeaderProps) => {
   useAsyncReducer(FILTER_ARTICLES_SLICE, filterArticlesReducer, false);
   const search = useSelector(filterArticlesSelectors.getSearch);
 
+  const { setSearchFilterParams } = usePageSearchParams(sortingType, sortingOrder, search);
+
   useEffect(() => {
     isInit = false;
   }, []);
@@ -63,14 +68,15 @@ export const Header = memo((props: HeaderProps) => {
     dispatch(fetchArticles());
   }, [dispatch]);
 
-  const debouncedSearch = useDebounce(() => {
+  const debouncedSearch = useDebounce((value: string) => {
     dispatch(articlesActions.resetArticles());
     dispatch(fetchArticles());
-  }, 500);
+    setSearchFilterParams(value);
+  }, DEBOUNCE_DELAY);
 
   const onSearchChange = useCallback((value: string) => {
     dispatch(filterArticlesActions.setSearch(value));
-    debouncedSearch();
+    debouncedSearch(value);
   }, [dispatch, debouncedSearch]);
 
   if (isInit && !articlesTotal) {
