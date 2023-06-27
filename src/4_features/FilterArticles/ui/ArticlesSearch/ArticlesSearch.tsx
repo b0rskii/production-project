@@ -19,6 +19,7 @@ export const ArticlesSearch = memo((props: Props) => {
   return (
     <Card className={getClassNames(style.articlesSearch, {}, [className])}>
       <Input
+        className={style.input}
         value={search}
         onChange={onChange}
         placeholder={t('Поиск')}
