@@ -3,7 +3,7 @@ import { useCallback, useEffect, useRef } from 'react';
 // eslint-disable-next-line no-unused-vars
 export const useThrottle = (callback: (...args: any[]) => void, delay: number) => {
   const throttleRef = useRef(false);
-  const timeoutRef = useRef<any>(null);
+  const timeoutRef = useRef<NodeJS.Timeout>();
 
   const throttledCallback = useCallback((...args) => {
     if (!throttleRef.current) {
@@ -18,7 +18,9 @@ export const useThrottle = (callback: (...args: any[]) => void, delay: number) =
   }, [callback, delay]);
 
   useEffect(() => () => {
-    clearTimeout(timeoutRef.current);
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
   }, []);
 
   return throttledCallback;

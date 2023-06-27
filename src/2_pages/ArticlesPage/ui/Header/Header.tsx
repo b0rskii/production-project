@@ -19,6 +19,7 @@ import {
 import { articlesActions, articlesSelectors, fetchArticles } from '5_entities/Article';
 import { getClassNames } from '6_shared/utils/classNames';
 import { useAppDispatch, useAsyncReducer } from '6_shared/utils/redux';
+import { useDebounce } from '6_shared/utils/debounce';
 import { ListView, ListViewSwitcher } from '6_shared/ui/ListViewSwitcher';
 import style from './Header.module.scss';
 
@@ -62,11 +63,15 @@ export const Header = memo((props: HeaderProps) => {
     dispatch(fetchArticles());
   }, [dispatch]);
 
-  const onSearchChange = useCallback((value: string) => {
-    dispatch(filterArticlesActions.setSearch(value));
+  const debouncedSearch = useDebounce(() => {
     dispatch(articlesActions.resetArticles());
     dispatch(fetchArticles());
-  }, [dispatch]);
+  }, 500);
+
+  const onSearchChange = useCallback((value: string) => {
+    dispatch(filterArticlesActions.setSearch(value));
+    debouncedSearch();
+  }, [dispatch, debouncedSearch]);
 
   if (isInit && !articlesTotal) {
     return null;
