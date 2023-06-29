@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkAPI } from '1_app/providers/StoreProvider';
 import { ApiRoutes } from '6_shared/api';
 import { NAME } from '../../slice/articleSlice';
-import { Article } from '../../types/articleSchema';
+import { Article, ArticleType } from '../../types/articleSchema';
 import { articlesActions } from '../../slice/articlesSlice';
 
 type Returned = {
@@ -20,6 +20,7 @@ export const fetchArticles = createAsyncThunk<Returned, undefined, ThunkAPI<stri
     const sortingType = state.sortArticles?.sortingType;
     const sortingOrder = state.sortArticles?.sortingOrder;
     const search = state.filterArticles?.search;
+    const type = state.filterArticles?.type;
 
     if (page === undefined || !limit) {
       return rejectWithValue('error');
@@ -35,6 +36,7 @@ export const fetchArticles = createAsyncThunk<Returned, undefined, ThunkAPI<stri
         _sort: sortingType,
         _order: sortingOrder,
         q: search,
+        type: type !== ArticleType.ALL ? type : undefined,
       } });
 
       if (!data) {

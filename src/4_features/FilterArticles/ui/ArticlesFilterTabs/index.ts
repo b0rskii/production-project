@@ -1,0 +1,1 @@
+export { ArticlesFilterTabs } from './ArticlesFilterTabs';

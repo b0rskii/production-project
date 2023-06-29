@@ -30,6 +30,16 @@ export const usePageSearchParams = (
     setSearchParams(searchParams, { replace: true });
   }, []);
 
+  // const setTypeFilterParams = useCallback((value: ArticleType) => {
+  //   if (value === ArticleType.ALL) {
+  //     searchParams.delete(FilterArticlesSearchParam.TYPE);
+  //     setSearchParams(searchParams, { replace: true });
+  //     return;
+  //   }
+  //   searchParams.set(FilterArticlesSearchParam.TYPE, value);
+  //   setSearchParams(searchParams, { replace: true });
+  // }, []);
+
   useEffect(() => {
     setSortingTypeParams(sortingType);
   }, [sortingType]);

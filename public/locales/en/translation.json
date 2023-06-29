@@ -30,5 +30,9 @@
   "количеству просмотров": "number of views",
   "возрастанию": "ascending",
   "убыванию": "descending",
-  "Поиск": "Search"
+  "Поиск": "Search",
+  "Все": "All",
+  "АйТи": "IT",
+  "Наука": "Science",
+  "Экономика": "Economy"
 }

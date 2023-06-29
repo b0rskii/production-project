@@ -15,6 +15,7 @@ import {
   filterArticlesReducer,
   filterArticlesActions,
   filterArticlesSelectors,
+  ArticlesFilterTabs,
 } from '4_features/FilterArticles';
 import { articlesActions, articlesSelectors, fetchArticles } from '5_entities/Article';
 import { getClassNames } from '6_shared/utils/classNames';
@@ -84,22 +85,27 @@ export const Header = memo((props: HeaderProps) => {
   }
 
   return (
-    <section className={getClassNames(style.header, {}, [className])}>
-      <ArticlesSorting
-        type={sortingType}
-        order={sortingOrder}
-        onTypeChange={onSortingTypeChange}
-        onOrderChange={onSortingOrderChange}
-      />
-      <ArticlesSearch
-        className={style.search}
-        search={search}
-        onChange={onSearchChange}
-      />
-      <ListViewSwitcher
-        activeControl={articleView}
-        onControlClick={onViewControlClick}
-      />
+    <section className={getClassNames('', {}, [className])}>
+      <div className={style.row}>
+        <ArticlesSorting
+          type={sortingType}
+          order={sortingOrder}
+          onTypeChange={onSortingTypeChange}
+          onOrderChange={onSortingOrderChange}
+        />
+        <ArticlesSearch
+          className={style.search}
+          search={search}
+          onChange={onSearchChange}
+        />
+        <ListViewSwitcher
+          activeControl={articleView}
+          onControlClick={onViewControlClick}
+        />
+      </div>
+      <div className={style.row}>
+        <ArticlesFilterTabs />
+      </div>
     </section>
   );
 });

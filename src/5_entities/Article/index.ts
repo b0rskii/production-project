@@ -1,6 +1,6 @@
 export { ArticleDetails } from './ui/ArticleDetails';
 export { ArticlesList } from './ui/ArticlesList';
-export { Article, ArticleSchema } from './model/types/articleSchema';
+export { Article, ArticleSchema, ArticleType } from './model/types/articleSchema';
 export { ArticlesSchema } from './model/types/articlesSchema';
 export { NAME as ARTICLE_SLICE, articleReducer } from './model/slice/articleSlice';
 export {

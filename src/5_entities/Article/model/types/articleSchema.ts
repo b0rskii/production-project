@@ -1,6 +1,8 @@
+/* eslint-disable no-unused-vars */
 import { User } from '5_entities/User';
 
 export enum ArticleType {
+  ALL = 'ALL',
   IT = 'IT',
   SCIENCE = 'SCIENCE',
   ECONOMY = 'ECONOMY',
