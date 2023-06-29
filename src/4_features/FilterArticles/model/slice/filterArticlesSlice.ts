@@ -15,6 +15,7 @@ if (window) {
 
 export const initialState: FilterArticlesSchema = {
   search: searchFilterParams ?? '',
+  currentSearch: searchFilterParams ?? '',
   type: typeFilterParams ?? ArticleType.ALL,
 };
 
@@ -26,6 +27,9 @@ export const filterArticlesSlice = createSlice({
   reducers: {
     setSearch: (state, action: PayloadAction<string>) => {
       state.search = action.payload;
+    },
+    setCurrentSearch: (state, action: PayloadAction<string>) => {
+      state.currentSearch = action.payload;
     },
     setType: (state, action: PayloadAction<ArticleType>) => {
       state.type = action.payload;

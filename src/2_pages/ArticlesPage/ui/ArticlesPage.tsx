@@ -4,6 +4,7 @@ import { Page } from '3_widgets/Page';
 import { articlesSelectors, fetchArticles } from '5_entities/Article';
 import { useAppDispatch } from '6_shared/utils/redux';
 import { getClassNames } from '6_shared/utils/classNames';
+import { UrlSearchParamsSync } from '../model/services/UrlSearchParamsSync';
 import { Header } from './Header';
 import { ArticlesBlock } from './ArticlesBlock';
 
@@ -31,6 +32,7 @@ const ArticlesPage = (props: ArticlesPageProps) => {
     >
       <Header />
       <ArticlesBlock />
+      <UrlSearchParamsSync />
     </Page>
   );
 };
