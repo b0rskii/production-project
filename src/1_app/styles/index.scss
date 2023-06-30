@@ -26,3 +26,18 @@ input::-webkit-input-placeholder {
 input::-moz-placeholder {
   color: var(--secondary-color);
 }
+
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--bg-color);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--secondary-color);
+  border-radius: 20px;
+  border: 3px solid var(--secondary-color);
+}
