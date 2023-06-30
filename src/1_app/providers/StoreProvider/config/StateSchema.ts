@@ -15,7 +15,15 @@ import { SortArticlesSchema, SORT_ARTICLES_SLICE } from '4_features/SortArticles
 import { FilterArticlesSchema, FILTER_ARTICLES_SLICE } from '4_features/FilterArticles';
 import { ProfileSchema, PROFILE_SLICE } from '5_entities/Profile';
 import { UserSchema, USER_SLICE } from '5_entities/User';
-import { ArticleSchema, ARTICLE_SLICE, ArticlesSchema, ARTICLES_SLICE } from '5_entities/Article';
+import {
+  ArticleSchema,
+  ARTICLE_SLICE,
+  ArticlesSchema,
+  ARTICLES_SLICE,
+  RECOMMENDED_ARTICLES_SLICE,
+  RecommendedArticlesSchema,
+} from '5_entities/Article';
+
 import { ArticleCommentsSchema, ARTICLE_COMMENTS_SLICE } from '5_entities/ArticleComment';
 import { NOTIFICATION_SLICE, NotificationsSchema } from '6_shared/utils/notifications';
 
@@ -32,6 +40,7 @@ export type StateSchema = {
   [ARTICLES_SLICE]?: ArticlesSchema;
   [SORT_ARTICLES_SLICE]?: SortArticlesSchema;
   [FILTER_ARTICLES_SLICE]?: FilterArticlesSchema;
+  [RECOMMENDED_ARTICLES_SLICE]?: RecommendedArticlesSchema;
 };
 
 export type StateSchemaKey = keyof StateSchema;

@@ -1,0 +1,9 @@
+.list {
+  display: flex;
+  align-items: center;
+  height: 300px;
+  flex-wrap: nowrap;
+  margin-top: 10px;
+  overflow: hidden;
+  overflow-x: auto;
+}

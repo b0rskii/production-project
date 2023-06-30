@@ -5,6 +5,7 @@ import {
 } from '5_entities/Article';
 import { getClassNames } from '6_shared/utils/classNames';
 import { useAppDispatch, useAsyncReducer } from '6_shared/utils/redux';
+import style from './ArticleDetailsBlock.module.scss';
 
 type ArticleDetailsBlockProps = PropsWithChildren<{
   className?: string;
@@ -28,7 +29,7 @@ export const ArticleDetailsBlock = memo((props: ArticleDetailsBlockProps) => {
   }, [dispatch, articleId]);
 
   return (
-    <section className={getClassNames('', {}, [className])}>
+    <section className={getClassNames(style.articleDetailsBlock, {}, [className])}>
       <ArticleDetails
         article={article}
         isLoading={isLoading}
