@@ -52,7 +52,7 @@ export const ArticlesBlock = (props: ArticlesBlockProps) => {
     }
   }, [dispatch]);
 
-  if (!isLoading && !error && !articles.length) {
+  if (!isInit && !isLoading && !error && !articles.length) {
     return (
       <section className={getClassNames(style.articlesBlock, {}, [className])}>
         <Text title={t('Статьи не найдены')} align="center" />

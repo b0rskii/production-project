@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { ButtonHTMLAttributes, memo } from 'react';
 import { getClassNames } from '6_shared/utils/classNames';
 import style from './Button.module.scss';
@@ -37,6 +38,7 @@ export const Button = memo((props: ButtonProps) => {
 
   return (
     <button
+      // eslint-disable-next-line react/jsx-props-no-spreading
       {...otherProps}
       // eslint-disable-next-line react/button-has-type
       type={type}

@@ -1,8 +1,14 @@
 .appLink {
   color: var(--primary-color);
+  cursor: pointer;
 
   &:hover {
     opacity: 0.8;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    pointer-events: none;
   }
 }
 
@@ -20,4 +26,12 @@
 
 .secondaryInverted {
   color: var(--inverted-secondary-color);
+}
+
+.outline {
+  padding: 6px 15px;
+  border-radius: 4px;
+  background: none;
+  border: 1px solid var(--primary-color);
+  text-decoration: none;
 }

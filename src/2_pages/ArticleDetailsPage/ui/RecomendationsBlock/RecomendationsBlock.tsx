@@ -44,6 +44,7 @@ export const RecomendationsBlock = memo((props: Props) => {
         isLoading={isLoading}
         error={error}
         skeletonsCount={limit}
+        target="_blank"
       />
     </section>
   );

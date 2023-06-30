@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { memo } from 'react';
 import { Link, LinkProps } from 'react-router-dom';
 import { getClassNames } from '6_shared/utils/classNames';
@@ -8,6 +9,7 @@ export enum AppLinkTheme {
   SECONDARY = 'secondary',
   PRIMARY_INVERTED = 'primaryInverted',
   SECONDARY_INVERTED = 'secondaryInverted',
+  OUTLINE = 'outline',
 }
 
 interface AppLinkProps extends LinkProps {
@@ -26,6 +28,7 @@ export const AppLink = memo((props: AppLinkProps) => {
 
   return (
     <Link
+      // eslint-disable-next-line react/jsx-props-no-spreading
       {...otherProps}
       className={getClassNames(style.appLink, {}, [className, style[theme]])}
       to={to}

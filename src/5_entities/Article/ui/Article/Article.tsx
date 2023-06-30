@@ -1,13 +1,12 @@
-import { PropsWithChildren, memo, useCallback } from 'react';
+import { HTMLAttributeAnchorTarget, PropsWithChildren, memo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
 import { getClassNames } from '6_shared/utils/classNames';
 import { RoutePath } from '6_shared/config/routing';
 import { Text } from '6_shared/ui/Text';
 import { Icon } from '6_shared/ui/Icon';
 import { Card } from '6_shared/ui/Card';
 import { Avatar } from '6_shared/ui/Avatar';
-import { Button, ButtonTheme } from '6_shared/ui/Button';
+import { AppLink, AppLinkTheme } from '6_shared/ui/AppLink';
 import { ListView } from '6_shared/ui/ListViewSwitcher';
 import EyeIcon from '6_shared/assets/icons/eye.svg';
 import {
@@ -20,13 +19,13 @@ type ArticleProps = PropsWithChildren<{
   className?: string;
   data: ArticleType;
   view: ListView;
+  target?: HTMLAttributeAnchorTarget;
 }>;
 
 export const Article = memo((props: ArticleProps) => {
-  const { className, data, view } = props;
+  const { className, data, view, target } = props;
   const { img, title, createdAt, type, views, user, blocks, id } = data;
   const { t } = useTranslation();
-  const navigate = useNavigate();
 
   const Types = <Text className={style.types} text={type.join(' ')} />;
   const Img = <img src={img} alt={title} />;
@@ -38,26 +37,27 @@ export const Article = memo((props: ArticleProps) => {
     </div>
   );
 
-  const articleClickHandler = useCallback(() => {
-    navigate(`${RoutePath.ARTICLE_DETAILS}${id}`);
-  }, [navigate, id]);
-
   if (view === 'tiles') {
     return (
-      <Card
-        className={getClassNames(style.tilesItem, {}, [className])}
-        onClick={articleClickHandler}
+      <AppLink
+        className={style.tileCardWrapper}
+        to={`${RoutePath.ARTICLE_DETAILS}${id}`}
+        target={target}
       >
-        <div className={style.imgWrapper}>
-          {Img}
-          <Text className={style.date} text={createdAt} />
-        </div>
-        <div className={style.infoWrapper}>
-          {Types}
-          {Views}
-        </div>
-        <Text className={style.title} text={title} />
-      </Card>
+        <Card
+          className={getClassNames(style.tilesItem, {}, [className])}
+        >
+          <div className={style.imgWrapper}>
+            {Img}
+            <Text className={style.date} text={createdAt} />
+          </div>
+          <div className={style.infoWrapper}>
+            {Types}
+            {Views}
+          </div>
+          <Text className={style.title} text={title} />
+        </Card>
+      </AppLink>
     );
   }
 
@@ -81,9 +81,9 @@ export const Article = memo((props: ArticleProps) => {
         <ArticleTextBlock className={style.previewText} content={previewTextBlock} />
       )}
       <div className={style.footer}>
-        <Button onClick={articleClickHandler} theme={ButtonTheme.OUTLINE}>
+        <AppLink to={`${RoutePath.ARTICLE_DETAILS}${id}`} theme={AppLinkTheme.OUTLINE}>
           {`${t('Читать далее')}...`}
-        </Button>
+        </AppLink>
         {Views}
       </div>
     </Card>

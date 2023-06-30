@@ -1,5 +1,5 @@
 /* eslint-disable react/no-array-index-key */
-import { PropsWithChildren, memo } from 'react';
+import { HTMLAttributeAnchorTarget, PropsWithChildren, memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { getClassNames } from '6_shared/utils/classNames';
 import { I18nNameSpace } from '6_shared/utils/i18n/nameSpace';
@@ -17,10 +17,11 @@ type ArticlesListProps = PropsWithChildren<{
   error: string | null;
   skeletonsCount: number;
   view?: ListView;
+  target?: HTMLAttributeAnchorTarget;
 }>;
 
 export const ArticlesList = memo((props: ArticlesListProps) => {
-  const { className, articles, isLoading, error, skeletonsCount, view = 'tiles' } = props;
+  const { className, articles, isLoading, error, skeletonsCount, target, view = 'tiles' } = props;
   const { t } = useTranslation([I18nNameSpace.Translation, I18nNameSpace.Article]);
 
   if (error) {
@@ -46,7 +47,12 @@ export const ArticlesList = memo((props: ArticlesListProps) => {
     <div className={getClassNames(style[view], {}, [className])}>
       {articles.length
         ? articles.map((article) => (
-          <Article data={article} view={view} key={article.id} />
+          <Article
+            data={article}
+            view={view}
+            target={target}
+            key={article.id}
+          />
         ))
         : null}
       {isLoading && getSkeletons()}
