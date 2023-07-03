@@ -5,7 +5,7 @@ import { mockArticle } from '../../model/mocks';
 import { Article } from './Article';
 
 export default {
-  title: '5_entities/Article',
+  title: '5_entities/Article/Article',
   component: Article,
   argTypes: {
     backgroundColor: { control: 'color' },

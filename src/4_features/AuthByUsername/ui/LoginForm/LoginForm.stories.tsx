@@ -5,7 +5,7 @@ import { Theme } from '6_shared/utils/theme';
 import LoginForm from './LoginForm';
 
 export default {
-  title: '4_features/LoginForm',
+  title: '4_features/AuthByUsername/LoginForm',
   component: LoginForm,
   argTypes: {
     backgroundColor: { control: 'color' },
@@ -15,6 +15,7 @@ export default {
   })],
 } as ComponentMeta<typeof LoginForm>;
 
+// eslint-disable-next-line react/jsx-props-no-spreading
 const Template: ComponentStory<typeof LoginForm> = (args) => <LoginForm {...args} />;
 
 export const Default = Template.bind({});

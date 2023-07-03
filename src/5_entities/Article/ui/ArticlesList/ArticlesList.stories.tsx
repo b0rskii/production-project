@@ -6,13 +6,14 @@ const tilesArticles = mockArticles(10);
 const listArticles = mockArticles(3);
 
 export default {
-  title: '5_entities/ArticlesList',
+  title: '5_entities/Article/ArticlesList',
   component: ArticlesList,
   argTypes: {
     backgroundColor: { control: 'color' },
   },
 } as ComponentMeta<typeof ArticlesList>;
 
+// eslint-disable-next-line react/jsx-props-no-spreading
 const Template: ComponentStory<typeof ArticlesList> = (args) => <ArticlesList {...args} />;
 
 export const TilesView = Template.bind({});

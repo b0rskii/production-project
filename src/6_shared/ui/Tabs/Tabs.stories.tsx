@@ -9,6 +9,14 @@ export default {
   argTypes: {
     backgroundColor: { control: 'color' },
   },
+  args: {
+    activeTab: 'Tab 1',
+    tabs: [
+      { value: 'Tab 1', content: 'Tab 1' },
+      { value: 'Tab 2', content: 'Tab 2' },
+      { value: 'Tab 3', content: 'Tab 3' },
+    ],
+  },
 } as ComponentMeta<typeof Tabs>;
 
 // eslint-disable-next-line react/jsx-props-no-spreading

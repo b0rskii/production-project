@@ -1,22 +1,18 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { StoreDecorator } from '6_shared/config/storybook/StoreDecorator';
 import { ThemeDecorator } from '6_shared/config/storybook/ThemeDecorator';
 import { Theme } from '6_shared/utils/theme';
-import { Header } from './Header';
+import { ArticlesSearch } from './ArticlesSearch';
 
 export default {
-  title: '2_pages/ArticleDetailsPage/Header',
-  component: Header,
+  title: '4_features/FilterArticles/ArticlesSearch',
+  component: ArticlesSearch,
   argTypes: {
     backgroundColor: { control: 'color' },
   },
-  decorators: [
-    StoreDecorator({}),
-  ],
-} as ComponentMeta<typeof Header>;
+} as ComponentMeta<typeof ArticlesSearch>;
 
 // eslint-disable-next-line react/jsx-props-no-spreading
-const Template: ComponentStory<typeof Header> = (args) => <Header {...args} />;
+const Template: ComponentStory<typeof ArticlesSearch> = (args) => <ArticlesSearch {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {};

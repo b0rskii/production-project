@@ -5,7 +5,7 @@ import { mockProfile } from '../../model/mocks';
 import { ProfileCard } from './ProfileCard';
 
 export default {
-  title: '5_entities/ProfileCard',
+  title: '5_entities/Profile/ProfileCard',
   component: ProfileCard,
   argTypes: {
     backgroundColor: { control: 'color' },
@@ -20,6 +20,7 @@ export default {
   },
 } as ComponentMeta<typeof ProfileCard>;
 
+// eslint-disable-next-line react/jsx-props-no-spreading
 const Template: ComponentStory<typeof ProfileCard> = (args) => <ProfileCard {...args} />;
 
 export const Default = Template.bind({});

@@ -11,6 +11,7 @@ export default {
   },
 } as ComponentMeta<typeof Text>;
 
+// eslint-disable-next-line react/jsx-props-no-spreading
 const Template: ComponentStory<typeof Text> = (args) => <Text {...args} />;
 
 export const Default = Template.bind({});
@@ -34,6 +35,13 @@ Error.args = {
   title: 'Title',
   text: 'text',
   theme: TextTheme.ERROR,
+};
+
+export const BgColor = Template.bind({});
+BgColor.args = {
+  title: 'Title',
+  text: 'text',
+  theme: TextTheme.BG_COLOR,
 };
 
 export const SizeL = Template.bind({});
@@ -69,6 +77,14 @@ ErrorDark.args = {
   theme: TextTheme.ERROR,
 };
 ErrorDark.decorators = [ThemeDecorator(Theme.DARK)];
+
+export const BgColorDark = Template.bind({});
+BgColorDark.args = {
+  title: 'Title',
+  text: 'text',
+  theme: TextTheme.BG_COLOR,
+};
+BgColorDark.decorators = [ThemeDecorator(Theme.DARK)];
 
 export const SizeLDark = Template.bind({});
 SizeLDark.args = {

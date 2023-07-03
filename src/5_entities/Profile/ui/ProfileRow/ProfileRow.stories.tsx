@@ -7,7 +7,7 @@ import { ProfileRow } from './ProfileRow';
 const VALUE = 'Вася';
 
 export default {
-  title: '5_entities/ProfileRow',
+  title: '5_entities/Profile/ProfileRow',
   component: ProfileRow,
   argTypes: {
     backgroundColor: { control: 'color' },
@@ -19,6 +19,7 @@ export default {
   },
 } as ComponentMeta<typeof ProfileRow>;
 
+// eslint-disable-next-line react/jsx-props-no-spreading
 const Template: ComponentStory<typeof ProfileRow> = (args) => <ProfileRow {...args} />;
 
 export const Readonly = Template.bind({});

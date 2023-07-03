@@ -5,7 +5,7 @@ import { Theme } from '6_shared/utils/theme';
 import { EditProfileButton } from './EditProfileButton';
 
 export default {
-  title: '4_features/EditProfileButton',
+  title: '4_features/EditProfile/EditProfileButton',
   component: EditProfileButton,
   argTypes: {
     backgroundColor: { control: 'color' },
@@ -13,6 +13,7 @@ export default {
   args: {},
 } as ComponentMeta<typeof EditProfileButton>;
 
+// eslint-disable-next-line react/jsx-props-no-spreading
 const Template: ComponentStory<typeof EditProfileButton> = (args) => <EditProfileButton {...args} />;
 
 export const Readonly = Template.bind({});

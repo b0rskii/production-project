@@ -9,7 +9,7 @@ import { LoginButton } from './LoginButton';
 const USER = mockUser();
 
 export default {
-  title: '4_features/LoginButton',
+  title: '4_features/AuthByUsername/LoginButton',
   component: LoginButton,
   argTypes: {
     backgroundColor: { control: 'color' },
@@ -19,6 +19,7 @@ export default {
   },
 } as ComponentMeta<typeof LoginButton>;
 
+// eslint-disable-next-line react/jsx-props-no-spreading
 const Template: ComponentStory<typeof LoginButton> = (args) => <LoginButton {...args} />;
 
 export const Default = Template.bind({});

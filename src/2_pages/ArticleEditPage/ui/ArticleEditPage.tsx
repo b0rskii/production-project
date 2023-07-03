@@ -11,7 +11,7 @@ function ArticleEditPage() {
 
   return (
     <Page>
-      <Text title={isEdit ? t('Редактирова') : t('Создать')} />
+      <Text title={isEdit ? t('Редактировать') : t('Создать')} />
     </Page>
   );
 }
