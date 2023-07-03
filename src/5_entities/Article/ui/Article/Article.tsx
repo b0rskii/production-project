@@ -41,7 +41,7 @@ export const Article = memo((props: ArticleProps) => {
     return (
       <AppLink
         className={style.tileCardWrapper}
-        to={`${RoutePath.ARTICLE_DETAILS}${id}`}
+        to={RoutePath.ARTICLE_DETAILS(id)}
         target={target}
       >
         <Card
@@ -81,7 +81,7 @@ export const Article = memo((props: ArticleProps) => {
         <ArticleTextBlock className={style.previewText} content={previewTextBlock} />
       )}
       <div className={style.footer}>
-        <AppLink to={`${RoutePath.ARTICLE_DETAILS}${id}`} theme={AppLinkTheme.OUTLINE}>
+        <AppLink to={RoutePath.ARTICLE_DETAILS(id)} theme={AppLinkTheme.OUTLINE}>
           {`${t('Читать далее')}...`}
         </AppLink>
         {Views}

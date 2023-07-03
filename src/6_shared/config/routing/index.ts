@@ -1,2 +1,2 @@
-export { RouteName, RoutePath } from './routing';
+export { RoutePath } from './routing';
 export { RequireAuth } from './ui/RequireAuth';

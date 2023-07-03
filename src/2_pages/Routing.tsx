@@ -9,6 +9,7 @@ import { MainPage } from './MainPage';
 import { ProfilePage } from './ProfilePage';
 import { ArticlesPage } from './ArticlesPage';
 import { ArticleDetailsPage } from './ArticleDetailsPage';
+import { ArticleEditPage } from './ArticleEditPage';
 import { NotFoundPage } from './NotFoundPage';
 
 type AppRouteProps = RouteProps & {
@@ -17,30 +18,35 @@ type AppRouteProps = RouteProps & {
 
 export const routes: AppRouteProps[] = [
   {
-    path: RoutePath.MAIN,
+    path: RoutePath.MAIN(),
     element: <MainPage />,
   },
   {
-    path: RoutePath.ABOUT,
+    path: RoutePath.ABOUT(),
     element: <AboutPage />,
   },
   {
-    path: `${RoutePath.PROFILES}:id`,
+    path: RoutePath.PROFILE(':id'),
     element: <ProfilePage />,
     authOnly: true,
   },
   {
-    path: RoutePath.ARTICLES,
+    path: RoutePath.ARTICLES(),
     element: <ArticlesPage />,
     authOnly: true,
   },
   {
-    path: `${RoutePath.ARTICLE_DETAILS}:id`,
+    path: RoutePath.ARTICLE_DETAILS(':id'),
     element: <ArticleDetailsPage />,
     authOnly: true,
   },
   {
-    path: RoutePath.NOT_FOUNT,
+    path: RoutePath.EDIT_ARTICLE(':id'),
+    element: <ArticleEditPage />,
+    authOnly: true,
+  },
+  {
+    path: RoutePath.NOT_FOUNT(),
     element: <NotFoundPage />,
   },
 ];

@@ -16,6 +16,7 @@ type SidebarProps = {
 export const Sidebar = memo((props: SidebarProps) => {
   const { className } = props;
   const [collapsed, setCollapsed] = useState(false);
+
   const userData = useSelector(userSelectors.getUserAuthData);
 
   const onToggleButtonClick = () => {

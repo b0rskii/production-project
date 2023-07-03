@@ -14,23 +14,23 @@ export type LinkItem = {
 
 export const getLinkItems = (userId?: string): LinkItem[] => [
   {
-    route: RoutePath.MAIN,
+    route: RoutePath.MAIN(),
     Icon: MainIcon,
     translationKey: 'На главную',
   },
   {
-    route: RoutePath.ABOUT,
+    route: RoutePath.ABOUT(),
     Icon: AboutIcon,
     translationKey: 'На страницу о нас',
   },
   {
-    route: `${RoutePath.PROFILES}${userId}`,
+    route: RoutePath.PROFILE(userId as string),
     Icon: ProfileIcon,
     translationKey: 'На страницу профиля',
     authOnly: true,
   },
   {
-    route: RoutePath.ARTICLES,
+    route: RoutePath.ARTICLES(),
     Icon: ArticleIcon,
     translationKey: 'На страницу списка статей',
     authOnly: true,

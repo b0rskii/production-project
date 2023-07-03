@@ -9,7 +9,7 @@ type RequireAuthProps = {
 export const RequireAuth = ({ isAuth, children }: RequireAuthProps) => {
   if (!isAuth) {
     return (
-      <Navigate to={RoutePath.MAIN} replace />
+      <Navigate to={RoutePath.MAIN()} replace />
     );
   }
 

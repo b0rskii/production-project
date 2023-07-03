@@ -1,17 +1,10 @@
-export enum RouteName {
-  MAIN = 'MAIN',
-  ABOUT = 'ABOUT',
-  PROFILE = 'PROFILES',
-  ARTICLES = 'ARTICLES',
-  ARTICLE_DETAILS = 'ARTICLE_DETAILS',
-  NOT_FOUNT = 'NOT_FOUNT',
-}
-
-export const RoutePath: Record<RouteName, string> = {
-  [RouteName.MAIN]: '/',
-  [RouteName.ABOUT]: '/about',
-  [RouteName.PROFILE]: '/profiles/',
-  [RouteName.ARTICLES]: '/articles',
-  [RouteName.ARTICLE_DETAILS]: '/articles/',
-  [RouteName.NOT_FOUNT]: '*',
+export const RoutePath = {
+  MAIN: () => '/',
+  ABOUT: () => '/about',
+  PROFILE: (id: string) => `/profiles/${id}`,
+  ARTICLES: () => '/articles',
+  ARTICLE_DETAILS: (id: string) => `/articles/${id}`,
+  CREATE_ARTICLE: () => '/articles/new',
+  EDIT_ARTICLE: (id: string) => `/articles/${id}/edit`,
+  NOT_FOUNT: () => '*',
 };
