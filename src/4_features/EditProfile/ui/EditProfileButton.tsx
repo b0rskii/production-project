@@ -53,7 +53,7 @@ export const EditProfileButton = memo((props: EditProfileProps) => {
         theme={ButtonTheme.OUTLINE}
         onClick={editButtonClickHandler}
       >
-        {t('Редактировать')}
+        {t('Редактировать', { ns: I18nNameSpace.Translation })}
       </Button>
     );
   }
