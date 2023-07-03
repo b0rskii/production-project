@@ -5,14 +5,16 @@ import { userSelectors, userActions } from '5_entities/User';
 import { Button, ButtonTheme } from '6_shared/ui/Button';
 import { useAppDispatch } from '6_shared/utils/redux';
 import { LocalStorageKey } from '6_shared/const/localStorage';
+import { getClassNames } from '6_shared/utils/classNames';
 import { LoginModal } from '../LoginModal/LoginModal';
 
 type LoginButtonProps = {
+  className?: string;
   theme?: ButtonTheme;
 };
 
 export const LoginButton = memo((props: LoginButtonProps) => {
-  const { theme = ButtonTheme.DEFAULT } = props;
+  const { className, theme = ButtonTheme.DEFAULT } = props;
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const [isAuthModalOpened, setIsAuthModalOpened] = useState(false);
@@ -35,6 +37,7 @@ export const LoginButton = memo((props: LoginButtonProps) => {
     <>
       {userAuthData ? (
         <Button
+          className={getClassNames('', {}, [className])}
           theme={theme}
           onClick={logoutButtonClickHandler}
         >
@@ -42,6 +45,7 @@ export const LoginButton = memo((props: LoginButtonProps) => {
         </Button>
       ) : (
         <Button
+          className={getClassNames('', {}, [className])}
           theme={theme}
           onClick={loginButtonClickHandler}
         >

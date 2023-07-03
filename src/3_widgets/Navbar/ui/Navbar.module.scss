@@ -8,8 +8,20 @@
   background: var(--inverted-bg-color);
 }
 
+.logo {
+  width: var(--sidebar-width);
+}
+
 .links {
   display: flex;
   align-items: center;
   gap: 15px;
+
+  a {
+    text-decoration: none;
+  }
+}
+
+.loginButton {
+  margin-left: auto;
 }

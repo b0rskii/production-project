@@ -1,13 +1,17 @@
 import { useTranslation } from 'react-i18next';
+import { useParams } from 'react-router-dom';
 import { Page } from '3_widgets/Page';
-import { I18nNameSpace } from '6_shared/utils/i18n/nameSpace';
+import { Text } from '6_shared/ui/Text';
 
 function ArticleEditPage() {
-  const { t } = useTranslation(I18nNameSpace.Article);
+  const { t } = useTranslation();
+  const { id } = useParams();
+
+  const isEdit = Boolean(id);
 
   return (
     <Page>
-      {t('Страница редактирования статьи')}
+      <Text title={isEdit ? t('Редактирова') : t('Создать')} />
     </Page>
   );
 }

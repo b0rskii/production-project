@@ -16,6 +16,16 @@
   }
 }
 
+.bgColor {
+  .title {
+    color: var(--bg-color);
+  }
+
+  .text {
+    color: var(--bg-color);
+  }
+}
+
 .start {
   text-align: start;
 }

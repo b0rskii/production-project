@@ -46,6 +46,11 @@ export const routes: AppRouteProps[] = [
     authOnly: true,
   },
   {
+    path: RoutePath.CREATE_ARTICLE(),
+    element: <ArticleEditPage />,
+    authOnly: true,
+  },
+  {
     path: RoutePath.NOT_FOUNT(),
     element: <NotFoundPage />,
   },

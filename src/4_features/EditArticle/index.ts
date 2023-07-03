@@ -4,3 +4,4 @@ export {
   editArticleReducer,
 } from './model/slice/editArticleSlice';
 export { EditArticleButton } from './ui/EditArticleButton';
+export { CreateArticleButton } from './ui/CreateArticleButton';
