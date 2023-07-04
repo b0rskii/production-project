@@ -8,7 +8,6 @@ import { RoutePath } from '6_shared/config/routing';
 import { AppLink, AppLinkTheme } from '6_shared/ui/AppLink';
 import { SLICE_NAME, editArticleReducer } from '../../model/slice/editArticleSlice';
 import { editArticleSelectors } from '../../model/selectors';
-import style from './EditArticleButton.module.scss';
 
 type Props = PropsWithChildren<{
   className?: string;
@@ -29,7 +28,7 @@ export const EditArticleButton = memo((props: Props) => {
 
   return (
     <AppLink
-      className={getClassNames(style.editArticleButton, {}, [className])}
+      className={getClassNames('', {}, [className])}
       theme={AppLinkTheme.OUTLINE}
       to={RoutePath.EDIT_ARTICLE(id as string)}
     >
