@@ -24,9 +24,7 @@ export const SLICE_NAME = 'recommendedArticles';
 export const recommendedArticlesSlice = createSlice({
   name: SLICE_NAME,
   initialState,
-  reducers: {
-
-  },
+  reducers: {},
   extraReducers(builder) {
     builder
       .addCase(fetchRecommendedArticles.pending, (state) => {
