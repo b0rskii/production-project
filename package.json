@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build:prod": "webpack --env mode=production",
+    "build:prod": "webpack --env mode=production apiUrl=https://production-project-server-umber.vercel.app",
     "build:dev": "webpack --env mode=development",
     "analyze:dev": "webpack --env mode=development isAnalyze=1",
     "start": "webpack serve --env port=3001",
