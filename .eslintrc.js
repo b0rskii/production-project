@@ -21,6 +21,7 @@ module.exports = {
     '@typescript-eslint',
     'i18next',
     'react-hooks',
+    'borskii-fsd',
   ],
   rules: {
     'react/jsx-indent': [2, 2],
@@ -54,6 +55,7 @@ module.exports = {
     'no-param-reassign': 'off',
     'object-curly-newline': 'off',
     'no-undef': 'off',
+    'borskii-fsd/check-path': 'error',
   },
   globals: {
     __IS_DEV__: true,
