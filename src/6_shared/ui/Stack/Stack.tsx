@@ -4,11 +4,11 @@ import style from './Stack.module.scss';
 
 type Props = PropsWithChildren<{
   className?: string;
-  Tag: 'div' | 'section';
-  mode: 'v' | 'h';
-  justify: 'start' | 'center' | 'space-between' | 'end';
-  align: 'start' | 'center' | 'end';
-  gap: 's' | 'm' | 'l' | 'xl';
+  Tag?: 'div' | 'section' | 'header' | 'nav';
+  mode?: 'v' | 'h';
+  justify?: 'start' | 'center' | 'space-between' | 'end';
+  align?: 'start' | 'center' | 'end';
+  gap?: 's' | 'm' | 'l' | 'xl';
 }>;
 
 export const Stack = (props: Props) => {

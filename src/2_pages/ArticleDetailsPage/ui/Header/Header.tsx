@@ -3,10 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { EditArticleButton } from '4_features/EditArticle';
 import { I18nNameSpace } from '6_shared/utils/i18n/nameSpace';
-import { getClassNames } from '6_shared/utils/classNames';
 import { RoutePath } from '6_shared/config/routing';
 import { Button, ButtonTheme } from '6_shared/ui/Button';
-import style from './Header.module.scss';
+import { Stack } from '6_shared/ui/Stack';
 
 type Props = PropsWithChildren<{
   className?: string;
@@ -22,7 +21,7 @@ export const Header = memo((props: Props) => {
   }, [navigate]);
 
   return (
-    <section className={getClassNames(style.header, {}, [className])}>
+    <Stack Tag="section" justify="space-between" className={className}>
       <Button
         theme={ButtonTheme.OUTLINE}
         onClick={toArticlesListButtonHandler}
@@ -30,6 +29,6 @@ export const Header = memo((props: Props) => {
         {t('К списку статей')}
       </Button>
       <EditArticleButton />
-    </section>
+    </Stack>
   );
 });

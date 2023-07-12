@@ -6,6 +6,7 @@ import { userSelectors } from '5_entities/User';
 import { ButtonTheme } from '6_shared/ui/Button';
 import { getClassNames } from '6_shared/utils/classNames';
 import { Text, TextTheme } from '6_shared/ui/Text';
+import { Stack } from '6_shared/ui/Stack';
 import style from './Navbar.module.scss';
 
 type NavbarProps = {
@@ -20,17 +21,21 @@ export const Navbar = memo((props: NavbarProps) => {
   const getNavigation = () => {
     if (userData) {
       return (
-        <nav className={style.links}>
+        <Stack className={style.links} Tag="nav" gap="l">
           <CreateArticleButton />
-        </nav>
+        </Stack>
       );
     }
 
-    return <nav className={style.links} />;
+    return <Stack className={style.links} Tag="nav" gap="l" />;
   };
 
   return (
-    <header className={getClassNames(style.navbar, {}, [className])}>
+    <Stack
+      className={getClassNames(style.navbar, {}, [className])}
+      Tag="header"
+      justify="space-between"
+    >
       {/* eslint-disable i18next/no-literal-string */}
       <Text
         className={style.logo}
@@ -39,6 +44,6 @@ export const Navbar = memo((props: NavbarProps) => {
       />
       {getNavigation()}
       <LoginButton className={style.loginButton} theme={ButtonTheme.OUTLINE_INVERTED} />
-    </header>
+    </Stack>
   );
 });

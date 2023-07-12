@@ -1,7 +1,4 @@
 .navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   padding: 20px;
   width: 100%;
   height: var(--navbar-height);
@@ -13,10 +10,6 @@
 }
 
 .links {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-
   a {
     text-decoration: none;
   }
