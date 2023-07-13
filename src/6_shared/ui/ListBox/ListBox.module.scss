@@ -1,0 +1,17 @@
+.listBox {
+  position: relative;
+}
+
+.options {
+  position: absolute;
+  background: var(--listbox-bg);
+  border-radius: 8px;
+}
+
+.item {
+  padding: 5px 10px;
+}
+
+.active {
+  background: var(--card-bg);
+}
