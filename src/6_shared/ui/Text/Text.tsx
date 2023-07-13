@@ -19,6 +19,7 @@ type TextProps = {
   theme?: TextTheme;
   align?: TextAlign;
   size?: TextSize;
+  TitleTag?: 'h1' | 'h2' | 'h3' | 'p';
 };
 
 export const Text = memo((props: TextProps) => {
@@ -29,6 +30,7 @@ export const Text = memo((props: TextProps) => {
     theme = TextTheme.DEFAULT,
     align = 'left',
     size = 'm',
+    TitleTag = 'h2',
   } = props;
 
   return (
@@ -38,7 +40,7 @@ export const Text = memo((props: TextProps) => {
       [className, style[theme], style[align], style[`size_${size}`]],
     )}
     >
-      {title && <p className={style.title}>{title}</p>}
+      {title && <TitleTag className={style.title}>{title}</TitleTag>}
       {text && <p className={style.text}>{text}</p>}
     </div>
   );

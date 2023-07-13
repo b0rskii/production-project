@@ -48,7 +48,7 @@ export const ArticleCommentsBlock = memo((props: ArticleCommentsBlockProps) => {
 
   return (
     <section className={getClassNames('', {}, [className])}>
-      <Text title={t('Комментарии')} />
+      <Text title={t('Комментарии')} TitleTag="h3" />
       <AddCommentForm onSendComment={sendCommentHandler} />
       <CommentCardsList
         comments={comments}

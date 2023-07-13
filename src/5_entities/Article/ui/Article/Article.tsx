@@ -72,7 +72,7 @@ export const Article = memo((props: ArticleProps) => {
         <Text text={user.username} />
         <Text className={style.date} text={createdAt} />
       </div>
-      <Text className={style.title} title={title} />
+      <Text className={style.title} title={title} TitleTag="h3" />
       {Types}
       <div className={style.imgWrapper}>
         {Img}

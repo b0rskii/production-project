@@ -14,7 +14,10 @@ export const ArticleTextBlock = memo((props: ArticleTextBlockProps) => {
 
   return (
     <div className={getClassNames('', {}, [className])}>
-      {content.title && <Text className={style.title} title={content.title} />}
+      {content.title && (
+        <Text className={style.title} title={content.title} TitleTag="h3" />
+      )}
+
       {content.paragraphs.map((paragraph) => (
         <Text
           className={style.paragraph}

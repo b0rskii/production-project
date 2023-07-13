@@ -37,7 +37,7 @@ export const RecomendationsBlock = memo((props: Props) => {
 
   return (
     <section className={getClassNames('', {}, [className])}>
-      <Text title={t('Рекомендуем')} />
+      <Text title={t('Рекомендуем')} TitleTag="h3" />
       <ArticlesList
         className={style.list}
         articles={articles}

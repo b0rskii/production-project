@@ -49,7 +49,7 @@ export const CommentCardsList = memo((props: CommentCardsListProps) => {
             key={comment.id}
           />
         ))
-        : <Text title={t('Комментариев нет')} />}
+        : <Text title={t('Комментариев нет')} TitleTag="p" />}
     </div>
   );
 });
