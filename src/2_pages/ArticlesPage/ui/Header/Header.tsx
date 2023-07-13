@@ -22,7 +22,6 @@ import { getClassNames } from '6_shared/utils/classNames';
 import { useAppDispatch, useAsyncReducer } from '6_shared/utils/redux';
 import { useDebounce } from '6_shared/utils/debounce';
 import { ListView, ListViewSwitcher } from '6_shared/ui/ListViewSwitcher';
-import { Stack } from '6_shared/ui/Stack';
 import style from './Header.module.scss';
 
 const DEBOUNCE_DELAY = 500;
@@ -84,7 +83,7 @@ export const Header = memo((props: HeaderProps) => {
 
   return (
     <section className={getClassNames('', {}, [className])}>
-      <Stack className={style.row} justify="space-between" gap="m">
+      <div className={style.row}>
         <ArticlesSorting
           type={sortingType}
           order={sortingOrder}
@@ -100,7 +99,7 @@ export const Header = memo((props: HeaderProps) => {
           activeControl={articleView}
           onControlClick={onViewControlClick}
         />
-      </Stack>
+      </div>
       <div className={style.row}>
         <ArticlesFilterTabs />
       </div>

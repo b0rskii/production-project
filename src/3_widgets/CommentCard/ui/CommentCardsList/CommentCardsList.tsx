@@ -4,7 +4,6 @@ import { getClassNames } from '6_shared/utils/classNames';
 import { Text, TextTheme } from '6_shared/ui/Text';
 import { Loader } from '6_shared/ui/Loader';
 import { Comment } from '6_shared/types/comment';
-import { Stack } from '6_shared/ui/Stack';
 import { CommentCard } from '../CommentCard';
 import style from './CommentCardsList.module.scss';
 
@@ -21,22 +20,22 @@ export const CommentCardsList = memo((props: CommentCardsListProps) => {
 
   if (isLoading) {
     return (
-      <Stack className={className} justify="center">
+      <div className={getClassNames('', {}, [className, style.loading])}>
         <Loader />
-      </Stack>
+      </div>
     );
   }
 
   if (error) {
     return (
-      <Stack className={className} justify="center">
+      <div className={getClassNames(style.profileCard, {}, [className, style.error])}>
         <Text
           title={t('При загрузке комментариев произошла ошибка')}
           text={t('Попробуйте обновить страницу')}
           theme={TextTheme.ERROR}
           align="center"
         />
-      </Stack>
+      </div>
     );
   }
 

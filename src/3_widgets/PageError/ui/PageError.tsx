@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { getClassNames } from '6_shared/utils/classNames/getClassNames';
 import { Button, ButtonTheme } from '6_shared/ui/Button';
-import { Stack } from '6_shared/ui/Stack';
 import style from './PageError.module.scss';
 
 type PageErrorProps = {
@@ -20,12 +19,7 @@ export const PageError: FC<PageErrorProps> = (props) => {
   };
 
   return (
-    <Stack
-      className={getClassNames(style.pageError, {}, [className])}
-      mode="v"
-      justify="center"
-      gap="l"
-    >
+    <div className={getClassNames(style.pageError, {}, [className])}>
       <p>{t('Произошла непредвиденная ошибка')}</p>
       <Button
         onClick={onRefreshButtonClick}
@@ -33,6 +27,6 @@ export const PageError: FC<PageErrorProps> = (props) => {
       >
         {t('Обновить страницу')}
       </Button>
-    </Stack>
+    </div>
   );
 };
