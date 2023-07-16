@@ -2,10 +2,17 @@
   position: relative;
 }
 
+.button {
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+
 .options {
   position: absolute;
+  min-width: 100%;
   background: var(--listbox-bg);
   border-radius: 8px;
+  z-index: 10000;
 }
 
 .item {
@@ -14,4 +21,8 @@
 
 .active {
   background: var(--card-bg);
+}
+
+.disabled {
+  opacity: 0.5;
 }

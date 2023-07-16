@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { memo, PropsWithChildren, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Country, CountrySelect } from '5_entities/Country';
@@ -16,8 +17,8 @@ import style from './ProfileCard.module.scss';
 export type ProfileHandlers = {
   onInputChange?: (value: string, name?: string) => void,
   onAgeChange?: (value: string) => void;
-  onCountryChange?: (value: Country) => void;
-  onCurrencyChange?: (value: Currency) => void;
+  onCountryChange: (value: Country) => void;
+  onCurrencyChange: (value: Currency) => void;
 };
 
 type ProfileProps = PropsWithChildren<{

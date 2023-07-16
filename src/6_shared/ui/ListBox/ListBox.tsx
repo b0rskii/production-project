@@ -29,7 +29,12 @@ export const ListBox = memo((props: Props) => {
       onChange={onChange}
     >
       <Listbox.Button as="div">
-        <Button theme={ButtonTheme.OUTLINE}>{selected}</Button>
+        <Button
+          className={style.button}
+          theme={ButtonTheme.OUTLINE}
+        >
+          {selected}
+        </Button>
       </Listbox.Button>
       <Listbox.Options className={style.options}>
         {items.map(({ value, content, disabled }) => (
@@ -39,11 +44,18 @@ export const ListBox = memo((props: Props) => {
             value={value}
             disabled={disabled}
           >
-            {({ active }) => (
-              <li className={getClassNames(style.item, { [style.active]: active }, [])}>
-                {content}
-              </li>
-            )}
+            {({ active }) => {
+              const modes = {
+                [style.active]: active,
+                [style.disabled]: disabled,
+              };
+
+              return (
+                <li className={getClassNames(style.item, modes, [])}>
+                  {content}
+                </li>
+              );
+            }}
           </Listbox.Option>
         ))}
       </Listbox.Options>
