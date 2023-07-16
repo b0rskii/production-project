@@ -8,7 +8,7 @@ import { ProfileBlock } from './ProfileBlock';
 const USER_DATA = mockUser();
 
 export default {
-  title: '3_widgets/ProfileBlock',
+  title: '2_pages/ProfilePage/ProfileBlock',
   component: ProfileBlock,
   argTypes: {
     backgroundColor: { control: 'color' },

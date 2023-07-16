@@ -1,5 +1,5 @@
-import { ProfileBlock } from '3_widgets/ProfileBlock';
 import { Page } from '3_widgets/Page';
+import { ProfileBlock } from './ProfileBlock';
 
 function ProfilePage() {
   return (
