@@ -13,12 +13,13 @@ const currencies: SelectOption<Currency>[] = Object.values(Currency)
 type CurrencySelectProps = PropsWithChildren<{
   className?: string;
   value?: Currency;
+  disabled?: boolean;
   // eslint-disable-next-line no-unused-vars
   onChange: (value: Currency) => void;
 }>;
 
 export const CurrencySelect = memo((props: CurrencySelectProps) => {
-  const { className, value, onChange } = props;
+  const { className, value, disabled, onChange } = props;
 
   const changeHandler = (value: string) => {
     onChange(value as Currency);
@@ -29,6 +30,7 @@ export const CurrencySelect = memo((props: CurrencySelectProps) => {
       className={getClassNames('', {}, [className])}
       items={currencies}
       selected={value ?? currencies[0].value}
+      disabled={disabled}
       onChange={changeHandler}
     />
   );

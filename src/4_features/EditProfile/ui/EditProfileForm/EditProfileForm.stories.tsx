@@ -1,25 +1,18 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { ThemeDecorator } from '6_shared/config/storybook/ThemeDecorator';
-import { Input } from '6_shared/ui/Input';
 import { Theme } from '6_shared/utils/theme';
-import { ProfileRow } from './ProfileRow';
-
-const VALUE = 'Вася';
+import { EditProfileForm } from './EditProfileForm';
 
 export default {
-  title: '5_entities/Profile/ProfileRow',
-  component: ProfileRow,
+  title: '4_features/EditProfile/EditProfileForm',
+  component: EditProfileForm,
   argTypes: {
     backgroundColor: { control: 'color' },
   },
-  args: {
-    name: 'Имя',
-    children: <Input value={VALUE} />,
-  },
-} as ComponentMeta<typeof ProfileRow>;
+} as ComponentMeta<typeof EditProfileForm>;
 
 // eslint-disable-next-line react/jsx-props-no-spreading
-const Template: ComponentStory<typeof ProfileRow> = (args) => <ProfileRow {...args} />;
+const Template: ComponentStory<typeof EditProfileForm> = (args) => <EditProfileForm {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {};

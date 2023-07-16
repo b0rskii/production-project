@@ -5,7 +5,9 @@ import { useParams } from 'react-router-dom';
 import {
   editProfileActions,
   EditProfileButton,
+  EditProfileForm,
   editProfileSelectors,
+  ProfileHandlers,
   ValidateProfileError,
 } from '4_features/EditProfile';
 import {
@@ -14,7 +16,6 @@ import {
   profileReducer,
   fetchProfileData,
   profileSelectors,
-  ProfileHandlers,
 } from '5_entities/Profile';
 import { Country } from '5_entities/Country';
 import { Currency } from '5_entities/Currency';
@@ -55,6 +56,10 @@ export const ProfileBlock = (props: ProfileBlockProps) => {
     [ValidateProfileError.NO_DATA]: t('Нет данных'),
   } as const;
 
+  // useEffect(() => {
+  //   console.timeEnd();
+  // });
+
   useEffect(() => {
     if (!id || __PROJECT__ === 'storybook') {
       return;
@@ -66,6 +71,7 @@ export const ProfileBlock = (props: ProfileBlockProps) => {
   }, [dispatch, id, profile?.id]);
 
   const onInputChange = useCallback((value: string, name?: string) => {
+    // console.time();
     if (!name) {
       return;
     }
@@ -114,14 +120,21 @@ export const ProfileBlock = (props: ProfileBlockProps) => {
         <Text text={ValidateErrorTranslation[error]} theme={TextTheme.ERROR} key={error} />
       ))}
 
-      <ProfileCard
-        profile={profile}
-        profileForm={profileForm}
-        isLoading={isLoading || isUpdating}
-        error={error}
-        isReadonly={isReadonly}
-        handlers={profileHandlers}
-      />
+      {isReadonly && (
+        <ProfileCard
+          profile={profile}
+          isLoading={isLoading}
+          error={error}
+        />
+      )}
+      {!isReadonly && (
+        <EditProfileForm
+          profile={profile}
+          profileForm={profileForm}
+          isUpdating={isUpdating}
+          handlers={profileHandlers}
+        />
+      )}
     </section>
   );
 };

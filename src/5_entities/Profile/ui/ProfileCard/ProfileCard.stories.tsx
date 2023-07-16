@@ -10,14 +10,6 @@ export default {
   argTypes: {
     backgroundColor: { control: 'color' },
   },
-  args: {
-    handlers: {
-      onAgeChange: () => {},
-      onCountryChange: () => {},
-      onCurrencyChange: () => {},
-      onInputChange: () => {},
-    },
-  },
 } as ComponentMeta<typeof ProfileCard>;
 
 // eslint-disable-next-line react/jsx-props-no-spreading
@@ -26,7 +18,6 @@ const Template: ComponentStory<typeof ProfileCard> = (args) => <ProfileCard {...
 export const Default = Template.bind({});
 Default.args = {
   profile: mockProfile,
-  isReadonly: true,
 };
 
 export const Loading = Template.bind({});
@@ -47,7 +38,6 @@ Empty.args = {
 export const DefaultDark = Template.bind({});
 DefaultDark.args = {
   profile: mockProfile,
-  isReadonly: true,
 };
 DefaultDark.decorators = [ThemeDecorator(Theme.DARK)];
 

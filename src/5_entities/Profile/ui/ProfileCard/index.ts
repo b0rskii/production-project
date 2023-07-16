@@ -1,1 +1,1 @@
-export { ProfileCard, ProfileHandlers } from './ProfileCard';
+export { ProfileCard } from './ProfileCard';

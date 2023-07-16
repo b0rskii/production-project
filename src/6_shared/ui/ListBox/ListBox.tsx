@@ -14,16 +14,18 @@ type Props = PropsWithChildren<{
   className?: string;
   items: ListBoxItem[];
   selected: string;
+  disabled?: boolean;
   // eslint-disable-next-line no-unused-vars
   onChange: (selected: string) => void
 }>;
 
 export const ListBox = memo((props: Props) => {
-  const { className, items, selected, onChange } = props;
+  const { className, items, selected, disabled, onChange } = props;
 
   return (
     <Listbox
       as="div"
+      disabled={disabled}
       className={getClassNames(style.listBox, {}, [className])}
       value={selected}
       onChange={onChange}

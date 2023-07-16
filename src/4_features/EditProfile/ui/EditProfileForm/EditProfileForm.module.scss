@@ -1,0 +1,18 @@
+.editProfileForm {
+  padding: 20px;
+  border: 2px solid var(--primary-color);
+
+  &.updating {
+    opacity: 0.5;
+  }
+}
+
+.data {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.input {
+  min-width: 200px;
+}

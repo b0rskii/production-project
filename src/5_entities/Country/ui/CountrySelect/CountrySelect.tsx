@@ -13,12 +13,13 @@ const countries: SelectOption<Country>[] = Object.values(Country)
 type CountrySelectProps = PropsWithChildren<{
   className?: string;
   value?: Country;
+  disabled?: boolean;
   // eslint-disable-next-line no-unused-vars
   onChange: (value: Country) => void;
 }>;
 
 export const CountrySelect = memo((props: CountrySelectProps) => {
-  const { className, value, onChange } = props;
+  const { className, value, disabled, onChange } = props;
 
   const changeHandler = (value: string) => {
     onChange(value as Country);
@@ -29,6 +30,7 @@ export const CountrySelect = memo((props: CountrySelectProps) => {
       className={getClassNames('', {}, [className])}
       items={countries}
       selected={value ?? countries[0].value}
+      disabled={disabled}
       onChange={changeHandler}
     />
   );

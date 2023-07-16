@@ -2,5 +2,6 @@ export { profileActions, profileReducer, NAME as PROFILE_SLICE } from './model/s
 export { Profile, ProfileSchema } from './model/types/profileSchema';
 export { fetchProfileData } from './model/services/fetchProfileData/fetchProfileData';
 export { profileSelectors } from './model/selectors';
-export { ProfileCard, ProfileHandlers } from './ui/ProfileCard';
+export { ProfileCard } from './ui/ProfileCard';
+export { ProfileRow } from './ui/ProfileRow';
 export { mockProfile } from './model/mocks';
