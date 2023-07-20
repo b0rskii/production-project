@@ -42,7 +42,6 @@ export const ProfileBlock = (props: ProfileBlockProps) => {
   const isLoading = useSelector(profileSelectors.getIsLoading);
   const error = useSelector(profileSelectors.getError);
 
-  const profileForm = useSelector(editProfileSelectors.getProfileForm);
   const isReadonly = useSelector(editProfileSelectors.getIsReadonly);
   const isUpdating = useSelector(editProfileSelectors.getIsLoading);
   const validateErrors = useSelector(editProfileSelectors.getValidateErrors);
@@ -56,10 +55,6 @@ export const ProfileBlock = (props: ProfileBlockProps) => {
     [ValidateProfileError.NO_DATA]: t('Нет данных'),
   } as const;
 
-  // useEffect(() => {
-  //   console.timeEnd();
-  // });
-
   useEffect(() => {
     if (!id || __PROJECT__ === 'storybook') {
       return;
@@ -71,7 +66,6 @@ export const ProfileBlock = (props: ProfileBlockProps) => {
   }, [dispatch, id, profile?.id]);
 
   const onInputChange = useCallback((value: string, name?: string) => {
-    // console.time();
     if (!name) {
       return;
     }
@@ -130,7 +124,6 @@ export const ProfileBlock = (props: ProfileBlockProps) => {
       {!isReadonly && (
         <EditProfileForm
           profile={profile}
-          profileForm={profileForm}
           isUpdating={isUpdating}
           handlers={profileHandlers}
         />

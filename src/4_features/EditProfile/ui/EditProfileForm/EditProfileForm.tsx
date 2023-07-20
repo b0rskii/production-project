@@ -1,13 +1,11 @@
 /* eslint-disable no-unused-vars */
 import { memo, PropsWithChildren, useMemo } from 'react';
-import { useTranslation } from 'react-i18next';
 import { Profile, ProfileContent } from '5_entities/Profile';
 import { Country, CountrySelect } from '5_entities/Country';
 import { Currency, CurrencySelect } from '5_entities/Currency';
-import { Input } from '6_shared/ui/Input';
+import { Field } from '6_shared/ui/Field';
 import { getClassNames } from '6_shared/utils/classNames';
 import { getKeysMap } from '6_shared/utils/getKeysMap';
-import { I18nNameSpace } from '6_shared/utils/i18n/nameSpace';
 import style from './EditProfileForm.module.scss';
 
 export type ProfileHandlers = {
@@ -20,7 +18,6 @@ export type ProfileHandlers = {
 type ProfileProps = PropsWithChildren<{
   className?: string;
   profile: Profile | null;
-  profileForm: Profile | null;
   isUpdating: boolean;
   handlers: ProfileHandlers;
 }>;
@@ -29,7 +26,6 @@ export const EditProfileForm = memo((props: ProfileProps) => {
   const {
     className,
     profile,
-    profileForm,
     isUpdating,
     handlers,
   } = props;
@@ -40,8 +36,6 @@ export const EditProfileForm = memo((props: ProfileProps) => {
     onCountryChange,
     onCurrencyChange,
   } = handlers;
-
-  const { t } = useTranslation([I18nNameSpace.Translation, I18nNameSpace.Profile]);
 
   const profileMap = useMemo(() => {
     if (!profile) {
@@ -62,75 +56,69 @@ export const EditProfileForm = memo((props: ProfileProps) => {
       <ProfileContent
         avatar={profile?.avatar}
         Firstname={(
-          <Input
+          <Field
             className={style.input}
-            value={profileForm?.firstname}
+            initialValue={profile?.firstname}
             onChange={onInputChange}
-            size={profileForm?.firstname?.length}
             name={profileMap?.firstname}
             disabled={isUpdating}
           />
         )}
         Lastname={(
-          <Input
+          <Field
             className={style.input}
-            value={profileForm?.lastname}
+            initialValue={profile?.lastname}
             onChange={onInputChange}
-            size={profileForm?.lastname?.length}
             name={profileMap?.lastname}
             disabled={isUpdating}
           />
         )}
         Username={(
-          <Input
+          <Field
             className={style.input}
-            value={profileForm?.username}
+            initialValue={profile?.username}
             onChange={onInputChange}
-            size={profileForm?.username?.length}
             name={profileMap?.username}
             disabled={isUpdating}
           />
         )}
         Age={(
-          <Input
+          <Field
             className={style.input}
-            value={profileForm?.age}
+            initialValue={profile?.age}
             onChange={onAgeChange}
-            size={String(profileForm?.age).length}
             type="number"
             disabled={isUpdating}
           />
         )}
         City={(
-          <Input
+          <Field
             className={style.input}
-            value={profileForm?.city}
+            initialValue={profile?.city}
             onChange={onInputChange}
-            size={profileForm?.city?.length}
             name={profileMap?.city}
             disabled={isUpdating}
           />
         )}
         Country={(
           <CountrySelect
-            value={profileForm?.country}
+            initialValue={profile?.country}
             onChange={onCountryChange}
             disabled={isUpdating}
           />
         )}
         Currency={(
           <CurrencySelect
-            value={profileForm?.currency}
+            initialValue={profile?.currency}
             onChange={onCurrencyChange}
             disabled={isUpdating}
           />
         )}
         AvatarNode={(
-          <Input
+          <Field
             className={style.input}
-            value={profileForm?.avatar}
+            initialValue={profile?.avatar}
             onChange={onInputChange}
-            size={profileForm?.avatar?.length}
             name={profileMap?.avatar}
             disabled={isUpdating}
           />

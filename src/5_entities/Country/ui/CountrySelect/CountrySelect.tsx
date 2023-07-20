@@ -1,4 +1,4 @@
-import { memo, PropsWithChildren } from 'react';
+import { memo, PropsWithChildren, useState } from 'react';
 import { SelectOption } from '6_shared/ui/Select';
 import { ListBox } from '6_shared/ui/ListBox';
 import { getClassNames } from '6_shared/utils/classNames';
@@ -12,24 +12,26 @@ const countries: SelectOption<Country>[] = Object.values(Country)
 
 type CountrySelectProps = PropsWithChildren<{
   className?: string;
-  value?: Country;
+  initialValue?: Country;
   disabled?: boolean;
   // eslint-disable-next-line no-unused-vars
-  onChange: (value: Country) => void;
+  onChange?: (value: Country) => void;
 }>;
 
 export const CountrySelect = memo((props: CountrySelectProps) => {
-  const { className, value, disabled, onChange } = props;
+  const { className, initialValue, disabled, onChange } = props;
+  const [selected, setSelected] = useState(initialValue ?? countries[0].value);
 
   const changeHandler = (value: string) => {
-    onChange(value as Country);
+    setSelected(value as Country);
+    onChange?.(value as Country);
   };
 
   return (
     <ListBox
       className={getClassNames('', {}, [className])}
       items={countries}
-      selected={value ?? countries[0].value}
+      selected={selected}
       disabled={disabled}
       onChange={changeHandler}
     />
