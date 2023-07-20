@@ -42,6 +42,8 @@ export const ProfileBlock = (props: ProfileBlockProps) => {
   const isLoading = useSelector(profileSelectors.getIsLoading);
   const error = useSelector(profileSelectors.getError);
 
+  const isCurrentProfile = id === profile?.id;
+
   const isReadonly = useSelector(editProfileSelectors.getIsReadonly);
   const isUpdating = useSelector(editProfileSelectors.getIsLoading);
   const validateErrors = useSelector(editProfileSelectors.getValidateErrors);
@@ -60,10 +62,10 @@ export const ProfileBlock = (props: ProfileBlockProps) => {
       return;
     }
 
-    if (id !== profile?.id) {
+    if (!isCurrentProfile) {
       dispatch(fetchProfileData(id));
     }
-  }, [dispatch, id, profile?.id]);
+  }, [dispatch, id, isCurrentProfile]);
 
   const onInputChange = useCallback((value: string, name?: string) => {
     if (!name) {
@@ -117,7 +119,7 @@ export const ProfileBlock = (props: ProfileBlockProps) => {
       {isReadonly && (
         <ProfileCard
           profile={profile}
-          isLoading={isLoading}
+          isLoading={isLoading || !isCurrentProfile}
           error={error}
         />
       )}
