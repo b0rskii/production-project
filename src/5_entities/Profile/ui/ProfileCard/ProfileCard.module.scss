@@ -3,12 +3,6 @@
   border: 2px solid var(--primary-color);
 }
 
-.data {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
 .loading,
 .error {
   display: flex;

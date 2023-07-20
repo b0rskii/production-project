@@ -3,5 +3,5 @@ export { Profile, ProfileSchema } from './model/types/profileSchema';
 export { fetchProfileData } from './model/services/fetchProfileData/fetchProfileData';
 export { profileSelectors } from './model/selectors';
 export { ProfileCard } from './ui/ProfileCard';
-export { ProfileRow } from './ui/ProfileRow';
+export { ProfileContent } from './ui/ProfileContent';
 export { mockProfile } from './model/mocks';

@@ -44,7 +44,9 @@ module.exports = {
       'error',
       {
         markupOnly: true,
-        ignoreAttribute: ['data-testid', 'to', 'size', 'align', 'target', 'TitleTag', 'as'],
+        ignoreAttribute: [
+          'data-testid', 'to', 'size', 'align', 'target', 'TitleTag', 'as', 'mode', 'gap', 'alt',
+        ],
       },
     ],
     'max-len': ['error', { ignoreComments: true, code: 100 }],

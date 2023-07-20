@@ -1,10 +1,9 @@
 /* eslint-disable no-unused-vars */
 import { memo, PropsWithChildren, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ProfileRow, Profile } from '5_entities/Profile';
+import { Profile, ProfileContent } from '5_entities/Profile';
 import { Country, CountrySelect } from '5_entities/Country';
 import { Currency, CurrencySelect } from '5_entities/Currency';
-import { Avatar } from '6_shared/ui/Avatar';
 import { Input } from '6_shared/ui/Input';
 import { getClassNames } from '6_shared/utils/classNames';
 import { getKeysMap } from '6_shared/utils/getKeysMap';
@@ -60,15 +59,9 @@ export const EditProfileForm = memo((props: ProfileProps) => {
         [className],
       )}
     >
-      <div className={style.data}>
-        {profile?.avatar && (
-          <Avatar
-            src={profile.avatar}
-            alt={`${profile.username} avatar`}
-          />
-        )}
-
-        <ProfileRow name={t('Имя', { ns: I18nNameSpace.Profile })}>
+      <ProfileContent
+        avatar={profile?.avatar}
+        Firstname={(
           <Input
             className={style.input}
             value={profileForm?.firstname}
@@ -77,9 +70,8 @@ export const EditProfileForm = memo((props: ProfileProps) => {
             name={profileMap?.firstname}
             disabled={isUpdating}
           />
-        </ProfileRow>
-
-        <ProfileRow name={t('Фамилия', { ns: I18nNameSpace.Profile })}>
+        )}
+        Lastname={(
           <Input
             className={style.input}
             value={profileForm?.lastname}
@@ -88,9 +80,8 @@ export const EditProfileForm = memo((props: ProfileProps) => {
             name={profileMap?.lastname}
             disabled={isUpdating}
           />
-        </ProfileRow>
-
-        <ProfileRow name={t('Имя пользователя')}>
+        )}
+        Username={(
           <Input
             className={style.input}
             value={profileForm?.username}
@@ -99,9 +90,8 @@ export const EditProfileForm = memo((props: ProfileProps) => {
             name={profileMap?.username}
             disabled={isUpdating}
           />
-        </ProfileRow>
-
-        <ProfileRow name={t('Возраст', { ns: I18nNameSpace.Profile })}>
+        )}
+        Age={(
           <Input
             className={style.input}
             value={profileForm?.age}
@@ -110,9 +100,8 @@ export const EditProfileForm = memo((props: ProfileProps) => {
             type="number"
             disabled={isUpdating}
           />
-        </ProfileRow>
-
-        <ProfileRow name={t('Город', { ns: I18nNameSpace.Profile })}>
+        )}
+        City={(
           <Input
             className={style.input}
             value={profileForm?.city}
@@ -121,25 +110,22 @@ export const EditProfileForm = memo((props: ProfileProps) => {
             name={profileMap?.city}
             disabled={isUpdating}
           />
-        </ProfileRow>
-
-        <ProfileRow name={t('Страна', { ns: I18nNameSpace.Profile })}>
+        )}
+        Country={(
           <CountrySelect
             value={profileForm?.country}
             onChange={onCountryChange}
             disabled={isUpdating}
           />
-        </ProfileRow>
-
-        <ProfileRow name={t('Валюта', { ns: I18nNameSpace.Profile })}>
+        )}
+        Currency={(
           <CurrencySelect
             value={profileForm?.currency}
             onChange={onCurrencyChange}
             disabled={isUpdating}
           />
-        </ProfileRow>
-
-        <ProfileRow name={t('Аватар', { ns: I18nNameSpace.Profile })}>
+        )}
+        AvatarNode={(
           <Input
             className={style.input}
             value={profileForm?.avatar}
@@ -148,8 +134,8 @@ export const EditProfileForm = memo((props: ProfileProps) => {
             name={profileMap?.avatar}
             disabled={isUpdating}
           />
-        </ProfileRow>
-      </div>
+        )}
+      />
     </form>
   );
 });
