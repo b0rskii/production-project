@@ -1,0 +1,42 @@
+.dropDown {
+  position: relative;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.items {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  min-width: fit-content;
+  border-radius: 8px;
+  background: var(--listbox-bg);
+  z-index: 10000;
+  overflow: hidden;
+
+  &.left {
+    right: 0;
+  }
+}
+
+.item {
+  padding: 5px 10px;
+  width: 100%;
+  border: none;
+  background: var(--listbox-bg);
+  color: var(--primary-color);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.active {
+  background: var(--card-bg);
+}
+
+.disabled {
+  opacity: 0.5;
+}
