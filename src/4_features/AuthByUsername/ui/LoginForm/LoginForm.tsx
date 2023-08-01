@@ -60,6 +60,7 @@ const LoginForm: FC<LoginFormProps> = (props) => {
         type="text"
         placeholder={t('Имя пользователя')}
         value={username}
+        autoFocus
         onChange={usernameChangeHandler}
       />
       <Input
