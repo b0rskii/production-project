@@ -1,6 +1,7 @@
 const fs = require('fs/promises');
 const resolveRoot = require('../resolveRoot');
 const firstCharUpperCase = require('../firstCharUpperCase');
+const toUpperSnakeCase = require('../toUpperSnakeCase');
 
 module.exports = async (layer, sliceName) => {
   const componentName = firstCharUpperCase(sliceName);
@@ -9,8 +10,9 @@ module.exports = async (layer, sliceName) => {
   try {
     await fs.writeFile(
       resolveRoot('src', layer, sliceName, 'index.ts'),
-      `export { ${componentName} } from './ui/${componentName}/${componentName}';
+      `export { SLICE_NAME as ${toUpperSnakeCase(sliceName)}_SLICE } from './model/const';
 export { ${firstCharUpperCase(schemaName)} } from './model/types/${schemaName}';
+export { ${componentName} } from './ui/${componentName}/${componentName}';
 `,
     );
   } catch (e) {

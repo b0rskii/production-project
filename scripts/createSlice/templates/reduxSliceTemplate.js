@@ -1,19 +1,18 @@
-const firstCharUpperCase = require('../firstCharUpperCase');
 const firstCharLowerCase = require('../firstCharLowerCase');
 
 module.exports = (sliceName) => {
-  const typeName = `${firstCharUpperCase(sliceName)}Schema`;
+  const typeName = `${sliceName}Schema`;
+  const sliceNameCamelCase = firstCharLowerCase(sliceName);
 
   return `import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ${typeName} } from '../types/${sliceName}Schema';
+import { SLICE_NAME } from '../const';
 
 export const initialState: ${typeName} = {
     
 };
 
-export const SLICE_NAME = '${firstCharLowerCase(sliceName)}';
-
-export const ${sliceName}Slice = createSlice({
+export const ${sliceNameCamelCase}Slice = createSlice({
   name: SLICE_NAME,
   initialState,
   reducers: {
@@ -24,8 +23,8 @@ export const ${sliceName}Slice = createSlice({
 });
 
 export const {
-  actions: ${sliceName}Actions,
-  reducer: ${sliceName}Reducer,
-} = ${sliceName}Slice;
+  actions: ${sliceNameCamelCase}Actions,
+  reducer: ${sliceNameCamelCase}Reducer,
+} = ${sliceNameCamelCase}Slice;
 `;
 };

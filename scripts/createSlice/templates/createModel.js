@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 const fs = require('fs/promises');
 const resolveRoot = require('../resolveRoot');
+const modelConstTemplate = require('./modelConstTemplate');
 const reduxSliceTemplate = require('./reduxSliceTemplate');
 const schemaTypeTemplate = require('./schemaTypeTemplate');
 const selectorsTemplate = require('./selectorsTemplate');
@@ -19,6 +20,11 @@ module.exports = async (layer, sliceName) => {
       await fs.mkdir(resolveModelPath('slice'));
       await fs.mkdir(resolveModelPath('selectors'));
       await fs.mkdir(resolveModelPath('services'));
+
+      await fs.writeFile(
+        resolveModelPath('', 'const.ts'),
+        modelConstTemplate(sliceName),
+      );
     } catch (e) {
       console.log(`Не удалось создать model сегмент для слайса ${sliceName}`, e);
     }
