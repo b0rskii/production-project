@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { createSearchParams } from 'react-router-dom';
 import { SortArticlesSchema, TSortingOrder, TSortingType } from '../types/sortArticlesSchema';
-import { SortingType, SortingOrder, SearchParam } from '../const';
+import { SortingType, SortingOrder, SearchParam, SLICE_NAME } from '../const';
 
 let sortingTypeParams: TSortingType | null = null;
 let sortingOrderParams: TSortingOrder | null = null;
@@ -16,8 +16,6 @@ export const initialState: SortArticlesSchema = {
   sortingType: sortingTypeParams ?? SortingType.DATE,
   sortingOrder: sortingOrderParams ?? SortingOrder.ASC,
 };
-
-export const SLICE_NAME = 'sortArticles';
 
 export const sortArticlesSlice = createSlice({
   name: SLICE_NAME,

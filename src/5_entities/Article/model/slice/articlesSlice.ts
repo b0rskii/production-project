@@ -3,6 +3,7 @@ import { ListView } from '6_shared/ui/ListViewSwitcher';
 import { ArticlesSchema } from '../types/articlesSchema';
 import { Article } from '../types/articleSchema';
 import { fetchArticles } from '../services/fetchArticles/fetchArticles';
+import { ARTICLES_SLICE_NAME } from '../const';
 
 export const ARTICLES_LIMIT = 12;
 
@@ -21,10 +22,8 @@ export const initialState = articlesAdapter.getInitialState<ArticlesSchema>({
   isHasMore: false,
 });
 
-export const SLICE_NAME = 'articles';
-
 export const articlesSlice = createSlice({
-  name: SLICE_NAME,
+  name: ARTICLES_SLICE_NAME,
   initialState,
   reducers: {
     setView: (state, action: PayloadAction<ListView>) => {

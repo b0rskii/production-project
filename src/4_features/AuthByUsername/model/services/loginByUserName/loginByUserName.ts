@@ -3,7 +3,7 @@ import { ThunkAPI } from '1_app/providers/StoreProvider';
 import { User, userActions } from '5_entities/User';
 import { LocalStorageKey } from '6_shared/const/localStorage';
 import { ApiRoutes } from '6_shared/api';
-import { NAME } from '../../slice/loginSlice';
+import { SLICE_NAME } from '../../const';
 
 type LoginByUsernameArg = {
   username: string;
@@ -11,7 +11,7 @@ type LoginByUsernameArg = {
 };
 
 export const loginByUserName = createAsyncThunk<User, LoginByUsernameArg, ThunkAPI<string>>(
-  `${NAME}/loginByUserName`,
+  `${SLICE_NAME}/loginByUserName`,
   async (authData, { rejectWithValue, dispatch, extra }) => {
     const { api } = extra;
 

@@ -5,7 +5,7 @@ import { notificationsActions } from '6_shared/utils/notifications';
 import { Comment } from '6_shared/types/comment';
 import { StatusMessage } from '6_shared/types/common';
 import { ApiRoutes } from '6_shared/api';
-import { SLICE_NAME } from '../../slice/addCommentSlice';
+import { SLICE_NAME } from '../../const';
 
 export const sendArticleComment = createAsyncThunk<
   Comment,

@@ -1,3 +1,4 @@
+export { SLICE_NAME as UI_SLICE } from './model/const';
 export { Page } from './Page';
 export { UISchema } from './model/types/uiSchema';
-export { SLICE_NAME as UI_SLICE, uiReducer } from './model/slice/uiSlice';
+export { uiReducer } from './model/slice/uiSlice';

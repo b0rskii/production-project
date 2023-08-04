@@ -1,3 +1,5 @@
+export const SLICE_NAME = 'sortArticles';
+
 export const SortingType = {
   VIEWS: 'views',
   DATE: 'createdAt',

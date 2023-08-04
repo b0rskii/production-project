@@ -7,7 +7,8 @@ import { Input } from '6_shared/ui/Input';
 import { getClassNames } from '6_shared/utils/classNames';
 import { useAppDispatch, useAsyncReducer } from '6_shared/utils/redux';
 import { loginSelectors } from '../../model/selectors';
-import { loginActions, loginReducer, NAME } from '../../model/slice/loginSlice';
+import { loginActions, loginReducer } from '../../model/slice/loginSlice';
+import { SLICE_NAME } from '../../model/const';
 import { loginByUserName } from '../../model/services/loginByUserName/loginByUserName';
 import style from './LoginForm.module.scss';
 
@@ -21,7 +22,7 @@ const LoginForm: FC<LoginFormProps> = (props) => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
 
-  useAsyncReducer(NAME, loginReducer);
+  useAsyncReducer(SLICE_NAME, loginReducer);
 
   const {
     username,

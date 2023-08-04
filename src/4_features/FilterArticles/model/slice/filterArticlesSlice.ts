@@ -2,7 +2,7 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { createSearchParams } from 'react-router-dom';
 import { ArticleType } from '5_entities/Article';
 import { FilterArticlesSchema } from '../types/filterArticlesSchema';
-import { SearchParam } from '../const';
+import { SLICE_NAME, SearchParam } from '../const';
 
 let searchFilterParams: string | null = null;
 let typeFilterParams: ArticleType | null = null;
@@ -18,8 +18,6 @@ export const initialState: FilterArticlesSchema = {
   currentSearch: searchFilterParams ?? '',
   type: typeFilterParams ?? ArticleType.ALL,
 };
-
-export const SLICE_NAME = 'filterArticles';
 
 export const filterArticlesSlice = createSlice({
   name: SLICE_NAME,

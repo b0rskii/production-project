@@ -1,11 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { EditArticleSchema } from '../types/editArticleSchema';
+import { SLICE_NAME } from '../const';
 
 export const initialState: EditArticleSchema = {
   canEdit: false,
 };
-
-export const SLICE_NAME = 'editArticle';
 
 export const editArticleSlice = createSlice({
   name: SLICE_NAME,

@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { fetchProfileData } from '../services/fetchProfileData/fetchProfileData';
 import { Profile, ProfileSchema } from '../types/profileSchema';
+import { SLICE_NAME } from '../const';
 
 export const initialState: ProfileSchema = {
   profile: null,
@@ -8,10 +9,8 @@ export const initialState: ProfileSchema = {
   error: null,
 };
 
-export const NAME = 'profile';
-
 export const profileSlice = createSlice({
-  name: NAME,
+  name: SLICE_NAME,
   initialState,
   reducers: {
     setProfile: (state, action: PayloadAction<Profile>) => {

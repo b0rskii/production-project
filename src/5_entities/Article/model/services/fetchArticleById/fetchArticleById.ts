@@ -1,11 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkAPI } from '1_app/providers/StoreProvider';
 import { ApiRoutes } from '6_shared/api';
-import { NAME } from '../../slice/articleSlice';
 import { Article } from '../../types/articleSchema';
+import { ARTICLE_SLICE_NAME } from '../../const';
 
 export const fetchArticleById = createAsyncThunk<Article, string, ThunkAPI<string>>(
-  `${NAME}/fetchArticleById`,
+  `${ARTICLE_SLICE_NAME}/fetchArticleById`,
   async (articleId, { rejectWithValue, extra }) => {
     const { api } = extra;
 

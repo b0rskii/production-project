@@ -4,15 +4,16 @@ import { Profile, profileActions } from '5_entities/Profile';
 import { notificationsActions } from '6_shared/utils/notifications';
 import { ApiRoutes } from '6_shared/api';
 import { StatusMessage } from '6_shared/types/common';
-import { NAME, editProfileActions } from '../../slice/editProfileSlice';
+import { editProfileActions } from '../../slice/editProfileSlice';
 import { validateProfileData } from '../validateProfile/validateProfile';
+import { SLICE_NAME } from '../../const';
 
 export const updateProfileData = createAsyncThunk<
   Profile,
   StatusMessage,
   ThunkAPI<string | null>
 >(
-  `${NAME}/updateProfileData`,
+  `${SLICE_NAME}/updateProfileData`,
   async (statusMessage, { rejectWithValue, getState, extra, dispatch }) => {
     const { api } = extra;
     const profileForm = getState().editProfile?.profileForm;

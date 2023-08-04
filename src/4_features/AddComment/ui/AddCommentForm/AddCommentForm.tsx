@@ -5,9 +5,8 @@ import { getClassNames } from '6_shared/utils/classNames';
 import { useAppDispatch, useAsyncReducer } from '6_shared/utils/redux';
 import { Input } from '6_shared/ui/Input';
 import { Button, ButtonTheme } from '6_shared/ui/Button';
-import {
-  SLICE_NAME, addCommentReducer, addCommentActions,
-} from '../../model/slice/addCommentSlice';
+import { addCommentReducer, addCommentActions } from '../../model/slice/addCommentSlice';
+import { SLICE_NAME } from '../../model/const';
 import { addCommentSelectors } from '../../model/selectors';
 import style from './AddCommentForm.module.scss';
 

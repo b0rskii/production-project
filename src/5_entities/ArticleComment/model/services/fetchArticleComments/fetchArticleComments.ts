@@ -1,11 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkAPI } from '1_app/providers/StoreProvider';
 import { ApiRoutes } from '6_shared/api';
-import { NAME } from '../../slice/articleCommentsSlice';
 import { ArticleComment } from '../../types/articleCommentsSchema';
+import { SLICE_NAME } from '../../const';
 
 export const fetchArticleComments = createAsyncThunk<ArticleComment[], string, ThunkAPI<string>>(
-  `${NAME}/fetchArticleComments`,
+  `${SLICE_NAME}/fetchArticleComments`,
   async (articleId, { rejectWithValue, extra }) => {
     const { api } = extra;
 

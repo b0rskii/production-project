@@ -1,11 +1,10 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { UISchema } from '../types/uiSchema';
+import { SLICE_NAME } from '../const';
 
 export const initialState: UISchema = {
   scrollData: {},
 };
-
-export const SLICE_NAME = 'ui';
 
 export const uiSlice = createSlice({
   name: SLICE_NAME,

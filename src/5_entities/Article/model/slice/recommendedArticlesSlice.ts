@@ -4,6 +4,7 @@ import { Article } from '../types/articleSchema';
 import {
   fetchRecommendedArticles,
 } from '../services/fetchRecommendedArticles/fetchRecommendedArticles';
+import { RECOMMENDATIONS_SLICE_NAME } from '../const';
 
 export const ARTICLES_LIMIT = 4;
 
@@ -19,10 +20,8 @@ export const initialState = recommendedArticlesAdapter.getInitialState<Recommend
   limit: ARTICLES_LIMIT,
 });
 
-export const SLICE_NAME = 'recommendedArticles';
-
 export const recommendedArticlesSlice = createSlice({
-  name: SLICE_NAME,
+  name: RECOMMENDATIONS_SLICE_NAME,
   initialState,
   reducers: {},
   extraReducers(builder) {

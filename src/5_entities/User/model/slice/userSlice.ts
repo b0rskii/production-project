@@ -1,15 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { User, UserSchema } from '../types/userSchema';
+import { SLICE_NAME } from '../const';
 
 const initialState: UserSchema = {
   authData: null,
   isInited: false,
 };
 
-export const NAME = 'user';
-
 export const userSlice = createSlice({
-  name: NAME,
+  name: SLICE_NAME,
   initialState,
   reducers: {
     initAuthData: (state) => {

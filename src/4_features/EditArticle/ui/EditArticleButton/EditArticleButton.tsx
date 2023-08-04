@@ -6,7 +6,8 @@ import { getClassNames } from '6_shared/utils/classNames';
 import { useAsyncReducer } from '6_shared/utils/redux';
 import { RoutePath } from '6_shared/config/routing';
 import { AppLink, AppLinkTheme } from '6_shared/ui/AppLink';
-import { SLICE_NAME, editArticleReducer } from '../../model/slice/editArticleSlice';
+import { editArticleReducer } from '../../model/slice/editArticleSlice';
+import { SLICE_NAME } from '../../model/const';
 import { editArticleSelectors } from '../../model/selectors';
 
 type Props = PropsWithChildren<{

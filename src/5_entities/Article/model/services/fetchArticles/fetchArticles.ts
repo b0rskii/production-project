@@ -1,9 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkAPI } from '1_app/providers/StoreProvider';
 import { ApiRoutes } from '6_shared/api';
-import { NAME } from '../../slice/articleSlice';
 import { Article, ArticleType } from '../../types/articleSchema';
 import { articlesActions } from '../../slice/articlesSlice';
+import { ARTICLES_SLICE_NAME } from '../../const';
 
 type Returned = {
   data: Article[];
@@ -11,7 +11,7 @@ type Returned = {
 };
 
 export const fetchArticles = createAsyncThunk<Returned, undefined, ThunkAPI<string>>(
-  `${NAME}/fetchArticles`,
+  `${ARTICLES_SLICE_NAME}/fetchArticles`,
   async (_, { rejectWithValue, extra, getState, dispatch }) => {
     const { api } = extra;
     const state = getState();

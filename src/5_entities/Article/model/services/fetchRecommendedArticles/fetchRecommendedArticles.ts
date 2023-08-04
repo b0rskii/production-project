@@ -1,11 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkAPI } from '1_app/providers/StoreProvider';
 import { ApiRoutes } from '6_shared/api';
-import { NAME } from '../../slice/articleSlice';
 import { Article } from '../../types/articleSchema';
+import { RECOMMENDATIONS_SLICE_NAME } from '../../const';
 
 export const fetchRecommendedArticles = createAsyncThunk<Article[], undefined, ThunkAPI<string>>(
-  `${NAME}/fetchRecommendedArticles`,
+  `${RECOMMENDATIONS_SLICE_NAME}/fetchRecommendedArticles`,
   async (_, { rejectWithValue, extra, getState }) => {
     const { api } = extra;
     const state = getState();

@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { loginByUserName } from '../services/loginByUserName/loginByUserName';
 import { LoginSchema } from '../types/loginSchema';
+import { SLICE_NAME } from '../const';
 
 export const initialState: LoginSchema = {
   username: '',
@@ -9,10 +10,8 @@ export const initialState: LoginSchema = {
   error: null,
 };
 
-export const NAME = 'login';
-
 export const loginSlice = createSlice({
-  name: NAME,
+  name: SLICE_NAME,
   initialState,
   reducers: {
     setUsername: (state, action: PayloadAction<string>) => {

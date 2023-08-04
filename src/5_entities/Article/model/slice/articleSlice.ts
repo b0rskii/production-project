@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { ArticleSchema } from '../types/articleSchema';
 import { fetchArticleById } from '../services/fetchArticleById/fetchArticleById';
+import { ARTICLE_SLICE_NAME } from '../const';
 
 export const initialState: ArticleSchema = {
   data: null,
@@ -8,10 +9,8 @@ export const initialState: ArticleSchema = {
   error: null,
 };
 
-export const NAME = 'article';
-
 export const articleSlice = createSlice({
-  name: NAME,
+  name: ARTICLE_SLICE_NAME,
   initialState,
   reducers: {},
   extraReducers(builder) {

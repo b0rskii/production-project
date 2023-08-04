@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Profile } from '5_entities/Profile';
 import { updateProfileData } from '../services/updateProfileData/updateProfileData';
 import { EditProfileSchema, ValidateProfileError } from '../types/editProfileSchema';
+import { SLICE_NAME } from '../const';
 
 export const initialState: EditProfileSchema = {
   profileForm: null,
@@ -11,10 +12,8 @@ export const initialState: EditProfileSchema = {
   validateErrors: null,
 };
 
-export const NAME = 'editProfile';
-
 export const editProfileSlice = createSlice({
-  name: NAME,
+  name: SLICE_NAME,
   initialState,
   reducers: {
     startEdit: (state, action: PayloadAction<Profile | null>) => {

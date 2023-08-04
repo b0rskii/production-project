@@ -1,4 +1,5 @@
-export { profileActions, profileReducer, NAME as PROFILE_SLICE } from './model/slice/profileSlice';
+export { SLICE_NAME as PROFILE_SLICE } from './model/const';
+export { profileActions, profileReducer } from './model/slice/profileSlice';
 export { Profile, ProfileSchema } from './model/types/profileSchema';
 export { fetchProfileData } from './model/services/fetchProfileData/fetchProfileData';
 export { profileSelectors } from './model/selectors';
