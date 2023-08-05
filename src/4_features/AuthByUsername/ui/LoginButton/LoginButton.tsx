@@ -1,6 +1,7 @@
 import { memo, useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { userSelectors, userActions } from '5_entities/User';
 import { Button, ButtonTheme } from '6_shared/ui/Button';
 import { useAppDispatch } from '6_shared/utils/redux';
@@ -20,7 +21,9 @@ type LoginButtonProps = {
 export const LoginButton = memo((props: LoginButtonProps) => {
   const { className, theme = ButtonTheme.DEFAULT } = props;
   const { t } = useTranslation([I18nNameSpace.Translation, I18nNameSpace.Profile]);
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
+
   const [isAuthModalOpened, setIsAuthModalOpened] = useState(false);
   const userAuthData = useSelector(userSelectors.getUserAuthData);
 
@@ -32,7 +35,13 @@ export const LoginButton = memo((props: LoginButtonProps) => {
     setIsAuthModalOpened(true);
   }, []);
 
-  const logoutButtonClickHandler = useCallback(() => {
+  const profileMenuItemClickHandler = useCallback(() => {
+    if (!userAuthData) return;
+    navigate(RoutePath.PROFILE(userAuthData.id));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const logoutMenuItemClickHandler = useCallback(() => {
     dispatch(userActions.logout());
     localStorage.removeItem(LocalStorageKey.USER);
   }, [dispatch]);
@@ -52,11 +61,11 @@ export const LoginButton = memo((props: LoginButtonProps) => {
           items={[
             {
               content: t('Профиль', { ns: I18nNameSpace.Profile }),
-              href: RoutePath.PROFILE(userAuthData.id),
+              onClick: profileMenuItemClickHandler,
             },
             {
               content: t('Выйти'),
-              onClick: logoutButtonClickHandler,
+              onClick: logoutMenuItemClickHandler,
             },
           ]}
           direction="left"

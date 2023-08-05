@@ -2,12 +2,10 @@ import { Fragment, PropsWithChildren, ReactNode, memo } from 'react';
 import { Menu } from '@headlessui/react';
 import { getClassNames } from '6_shared/utils/classNames';
 import { Direction } from '6_shared/types/common';
-import { AppLink } from '6_shared/ui/AppLink';
 import style from './DropDown.module.scss';
 
 export type DropDownItem = {
   content: ReactNode;
-  href?: string;
   disabled?: boolean;
   onClick?: () => void;
 };
@@ -31,7 +29,7 @@ export const DropDown = memo((props: Props) => {
         {button}
       </Menu.Button>
       <Menu.Items className={getClassNames(style.items, {}, [style[direction]])}>
-        {items.map(({ content, disabled, href, onClick }, i) => (
+        {items.map(({ content, disabled, onClick }, i) => (
           <Menu.Item
             as={Fragment}
             disabled={disabled}
@@ -45,23 +43,13 @@ export const DropDown = memo((props: Props) => {
               };
 
               return (
-                href ? (
-                  <AppLink
-                    className={getClassNames(style.item, modes, [])}
-                    to={href}
-                    onClick={onClick}
-                  >
-                    {content}
-                  </AppLink>
-                ) : (
-                  <button
-                    className={getClassNames(style.item, modes, [])}
-                    type="button"
-                    onClick={onClick}
-                  >
-                    {content}
-                  </button>
-                )
+                <button
+                  className={getClassNames(style.item, modes, [])}
+                  type="button"
+                  onClick={onClick}
+                >
+                  {content}
+                </button>
               );
             }}
           </Menu.Item>
