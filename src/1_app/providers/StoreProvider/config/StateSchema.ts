@@ -27,8 +27,10 @@ import {
 
 import { ArticleCommentsSchema, ARTICLE_COMMENTS_SLICE } from '5_entities/ArticleComment';
 import { NOTIFICATION_SLICE, NotificationsSchema } from '6_shared/utils/notifications';
+import { rtkApi } from '6_shared/api';
 
 export type StateSchema = {
+  [rtkApi.reducerPath]: ReturnType<typeof rtkApi.reducer>,
   [USER_SLICE]: UserSchema;
   [NOTIFICATION_SLICE]: NotificationsSchema;
   [UI_SLICE]: UISchema;
