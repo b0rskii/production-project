@@ -1,4 +1,4 @@
-import { PropsWithChildren, memo, useCallback, useEffect } from 'react';
+import { PropsWithChildren, memo, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import {
   ArticlesSorting,
@@ -26,8 +26,6 @@ import style from './Header.module.scss';
 
 const DEBOUNCE_DELAY = 500;
 
-let isInit = true;
-
 type HeaderProps = PropsWithChildren<{
   className?: string;
 }>;
@@ -36,7 +34,6 @@ export const Header = memo((props: HeaderProps) => {
   const { className } = props;
   const dispatch = useAppDispatch();
 
-  const articlesTotal = useSelector(articlesSelectors.getArticles.selectTotal);
   const articleView = useSelector(articlesSelectors.getView);
 
   useAsyncReducer(SORT_ARTICLES_SLICE, sortArticlesReducer, false);
@@ -46,9 +43,10 @@ export const Header = memo((props: HeaderProps) => {
   useAsyncReducer(FILTER_ARTICLES_SLICE, filterArticlesReducer, false);
   const search = useSelector(filterArticlesSelectors.getSearch);
 
-  useEffect(() => {
-    isInit = false;
-  }, []);
+  const getArticles = useCallback(() => {
+    dispatch(articlesActions.resetArticles());
+    dispatch(fetchArticles());
+  }, [dispatch]);
 
   const onViewControlClick = useCallback((view: ListView) => {
     dispatch(articlesActions.setView(view));
@@ -56,30 +54,23 @@ export const Header = memo((props: HeaderProps) => {
 
   const onSortingTypeChange = useCallback((value: TSortingType) => {
     dispatch(sortArticlesActions.setSortingType(value));
-    dispatch(articlesActions.resetArticles());
-    dispatch(fetchArticles());
-  }, [dispatch]);
+    getArticles();
+  }, [dispatch, getArticles]);
 
   const onSortingOrderChange = useCallback((value: TSortingOrder) => {
     dispatch(sortArticlesActions.setSortingOrder(value));
-    dispatch(articlesActions.resetArticles());
-    dispatch(fetchArticles());
-  }, [dispatch]);
+    getArticles();
+  }, [dispatch, getArticles]);
 
   const debouncedSearch = useDebounce((value: string) => {
     dispatch(filterArticlesActions.setCurrentSearch(value));
-    dispatch(articlesActions.resetArticles());
-    dispatch(fetchArticles());
+    getArticles();
   }, DEBOUNCE_DELAY);
 
   const onSearchChange = useCallback((value: string) => {
     dispatch(filterArticlesActions.setSearch(value));
     debouncedSearch(value);
   }, [dispatch, debouncedSearch]);
-
-  if (isInit && !articlesTotal) {
-    return null;
-  }
 
   return (
     <section className={getClassNames('', {}, [className])}>
