@@ -45,7 +45,7 @@ export const ArticlesList = memo((props: ArticlesListProps) => {
 
   return (
     <div className={getClassNames(style[view], {}, [className])}>
-      {articles.length
+      {articles?.length
         ? articles.map((article) => (
           <Article
             data={article}

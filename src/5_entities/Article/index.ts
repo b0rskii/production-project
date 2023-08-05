@@ -23,6 +23,7 @@ export { recommendedArticlesReducer } from './model/slice/recommendedArticlesSli
 export {
   fetchRecommendedArticles,
 } from './model/services/fetchRecommendedArticles/fetchRecommendedArticles';
+export { useGetRecommendedArticles } from './api/recommendedArticlesApi';
 
 export {
   articleSelectors,
