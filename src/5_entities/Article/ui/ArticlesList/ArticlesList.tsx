@@ -12,7 +12,7 @@ import style from './ArticlesList.module.scss';
 
 type ArticlesListProps = PropsWithChildren<{
   className?: string;
-  articles: ArticleType[];
+  articles?: ArticleType[];
   isLoading: boolean;
   error: string | null;
   skeletonsCount: number;
