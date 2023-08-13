@@ -6,10 +6,10 @@ import { Button, ButtonTheme } from '6_shared/ui/Button';
 import { getClassNames } from '6_shared/utils/classNames';
 import { useAppDispatch, useAsyncReducer } from '6_shared/utils/redux';
 import { I18nNameSpace } from '6_shared/utils/i18n/nameSpace';
-import { editProfileActions, editProfileReducer } from '../model/slice/editProfileSlice';
-import { SLICE_NAME } from '../model/const';
-import { editProfileSelectors } from '../model/selectors';
-import { updateProfileData } from '../model/services/updateProfileData/updateProfileData';
+import { editProfileActions, editProfileReducer } from '../../model/slice/editProfileSlice';
+import { SLICE_NAME } from '../../model/const';
+import { editProfileSelectors } from '../../model/selectors';
+import { updateProfileData } from '../../model/services/updateProfileData/updateProfileData';
 import style from './EditProfileButton.module.scss';
 
 type EditProfileProps = PropsWithChildren<{

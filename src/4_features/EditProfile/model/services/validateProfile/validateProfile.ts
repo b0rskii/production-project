@@ -7,7 +7,7 @@ export const validateProfileData = (profile?: Profile | null) => {
     return [ValidateProfileError.NO_DATA];
   }
 
-  const { firstname, lastname, age } = profile;
+  const { firstname, lastname, username, age } = profile;
   const errors: ValidateProfileError[] = [];
 
   if (!firstname) {
@@ -16,6 +16,10 @@ export const validateProfileData = (profile?: Profile | null) => {
 
   if (!lastname) {
     errors.push(ValidateProfileError.INCORRECT_LAST_NAME);
+  }
+
+  if (!username) {
+    errors.push(ValidateProfileError.INCORRECT_USER_NAME);
   }
 
   if (!age || !Number.isInteger(age) || age < AgeLimit.MIN || age > AgeLimit.MAX) {

@@ -8,7 +8,6 @@ import {
   EditProfileForm,
   editProfileSelectors,
   ProfileHandlers,
-  ValidateProfileError,
 } from '4_features/EditProfile';
 import {
   ProfileCard,
@@ -20,7 +19,7 @@ import {
 import { Country } from '5_entities/Country';
 import { Currency } from '5_entities/Currency';
 import { userSelectors } from '5_entities/User';
-import { Text, TextTheme } from '6_shared/ui/Text';
+import { Text } from '6_shared/ui/Text';
 import { getClassNames } from '6_shared/utils/classNames';
 import { useAppDispatch, useAsyncReducer } from '6_shared/utils/redux';
 import { I18nNameSpace } from '6_shared/utils/i18n/nameSpace';
@@ -49,13 +48,6 @@ export const ProfileBlock = (props: ProfileBlockProps) => {
   const validateErrors = useSelector(editProfileSelectors.getValidateErrors);
 
   const userData = useSelector(userSelectors.getUserAuthData);
-
-  const ValidateErrorTranslation = {
-    [ValidateProfileError.INCORRECT_FIRST_NAME]: t('Введите ваше имя'),
-    [ValidateProfileError.INCORRECT_LAST_NAME]: t('Введите вашу фамилию'),
-    [ValidateProfileError.INCORRECT_AGE]: t('Неверный возраст'),
-    [ValidateProfileError.NO_DATA]: t('Нет данных'),
-  } as const;
 
   useEffect(() => {
     if (!id || __PROJECT__ === 'storybook') {
@@ -112,10 +104,6 @@ export const ProfileBlock = (props: ProfileBlockProps) => {
         )}
       </div>
 
-      {validateErrors && validateErrors.map((error) => (
-        <Text text={ValidateErrorTranslation[error]} theme={TextTheme.ERROR} key={error} />
-      ))}
-
       {isReadonly && (
         <ProfileCard
           profile={profile}
@@ -127,6 +115,7 @@ export const ProfileBlock = (props: ProfileBlockProps) => {
         <EditProfileForm
           profile={profile}
           isUpdating={isUpdating}
+          validateErrors={validateErrors}
           handlers={profileHandlers}
         />
       )}
