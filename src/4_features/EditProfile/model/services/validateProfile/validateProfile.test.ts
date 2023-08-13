@@ -18,6 +18,11 @@ describe('validateProfileData', () => {
       .toEqual([ValidateProfileError.INCORRECT_LAST_NAME]);
   });
 
+  it('if username emprty should return username invalid error', () => {
+    expect(validateProfileData({ ...mockProfile, username: '' }))
+      .toEqual([ValidateProfileError.INCORRECT_USER_NAME]);
+  });
+
   it('if age emprty should return age invalid error', () => {
     expect(validateProfileData({ ...mockProfile, age: undefined }))
       .toEqual([ValidateProfileError.INCORRECT_AGE]);
