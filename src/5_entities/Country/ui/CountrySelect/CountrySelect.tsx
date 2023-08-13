@@ -34,6 +34,7 @@ export const CountrySelect = memo((props: CountrySelectProps) => {
       selected={selected}
       disabled={disabled}
       onChange={changeHandler}
+      data-testid="CountrySelect"
     />
   );
 });

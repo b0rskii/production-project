@@ -34,6 +34,7 @@ export const CurrencySelect = memo((props: CurrencySelectProps) => {
       selected={selected}
       disabled={disabled}
       onChange={changeHandler}
+      data-testid="CurrencySelect"
     />
   );
 });

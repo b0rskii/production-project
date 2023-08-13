@@ -17,10 +17,18 @@ type Props = PropsWithChildren<{
   disabled?: boolean;
   // eslint-disable-next-line no-unused-vars
   onChange: (selected: string) => void;
+  'data-testid'?: string;
 }>;
 
 export const ListBox = memo((props: Props) => {
-  const { className, items, selected, disabled, onChange } = props;
+  const {
+    className,
+    items,
+    selected,
+    disabled,
+    onChange,
+    'data-testid': dataTestid = 'ListBox',
+  } = props;
 
   return (
     <Listbox
@@ -29,11 +37,13 @@ export const ListBox = memo((props: Props) => {
       className={getClassNames(style.listBox, {}, [className])}
       value={selected}
       onChange={onChange}
+      data-testid={dataTestid}
     >
       <Listbox.Button as="div">
         <Button
           className={style.button}
           theme={ButtonTheme.OUTLINE}
+          data-testid={`${dataTestid}.Button`}
         >
           {selected}
         </Button>
