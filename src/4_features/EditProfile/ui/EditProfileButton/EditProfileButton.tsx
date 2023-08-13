@@ -53,6 +53,7 @@ export const EditProfileButton = memo((props: EditProfileProps) => {
         className={getClassNames('', {}, [className])}
         theme={ButtonTheme.OUTLINE}
         onClick={editButtonClickHandler}
+        data-testid="EditProfileButton.Edit"
       >
         {t('Редактировать', { ns: I18nNameSpace.Translation })}
       </Button>
@@ -66,6 +67,7 @@ export const EditProfileButton = memo((props: EditProfileProps) => {
         theme={ButtonTheme.OUTLINE_RED}
         onClick={cancelButtonClickHandler}
         disabled={isLoading}
+        data-testid="EditProfileButton.CancelEdit"
       >
         {t('Отменить редактирование')}
       </Button>
@@ -74,6 +76,7 @@ export const EditProfileButton = memo((props: EditProfileProps) => {
         theme={ButtonTheme.OUTLINE}
         onClick={saveButtonClickHandler}
         disabled={isLoading}
+        data-testid="EditProfileButton.Save"
       >
         {t('Сохранить')}
       </Button>

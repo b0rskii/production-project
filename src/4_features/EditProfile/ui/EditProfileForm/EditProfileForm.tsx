@@ -64,7 +64,12 @@ export const EditProfileForm = memo((props: ProfileProps) => {
   return (
     <>
       {validateErrors && validateErrors.map((error) => (
-        <Text text={ValidateErrorTranslation[error]} theme={TextTheme.ERROR} key={error} />
+        <Text
+          text={ValidateErrorTranslation[error]}
+          theme={TextTheme.ERROR}
+          key={error}
+          data-testid="EditProfileForm.Error"
+        />
       ))}
 
       <form
@@ -83,6 +88,7 @@ export const EditProfileForm = memo((props: ProfileProps) => {
               onChange={onInputChange}
               name={profileMap?.firstname}
               disabled={isUpdating}
+              data-testid="EditProfileForm.Firstname"
             />
           )}
           Lastname={(
@@ -92,6 +98,7 @@ export const EditProfileForm = memo((props: ProfileProps) => {
               onChange={onInputChange}
               name={profileMap?.lastname}
               disabled={isUpdating}
+              data-testid="EditProfileForm.Lastname"
             />
           )}
           Username={(
@@ -101,6 +108,7 @@ export const EditProfileForm = memo((props: ProfileProps) => {
               onChange={onInputChange}
               name={profileMap?.username}
               disabled={isUpdating}
+              data-testid="EditProfileForm.Username"
             />
           )}
           Age={(
@@ -110,6 +118,7 @@ export const EditProfileForm = memo((props: ProfileProps) => {
               onChange={onAgeChange}
               type="number"
               disabled={isUpdating}
+              data-testid="EditProfileForm.Age"
             />
           )}
           City={(
@@ -119,6 +128,7 @@ export const EditProfileForm = memo((props: ProfileProps) => {
               onChange={onInputChange}
               name={profileMap?.city}
               disabled={isUpdating}
+              data-testid="EditProfileForm.City"
             />
           )}
           Country={(
@@ -142,6 +152,7 @@ export const EditProfileForm = memo((props: ProfileProps) => {
               onChange={onInputChange}
               name={profileMap?.avatar}
               disabled={isUpdating}
+              data-testid="EditProfileForm.Avatar"
             />
           )}
         />

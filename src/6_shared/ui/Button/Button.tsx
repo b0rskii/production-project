@@ -19,6 +19,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   theme?: ButtonTheme;
   square?: boolean;
   size?: 'm' | 'l' | 'xl';
+  'data-testid'?: string;
 }
 
 export const Button = memo((props: ButtonProps) => {
@@ -29,6 +30,7 @@ export const Button = memo((props: ButtonProps) => {
     square,
     size = 'm',
     type = 'button',
+    'data-testid': dataTestid = 'Button',
     ...otherProps
   } = props;
 
@@ -47,6 +49,7 @@ export const Button = memo((props: ButtonProps) => {
         modes,
         [className, style[theme], style[`size_${size}`]],
       )}
+      data-testid={dataTestid}
     >
       {children}
     </button>

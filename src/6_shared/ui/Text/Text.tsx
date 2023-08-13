@@ -20,6 +20,7 @@ type TextProps = {
   align?: TextAlign;
   size?: TextSize;
   TitleTag?: 'h1' | 'h2' | 'h3' | 'p';
+  'data-testid'?: string;
 };
 
 export const Text = memo((props: TextProps) => {
@@ -31,17 +32,34 @@ export const Text = memo((props: TextProps) => {
     align = 'left',
     size = 'm',
     TitleTag = 'h2',
+    'data-testid': dataTestid = 'Text',
   } = props;
 
   return (
-    <div className={getClassNames(
-      style.text,
-      {},
-      [className, style[theme], style[align], style[`size_${size}`]],
-    )}
+    <div
+      className={getClassNames(
+        style.text,
+        {},
+        [className, style[theme], style[align], style[`size_${size}`]],
+      )}
+      data-testid={dataTestid}
     >
-      {title && <TitleTag className={style.title}>{title}</TitleTag>}
-      {text && <p className={style.text}>{text}</p>}
+      {title && (
+        <TitleTag
+          className={style.title}
+          data-testid={`${dataTestid}.Title`}
+        >
+          {title}
+        </TitleTag>
+      )}
+      {text && (
+        <p
+          className={style.text}
+          data-testid={`${dataTestid}.Text`}
+        >
+          {text}
+        </p>
+      )}
     </div>
   );
 });

@@ -17,6 +17,7 @@ interface Props extends HTMLInputProps {
   isContentSize?: boolean;
   // eslint-disable-next-line no-unused-vars
   onChange?: (value: string, name?: string) => void;
+  'data-testid'?: string;
 }
 
 export const Field = memo((props: Props) => {
@@ -27,6 +28,7 @@ export const Field = memo((props: Props) => {
     mode = 'default',
     isContentSize = true,
     onChange,
+    'data-testid': dataTestid = 'Field',
     ...otherProps
   } = props;
 
@@ -46,6 +48,7 @@ export const Field = memo((props: Props) => {
       value={value}
       size={isContentSize ? String(value).length : undefined}
       onChange={changeHandler}
+      data-testid={dataTestid}
     />
   );
 });
