@@ -4,4 +4,5 @@ export const I18nNameSpace = {
   Article: 'article',
   Main: 'main',
   Profile: 'profile',
+  AdminPanel: 'adminPanel',
 } as const;

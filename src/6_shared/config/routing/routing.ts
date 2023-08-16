@@ -6,5 +6,6 @@ export const RoutePath = {
   ARTICLE_DETAILS: (id: string) => `/articles/${id}`,
   CREATE_ARTICLE: () => '/articles/new',
   EDIT_ARTICLE: (id: string) => `/articles/${id}/edit`,
+  ADMIN_PANEL: () => '/admin-panel',
   NOT_FOUNT: () => '*',
 };

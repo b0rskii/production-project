@@ -2,7 +2,7 @@ import { memo, Suspense } from 'react';
 import { useSelector } from 'react-redux';
 import { Routes, Route, RouteProps } from 'react-router-dom';
 import { PageLoader } from '3_widgets/PageLoader';
-import { userSelectors } from '5_entities/User';
+import { userSelectors, UserRole } from '5_entities/User';
 import { RequireAuth, RoutePath } from '6_shared/config/routing';
 import { AboutPage } from './AboutPage';
 import { MainPage } from './MainPage';
@@ -10,10 +10,12 @@ import { ProfilePage } from './ProfilePage';
 import { ArticlesPage } from './ArticlesPage';
 import { ArticleDetailsPage } from './ArticleDetailsPage';
 import { ArticleEditPage } from './ArticleEditPage';
+import { AdminPanelPage } from './AdminPanelPage';
 import { NotFoundPage } from './NotFoundPage';
 
 type AppRouteProps = RouteProps & {
   authOnly?: boolean;
+  roles?: UserRole[];
 };
 
 export const routes: AppRouteProps[] = [
@@ -49,6 +51,12 @@ export const routes: AppRouteProps[] = [
     path: RoutePath.CREATE_ARTICLE(),
     element: <ArticleEditPage />,
     authOnly: true,
+  },
+  {
+    path: RoutePath.ADMIN_PANEL(),
+    element: <AdminPanelPage />,
+    authOnly: true,
+    roles: ['ADMIN', 'MANAGER'],
   },
   {
     path: RoutePath.NOT_FOUNT(),

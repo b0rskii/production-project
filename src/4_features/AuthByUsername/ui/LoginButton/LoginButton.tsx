@@ -20,12 +20,20 @@ type LoginButtonProps = {
 
 export const LoginButton = memo((props: LoginButtonProps) => {
   const { className, theme = ButtonTheme.DEFAULT } = props;
-  const { t } = useTranslation([I18nNameSpace.Translation, I18nNameSpace.Profile]);
+
+  const { t } = useTranslation(
+    [I18nNameSpace.Translation, I18nNameSpace.Profile, I18nNameSpace.AdminPanel],
+  );
+
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const [isAuthModalOpened, setIsAuthModalOpened] = useState(false);
   const userAuthData = useSelector(userSelectors.getUserAuthData);
+  const isAdmin = useSelector(userSelectors.isAdmin);
+  const isManager = useSelector(userSelectors.isManager);
+
+  const hasAccessToAdmin = isAdmin || isManager;
 
   const onCloseModal = useCallback(() => {
     setIsAuthModalOpened(false);
@@ -35,11 +43,14 @@ export const LoginButton = memo((props: LoginButtonProps) => {
     setIsAuthModalOpened(true);
   }, []);
 
+  const adminMenuItemClickHandler = useCallback(() => {
+    navigate(RoutePath.ADMIN_PANEL());
+  }, [navigate]);
+
   const profileMenuItemClickHandler = useCallback(() => {
     if (!userAuthData) return;
     navigate(RoutePath.PROFILE(userAuthData.id));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [navigate, userAuthData]);
 
   const logoutMenuItemClickHandler = useCallback(() => {
     dispatch(userActions.logout());
@@ -59,6 +70,12 @@ export const LoginButton = memo((props: LoginButtonProps) => {
             />
           )}
           items={[
+            ...(hasAccessToAdmin ? [
+              {
+                content: t('Админка', { ns: I18nNameSpace.AdminPanel }),
+                onClick: adminMenuItemClickHandler,
+              },
+            ] : []),
             {
               content: t('Профиль', { ns: I18nNameSpace.Profile }),
               onClick: profileMenuItemClickHandler,

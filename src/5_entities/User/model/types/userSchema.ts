@@ -1,6 +1,9 @@
+export type UserRole = 'ADMIN' | 'USER' | 'MANAGER';
+
 export type User = {
   id: string;
   username: string;
+  roles: UserRole[];
   avatar?: string;
 };
 
