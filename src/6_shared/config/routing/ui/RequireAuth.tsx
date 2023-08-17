@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
+import { ForbiddenPage } from '2_pages/ForbiddenPage';
 import { UserRole, userSelectors } from '5_entities/User';
 import { RoutePath } from '../routing';
 
@@ -13,16 +14,22 @@ type RequireAuthProps = {
 export const RequireAuth = ({ children, isAuth, requiredRoles }: RequireAuthProps) => {
   const userRoles = useSelector(userSelectors.getUserRoles);
 
-  const hasRequireRole = useMemo(() => {
+  const hasRequiredRole = useMemo(() => {
     if (!requiredRoles) {
       return true;
     }
     return requiredRoles.some((requiredRole) => userRoles?.includes(requiredRole));
   }, [requiredRoles, userRoles]);
 
-  if (!isAuth || !hasRequireRole) {
+  if (!isAuth) {
     return (
       <Navigate to={RoutePath.MAIN()} replace />
+    );
+  }
+
+  if (!hasRequiredRole) {
+    return (
+      <ForbiddenPage />
     );
   }
 
