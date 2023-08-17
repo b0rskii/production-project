@@ -23,7 +23,7 @@ export const RequireAuth = ({ children, isAuth, requiredRoles }: RequireAuthProp
 
   if (!isAuth) {
     return (
-      <Navigate to={RoutePath.MAIN()} replace />
+      <Navigate to={RoutePath.MAIN} replace />
     );
   }
 

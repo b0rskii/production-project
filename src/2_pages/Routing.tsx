@@ -20,11 +20,11 @@ type AppRouteProps = RouteProps & {
 
 export const routes: AppRouteProps[] = [
   {
-    path: RoutePath.MAIN(),
+    path: RoutePath.MAIN,
     element: <MainPage />,
   },
   {
-    path: RoutePath.ABOUT(),
+    path: RoutePath.ABOUT,
     element: <AboutPage />,
   },
   {
@@ -33,7 +33,7 @@ export const routes: AppRouteProps[] = [
     authOnly: true,
   },
   {
-    path: RoutePath.ARTICLES(),
+    path: RoutePath.ARTICLES,
     element: <ArticlesPage />,
     authOnly: true,
   },
@@ -48,18 +48,18 @@ export const routes: AppRouteProps[] = [
     authOnly: true,
   },
   {
-    path: RoutePath.CREATE_ARTICLE(),
+    path: RoutePath.CREATE_ARTICLE,
     element: <ArticleEditPage />,
     authOnly: true,
   },
   {
-    path: RoutePath.ADMIN_PANEL(),
+    path: RoutePath.ADMIN_PANEL,
     element: <AdminPanelPage />,
     authOnly: true,
     roles: ['ADMIN', 'MANAGER'],
   },
   {
-    path: RoutePath.NOT_FOUNT(),
+    path: RoutePath.NOT_FOUNT,
     element: <NotFoundPage />,
   },
 ];

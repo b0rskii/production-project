@@ -46,7 +46,7 @@ export const LoginButton = memo((props: LoginButtonProps) => {
   }, []);
 
   const adminMenuItemClickHandler = useCallback(() => {
-    navigate(RoutePath.ADMIN_PANEL());
+    navigate(RoutePath.ADMIN_PANEL);
   }, [navigate]);
 
   const profileMenuItemClickHandler = useCallback(() => {

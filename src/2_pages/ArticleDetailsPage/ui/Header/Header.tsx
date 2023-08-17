@@ -18,7 +18,7 @@ export const Header = memo((props: Props) => {
   const navigate = useNavigate();
 
   const toArticlesListButtonHandler = useCallback(() => {
-    navigate(RoutePath.ARTICLES());
+    navigate(RoutePath.ARTICLES);
   }, [navigate]);
 
   return (

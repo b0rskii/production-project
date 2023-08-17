@@ -16,7 +16,7 @@ export const CreateArticleButton = memo((props: Props) => {
   return (
     <AppLink
       className={getClassNames('', {}, [className])}
-      to={RoutePath.CREATE_ARTICLE()}
+      to={RoutePath.CREATE_ARTICLE}
       theme={AppLinkTheme.PRIMARY_INVERTED}
     >
       {t('Создать статью')}
