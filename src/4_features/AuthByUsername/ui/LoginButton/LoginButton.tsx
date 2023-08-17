@@ -1,4 +1,4 @@
-import { memo, useCallback, useState } from 'react';
+import { memo, useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -21,9 +21,11 @@ type LoginButtonProps = {
 export const LoginButton = memo((props: LoginButtonProps) => {
   const { className, theme = ButtonTheme.DEFAULT } = props;
 
-  const { t } = useTranslation(
-    [I18nNameSpace.Translation, I18nNameSpace.Profile, I18nNameSpace.AdminPanel],
-  );
+  const { t } = useTranslation([
+    I18nNameSpace.Translation,
+    I18nNameSpace.Profile,
+    I18nNameSpace.AdminPanel,
+  ]);
 
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -57,6 +59,29 @@ export const LoginButton = memo((props: LoginButtonProps) => {
     localStorage.removeItem(LocalStorageKey.USER);
   }, [dispatch]);
 
+  const menuItems = useMemo(() => [
+    ...(hasAccessToAdmin ? [
+      {
+        content: t('Админка', { ns: I18nNameSpace.AdminPanel }),
+        onClick: adminMenuItemClickHandler,
+      },
+    ] : []),
+    {
+      content: t('Профиль', { ns: I18nNameSpace.Profile }),
+      onClick: profileMenuItemClickHandler,
+    },
+    {
+      content: t('Выйти'),
+      onClick: logoutMenuItemClickHandler,
+    },
+  ], [
+    t,
+    adminMenuItemClickHandler,
+    profileMenuItemClickHandler,
+    logoutMenuItemClickHandler,
+    hasAccessToAdmin,
+  ]);
+
   return (
     <>
       {userAuthData ? (
@@ -69,22 +94,7 @@ export const LoginButton = memo((props: LoginButtonProps) => {
               size={35}
             />
           )}
-          items={[
-            ...(hasAccessToAdmin ? [
-              {
-                content: t('Админка', { ns: I18nNameSpace.AdminPanel }),
-                onClick: adminMenuItemClickHandler,
-              },
-            ] : []),
-            {
-              content: t('Профиль', { ns: I18nNameSpace.Profile }),
-              onClick: profileMenuItemClickHandler,
-            },
-            {
-              content: t('Выйти'),
-              onClick: logoutMenuItemClickHandler,
-            },
-          ]}
+          items={menuItems}
           direction="left"
         />
       ) : (

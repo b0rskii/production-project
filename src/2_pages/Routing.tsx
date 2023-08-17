@@ -86,7 +86,11 @@ export const Routing = memo(() => {
             path={route.path}
             element={
               route.authOnly
-                ? <RequireAuth isAuth={Boolean(isAuth)}>{element}</RequireAuth>
+                ? (
+                  <RequireAuth isAuth={Boolean(isAuth)} requiredRoles={route.roles}>
+                    {element}
+                  </RequireAuth>
+                )
                 : element
             }
             key={route.path}
