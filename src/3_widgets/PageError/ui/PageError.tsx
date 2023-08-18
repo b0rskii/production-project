@@ -1,4 +1,3 @@
-import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { getClassNames } from '6_shared/utils/classNames/getClassNames';
@@ -9,7 +8,7 @@ type PageErrorProps = {
   className?: string;
 };
 
-export const PageError: FC<PageErrorProps> = (props) => {
+export const PageError = (props: PageErrorProps) => {
   const { className } = props;
   const { t } = useTranslation();
   const navigate = useNavigate();

@@ -1,4 +1,3 @@
-import { FC } from 'react';
 import { getClassNames } from '6_shared/utils/classNames/getClassNames';
 import style from './Loader.module.scss';
 
@@ -6,7 +5,7 @@ type LoaderProps = {
   className?: string;
 };
 
-export const Loader: FC<LoaderProps> = (props) => {
+export const Loader = (props: LoaderProps) => {
   const { className } = props;
 
   return (

@@ -1,6 +1,6 @@
 import {
-  FC,
   MutableRefObject,
+  ReactNode,
   useCallback,
   useEffect,
   useRef,
@@ -16,10 +16,11 @@ const ANIMATION_DURATION = 100;
 type ModalProps = {
   className?: string;
   isOpen?: boolean;
+  children: ReactNode;
   onClose?: () => void;
 };
 
-export const Modal: FC<ModalProps> = (props) => {
+export const Modal = (props: ModalProps) => {
   const {
     className,
     children,

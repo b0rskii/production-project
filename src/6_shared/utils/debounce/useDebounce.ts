@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef } from 'react';
 export const useDebounce = (callback: (...args: any[]) => void, delay: number) => {
   const timeoutRef = useRef<NodeJS.Timeout>();
 
-  const debouncedCallback = useCallback((...args) => {
+  const debouncedCallback = useCallback((...args: any[]) => {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }

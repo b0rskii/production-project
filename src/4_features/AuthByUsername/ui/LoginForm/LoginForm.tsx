@@ -1,4 +1,4 @@
-import { FC, FormEvent, useCallback } from 'react';
+import { FormEvent, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { Button, ButtonTheme } from '6_shared/ui/Button';
@@ -12,12 +12,12 @@ import { SLICE_NAME } from '../../model/const';
 import { loginByUserName } from '../../model/services/loginByUserName/loginByUserName';
 import style from './LoginForm.module.scss';
 
-export type LoginFormProps = {
+type LoginFormProps = {
   className?: string;
   onSuccess: () => void;
 };
 
-const LoginForm: FC<LoginFormProps> = (props) => {
+const LoginForm = (props: LoginFormProps) => {
   const { className, onSuccess } = props;
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
