@@ -9,6 +9,7 @@ type Props = PropsWithChildren<{
   justify?: 'start' | 'center' | 'space-between' | 'end';
   align?: 'start' | 'center' | 'end';
   gap?: 's' | 'm' | 'l' | 'xl';
+  maxWidth?: boolean;
 }>;
 
 export const Stack = (props: Props) => {
@@ -20,7 +21,12 @@ export const Stack = (props: Props) => {
     justify = 'start',
     align = 'center',
     gap,
+    maxWidth,
   } = props;
+
+  const modes = useMemo(() => ({
+    [style.maxWidth]: maxWidth,
+  }), [maxWidth]);
 
   const classes = useMemo(() => [
     className,
@@ -31,7 +37,7 @@ export const Stack = (props: Props) => {
   ], [className, mode, justify, align, gap]);
 
   return (
-    <Tag className={getClassNames(style.stack, {}, classes)}>
+    <Tag className={getClassNames(style.stack, modes, classes)}>
       {children}
     </Tag>
   );
