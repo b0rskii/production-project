@@ -12,6 +12,7 @@ import {
 import { getClassNames } from '6_shared/utils/classNames';
 import { useAppDispatch, useAsyncReducer } from '6_shared/utils/redux';
 import { Text } from '6_shared/ui/Text';
+import style from './ArticleCommentsBlock.module.scss';
 
 type ArticleCommentsBlockProps = PropsWithChildren<{
   className?: string;
@@ -29,11 +30,16 @@ export const ArticleCommentsBlock = memo((props: ArticleCommentsBlockProps) => {
   const isLoading = useSelector(articleCommentsSelectors.getIsLoading);
   const error = useSelector(articleCommentsSelectors.getError);
 
-  useEffect(() => {
-    if (articleId && __PROJECT__ !== 'storybook') {
-      dispatch(fetchArticleComments(articleId));
-    }
+  const fetchComments = useCallback(() => {
+    if (!articleId) return;
+    dispatch(fetchArticleComments(articleId));
   }, [dispatch, articleId]);
+
+  useEffect(() => {
+    if (__PROJECT__ !== 'storybook') {
+      fetchComments();
+    }
+  }, [fetchComments]);
 
   const sendCommentHandler = useCallback(() => {
     if (__PROJECT__ === 'storybook') {
@@ -49,11 +55,16 @@ export const ArticleCommentsBlock = memo((props: ArticleCommentsBlockProps) => {
   return (
     <section className={getClassNames('', {}, [className])}>
       <Text title={t('Комментарии')} TitleTag="h3" />
-      <AddCommentForm onSendComment={sendCommentHandler} />
+      <AddCommentForm
+        className={style.addCommentForm}
+        onSendComment={sendCommentHandler}
+      />
       <CommentCardsList
+        className={style.comments}
         comments={comments}
         isLoading={isLoading}
         error={error}
+        onRepeatFetch={fetchComments}
       />
     </section>
   );

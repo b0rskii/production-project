@@ -1,7 +1,8 @@
 import { PropsWithChildren, memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { getClassNames } from '6_shared/utils/classNames';
-import { Text, TextTheme } from '6_shared/ui/Text';
+import { Text } from '6_shared/ui/Text';
+import { FetchError } from '6_shared/ui/FetchError';
 import { Skeleton } from '6_shared/ui/Skeleton';
 import { Avatar } from '6_shared/ui/Avatar';
 import { I18nNameSpace } from '6_shared/utils/i18n/nameSpace';
@@ -19,10 +20,11 @@ type ArticleDetailsProps = PropsWithChildren<{
   isLoading: boolean;
   error: string | null;
   className?: string;
+  onRepeatFetch?: () => void;
 }>;
 
 export const ArticleDetails = memo((props: ArticleDetailsProps) => {
-  const { article, isLoading, error, className } = props;
+  const { article, isLoading, error, className, onRepeatFetch } = props;
   const { t } = useTranslation([I18nNameSpace.Translation, I18nNameSpace.Article]);
 
   if (isLoading) {
@@ -40,11 +42,9 @@ export const ArticleDetails = memo((props: ArticleDetailsProps) => {
   if (error) {
     return (
       <div className={getClassNames('', {}, [className, style.error])}>
-        <Text
-          title={t('При загрузке статьи произошла ошибка', { ns: I18nNameSpace.Article })}
-          text={t('Попробуйте обновить страницу')}
-          theme={TextTheme.ERROR}
-          align="center"
+        <FetchError
+          message={t('При загрузке статьи произошла ошибка', { ns: I18nNameSpace.Article })}
+          onRepeat={onRepeatFetch}
         />
       </div>
     );

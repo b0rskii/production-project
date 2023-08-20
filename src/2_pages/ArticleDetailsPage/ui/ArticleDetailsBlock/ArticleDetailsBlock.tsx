@@ -1,4 +1,4 @@
-import { PropsWithChildren, memo, useEffect } from 'react';
+import { PropsWithChildren, memo, useCallback, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import {
   ARTICLE_SLICE, ArticleDetails, articleReducer, articleSelectors, fetchArticleById,
@@ -22,11 +22,16 @@ export const ArticleDetailsBlock = memo((props: ArticleDetailsBlockProps) => {
   const isLoading = useSelector(articleSelectors.getIsLoading);
   const error = useSelector(articleSelectors.getError);
 
+  const fetchArticle = useCallback(() => {
+    if (!articleId) return;
+    dispatch(fetchArticleById(articleId));
+  }, [articleId, dispatch]);
+
   useEffect(() => {
-    if (articleId && __PROJECT__ !== 'storybook') {
-      dispatch(fetchArticleById(articleId));
+    if (__PROJECT__ !== 'storybook') {
+      fetchArticle();
     }
-  }, [dispatch, articleId]);
+  }, [fetchArticle]);
 
   return (
     <section className={getClassNames(style.articleDetailsBlock, {}, [className])}>
@@ -34,6 +39,7 @@ export const ArticleDetailsBlock = memo((props: ArticleDetailsBlockProps) => {
         article={article}
         isLoading={isLoading}
         error={error}
+        onRepeatFetch={fetchArticle}
       />
     </section>
   );

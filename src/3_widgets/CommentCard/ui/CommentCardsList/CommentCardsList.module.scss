@@ -1,10 +1,8 @@
 .comment {
-  margin-top: 20px;
-}
+  margin-top: 10px;
+  width: 100%;
 
-.loading,
-.error {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  &:first-child {
+    margin-top: 0;
+  }
 }

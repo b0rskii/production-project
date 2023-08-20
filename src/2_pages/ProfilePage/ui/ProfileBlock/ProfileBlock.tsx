@@ -49,15 +49,20 @@ export const ProfileBlock = (props: ProfileBlockProps) => {
 
   const userData = useSelector(userSelectors.getUserAuthData);
 
+  const fetchProfile = useCallback(() => {
+    if (!id) return;
+    dispatch(fetchProfileData(id));
+  }, [dispatch, id]);
+
   useEffect(() => {
-    if (!id || __PROJECT__ === 'storybook') {
+    if (__PROJECT__ === 'storybook') {
       return;
     }
 
     if (!isCurrentProfile) {
-      dispatch(fetchProfileData(id));
+      fetchProfile();
     }
-  }, [dispatch, id, isCurrentProfile]);
+  }, [isCurrentProfile, fetchProfile]);
 
   const onInputChange = useCallback((value: string, name?: string) => {
     if (!name) {
@@ -107,8 +112,9 @@ export const ProfileBlock = (props: ProfileBlockProps) => {
       {isReadonly && (
         <ProfileCard
           profile={profile}
-          isLoading={isLoading || !isCurrentProfile}
+          isLoading={isLoading}
           error={error}
+          onRepeatFetch={fetchProfile}
         />
       )}
       {!isReadonly && (

@@ -1,7 +1,7 @@
 import { memo, PropsWithChildren } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Loader } from '6_shared/ui/Loader';
-import { Text, TextTheme } from '6_shared/ui/Text';
+import { FetchError } from '6_shared/ui/FetchError';
 import { getClassNames } from '6_shared/utils/classNames';
 import { I18nNameSpace } from '6_shared/utils/i18n/nameSpace';
 import { Profile } from '../../model/types/profileSchema';
@@ -13,6 +13,7 @@ type ProfileProps = PropsWithChildren<{
   profile: Profile | null;
   isLoading: boolean;
   error: string | null;
+  onRepeatFetch?: () => void;
 }>;
 
 export const ProfileCard = memo((props: ProfileProps) => {
@@ -21,6 +22,7 @@ export const ProfileCard = memo((props: ProfileProps) => {
     profile,
     isLoading,
     error,
+    onRepeatFetch,
   } = props;
 
   const { t } = useTranslation([I18nNameSpace.Translation, I18nNameSpace.Profile]);
@@ -36,11 +38,9 @@ export const ProfileCard = memo((props: ProfileProps) => {
   if (error) {
     return (
       <div className={getClassNames(style.profileCard, {}, [className, style.error])}>
-        <Text
-          title={t('При загрузке профиля произошла ошибка', { ns: I18nNameSpace.Profile })}
-          text={t('Попробуйте обновить страницу')}
-          theme={TextTheme.ERROR}
-          align="center"
+        <FetchError
+          message={t('При загрузке профиля произошла ошибка', { ns: I18nNameSpace.Profile })}
+          onRepeat={onRepeatFetch}
         />
       </div>
     );

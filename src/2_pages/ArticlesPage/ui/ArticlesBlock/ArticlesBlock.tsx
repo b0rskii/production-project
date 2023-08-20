@@ -1,4 +1,4 @@
-import { PropsWithChildren, useEffect } from 'react';
+import { PropsWithChildren, useCallback, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import {
@@ -36,6 +36,10 @@ export const ArticlesBlock = (props: ArticlesBlockProps) => {
   const isLoading = useSelector(articlesSelectors.getIsLoading);
   const error = useSelector(articlesSelectors.getError);
 
+  const getArticles = useCallback(() => {
+    dispatch(fetchArticles());
+  }, [dispatch]);
+
   useEffect(() => {
     if (__PROJECT__ !== 'storybook') {
       if (isInit) {
@@ -45,12 +49,12 @@ export const ArticlesBlock = (props: ArticlesBlockProps) => {
 
         if (localArticlesView) dispatch(articlesActions.setView(localArticlesView));
 
-        dispatch(fetchArticles());
+        getArticles();
 
         isInit = false;
       }
     }
-  }, [dispatch]);
+  }, [dispatch, getArticles]);
 
   if (!isInit && !isLoading && !error && !articles.length) {
     return (
@@ -68,6 +72,7 @@ export const ArticlesBlock = (props: ArticlesBlockProps) => {
         isLoading={isLoading}
         error={error}
         skeletonsCount={ARTICLES_LIMIT}
+        onRepeatFetch={getArticles}
       />
     </section>
   );
