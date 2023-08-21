@@ -55,10 +55,6 @@ export const ProfileBlock = (props: ProfileBlockProps) => {
   }, [dispatch, id]);
 
   useEffect(() => {
-    if (__PROJECT__ === 'storybook') {
-      return;
-    }
-
     if (!isCurrentProfile) {
       fetchProfile();
     }

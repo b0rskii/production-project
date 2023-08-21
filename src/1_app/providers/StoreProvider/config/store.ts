@@ -5,6 +5,7 @@ import { notificationsReducer, NOTIFICATION_SLICE } from '6_shared/utils/notific
 import { api, rtkApi } from '6_shared/api';
 import { createReducerManager } from './reducerManager';
 import { StateSchema } from './StateSchema';
+import { skipThunk } from './middlewares';
 
 export const createReduxStore = (
   initialState?: StateSchema,
@@ -30,7 +31,9 @@ export const createReduxStore = (
           api,
         },
       },
-    }).concat(rtkApi.middleware),
+    })
+      .concat(rtkApi.middleware)
+      .concat(skipThunk),
   });
 
   // @ts-ignore

@@ -36,16 +36,10 @@ export const ArticleCommentsBlock = memo((props: ArticleCommentsBlockProps) => {
   }, [dispatch, articleId]);
 
   useEffect(() => {
-    if (__PROJECT__ !== 'storybook') {
-      fetchComments();
-    }
+    fetchComments();
   }, [fetchComments]);
 
   const sendCommentHandler = useCallback(() => {
-    if (__PROJECT__ === 'storybook') {
-      return;
-    }
-
     dispatch(sendArticleComment({
       success: t('Комментарий добавлен'),
       error: t('Не удалось добавить комментарий'),

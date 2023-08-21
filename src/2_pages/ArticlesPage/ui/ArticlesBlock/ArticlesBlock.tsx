@@ -41,18 +41,16 @@ export const ArticlesBlock = (props: ArticlesBlockProps) => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (__PROJECT__ !== 'storybook') {
-      if (isInit) {
-        const localArticlesView = localStorage.getItem(
-          LocalStorageKey.ARTICLES_VIEW,
-        ) as ListView | null;
+    if (isInit) {
+      const localArticlesView = localStorage.getItem(
+        LocalStorageKey.ARTICLES_VIEW,
+      ) as ListView | null;
 
-        if (localArticlesView) dispatch(articlesActions.setView(localArticlesView));
+      if (localArticlesView) dispatch(articlesActions.setView(localArticlesView));
 
-        getArticles();
+      getArticles();
 
-        isInit = false;
-      }
+      isInit = false;
     }
   }, [dispatch, getArticles]);
 

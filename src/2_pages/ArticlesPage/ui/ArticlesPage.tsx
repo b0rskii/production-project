@@ -19,7 +19,7 @@ const ArticlesPage = (props: ArticlesPageProps) => {
   const isLoading = useSelector(articlesSelectors.getIsLoading);
 
   const scrollToPageBottomHandler = () => {
-    if (__PROJECT__ === 'storybook' || !isHasMore || isLoading) {
+    if (!isHasMore || isLoading) {
       return;
     }
     dispatch(fetchArticles());

@@ -28,9 +28,7 @@ export const ArticleDetailsBlock = memo((props: ArticleDetailsBlockProps) => {
   }, [articleId, dispatch]);
 
   useEffect(() => {
-    if (__PROJECT__ !== 'storybook') {
-      fetchArticle();
-    }
+    fetchArticle();
   }, [fetchArticle]);
 
   return (

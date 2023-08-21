@@ -23,7 +23,7 @@ const ArticleDetailsPage = (props: ArticleDetailsPageProps) => {
   const article = useSelector(articleSelectors.getArticle);
 
   const scrollToPageBottomHandler = () => {
-    if (!isCommentsBlockShow && article && __PROJECT__ !== 'storybook') {
+    if (!isCommentsBlockShow && article) {
       setIsCommentsBlockShow(true);
     }
   };
