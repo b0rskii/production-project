@@ -19,7 +19,7 @@ type ArticleCommentsBlockProps = PropsWithChildren<{
   articleId?: string;
 }>;
 
-export const ArticleCommentsBlock = memo((props: ArticleCommentsBlockProps) => {
+const ArticleCommentsBlock = memo((props: ArticleCommentsBlockProps) => {
   const { className, articleId } = props;
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
@@ -63,3 +63,5 @@ export const ArticleCommentsBlock = memo((props: ArticleCommentsBlockProps) => {
     </section>
   );
 });
+
+export default ArticleCommentsBlock;

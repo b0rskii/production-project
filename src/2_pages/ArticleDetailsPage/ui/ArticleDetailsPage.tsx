@@ -1,4 +1,4 @@
-import { PropsWithChildren, memo, useState } from 'react';
+import { PropsWithChildren, Suspense, memo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Page } from '3_widgets/Page';
@@ -7,7 +7,7 @@ import { getClassNames } from '6_shared/utils/classNames';
 import { Header } from './Header';
 import { ArticleDetailsBlock } from './ArticleDetailsBlock';
 import { RecomendationsBlock } from './RecomendationsBlock';
-import { ArticleCommentsBlock } from './ArticleCommentsBlock';
+import { ArticleCommentsBlockLazy } from './ArticleCommentsBlock';
 import style from './ArticleDetailsPage.module.scss';
 
 type ArticleDetailsPageProps = PropsWithChildren<{
@@ -38,7 +38,9 @@ const ArticleDetailsPage = (props: ArticleDetailsPageProps) => {
       <RecomendationsBlock className={style.block} />
 
       {isCommentsBlockShow && (
-        <ArticleCommentsBlock className={style.block} articleId={id} />
+        <Suspense>
+          <ArticleCommentsBlockLazy className={style.block} articleId={id} />
+        </Suspense>
       )}
     </Page>
   );

@@ -1,1 +1,1 @@
-export { ArticleCommentsBlock } from './ArticleCommentsBlock';
+export { ArticleCommentsBlockLazy } from './ArticleCommentsBlock.lazy';

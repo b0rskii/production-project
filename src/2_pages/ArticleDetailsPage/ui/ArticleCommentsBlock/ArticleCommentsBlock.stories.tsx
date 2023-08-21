@@ -4,7 +4,7 @@ import { mockNormalizedArticleComments } from '5_entities/ArticleComment';
 import { ThemeDecorator } from '6_shared/config/storybook/ThemeDecorator';
 import { StoreDecorator } from '6_shared/config/storybook/StoreDecorator';
 import { Theme } from '6_shared/utils/theme';
-import { ArticleCommentsBlock } from './ArticleCommentsBlock';
+import ArticleCommentsBlock from './ArticleCommentsBlock';
 
 const { ids, entities } = mockNormalizedArticleComments(3);
 
@@ -16,6 +16,7 @@ export default {
   },
 } as ComponentMeta<typeof ArticleCommentsBlock>;
 
+// eslint-disable-next-line react/jsx-props-no-spreading
 const Template: ComponentStory<typeof ArticleCommentsBlock> = (args) => <ArticleCommentsBlock {...args} />;
 
 export const Default = Template.bind({});
