@@ -9,18 +9,16 @@ import {
   articleCommentsSelectors,
   fetchArticleComments,
 } from '5_entities/ArticleComment';
-import { getClassNames } from '6_shared/utils/classNames';
 import { useAppDispatch, useAsyncReducer } from '6_shared/utils/redux';
 import { Text } from '6_shared/ui/Text';
 import style from './ArticleCommentsBlock.module.scss';
 
 type ArticleCommentsBlockProps = PropsWithChildren<{
-  className?: string;
   articleId?: string;
 }>;
 
 const ArticleCommentsBlock = memo((props: ArticleCommentsBlockProps) => {
-  const { className, articleId } = props;
+  const { articleId } = props;
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
 
@@ -47,7 +45,7 @@ const ArticleCommentsBlock = memo((props: ArticleCommentsBlockProps) => {
   }, [dispatch, t]);
 
   return (
-    <section className={getClassNames('', {}, [className])}>
+    <>
       <Text title={t('Комментарии')} TitleTag="h3" />
       <AddCommentForm
         className={style.addCommentForm}
@@ -60,7 +58,7 @@ const ArticleCommentsBlock = memo((props: ArticleCommentsBlockProps) => {
         error={error}
         onRepeatFetch={fetchComments}
       />
-    </section>
+    </>
   );
 });
 

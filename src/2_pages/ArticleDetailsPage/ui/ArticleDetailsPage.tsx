@@ -37,11 +37,13 @@ const ArticleDetailsPage = (props: ArticleDetailsPageProps) => {
       <ArticleDetailsBlock articleId={id} />
       <RecomendationsBlock className={style.block} />
 
-      {isCommentsBlockShow && (
-        <Suspense>
-          <ArticleCommentsBlockLazy className={style.block} articleId={id} />
-        </Suspense>
-      )}
+      <section className={style.commentsBlock}>
+        {isCommentsBlockShow && (
+          <Suspense>
+            <ArticleCommentsBlockLazy articleId={id} />
+          </Suspense>
+        )}
+      </section>
     </Page>
   );
 };
