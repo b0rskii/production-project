@@ -1,11 +1,14 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { mockNormalizedArticles } from '5_entities/Article';
+import withMock from 'storybook-addon-mock';
+import { mockArticles } from '5_entities/Article';
 import { ThemeDecorator } from '6_shared/config/storybook/ThemeDecorator';
 import { StoreDecorator } from '6_shared/config/storybook/StoreDecorator';
 import { Theme } from '6_shared/utils/theme';
+import { ApiRoutes } from '6_shared/api';
 import { RecomendationsBlock } from './RecomendationsBlock';
 
-const normalizedArticles = mockNormalizedArticles(4);
+const LIMIT = 4;
+const articles = mockArticles(4);
 
 export default {
   title: '2_pages/ArticleDetailsPage/RecomendationsBlock',
@@ -16,11 +19,23 @@ export default {
   decorators: [
     StoreDecorator({
       recommendedArticles: {
-        ids: normalizedArticles.ids,
-        entities: normalizedArticles.entities,
+        limit: LIMIT,
       },
     }),
+    withMock,
   ],
+  parameters: {
+    mockData: [
+      {
+        url: `${__API__}${ApiRoutes.ARTICLES}?_limit=${LIMIT}`,
+        method: 'GET',
+        status: 200,
+        response: {
+          data: articles,
+        },
+      },
+    ],
+  },
 } as ComponentMeta<typeof RecomendationsBlock>;
 
 // eslint-disable-next-line react/jsx-props-no-spreading
