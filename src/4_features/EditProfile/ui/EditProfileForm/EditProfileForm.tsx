@@ -9,7 +9,7 @@ import { Text, TextTheme } from '6_shared/ui/Text';
 import { getClassNames } from '6_shared/utils/classNames';
 import { getKeysMap } from '6_shared/utils/getKeysMap';
 import { I18nNameSpace } from '6_shared/utils/i18n/nameSpace';
-import { ValidateProfileError } from '../../model/types/editProfileSchema';
+import { ValidateProfileError } from '../../model/const';
 import style from './EditProfileForm.module.scss';
 
 export type ProfileHandlers = {

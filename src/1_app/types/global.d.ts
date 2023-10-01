@@ -28,6 +28,7 @@ type DeepPartial<T> = T extends object ? {
   [P in keyof T]?: DeepPartial<T[P]>;
 } : T;
 
+// eslint-disable-next-line no-unused-vars
 type Entries<T> = {
   [K in keyof T]: [K, T[K]];
 }[keyof T][];

@@ -1,6 +1,5 @@
 import { Profile } from '5_entities/Profile';
-import { ValidateProfileError } from '../../types/editProfileSchema';
-import { AgeLimit } from '../../const';
+import { AgeLimit, ValidateProfileError } from '../../const';
 
 export const validateProfileData = (profile?: Profile | null) => {
   if (!profile) {

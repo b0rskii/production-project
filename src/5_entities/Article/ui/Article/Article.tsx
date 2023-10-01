@@ -10,8 +10,10 @@ import { AppLink, AppLinkTheme } from '6_shared/ui/AppLink';
 import { ListView } from '6_shared/ui/ListViewSwitcher';
 import EyeIcon from '6_shared/assets/icons/eye.svg';
 import {
-  ArticleBlockType, ArticleTextBlock as ArticleTextBlockType, Article as ArticleType,
+  ArticleTextBlock as ArticleTextBlockType,
+  Article as ArticleType,
 } from '../../model/types/articleSchema';
+import { ArticleBlockType } from '../../model/const';
 import { ArticleTextBlock } from '../ArticleTextBlock';
 import style from './Article.module.scss';
 

@@ -15,6 +15,7 @@ export default {
   },
 } as ComponentMeta<typeof ProfileBlock>;
 
+// eslint-disable-next-line react/jsx-props-no-spreading
 const Template: ComponentStory<typeof ProfileBlock> = (args) => <ProfileBlock {...args} />;
 
 export const Readonly = Template.bind({});

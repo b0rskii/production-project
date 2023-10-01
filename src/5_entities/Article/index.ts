@@ -4,12 +4,13 @@ export {
   RECOMMENDATIONS_SLICE_NAME as RECOMMENDED_ARTICLES_SLICE,
 } from './model/const';
 
-export { Article, ArticleSchema, ArticleType } from './model/types/articleSchema';
+export type { Article, ArticleSchema } from './model/types/articleSchema';
+export { ArticleType } from './model/const';
 export { articleReducer } from './model/slice/articleSlice';
 export { fetchArticleById } from './model/services/fetchArticleById/fetchArticleById';
 export { ArticleDetails } from './ui/ArticleDetails';
 
-export { ArticlesSchema } from './model/types/articlesSchema';
+export type { ArticlesSchema } from './model/types/articlesSchema';
 export {
   articlesReducer,
   articlesActions,
@@ -18,7 +19,7 @@ export {
 export { fetchArticles } from './model/services/fetchArticles/fetchArticles';
 export { ArticlesList } from './ui/ArticlesList';
 
-export { RecommendedArticlesSchema } from './model/types/recommendedArticlesSchema';
+export type { RecommendedArticlesSchema } from './model/types/recommendedArticlesSchema';
 export { recommendedArticlesReducer } from './model/slice/recommendedArticlesSlice';
 export {
   fetchRecommendedArticles,

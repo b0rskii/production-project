@@ -1,6 +1,7 @@
 import { mockProfile } from '5_entities/Profile';
 import { updateProfileData } from '../services/updateProfileData/updateProfileData';
-import { EditProfileSchema, ValidateProfileError } from '../types/editProfileSchema';
+import { EditProfileSchema } from '../types/editProfileSchema';
+import { ValidateProfileError } from '../const';
 import { editProfileReducer, editProfileActions } from './editProfileSlice';
 
 describe('editProfileSlice', () => {

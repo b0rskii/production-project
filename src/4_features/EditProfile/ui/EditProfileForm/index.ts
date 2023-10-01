@@ -1,1 +1,2 @@
-export { EditProfileForm, ProfileHandlers } from './EditProfileForm';
+export { EditProfileForm } from './EditProfileForm';
+export type { ProfileHandlers } from './EditProfileForm';

@@ -1,7 +1,6 @@
 import { mockProfile } from '5_entities/Profile';
-import { ValidateProfileError } from '../../types/editProfileSchema';
 import { validateProfileData } from './validateProfile';
-import { AgeLimit } from '../../const';
+import { AgeLimit, ValidateProfileError } from '../../const';
 
 describe('validateProfileData', () => {
   it('if no profile should return no data error', () => {

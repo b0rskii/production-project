@@ -1,6 +1,7 @@
 import { EntityState } from '@reduxjs/toolkit';
 import { mockUser } from '5_entities/User';
-import { Article, ArticleBlockType, ArticleType } from './types/articleSchema';
+import { Article } from './types/articleSchema';
+import { ArticleBlockType, ArticleType } from './const';
 
 /* eslint-disable max-len */
 export const mockArticle = (id: string = '1'): Article => ({
