@@ -2,7 +2,6 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkAPI } from '1_app/providers/StoreProvider';
 import { ApiRoutes } from '6_shared/api';
 import { Article } from '../../types/articleSchema';
-import { articlesActions } from '../../slice/articlesSlice';
 import { ARTICLES_SLICE_NAME, ArticleType } from '../../const';
 
 type Returned = {
@@ -12,7 +11,7 @@ type Returned = {
 
 export const fetchArticles = createAsyncThunk<Returned, undefined, ThunkAPI<string>>(
   `${ARTICLES_SLICE_NAME}/fetchArticles`,
-  async (_, { rejectWithValue, extra, getState, dispatch }) => {
+  async (_, { rejectWithValue, extra, getState }) => {
     const { api } = extra;
     const state = getState();
     const page = state.articles?.page;
@@ -42,8 +41,6 @@ export const fetchArticles = createAsyncThunk<Returned, undefined, ThunkAPI<stri
       if (!data) {
         throw new Error();
       }
-
-      dispatch(articlesActions.setPage(currentPage));
 
       return {
         data,

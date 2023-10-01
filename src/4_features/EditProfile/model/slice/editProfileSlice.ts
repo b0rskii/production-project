@@ -48,7 +48,9 @@ export const editProfileSlice = createSlice({
         state.isReadonly = true;
       })
       .addCase(updateProfileData.rejected, (state, action) => {
-        state.error = action.payload || null;
+        const { payload } = action;
+        state.validateErrors = payload?.validateError ?? null;
+        state.error = payload?.serverError ?? null;
         state.isLoading = false;
       });
   },

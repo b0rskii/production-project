@@ -49,6 +49,8 @@ export const articlesSlice = createSlice({
         const { data, totalCount } = action.payload;
         state.error = null;
         state.isLoading = false;
+        // eslint-disable-next-line operator-assignment
+        state.page = state.page + 1;
         articlesAdapter.addMany(state, data);
         state.isHasMore = state.ids.length < Number(totalCount);
       })

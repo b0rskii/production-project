@@ -4,14 +4,16 @@ import { Profile, profileActions } from '5_entities/Profile';
 import { notificationsActions } from '6_shared/utils/notifications';
 import { ApiRoutes } from '6_shared/api';
 import { StatusMessage } from '6_shared/types/common';
-import { editProfileActions } from '../../slice/editProfileSlice';
 import { validateProfileData } from '../validateProfile/validateProfile';
-import { SLICE_NAME } from '../../const';
+import { SLICE_NAME, ValidateProfileError } from '../../const';
 
 export const updateProfileData = createAsyncThunk<
   Profile,
   StatusMessage,
-  ThunkAPI<string | null>
+  ThunkAPI<{
+    validateError: ValidateProfileError[] | null,
+    serverError: string | null,
+  }>
 >(
   `${SLICE_NAME}/updateProfileData`,
   async (statusMessage, { rejectWithValue, getState, extra, dispatch }) => {
@@ -21,8 +23,7 @@ export const updateProfileData = createAsyncThunk<
     const profileErrors = validateProfileData(profileForm);
 
     if (profileErrors.length) {
-      dispatch(editProfileActions.setValidateError(profileErrors));
-      return rejectWithValue(null);
+      return rejectWithValue({ validateError: profileErrors, serverError: null });
     }
 
     try {
@@ -38,7 +39,7 @@ export const updateProfileData = createAsyncThunk<
       return data;
     } catch (error) {
       dispatch(notificationsActions.notifyError(statusMessage.error));
-      return rejectWithValue('error');
+      return rejectWithValue({ validateError: null, serverError: 'error' });
     }
   },
 );
