@@ -1,7 +1,6 @@
 import { testAsyncThunk } from '6_shared/utils/tests';
 import { fetchArticles } from './fetchArticles';
 import { Article } from '../../types/articleSchema';
-import { articlesActions } from '../../slice/articlesSlice';
 import { mockArticles } from '../../mocks';
 
 const PAGE = 1;
@@ -17,6 +16,11 @@ describe('fetchArticles', () => {
         page: PAGE,
         limit: LIMIT,
       },
+      sortArticles: {
+        sortingType: 'title',
+        sortingOrder: 'asc',
+      },
+      filterArticles: {},
     });
 
     thunk.api.get.mockReturnValue(
@@ -27,8 +31,7 @@ describe('fetchArticles', () => {
 
     expect(thunk.api.get).toHaveBeenCalled();
     expect(result.meta.requestStatus).toBe('fulfilled');
-    expect(thunk.dispatch).toHaveBeenCalledWith(articlesActions.setPage(PAGE + 1));
-    expect(thunk.dispatch).toHaveBeenCalledTimes(3);
+    expect(thunk.dispatch).toHaveBeenCalledTimes(2);
     expect(result.payload).toEqual({ data: RESPONSE_DATA, totalCount: HEADERS['x-total-count'] });
   });
 
@@ -38,6 +41,11 @@ describe('fetchArticles', () => {
         page: PAGE,
         limit: LIMIT,
       },
+      sortArticles: {
+        sortingType: 'title',
+        sortingOrder: 'asc',
+      },
+      filterArticles: {},
     });
 
     thunk.api.get.mockReturnValue(

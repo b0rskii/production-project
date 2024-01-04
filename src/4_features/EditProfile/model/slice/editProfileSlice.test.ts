@@ -87,18 +87,20 @@ describe('editProfileSlice', () => {
   });
 
   it('updateProfileData rejected', () => {
-    const payload = 'error';
+    const payload = { validateErrors: null, serverError: 'error' };
 
     expect(editProfileReducer(
       {
         error: null,
         isLoading: true,
+        validateErrors: null,
       } as EditProfileSchema,
       { type: updateProfileData.rejected.type, payload },
     ))
       .toEqual({
         isLoading: false,
-        error: payload,
+        error: payload.serverError,
+        validateErrors: null,
       });
   });
 });

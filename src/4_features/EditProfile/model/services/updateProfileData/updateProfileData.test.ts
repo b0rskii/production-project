@@ -4,7 +4,6 @@ import { mockUser } from '5_entities/User';
 import { notificationsActions } from '6_shared/utils/notifications';
 import { StatusMessage } from '6_shared/const/mocks';
 import { updateProfileData } from './updateProfileData';
-import { editProfileActions } from '../../slice/editProfileSlice';
 import { validateProfileData } from '../validateProfile/validateProfile';
 
 const USER_DATA = mockUser();
@@ -48,11 +47,12 @@ describe('updateProfileData', () => {
     expect(result.meta.requestStatus).toBe('rejected');
     expect(thunk.dispatch).toHaveBeenCalledWith(notificationsActions.notifyError(StatusMessage.error));
     expect(thunk.dispatch).toHaveBeenCalledTimes(3);
-    expect(result.payload).toBe('error');
+    expect(result.payload).toEqual({ validateError: null, serverError: 'error' });
   });
 
   it('if data invalid', async () => {
     const invalidProfileData = { ...mockProfile, firstname: '' };
+    const validationErrors = validateProfileData(invalidProfileData);
 
     const thunk = testAsyncThunk(updateProfileData, {
       editProfile: { profileForm: invalidProfileData },
@@ -63,13 +63,8 @@ describe('updateProfileData', () => {
 
     expect(thunk.api.put).not.toHaveBeenCalled();
 
-    expect(thunk.dispatch)
-      .toHaveBeenCalledWith(
-        editProfileActions.setValidateError(validateProfileData(invalidProfileData)),
-      );
-
     expect(result.meta.requestStatus).toBe('rejected');
-    expect(thunk.dispatch).toHaveBeenCalledTimes(3);
-    expect(result.payload).toBe(null);
+    expect(thunk.dispatch).toHaveBeenCalledTimes(2);
+    expect(result.payload).toEqual({ validateError: validationErrors, serverError: null });
   });
 });

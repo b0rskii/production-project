@@ -58,6 +58,7 @@ describe('articlesSlice', () => {
       entities: normalizedArticles.entities,
       isLoading: true,
       error: 'error',
+      page: 0,
       isHasMore: true,
     };
 
@@ -72,6 +73,7 @@ describe('articlesSlice', () => {
         entities: { ...normalizedArticles.entities, 11: payload.data[0] },
         isLoading: false,
         error: null,
+        page: 1,
         isHasMore: false,
       });
   });
@@ -82,6 +84,7 @@ describe('articlesSlice', () => {
       entities: normalizedArticles.entities,
       isLoading: true,
       error: 'error',
+      page: 0,
       isHasMore: true,
     };
 
@@ -96,6 +99,7 @@ describe('articlesSlice', () => {
         entities: { ...normalizedArticles.entities, 11: payload.data[0] },
         isLoading: false,
         error: null,
+        page: 1,
         isHasMore: true,
       });
   });
