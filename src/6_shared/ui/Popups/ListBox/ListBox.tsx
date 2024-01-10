@@ -3,6 +3,7 @@ import { Listbox } from '@headlessui/react';
 import { getClassNames } from '6_shared/utils/classNames';
 import { Button, ButtonTheme } from '6_shared/ui/Button';
 import style from './ListBox.module.scss';
+import popupStyle from '../popup.module.scss';
 
 export type ListBoxItem = {
   value: string;
@@ -34,7 +35,7 @@ export const ListBox = memo((props: Props) => {
     <Listbox
       as="div"
       disabled={disabled}
-      className={getClassNames(style.listBox, {}, [className])}
+      className={getClassNames(style.listBox, {}, [popupStyle.el, className])}
       value={selected}
       onChange={onChange}
       data-testid={dataTestid}
@@ -48,7 +49,7 @@ export const ListBox = memo((props: Props) => {
           {selected}
         </Button>
       </Listbox.Button>
-      <Listbox.Options className={style.options}>
+      <Listbox.Options className={getClassNames(style.options, {}, [popupStyle.items])}>
         {items.map(({ value, content, disabled }) => (
           <Listbox.Option
             as={Fragment}
@@ -58,12 +59,12 @@ export const ListBox = memo((props: Props) => {
           >
             {({ active }) => {
               const modes = {
-                [style.active]: active,
-                [style.disabled]: disabled,
+                [popupStyle.active]: active,
+                [popupStyle.disabled]: disabled,
               };
 
               return (
-                <li className={getClassNames(style.item, modes, [])}>
+                <li className={getClassNames(popupStyle.item, modes, [])}>
                   {content}
                 </li>
               );

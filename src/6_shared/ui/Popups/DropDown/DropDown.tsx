@@ -3,6 +3,7 @@ import { Menu } from '@headlessui/react';
 import { getClassNames } from '6_shared/utils/classNames';
 import { Direction } from '6_shared/types/common';
 import style from './DropDown.module.scss';
+import popupStyle from '../popup.module.scss';
 
 export type DropDownItem = {
   content: ReactNode;
@@ -23,12 +24,12 @@ export const DropDown = memo((props: Props) => {
   return (
     <Menu
       as="div"
-      className={getClassNames(style.dropDown, {}, [className])}
+      className={getClassNames(style.dropDown, {}, [popupStyle.el, className])}
     >
       <Menu.Button as="div" className={style.button}>
         {button}
       </Menu.Button>
-      <Menu.Items className={getClassNames(style.items, {}, [style[direction]])}>
+      <Menu.Items className={getClassNames(style.items, {}, [popupStyle.items, style[direction]])}>
         {items.map(({ content, disabled, onClick }, i) => (
           <Menu.Item
             as={Fragment}
@@ -38,13 +39,13 @@ export const DropDown = memo((props: Props) => {
           >
             {({ active }) => {
               const modes = {
-                [style.active]: active,
-                [style.disabled]: disabled,
+                [popupStyle.active]: active,
+                [popupStyle.disabled]: disabled,
               };
 
               return (
                 <button
-                  className={getClassNames(style.item, modes, [])}
+                  className={getClassNames(style.item, modes, [popupStyle.item])}
                   type="button"
                   onClick={onClick}
                 >

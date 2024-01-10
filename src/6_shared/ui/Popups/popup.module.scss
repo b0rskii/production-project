@@ -1,17 +1,11 @@
-.listBox {
+.el {
   position: relative;
 }
 
-.button {
-  padding-top: 2px;
-  padding-bottom: 2px;
-}
-
-.options {
+.items {
   position: absolute;
-  min-width: 100%;
-  background: var(--listbox-bg);
   border-radius: 8px;
+  background: var(--listbox-bg);
   z-index: 10000;
 }
 

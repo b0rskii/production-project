@@ -9,7 +9,7 @@ import { I18nNameSpace } from '6_shared/utils/i18n/nameSpace';
 import { LocalStorageKey } from '6_shared/const/localStorage';
 import { getClassNames } from '6_shared/utils/classNames';
 import { RoutePath } from '6_shared/config/routing';
-import { DropDown } from '6_shared/ui/DropDown';
+import { DropDown } from '6_shared/ui/Popups';
 import { Avatar } from '6_shared/ui/Avatar';
 import { LoginModal } from '../LoginModal/LoginModal';
 

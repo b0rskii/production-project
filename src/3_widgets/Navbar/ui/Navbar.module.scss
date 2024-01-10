@@ -16,9 +16,21 @@
   display: flex;
   align-items: center;
   gap: 15px;
+  width: 100%;
+  padding-inline: 25px;
 
   a {
     text-decoration: none;
+  }
+}
+
+.notificationsButton {
+  display: flex;
+  align-items: center;
+
+  svg {
+    width: 20px;
+    height: 20px;
   }
 }
 
