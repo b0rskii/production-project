@@ -13,6 +13,26 @@
   padding: 5px 10px;
 }
 
+.top-right {
+  bottom: 100%;
+  left: 0;
+}
+
+.top-left {
+  bottom: 100%;
+  right: 0;
+}
+
+.bottom-right {
+  top: 100%;
+  left: 0;
+}
+
+.bottom-left {
+  top: 100%;
+  right: 0;
+}
+
 .active {
   background: var(--card-bg);
 }

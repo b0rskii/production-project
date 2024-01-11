@@ -19,7 +19,7 @@ type Props = PropsWithChildren<{
 }>;
 
 export const DropDown = memo((props: Props) => {
-  const { className, items, button, direction = 'right' } = props;
+  const { className, items, button, direction = 'bottom-right' } = props;
 
   return (
     <Menu
@@ -29,7 +29,9 @@ export const DropDown = memo((props: Props) => {
       <Menu.Button as="div" className={style.button}>
         {button}
       </Menu.Button>
-      <Menu.Items className={getClassNames(style.items, {}, [popupStyle.items, style[direction]])}>
+      <Menu.Items
+        className={getClassNames(style.items, {}, [popupStyle.items, popupStyle[direction]])}
+      >
         {items.map(({ content, disabled, onClick }, i) => (
           <Menu.Item
             as={Fragment}

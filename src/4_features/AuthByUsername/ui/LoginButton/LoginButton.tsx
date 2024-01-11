@@ -95,7 +95,7 @@ export const LoginButton = memo((props: LoginButtonProps) => {
             />
           )}
           items={menuItems}
-          direction="left"
+          direction="bottom-left"
         />
       ) : (
         <Button

@@ -3,4 +3,4 @@ export type StatusMessage = {
   error: string;
 };
 
-export type Direction = 'top' | 'right' | 'bottom' | 'left';
+export type Direction = 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left';

@@ -43,7 +43,15 @@ export const Navbar = memo((props: NavbarProps) => {
       />
       {getNavigation()}
       <Stack gap="l">
-        <Popover trigger={<Icon Svg={BellIcon} inverted />} />
+        <Popover
+          trigger={(
+            <Button theme={ButtonTheme.CLEAR}>
+              <Icon Svg={BellIcon} inverted />
+            </Button>
+          )}
+          content="fregghrt"
+          direction="bottom-left"
+        />
         <LoginButton className={style.loginButton} theme={ButtonTheme.OUTLINE_INVERTED} />
       </Stack>
     </header>

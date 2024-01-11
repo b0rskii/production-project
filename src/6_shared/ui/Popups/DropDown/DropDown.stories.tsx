@@ -40,7 +40,7 @@ Default.args = {};
 
 export const LeftDirection = Template.bind({});
 LeftDirection.args = {
-  direction: 'left',
+  direction: 'bottom-left',
 };
 
 export const DefaultDark = Template.bind({});
@@ -49,6 +49,6 @@ DefaultDark.decorators = [ThemeDecorator(Theme.DARK)];
 
 export const LeftDirectionDark = Template.bind({});
 LeftDirectionDark.args = {
-  direction: 'left',
+  direction: 'bottom-left',
 };
 LeftDirectionDark.decorators = [ThemeDecorator(Theme.DARK)];
