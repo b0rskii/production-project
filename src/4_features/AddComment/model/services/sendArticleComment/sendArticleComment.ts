@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkAPI } from '1_app/providers/StoreProvider';
 import { ArticleComment, articleCommentsActions } from '5_entities/ArticleComment';
-import { notificationsActions } from '6_shared/utils/notifications';
+import { toastifyActions } from '6_shared/ui/Toastify';
 import { Comment } from '6_shared/types/comment';
 import { StatusMessage } from '6_shared/types/common';
 import { ApiRoutes } from '6_shared/api';
@@ -44,11 +44,11 @@ export const sendArticleComment = createAsyncThunk<
       };
 
       dispatch(articleCommentsActions.addComment(addedComment));
-      dispatch(notificationsActions.notify(statusMessage.success));
+      dispatch(toastifyActions.notify(statusMessage.success));
 
       return addedComment;
     } catch (error) {
-      dispatch(notificationsActions.notifyError(statusMessage.error));
+      dispatch(toastifyActions.notifyError(statusMessage.error));
       return rejectWithValue('error');
     }
   },

@@ -4,7 +4,7 @@ import style from './Notification.module.scss';
 
 type NotificationType = 'success' | 'error';
 
-export type NotificationItem = {
+export type ToastifyItem = {
   text: string;
   type: NotificationType;
 };
@@ -12,7 +12,7 @@ export type NotificationItem = {
 type NotificationProps = PropsWithChildren<{
   className?: string;
   duration: number;
-  notification: NotificationItem;
+  notification: ToastifyItem;
   onRemoveFirstNotification: () => void;
 }>;
 

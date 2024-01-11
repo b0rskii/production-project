@@ -26,13 +26,13 @@ import {
 } from '5_entities/Article';
 
 import { ArticleCommentsSchema, ARTICLE_COMMENTS_SLICE } from '5_entities/ArticleComment';
-import { NOTIFICATION_SLICE, NotificationsSchema } from '6_shared/utils/notifications';
+import { TOASTIFY_SLICE, ToastifySchema } from '6_shared/ui/Toastify';
 import { rtkApi } from '6_shared/api';
 
 export type StateSchema = {
   [rtkApi.reducerPath]: ReturnType<typeof rtkApi.reducer>,
   [USER_SLICE]: UserSchema;
-  [NOTIFICATION_SLICE]: NotificationsSchema;
+  [TOASTIFY_SLICE]: ToastifySchema;
   [UI_SLICE]: UISchema;
   [LOGIN_SLICE]?: LoginSchema;
   [PROFILE_SLICE]?: ProfileSchema;

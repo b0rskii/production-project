@@ -1,7 +1,7 @@
 import { configureStore, ReducersMapObject, Reducer, AnyAction } from '@reduxjs/toolkit';
 import { UI_SLICE, uiReducer } from '3_widgets/Page';
 import { userReducer, USER_SLICE } from '5_entities/User';
-import { notificationsReducer, NOTIFICATION_SLICE } from '6_shared/utils/notifications';
+import { toastifyReducer, TOASTIFY_SLICE } from '6_shared/ui/Toastify';
 import { api, rtkApi } from '6_shared/api';
 import { createReducerManager } from './reducerManager';
 import { StateSchema } from './StateSchema';
@@ -15,7 +15,7 @@ export const createReduxStore = (
     ...asyncReducers,
     [rtkApi.reducerPath]: rtkApi.reducer,
     [USER_SLICE]: userReducer,
-    [NOTIFICATION_SLICE]: notificationsReducer,
+    [TOASTIFY_SLICE]: toastifyReducer,
     [UI_SLICE]: uiReducer,
   };
 

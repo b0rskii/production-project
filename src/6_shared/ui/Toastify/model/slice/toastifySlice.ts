@@ -1,13 +1,13 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { NotificationsSchema } from '../types/notificationsSchema';
+import { ToastifySchema } from '../types/toastifySchema';
 
-export const initialState: NotificationsSchema = {
+export const initialState: ToastifySchema = {
   data: [],
 };
 
-export const SLICE_NAME = 'notifications';
+export const SLICE_NAME = 'toastify';
 
-export const notificationsSlice = createSlice({
+export const toastifySlice = createSlice({
   name: SLICE_NAME,
   initialState,
   reducers: {
@@ -30,6 +30,6 @@ export const notificationsSlice = createSlice({
 });
 
 export const {
-  actions: notificationsActions,
-  reducer: notificationsReducer,
-} = notificationsSlice;
+  actions: toastifyActions,
+  reducer: toastifyReducer,
+} = toastifySlice;

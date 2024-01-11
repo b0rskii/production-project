@@ -2,16 +2,16 @@ import { useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from '6_shared/utils/redux';
 import { Timer } from '6_shared/const/timers';
-import { notificationsSelectors } from '../../model/selectors';
+import { toastifySelectors } from '../../model/selectors';
 import { NotificationsList } from '../NotificationsList';
-import { notificationsActions } from '../../model/slice/notificationsSlice';
+import { toastifyActions } from '../../model/slice/toastifySlice';
 
-export const NotificationsContainer = () => {
+export const ToastifyContainer = () => {
   const dispatch = useAppDispatch();
-  const notifications = useSelector(notificationsSelectors.getNotifications);
+  const notifications = useSelector(toastifySelectors.getToastify);
 
   const onRemoveFirstNotification = useCallback(() => {
-    dispatch(notificationsActions.removeFirstNotification());
+    dispatch(toastifyActions.removeFirstNotification());
   }, [dispatch]);
 
   return (

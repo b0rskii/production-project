@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkAPI } from '1_app/providers/StoreProvider';
 import { Profile, profileActions } from '5_entities/Profile';
-import { notificationsActions } from '6_shared/utils/notifications';
+import { toastifyActions } from '6_shared/ui/Toastify';
 import { ApiRoutes } from '6_shared/api';
 import { StatusMessage } from '6_shared/types/common';
 import { validateProfileData } from '../validateProfile/validateProfile';
@@ -34,11 +34,11 @@ export const updateProfileData = createAsyncThunk<
       }
 
       dispatch(profileActions.setProfile(data));
-      dispatch(notificationsActions.notify(statusMessage.success));
+      dispatch(toastifyActions.notify(statusMessage.success));
 
       return data;
     } catch (error) {
-      dispatch(notificationsActions.notifyError(statusMessage.error));
+      dispatch(toastifyActions.notifyError(statusMessage.error));
       return rejectWithValue({ validateError: null, serverError: 'error' });
     }
   },

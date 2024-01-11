@@ -1,7 +1,7 @@
 import { testAsyncThunk } from '6_shared/utils/tests';
 import { Profile, mockProfile, profileActions } from '5_entities/Profile';
 import { mockUser } from '5_entities/User';
-import { notificationsActions } from '6_shared/utils/notifications';
+import { toastifyActions } from '6_shared/ui/Toastify';
 import { StatusMessage } from '6_shared/const/mocks';
 import { updateProfileData } from './updateProfileData';
 import { validateProfileData } from '../validateProfile/validateProfile';
@@ -26,7 +26,7 @@ describe('updateProfileData', () => {
     expect(thunk.api.put).toHaveBeenCalled();
     expect(result.meta.requestStatus).toBe('fulfilled');
     expect(thunk.dispatch).toHaveBeenCalledWith(profileActions.setProfile(RESPONSE_DATA));
-    expect(thunk.dispatch).toHaveBeenCalledWith(notificationsActions.notify(StatusMessage.success));
+    expect(thunk.dispatch).toHaveBeenCalledWith(toastifyActions.notify(StatusMessage.success));
     expect(thunk.dispatch).toHaveBeenCalledTimes(4);
     expect(result.payload).toEqual(RESPONSE_DATA);
   });
@@ -45,7 +45,7 @@ describe('updateProfileData', () => {
 
     expect(thunk.api.put).toHaveBeenCalled();
     expect(result.meta.requestStatus).toBe('rejected');
-    expect(thunk.dispatch).toHaveBeenCalledWith(notificationsActions.notifyError(StatusMessage.error));
+    expect(thunk.dispatch).toHaveBeenCalledWith(toastifyActions.notifyError(StatusMessage.error));
     expect(thunk.dispatch).toHaveBeenCalledTimes(3);
     expect(result.payload).toEqual({ validateError: null, serverError: 'error' });
   });

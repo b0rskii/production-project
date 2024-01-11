@@ -2,9 +2,9 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { ThemeDecorator } from '6_shared/config/storybook/ThemeDecorator';
 import { Theme } from '6_shared/utils/theme';
 import { NotificationsList } from './NotificationsList';
-import { NotificationItem } from '../Notification';
+import { ToastifyItem } from '../Notification';
 
-const notification: NotificationItem = { text: 'Операция прошла успешно', type: 'success' };
+const notification: ToastifyItem = { text: 'Операция прошла успешно', type: 'success' };
 const notifications = [notification, notification, notification];
 
 export default {
@@ -15,6 +15,7 @@ export default {
   },
 } as ComponentMeta<typeof NotificationsList>;
 
+// eslint-disable-next-line react/jsx-props-no-spreading
 const Template: ComponentStory<typeof NotificationsList> = (args) => <NotificationsList {...args} />;
 
 export const Default = Template.bind({});

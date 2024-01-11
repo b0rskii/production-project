@@ -2,7 +2,7 @@ import { testAsyncThunk } from '6_shared/utils/tests';
 import { articleCommentsActions } from '5_entities/ArticleComment';
 import { mockArticle } from '5_entities/Article';
 import { mockUser } from '5_entities/User';
-import { notificationsActions } from '6_shared/utils/notifications';
+import { toastifyActions } from '6_shared/ui/Toastify';
 import { StatusMessage } from '6_shared/const/mocks';
 import { sendArticleComment } from './sendArticleComment';
 
@@ -36,7 +36,7 @@ describe('sendArticleComment', () => {
     expect(thunk.api.post).toHaveBeenCalled();
     expect(result.meta.requestStatus).toBe('fulfilled');
     expect(thunk.dispatch).toHaveBeenCalledWith(articleCommentsActions.addComment(addedComment));
-    expect(thunk.dispatch).toHaveBeenCalledWith(notificationsActions.notify(StatusMessage.success));
+    expect(thunk.dispatch).toHaveBeenCalledWith(toastifyActions.notify(StatusMessage.success));
     expect(thunk.dispatch).toHaveBeenCalledTimes(4);
     expect(result.payload).toEqual(addedComment);
   });
@@ -56,7 +56,7 @@ describe('sendArticleComment', () => {
 
     expect(thunk.api.post).toHaveBeenCalled();
     expect(result.meta.requestStatus).toBe('rejected');
-    expect(thunk.dispatch).toHaveBeenCalledWith(notificationsActions.notifyError(StatusMessage.error));
+    expect(thunk.dispatch).toHaveBeenCalledWith(toastifyActions.notifyError(StatusMessage.error));
     expect(thunk.dispatch).toHaveBeenCalledTimes(3);
     expect(result.payload).toBe('error');
   });
