@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { LoginButton } from '4_features/AuthByUsername';
 import { CreateArticleButton } from '4_features/EditArticle';
 import { userSelectors } from '5_entities/User';
+import { NotificationsList } from '5_entities/Notification';
 import { Stack } from '6_shared/ui/Stack';
 import { Button, ButtonTheme } from '6_shared/ui/Button';
 import { Icon } from '6_shared/ui/Icon';
@@ -49,9 +50,10 @@ export const Navbar = memo((props: NavbarProps) => {
               <Icon Svg={BellIcon} inverted />
             </Button>
           )}
-          content="fregghrt"
           direction="bottom-left"
-        />
+        >
+          <NotificationsList className={style.notificationsList} />
+        </Popover>
         <LoginButton className={style.loginButton} theme={ButtonTheme.OUTLINE_INVERTED} />
       </Stack>
     </header>

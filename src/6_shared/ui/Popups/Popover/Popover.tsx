@@ -8,12 +8,11 @@ import popupStyle from '../popup.module.scss';
 type Props = PropsWithChildren<{
   className?: string;
   trigger: ReactNode;
-  content: ReactNode;
   direction?: Direction;
 }>;
 
 export const Popover = memo((props: Props) => {
-  const { className, trigger, content, direction = 'bottom-right' } = props;
+  const { className, trigger, direction = 'bottom-right', children } = props;
 
   return (
     <UiPopover className={getClassNames(style.popover, {}, [popupStyle.el, className])}>
@@ -24,7 +23,7 @@ export const Popover = memo((props: Props) => {
       <UiPopover.Panel
         className={getClassNames(style.content, {}, [popupStyle.items, popupStyle[direction]])}
       >
-        {content}
+        {children}
       </UiPopover.Panel>
     </UiPopover>
   );
