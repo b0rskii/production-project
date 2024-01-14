@@ -3,14 +3,11 @@ import { useSelector } from 'react-redux';
 import { LoginButton } from '4_features/AuthByUsername';
 import { CreateArticleButton } from '4_features/EditArticle';
 import { userSelectors } from '5_entities/User';
-import { NotificationsList } from '5_entities/Notification';
+import { NotificationsPopover } from '5_entities/Notification';
 import { Stack } from '6_shared/ui/Stack';
-import { Button, ButtonTheme } from '6_shared/ui/Button';
-import { Icon } from '6_shared/ui/Icon';
+import { ButtonTheme } from '6_shared/ui/Button';
 import { getClassNames } from '6_shared/utils/classNames';
 import { Text, TextTheme } from '6_shared/ui/Text';
-import { Popover } from '6_shared/ui/Popups';
-import BellIcon from '6_shared/assets/icons/bell.svg';
 import style from './Navbar.module.scss';
 
 type NavbarProps = {
@@ -42,18 +39,11 @@ export const Navbar = memo((props: NavbarProps) => {
         title="Prod App"
         theme={TextTheme.BG_COLOR}
       />
+
       {getNavigation()}
+
       <Stack gap="l">
-        <Popover
-          trigger={(
-            <Button theme={ButtonTheme.CLEAR}>
-              <Icon Svg={BellIcon} inverted />
-            </Button>
-          )}
-          direction="bottom-left"
-        >
-          <NotificationsList className={style.notificationsList} />
-        </Popover>
+        <NotificationsPopover />
         <LoginButton className={style.loginButton} theme={ButtonTheme.OUTLINE_INVERTED} />
       </Stack>
     </header>
