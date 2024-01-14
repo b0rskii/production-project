@@ -9,6 +9,7 @@ import {
 import { getClassNames } from '6_shared/utils/classNames/getClassNames';
 import { Key } from '6_shared/const/keys';
 import { Portal } from '6_shared/ui/Portal';
+import { Overlay } from '6_shared/ui/Overlay';
 import style from './Modal.module.scss';
 
 const ANIMATION_DURATION = 100;
@@ -81,16 +82,9 @@ export const Modal = (props: ModalProps) => {
   return (
     <Portal>
       <div className={getClassNames(style.modal, modes, [className])}>
-        <div
-          className={style.overlay}
-          onClick={closeHandler}
-        >
-          <div
-            className={style.content}
-            onClick={(evt) => evt.stopPropagation()}
-          >
-            {children}
-          </div>
+        <Overlay onClick={closeHandler} />
+        <div className={style.content}>
+          {children}
         </div>
       </div>
     </Portal>
