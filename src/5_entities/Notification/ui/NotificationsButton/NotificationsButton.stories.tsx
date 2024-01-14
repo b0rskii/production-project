@@ -1,18 +1,18 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { ThemeDecorator } from '6_shared/config/storybook/ThemeDecorator';
 import { Theme } from '6_shared/utils/theme';
-import { NotificationsPopover } from './NotificationsPopover';
+import { NotificationsButton } from './NotificationsButton';
 
 export default {
-  title: '5_entities/NotificationsPopover',
-  component: NotificationsPopover,
+  title: '5_entities/NotificationsButton',
+  component: NotificationsButton,
   argTypes: {
     backgroundColor: { control: 'color' },
   },
-} as ComponentMeta<typeof NotificationsPopover>;
+} as ComponentMeta<typeof NotificationsButton>;
 
 // eslint-disable-next-line react/jsx-props-no-spreading
-const Template: ComponentStory<typeof NotificationsPopover> = (args) => <NotificationsPopover {...args} />;
+const Template: ComponentStory<typeof NotificationsButton> = (args) => <NotificationsButton {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {};

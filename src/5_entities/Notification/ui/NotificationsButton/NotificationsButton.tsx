@@ -6,7 +6,7 @@ import { Icon } from '6_shared/ui/Icon';
 import BellIcon from '6_shared/assets/icons/bell.svg';
 import { useGetNotifications } from '../../api/notificationsApi';
 import { NotificationsList } from '../NotificationsList';
-import style from './NotificationsPopover.module.scss';
+import style from './NotificationsButton.module.scss';
 
 const POLLING_INTERVAL_MS = 5000;
 
@@ -14,7 +14,7 @@ type Props = PropsWithChildren<{
   className?: string;
 }>;
 
-export const NotificationsPopover = memo((props: Props) => {
+export const NotificationsButton = memo((props: Props) => {
   const { className } = props;
 
   const { data, isLoading } = useGetNotifications(null, {
@@ -23,7 +23,7 @@ export const NotificationsPopover = memo((props: Props) => {
 
   return (
     <Popover
-      className={getClassNames(style.notificationsPopover, {}, [className])}
+      className={getClassNames(style.notificationsButton, {}, [className])}
       trigger={(
         <Button theme={ButtonTheme.CLEAR}>
           <Icon Svg={BellIcon} inverted />
