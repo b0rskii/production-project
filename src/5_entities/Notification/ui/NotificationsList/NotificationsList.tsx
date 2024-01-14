@@ -1,17 +1,18 @@
 import { PropsWithChildren, memo } from 'react';
 import { getClassNames } from '6_shared/utils/classNames';
 import { Skeleton } from '6_shared/ui/Skeleton';
-import { useGetNotifications } from '../../api/notificationsApi';
-import { Notification } from '../Notification';
+import { Notification as NotificationItem } from '../Notification';
+import { Notification } from '../../model/types/notification';
 import style from './NotificationsList.module.scss';
 
 type Props = PropsWithChildren<{
   className?: string;
+  data?: Notification[];
+  isLoading: boolean;
 }>;
 
 export const NotificationsList = memo((props: Props) => {
-  const { className } = props;
-  const { data, isLoading } = useGetNotifications(null);
+  const { className, data, isLoading } = props;
 
   return (
     <ul className={getClassNames(style.notificationsList, {}, [className])}>
@@ -25,7 +26,7 @@ export const NotificationsList = memo((props: Props) => {
 
       {!isLoading && data?.map((notification) => (
         <li className={style.listItem} key={notification.id}>
-          <Notification data={notification} />
+          <NotificationItem data={notification} />
         </li>
       ))}
     </ul>

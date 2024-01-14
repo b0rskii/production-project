@@ -4,8 +4,11 @@ import { Popover } from '6_shared/ui/Popups';
 import { Button, ButtonTheme } from '6_shared/ui/Button';
 import { Icon } from '6_shared/ui/Icon';
 import BellIcon from '6_shared/assets/icons/bell.svg';
+import { useGetNotifications } from '../../api/notificationsApi';
 import { NotificationsList } from '../NotificationsList';
 import style from './NotificationsPopover.module.scss';
+
+const POLLING_INTERVAL_MS = 5000;
 
 type Props = PropsWithChildren<{
   className?: string;
@@ -13,6 +16,10 @@ type Props = PropsWithChildren<{
 
 export const NotificationsPopover = memo((props: Props) => {
   const { className } = props;
+
+  const { data, isLoading } = useGetNotifications(null, {
+    pollingInterval: POLLING_INTERVAL_MS,
+  });
 
   return (
     <Popover
@@ -24,7 +31,11 @@ export const NotificationsPopover = memo((props: Props) => {
       )}
       direction="bottom-left"
     >
-      <NotificationsList className={style.notificationsList} />
+      <NotificationsList
+        className={style.notificationsList}
+        data={data}
+        isLoading={isLoading}
+      />
     </Popover>
   );
 });
