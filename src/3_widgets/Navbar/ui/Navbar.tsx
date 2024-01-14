@@ -43,7 +43,7 @@ export const Navbar = memo((props: NavbarProps) => {
       {getNavigation()}
 
       <Stack gap="l">
-        <NotificationsPopover />
+        {userData && <NotificationsPopover />}
         <LoginButton className={style.loginButton} theme={ButtonTheme.OUTLINE_INVERTED} />
       </Stack>
     </header>
