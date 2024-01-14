@@ -11,6 +11,13 @@ describe('profileSlice', () => {
       .toEqual({ profile: mockProfile });
   });
 
+  it('cleanProfile action', () => {
+    expect(
+      profileReducer({ profile: mockProfile } as ProfileSchema, profileActions.cleanProfile()),
+    )
+      .toEqual({ profile: null });
+  });
+
   it('fetchProfileData pending', () => {
     const state: DeepPartial<ProfileSchema> = {
       profile: mockProfile,

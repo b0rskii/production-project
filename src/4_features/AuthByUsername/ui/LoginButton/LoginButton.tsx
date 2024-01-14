@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { userSelectors, userActions } from '5_entities/User';
+import { profileActions } from '5_entities/Profile';
 import { Button, ButtonTheme } from '6_shared/ui/Button';
 import { useAppDispatch } from '6_shared/utils/redux';
 import { I18nNameSpace } from '6_shared/utils/i18n/nameSpace';
@@ -56,6 +57,7 @@ export const LoginButton = memo((props: LoginButtonProps) => {
 
   const logoutMenuItemClickHandler = useCallback(() => {
     dispatch(userActions.logout());
+    dispatch(profileActions.cleanProfile());
     localStorage.removeItem(LocalStorageKey.USER);
   }, [dispatch]);
 
