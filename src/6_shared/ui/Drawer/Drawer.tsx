@@ -1,37 +1,37 @@
 import { memo, ReactNode } from 'react';
 import { getClassNames } from '6_shared/utils/classNames';
-// import { useTheme } from 'app/providers/ThemeProvider';
-import { Overlay } from '../Overlay';
+import { useModal } from '6_shared/utils/modal';
+import { Portal } from '6_shared/ui/Portal';
+import { Overlay } from '6_shared/ui/Overlay';
 import style from './Drawer.module.scss';
-import { Portal } from '../Portal/Portal';
+
+const ANIMATION_MS = 300;
 
 type DrawerProps = {
   className?: string;
   children: ReactNode;
-  isOpen?: boolean;
   onClose?: () => void;
 };
 
 export const Drawer = memo((props: DrawerProps) => {
+  const { className, children, onClose } = props;
+
   const {
-    className,
-    children,
-    onClose,
-    isOpen,
-  } = props;
-  // const { theme } = useTheme();
+    isOpening,
+    isClosing,
+    closeHandler,
+  } = useModal({ animationMs: ANIMATION_MS, onClose });
 
   const modes = {
-    [style.opened]: isOpen,
+    [style.opened]: !isOpening,
+    [style.closing]: isClosing,
   };
 
   return (
     <Portal>
       <div className={getClassNames(style.drawer, modes, [className])}>
-        <Overlay onClick={onClose} />
-        <div
-          className={style.content}
-        >
+        {!isClosing && <Overlay onClick={closeHandler} />}
+        <div className={style.content}>
           {children}
         </div>
       </div>

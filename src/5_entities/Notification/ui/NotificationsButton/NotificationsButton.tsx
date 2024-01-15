@@ -61,17 +61,18 @@ export const NotificationsButton = memo((props: Props) => {
       <MobileView>
         <>
           {Trigger}
-          <Drawer
-            className={getClassNames(style.notificationsButton, {}, [className])}
-            isOpen={isDrawerOpen}
-            onClose={drawerOverlayClickHandler}
-          >
-            <NotificationsList
-              className={style.notificationsList}
-              data={data}
-              isLoading={isLoading}
-            />
-          </Drawer>
+          {isDrawerOpen && (
+            <Drawer
+              className={getClassNames(style.notificationsButton, {}, [className])}
+              onClose={drawerOverlayClickHandler}
+            >
+              <NotificationsList
+                className={style.notificationsList}
+                data={data}
+                isLoading={isLoading}
+              />
+            </Drawer>
+          )}
         </>
       </MobileView>
     </>

@@ -1,18 +1,16 @@
 import {
-  MutableRefObject,
   ReactNode,
   useCallback,
   useEffect,
-  useRef,
-  useState,
 } from 'react';
+import { useModal } from '6_shared/utils/modal';
 import { getClassNames } from '6_shared/utils/classNames/getClassNames';
 import { Key } from '6_shared/const/keys';
 import { Portal } from '6_shared/ui/Portal';
 import { Overlay } from '6_shared/ui/Overlay';
 import style from './Modal.module.scss';
 
-const ANIMATION_DURATION = 100;
+const ANIMATION_MS = 100;
 
 type ModalProps = {
   className?: string;
@@ -22,28 +20,14 @@ type ModalProps = {
 };
 
 export const Modal = (props: ModalProps) => {
+  const { className, children, isOpen, onClose } = props;
+
   const {
-    className,
-    children,
-    isOpen,
-    onClose,
-  } = props;
-
-  const [isOpening, setIsOpening] = useState(true);
-  const [isClosing, setIsClosing] = useState(false);
-  const openingTmeoutRef = useRef() as MutableRefObject<ReturnType<typeof setTimeout>>;
-  const closingTimeoutRef = useRef() as MutableRefObject<ReturnType<typeof setTimeout>>;
-
-  const closeHandler = useCallback(() => {
-    if (onClose) {
-      setIsClosing(true);
-
-      closingTimeoutRef.current = setTimeout(() => {
-        onClose();
-        setIsClosing(false);
-      }, ANIMATION_DURATION);
-    }
-  }, [onClose]);
+    isOpening,
+    isClosing,
+    closingTimeoutRef,
+    closeHandler,
+  } = useModal({ animationMs: ANIMATION_MS, onClose });
 
   const escKeydownHandler = useCallback((evt: KeyboardEvent) => {
     if (evt.key === Key.ESCAPE) {
@@ -52,27 +36,17 @@ export const Modal = (props: ModalProps) => {
   }, [closeHandler]);
 
   useEffect(() => {
-    if (isOpening) {
-      openingTmeoutRef.current = setTimeout(() => {
-        setIsOpening(false);
-      });
-    }
+    const closingTimeout = closingTimeoutRef.current;
 
-    return () => {
-      clearTimeout(openingTmeoutRef.current);
-    };
-  }, [isOpening]);
-
-  useEffect(() => {
     if (isOpen) {
       document.addEventListener('keydown', escKeydownHandler);
     }
 
     return () => {
-      clearTimeout(closingTimeoutRef.current);
+      clearTimeout(closingTimeout);
       document.removeEventListener('keydown', escKeydownHandler);
     };
-  }, [isOpen, escKeydownHandler]);
+  }, [isOpen, escKeydownHandler, closingTimeoutRef]);
 
   const modes = {
     [style.opened]: !isOpening,
