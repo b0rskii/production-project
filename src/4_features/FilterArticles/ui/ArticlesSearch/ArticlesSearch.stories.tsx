@@ -11,7 +11,6 @@ export default {
   },
 } as ComponentMeta<typeof ArticlesSearch>;
 
-// eslint-disable-next-line react/jsx-props-no-spreading
 const Template: ComponentStory<typeof ArticlesSearch> = (args) => <ArticlesSearch {...args} />;
 
 export const Default = Template.bind({});

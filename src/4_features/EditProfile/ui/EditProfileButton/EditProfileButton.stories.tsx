@@ -13,7 +13,6 @@ export default {
   args: {},
 } as ComponentMeta<typeof EditProfileButton>;
 
-// eslint-disable-next-line react/jsx-props-no-spreading
 const Template: ComponentStory<typeof EditProfileButton> = (args) => <EditProfileButton {...args} />;
 
 export const Readonly = Template.bind({});

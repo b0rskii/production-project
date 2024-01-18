@@ -11,7 +11,6 @@ export default {
   },
 } as ComponentMeta<typeof Popover>;
 
-// eslint-disable-next-line react/jsx-props-no-spreading
 const Template: ComponentStory<typeof Popover> = (args) => <Popover {...args} />;
 
 export const Default = Template.bind({});

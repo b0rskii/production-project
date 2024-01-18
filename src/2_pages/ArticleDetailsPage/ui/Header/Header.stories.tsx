@@ -15,7 +15,6 @@ export default {
   ],
 } as ComponentMeta<typeof Header>;
 
-// eslint-disable-next-line react/jsx-props-no-spreading
 const Template: ComponentStory<typeof Header> = (args) => <Header {...args} />;
 
 export const Default = Template.bind({});

@@ -11,7 +11,6 @@ export default {
   },
 } as ComponentMeta<typeof ListBox>;
 
-// eslint-disable-next-line react/jsx-props-no-spreading
 const Template: ComponentStory<typeof ListBox> = (args) => <ListBox {...args} />;
 
 export const Default = Template.bind({});

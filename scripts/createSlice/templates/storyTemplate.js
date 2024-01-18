@@ -12,7 +12,6 @@ export default {
   },
 } as ComponentMeta<typeof ${componentName}>;
 
-// eslint-disable-next-line react/jsx-props-no-spreading
 const Template: ComponentStory<typeof ${componentName}> = (args) => <${componentName} {...args} />;
 
 export const Default = Template.bind({});

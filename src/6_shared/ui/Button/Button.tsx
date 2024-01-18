@@ -40,7 +40,6 @@ export const Button = memo((props: ButtonProps) => {
 
   return (
     <button
-      // eslint-disable-next-line react/jsx-props-no-spreading
       {...otherProps}
       // eslint-disable-next-line react/button-has-type
       type={type}

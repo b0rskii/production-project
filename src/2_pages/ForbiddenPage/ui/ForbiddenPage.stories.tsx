@@ -15,7 +15,6 @@ export default {
   ],
 } as ComponentMeta<typeof ForbiddenPage>;
 
-// eslint-disable-next-line react/jsx-props-no-spreading
 const Template: ComponentStory<typeof ForbiddenPage> = (args: {}) => <ForbiddenPage {...args} />;
 
 export const Default = Template.bind({});

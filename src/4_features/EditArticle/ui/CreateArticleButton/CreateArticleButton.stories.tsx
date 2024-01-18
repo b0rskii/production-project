@@ -11,7 +11,6 @@ export default {
   },
 } as ComponentMeta<typeof CreateArticleButton>;
 
-// eslint-disable-next-line react/jsx-props-no-spreading
 const Template: ComponentStory<typeof CreateArticleButton> = (args) => <CreateArticleButton {...args} />;
 
 export const Default = Template.bind({});

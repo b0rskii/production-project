@@ -11,7 +11,6 @@ export default {
   },
 } as ComponentMeta<typeof Notification>;
 
-// eslint-disable-next-line react/jsx-props-no-spreading
 const Template: ComponentStory<typeof Notification> = (args) => <Notification {...args} />;
 
 export const Default = Template.bind({});

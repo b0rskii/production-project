@@ -30,7 +30,6 @@ export const Input = memo((props: InputProps) => {
 
   return (
     <input
-      // eslint-disable-next-line react/jsx-props-no-spreading
       {...otherProps}
       className={getClassNames(style.input, {}, [className, style[mode]])}
       type={type}

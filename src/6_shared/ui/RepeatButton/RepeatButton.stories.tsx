@@ -11,7 +11,6 @@ export default {
   },
 } as ComponentMeta<typeof RepeatButton>;
 
-// eslint-disable-next-line react/jsx-props-no-spreading
 const Template: ComponentStory<typeof RepeatButton> = (args) => <RepeatButton {...args} />;
 
 export const Default = Template.bind({});

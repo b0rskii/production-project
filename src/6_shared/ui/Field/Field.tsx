@@ -41,7 +41,6 @@ export const Field = memo((props: Props) => {
 
   return (
     <input
-      // eslint-disable-next-line react/jsx-props-no-spreading
       {...otherProps}
       className={getClassNames(style.field, {}, [className, style[mode]])}
       type={type}

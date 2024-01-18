@@ -18,7 +18,6 @@ export default {
   },
 } as ComponentMeta<typeof ProfileRow>;
 
-// eslint-disable-next-line react/jsx-props-no-spreading
 const Template: ComponentStory<typeof ProfileRow> = (args) => <ProfileRow {...args} />;
 
 export const Default = Template.bind({});

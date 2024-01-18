@@ -38,7 +38,6 @@ export default {
   },
 } as ComponentMeta<typeof RecomendationsBlock>;
 
-// eslint-disable-next-line react/jsx-props-no-spreading
 const Template: ComponentStory<typeof RecomendationsBlock> = (args) => <RecomendationsBlock {...args} />;
 
 export const Default = Template.bind({});

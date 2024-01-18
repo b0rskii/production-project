@@ -44,7 +44,6 @@ export const Select = <T extends string>(props: SelectProps<T>) => {
         </span>
       )}
       <select
-        // eslint-disable-next-line react/jsx-props-no-spreading
         {...otherProps}
         className={style.select}
         value={value}

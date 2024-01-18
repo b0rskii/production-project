@@ -19,7 +19,6 @@ export default {
   },
 } as ComponentMeta<typeof LoginButton>;
 
-// eslint-disable-next-line react/jsx-props-no-spreading
 const Template: ComponentStory<typeof LoginButton> = (args) => <LoginButton {...args} />;
 
 export const Default = Template.bind({});

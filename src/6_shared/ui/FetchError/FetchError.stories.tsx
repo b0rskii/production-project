@@ -14,7 +14,6 @@ export default {
   },
 } as ComponentMeta<typeof FetchError>;
 
-// eslint-disable-next-line react/jsx-props-no-spreading
 const Template: ComponentStory<typeof FetchError> = (args) => <FetchError {...args} />;
 
 export const Default = Template.bind({});

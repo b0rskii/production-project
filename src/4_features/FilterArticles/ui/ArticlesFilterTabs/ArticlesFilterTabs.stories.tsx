@@ -20,7 +20,6 @@ export default {
   ],
 } as ComponentMeta<typeof ArticlesFilterTabs>;
 
-// eslint-disable-next-line react/jsx-props-no-spreading
 const Template: ComponentStory<typeof ArticlesFilterTabs> = (args) => <ArticlesFilterTabs {...args} />;
 
 export const Default = Template.bind({});

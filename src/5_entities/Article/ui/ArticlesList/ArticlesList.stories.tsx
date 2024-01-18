@@ -13,7 +13,6 @@ export default {
   },
 } as ComponentMeta<typeof ArticlesList>;
 
-// eslint-disable-next-line react/jsx-props-no-spreading
 const Template: ComponentStory<typeof ArticlesList> = (args) => <ArticlesList {...args} />;
 
 export const TilesView = Template.bind({});

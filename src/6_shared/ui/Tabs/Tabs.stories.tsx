@@ -19,7 +19,6 @@ export default {
   },
 } as ComponentMeta<typeof Tabs>;
 
-// eslint-disable-next-line react/jsx-props-no-spreading
 const Template: ComponentStory<typeof Tabs> = (args) => <Tabs {...args} />;
 
 export const Default = Template.bind({});

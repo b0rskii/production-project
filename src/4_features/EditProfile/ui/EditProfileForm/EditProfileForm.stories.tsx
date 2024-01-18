@@ -11,7 +11,6 @@ export default {
   },
 } as ComponentMeta<typeof EditProfileForm>;
 
-// eslint-disable-next-line react/jsx-props-no-spreading
 const Template: ComponentStory<typeof EditProfileForm> = (args) => <EditProfileForm {...args} />;
 
 export const Default = Template.bind({});

@@ -22,7 +22,6 @@ export default {
   },
 } as ComponentMeta<typeof Stack>;
 
-// eslint-disable-next-line react/jsx-props-no-spreading
 const Template: ComponentStory<typeof Stack> = (args) => <Stack {...args} />;
 
 export const Default = Template.bind({});
