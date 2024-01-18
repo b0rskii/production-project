@@ -1,7 +1,6 @@
 import { memo, ReactNode, useEffect } from 'react';
-import { useDrag } from '@use-gesture/react';
-import { a, useSpring, config } from '@react-spring/web';
 import { getClassNames } from '6_shared/utils/classNames';
+import { AnimationSwipeProvider, useAnimationSwipeContext } from '6_shared/utils/animationSwipe';
 import { Portal } from '6_shared/ui/Portal';
 import { Overlay } from '6_shared/ui/Overlay';
 import style from './Drawer.module.scss';
@@ -14,8 +13,12 @@ type DrawerProps = {
   onClose?: () => void;
 };
 
-export const Drawer = memo((props: DrawerProps) => {
+const DrawerContent = (props: DrawerProps) => {
   const { className, children, onClose } = props;
+  const { Spring, Gesture } = useAnimationSwipeContext();
+
+  const { useSpring, config, a } = Spring;
+  const { useDrag } = Gesture;
 
   const [{ y }, api] = useSpring(() => ({ y: height }));
 
@@ -65,7 +68,6 @@ export const Drawer = memo((props: DrawerProps) => {
         <a.div
           className={style.sheet}
           style={{ display, bottom: `calc(-100vh + ${height - 100}px)`, y }}
-          // eslint-disable-next-line react/jsx-props-no-spreading
           {...bind()}
         >
           {children}
@@ -73,4 +75,20 @@ export const Drawer = memo((props: DrawerProps) => {
       </div>
     </Portal>
   );
-});
+};
+
+const DrawerLoaded = (props: DrawerProps) => {
+  const { isLoaded } = useAnimationSwipeContext();
+
+  if (!isLoaded) {
+    return null;
+  }
+
+  return <DrawerContent {...props} />;
+};
+
+export const Drawer = memo((props: DrawerProps) => (
+  <AnimationSwipeProvider>
+    <DrawerLoaded {...props} />
+  </AnimationSwipeProvider>
+));
