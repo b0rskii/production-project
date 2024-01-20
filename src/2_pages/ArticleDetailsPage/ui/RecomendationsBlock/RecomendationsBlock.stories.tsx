@@ -1,10 +1,10 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import withMock from 'storybook-addon-mock';
-import { mockArticles } from '5_entities/Article';
-import { ThemeDecorator } from '6_shared/config/storybook/ThemeDecorator';
-import { StoreDecorator } from '6_shared/config/storybook/StoreDecorator';
-import { Theme } from '6_shared/utils/theme';
-import { ApiRoutes } from '6_shared/api';
+import { mockArticles } from '@/5_entities/Article';
+import { ThemeDecorator } from '@/6_shared/config/storybook/ThemeDecorator';
+import { StoreDecorator } from '@/6_shared/config/storybook/StoreDecorator';
+import { Theme } from '@/6_shared/utils/theme';
+import { ApiRoutes } from '@/6_shared/api';
 import { RecomendationsBlock } from './RecomendationsBlock';
 
 const LIMIT = 4;

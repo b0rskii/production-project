@@ -1,7 +1,7 @@
 import { Fragment, PropsWithChildren, ReactNode, memo } from 'react';
 import { Listbox } from '@headlessui/react';
-import { getClassNames } from '6_shared/utils/classNames';
-import { Button, ButtonTheme } from '6_shared/ui/Button';
+import { getClassNames } from '@/6_shared/utils/classNames';
+import { Button, ButtonTheme } from '@/6_shared/ui/Button';
 import style from './ListBox.module.scss';
 import popupStyle from '../popup.module.scss';
 

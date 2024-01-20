@@ -1,5 +1,5 @@
 import { InputHTMLAttributes, memo } from 'react';
-import { getClassNames } from '6_shared/utils/classNames/getClassNames';
+import { getClassNames } from '@/6_shared/utils/classNames/getClassNames';
 import style from './Input.module.scss';
 
 export const InputMode = {

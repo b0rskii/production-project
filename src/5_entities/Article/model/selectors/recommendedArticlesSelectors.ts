@@ -1,4 +1,4 @@
-import { StateSchema } from '1_app/providers/StoreProvider';
+import { StateSchema } from '@/1_app/providers/StoreProvider';
 import { initialState, recommendedArticlesAdapter } from '../slice/recommendedArticlesSlice';
 
 export const getError = (state: StateSchema) => (

@@ -1,11 +1,11 @@
 import { PropsWithChildren, memo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { getClassNames } from '6_shared/utils/classNames';
-import { Text } from '6_shared/ui/Text';
-import { Loader } from '6_shared/ui/Loader';
-import { FetchError } from '6_shared/ui/FetchError';
-import { Comment } from '6_shared/types/comment';
-import { Stack } from '6_shared/ui/Stack';
+import { getClassNames } from '@/6_shared/utils/classNames';
+import { Text } from '@/6_shared/ui/Text';
+import { Loader } from '@/6_shared/ui/Loader';
+import { FetchError } from '@/6_shared/ui/FetchError';
+import { Comment } from '@/6_shared/types/comment';
+import { Stack } from '@/6_shared/ui/Stack';
 import { CommentCard } from '../CommentCard';
 import style from './CommentCardsList.module.scss';
 

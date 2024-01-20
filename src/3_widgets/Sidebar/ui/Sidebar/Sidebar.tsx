@@ -1,10 +1,10 @@
 import { useSelector } from 'react-redux';
 import { memo, useState } from 'react';
-import { userSelectors } from '5_entities/User';
-import { getClassNames } from '6_shared/utils/classNames';
-import { ThemeSwitcher } from '6_shared/ui/ThemeSwitcher';
-import { LangSwitcher } from '6_shared/ui/LangSwitcher';
-import { Button, ButtonTheme } from '6_shared/ui/Button';
+import { userSelectors } from '@/5_entities/User';
+import { getClassNames } from '@/6_shared/utils/classNames';
+import { ThemeSwitcher } from '@/6_shared/ui/ThemeSwitcher';
+import { LangSwitcher } from '@/6_shared/ui/LangSwitcher';
+import { Button, ButtonTheme } from '@/6_shared/ui/Button';
 import { getLinkItems } from '../../model/linkItems';
 import { LinkItem } from '../LinkItem/LinkItem';
 import style from './Sidebar.module.scss';

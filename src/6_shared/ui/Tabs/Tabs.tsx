@@ -1,6 +1,6 @@
 import { PropsWithChildren, ReactNode, memo } from 'react';
-import { getClassNames } from '6_shared/utils/classNames';
-import { Card } from '6_shared/ui/Card';
+import { getClassNames } from '@/6_shared/utils/classNames';
+import { Card } from '@/6_shared/ui/Card';
 import style from './Tabs.module.scss';
 
 export type Tab = {

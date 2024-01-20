@@ -1,4 +1,4 @@
-import { Profile } from '5_entities/Profile';
+import { Profile } from '@/5_entities/Profile';
 import { AgeLimit, ValidateProfileError } from '../../const';
 
 export const validateProfileData = (profile?: Profile | null) => {

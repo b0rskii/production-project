@@ -1,9 +1,9 @@
 import { PropsWithChildren, ReactNode, memo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { getClassNames } from '6_shared/utils/classNames';
-import { I18nNameSpace } from '6_shared/utils/i18n/nameSpace';
-import { Stack } from '6_shared/ui/Stack';
-import { Avatar } from '6_shared/ui/Avatar';
+import { getClassNames } from '@/6_shared/utils/classNames';
+import { I18nNameSpace } from '@/6_shared/utils/i18n/nameSpace';
+import { Stack } from '@/6_shared/ui/Stack';
+import { Avatar } from '@/6_shared/ui/Avatar';
 import { ProfileRow } from '../ProfileRow';
 
 type Props = PropsWithChildren<{

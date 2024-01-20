@@ -1,8 +1,8 @@
 import { memo, ReactNode, useEffect } from 'react';
-import { getClassNames } from '6_shared/utils/classNames';
-import { AnimationSwipeProvider, useAnimationSwipeContext } from '6_shared/utils/animationSwipe';
-import { Portal } from '6_shared/ui/Portal';
-import { Overlay } from '6_shared/ui/Overlay';
+import { getClassNames } from '@/6_shared/utils/classNames';
+import { AnimationSwipeProvider, useAnimationSwipeContext } from '@/6_shared/utils/animationSwipe';
+import { Portal } from '@/6_shared/ui/Portal';
+import { Overlay } from '@/6_shared/ui/Overlay';
 import style from './Drawer.module.scss';
 
 const height = window.innerHeight - 100;

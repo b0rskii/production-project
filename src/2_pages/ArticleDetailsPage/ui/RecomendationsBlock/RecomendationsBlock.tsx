@@ -6,11 +6,11 @@ import {
   recommendedArticlesReducer,
   recommendedArticlesSelectors,
   useGetRecommendedArticles,
-} from '5_entities/Article';
+} from '@/5_entities/Article';
 
-import { getClassNames } from '6_shared/utils/classNames';
-import { useAsyncReducer } from '6_shared/utils/redux';
-import { Text } from '6_shared/ui/Text';
+import { getClassNames } from '@/6_shared/utils/classNames';
+import { useAsyncReducer } from '@/6_shared/utils/redux';
+import { Text } from '@/6_shared/ui/Text';
 import style from './RecomendationsBlock.module.scss';
 
 type Props = PropsWithChildren<{

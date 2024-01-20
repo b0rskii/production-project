@@ -1,8 +1,8 @@
 import { PropsWithChildren } from 'react';
-import { getClassNames } from '6_shared/utils/classNames';
-import { Skeleton } from '6_shared/ui/Skeleton';
-import { Card } from '6_shared/ui/Card';
-import { ListView } from '6_shared/ui/ListViewSwitcher';
+import { getClassNames } from '@/6_shared/utils/classNames';
+import { Skeleton } from '@/6_shared/ui/Skeleton';
+import { Card } from '@/6_shared/ui/Card';
+import { ListView } from '@/6_shared/ui/ListViewSwitcher';
 import style from './Article.module.scss';
 
 type ArticleSkeletonProps = PropsWithChildren<{

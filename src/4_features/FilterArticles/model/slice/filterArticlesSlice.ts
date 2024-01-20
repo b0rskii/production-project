@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { createSearchParams } from 'react-router-dom';
-import { ArticleType } from '5_entities/Article';
+import { ArticleType } from '@/5_entities/Article';
 import { FilterArticlesSchema } from '../types/filterArticlesSchema';
 import { SLICE_NAME, SearchParam } from '../const';
 

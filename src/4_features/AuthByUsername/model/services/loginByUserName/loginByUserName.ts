@@ -1,8 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { ThunkAPI } from '1_app/providers/StoreProvider';
-import { User, userActions } from '5_entities/User';
-import { LocalStorageKey } from '6_shared/const/localStorage';
-import { ApiRoutes } from '6_shared/api';
+import { ThunkAPI } from '@/1_app/providers/StoreProvider';
+import { User, userActions } from '@/5_entities/User';
+import { LocalStorageKey } from '@/6_shared/const/localStorage';
+import { ApiRoutes } from '@/6_shared/api';
 import { SLICE_NAME } from '../../const';
 
 type LoginByUsernameArg = {

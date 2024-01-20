@@ -1,9 +1,9 @@
 import { PropsWithChildren, memo } from 'react';
 import { useSelector } from 'react-redux';
-import { Page } from '3_widgets/Page';
-import { articlesSelectors, fetchArticles } from '5_entities/Article';
-import { useAppDispatch } from '6_shared/utils/redux';
-import { getClassNames } from '6_shared/utils/classNames';
+import { Page } from '@/3_widgets/Page';
+import { articlesSelectors, fetchArticles } from '@/5_entities/Article';
+import { useAppDispatch } from '@/6_shared/utils/redux';
+import { getClassNames } from '@/6_shared/utils/classNames';
 import { UrlSearchParamsSync } from '../model/services/UrlSearchParamsSync';
 import { Header } from './Header';
 import { ArticlesBlock } from './ArticlesBlock';

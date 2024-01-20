@@ -1,5 +1,5 @@
 import { PayloadAction, createEntityAdapter, createSlice } from '@reduxjs/toolkit';
-import { ListView } from '6_shared/ui/ListViewSwitcher';
+import { ListView } from '@/6_shared/ui/ListViewSwitcher';
 import { ArticlesSchema } from '../types/articlesSchema';
 import { Article } from '../types/articleSchema';
 import { fetchArticles } from '../services/fetchArticles/fetchArticles';

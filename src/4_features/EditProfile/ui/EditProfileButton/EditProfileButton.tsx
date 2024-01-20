@@ -1,11 +1,11 @@
 import { memo, PropsWithChildren, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { profileSelectors } from '5_entities/Profile';
-import { Button, ButtonTheme } from '6_shared/ui/Button';
-import { getClassNames } from '6_shared/utils/classNames';
-import { useAppDispatch, useAsyncReducer } from '6_shared/utils/redux';
-import { I18nNameSpace } from '6_shared/utils/i18n/nameSpace';
+import { profileSelectors } from '@/5_entities/Profile';
+import { Button, ButtonTheme } from '@/6_shared/ui/Button';
+import { getClassNames } from '@/6_shared/utils/classNames';
+import { useAppDispatch, useAsyncReducer } from '@/6_shared/utils/redux';
+import { I18nNameSpace } from '@/6_shared/utils/i18n/nameSpace';
 import { editProfileActions, editProfileReducer } from '../../model/slice/editProfileSlice';
 import { SLICE_NAME } from '../../model/const';
 import { editProfileSelectors } from '../../model/selectors';

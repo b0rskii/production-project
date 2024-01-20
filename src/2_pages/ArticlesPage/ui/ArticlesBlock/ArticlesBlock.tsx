@@ -9,13 +9,13 @@ import {
   articlesReducer,
   articlesSelectors,
   fetchArticles,
-} from '5_entities/Article';
-import { getClassNames } from '6_shared/utils/classNames';
-import { useAppDispatch, useAsyncReducer } from '6_shared/utils/redux';
-import { LocalStorageKey } from '6_shared/const/localStorage';
-import { I18nNameSpace } from '6_shared/utils/i18n/nameSpace';
-import { ListView } from '6_shared/ui/ListViewSwitcher';
-import { Text } from '6_shared/ui/Text';
+} from '@/5_entities/Article';
+import { getClassNames } from '@/6_shared/utils/classNames';
+import { useAppDispatch, useAsyncReducer } from '@/6_shared/utils/redux';
+import { LocalStorageKey } from '@/6_shared/const/localStorage';
+import { I18nNameSpace } from '@/6_shared/utils/i18n/nameSpace';
+import { ListView } from '@/6_shared/ui/ListViewSwitcher';
+import { Text } from '@/6_shared/ui/Text';
 import style from './ArticlesBlock.module.scss';
 
 let isInit = true;

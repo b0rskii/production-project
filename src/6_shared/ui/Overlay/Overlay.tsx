@@ -1,5 +1,5 @@
 import { PropsWithChildren, memo } from 'react';
-import { getClassNames } from '6_shared/utils/classNames';
+import { getClassNames } from '@/6_shared/utils/classNames';
 import style from './Overlay.module.scss';
 
 type Props = PropsWithChildren<{

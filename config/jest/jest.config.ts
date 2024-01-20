@@ -28,6 +28,7 @@ export default {
   moduleNameMapper: {
     '\\.s?css$': 'identity-obj-proxy',
     '\\.svg': path.resolve(__dirname, 'JestEmptyComponent.tsx'),
+    '^@/(.*)$': '<rootDir>src/$1',
   },
   testMatch: [
     '<rootDir>src/**/*(*.)@(spec|test).[tj]s?(x)',

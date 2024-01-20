@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Profile } from '5_entities/Profile';
+import { Profile } from '@/5_entities/Profile';
 import { updateProfileData } from '../services/updateProfileData/updateProfileData';
 import { EditProfileSchema } from '../types/editProfileSchema';
 import { SLICE_NAME, ValidateProfileError } from '../const';

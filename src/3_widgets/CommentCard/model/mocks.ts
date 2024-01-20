@@ -1,4 +1,4 @@
-import { mockUser } from '5_entities/User';
+import { mockUser } from '@/5_entities/User';
 
 export const mockComment = ({
   isAvatar = true,

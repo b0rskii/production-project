@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-vars */
 import { PropsWithChildren, memo, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { getClassNames } from '6_shared/utils/classNames';
-import { Select, SelectOption } from '6_shared/ui/Select';
-import { Card } from '6_shared/ui/Card';
+import { getClassNames } from '@/6_shared/utils/classNames';
+import { Select, SelectOption } from '@/6_shared/ui/Select';
+import { Card } from '@/6_shared/ui/Card';
 import { SortingType, SortingOrder } from '../../model/const';
 import { TSortingType, TSortingOrder } from '../../model/types/sortArticlesSchema';
 import style from './ArticlesSorting.module.scss';

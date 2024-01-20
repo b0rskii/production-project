@@ -1,5 +1,5 @@
 import { PropsWithChildren, useMemo } from 'react';
-import { getClassNames } from '6_shared/utils/classNames';
+import { getClassNames } from '@/6_shared/utils/classNames';
 import style from './Stack.module.scss';
 
 type Props = PropsWithChildren<{

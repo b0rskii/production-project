@@ -2,16 +2,16 @@ import { memo, useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { userSelectors, userActions } from '5_entities/User';
-import { profileActions } from '5_entities/Profile';
-import { Button, ButtonTheme } from '6_shared/ui/Button';
-import { useAppDispatch } from '6_shared/utils/redux';
-import { I18nNameSpace } from '6_shared/utils/i18n/nameSpace';
-import { LocalStorageKey } from '6_shared/const/localStorage';
-import { getClassNames } from '6_shared/utils/classNames';
-import { RoutePath } from '6_shared/config/routing';
-import { DropDown } from '6_shared/ui/Popups';
-import { Avatar } from '6_shared/ui/Avatar';
+import { userSelectors, userActions } from '@/5_entities/User';
+import { profileActions } from '@/5_entities/Profile';
+import { Button, ButtonTheme } from '@/6_shared/ui/Button';
+import { useAppDispatch } from '@/6_shared/utils/redux';
+import { I18nNameSpace } from '@/6_shared/utils/i18n/nameSpace';
+import { LocalStorageKey } from '@/6_shared/const/localStorage';
+import { getClassNames } from '@/6_shared/utils/classNames';
+import { RoutePath } from '@/6_shared/config/routing';
+import { DropDown } from '@/6_shared/ui/Popups';
+import { Avatar } from '@/6_shared/ui/Avatar';
 import { LoginModal } from '../LoginModal/LoginModal';
 
 type LoginButtonProps = {

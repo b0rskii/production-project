@@ -1,8 +1,8 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { mockArticle } from '5_entities/Article';
-import { ThemeDecorator } from '6_shared/config/storybook/ThemeDecorator';
-import { StoreDecorator } from '6_shared/config/storybook/StoreDecorator';
-import { Theme } from '6_shared/utils/theme';
+import { mockArticle } from '@/5_entities/Article';
+import { ThemeDecorator } from '@/6_shared/config/storybook/ThemeDecorator';
+import { StoreDecorator } from '@/6_shared/config/storybook/StoreDecorator';
+import { Theme } from '@/6_shared/utils/theme';
 import { ArticleDetailsBlock } from './ArticleDetailsBlock';
 
 export default {

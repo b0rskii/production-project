@@ -1,8 +1,8 @@
 import { PropsWithChildren, memo } from 'react';
-import { getClassNames } from '6_shared/utils/classNames';
-import { Stack } from '6_shared/ui/Stack';
-import { Text, TextTheme } from '6_shared/ui/Text';
-import { RepeatButton } from '6_shared/ui/RepeatButton';
+import { getClassNames } from '@/6_shared/utils/classNames';
+import { Stack } from '@/6_shared/ui/Stack';
+import { Text, TextTheme } from '@/6_shared/ui/Text';
+import { RepeatButton } from '@/6_shared/ui/RepeatButton';
 import style from './FetchError.module.scss';
 
 type Props = PropsWithChildren<{

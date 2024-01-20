@@ -7,9 +7,9 @@ import {
   TSortingOrder,
   TSortingType,
   sortArticlesSelectors,
-} from '4_features/SortArticles';
-import { FilterArticlesSearchParam, filterArticlesSelectors } from '4_features/FilterArticles';
-import { ArticleType } from '5_entities/Article';
+} from '@/4_features/SortArticles';
+import { FilterArticlesSearchParam, filterArticlesSelectors } from '@/4_features/FilterArticles';
+import { ArticleType } from '@/5_entities/Article';
 
 export const UrlSearchParamsSync = () => {
   const [searchParams, setSearchParams] = useSearchParams();

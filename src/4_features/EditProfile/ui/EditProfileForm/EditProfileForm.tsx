@@ -1,14 +1,14 @@
 /* eslint-disable no-unused-vars */
 import { memo, PropsWithChildren, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Profile, ProfileContent } from '5_entities/Profile';
-import { Country, CountrySelect } from '5_entities/Country';
-import { Currency, CurrencySelect } from '5_entities/Currency';
-import { Field } from '6_shared/ui/Field';
-import { Text, TextTheme } from '6_shared/ui/Text';
-import { getClassNames } from '6_shared/utils/classNames';
-import { getKeysMap } from '6_shared/utils/getKeysMap';
-import { I18nNameSpace } from '6_shared/utils/i18n/nameSpace';
+import { Profile, ProfileContent } from '@/5_entities/Profile';
+import { Country, CountrySelect } from '@/5_entities/Country';
+import { Currency, CurrencySelect } from '@/5_entities/Currency';
+import { Field } from '@/6_shared/ui/Field';
+import { Text, TextTheme } from '@/6_shared/ui/Text';
+import { getClassNames } from '@/6_shared/utils/classNames';
+import { getKeysMap } from '@/6_shared/utils/getKeysMap';
+import { I18nNameSpace } from '@/6_shared/utils/i18n/nameSpace';
 import { ValidateProfileError } from '../../model/const';
 import style from './EditProfileForm.module.scss';
 

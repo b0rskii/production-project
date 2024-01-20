@@ -1,9 +1,9 @@
 import { memo, PropsWithChildren } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Loader } from '6_shared/ui/Loader';
-import { FetchError } from '6_shared/ui/FetchError';
-import { getClassNames } from '6_shared/utils/classNames';
-import { I18nNameSpace } from '6_shared/utils/i18n/nameSpace';
+import { Loader } from '@/6_shared/ui/Loader';
+import { FetchError } from '@/6_shared/ui/FetchError';
+import { getClassNames } from '@/6_shared/utils/classNames';
+import { I18nNameSpace } from '@/6_shared/utils/i18n/nameSpace';
 import { Profile } from '../../model/types/profileSchema';
 import { ProfileContent } from '../ProfileContent';
 import style from './ProfileCard.module.scss';

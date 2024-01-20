@@ -1,16 +1,16 @@
 import { PropsWithChildren, memo, useCallback, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { CommentCardsList } from '3_widgets/CommentCard';
-import { AddCommentForm, sendArticleComment } from '4_features/AddComment';
+import { CommentCardsList } from '@/3_widgets/CommentCard';
+import { AddCommentForm, sendArticleComment } from '@/4_features/AddComment';
 import {
   ARTICLE_COMMENTS_SLICE,
   articleCommentsReducer,
   articleCommentsSelectors,
   fetchArticleComments,
-} from '5_entities/ArticleComment';
-import { useAppDispatch, useAsyncReducer } from '6_shared/utils/redux';
-import { Text } from '6_shared/ui/Text';
+} from '@/5_entities/ArticleComment';
+import { useAppDispatch, useAsyncReducer } from '@/6_shared/utils/redux';
+import { Text } from '@/6_shared/ui/Text';
 import style from './ArticleCommentsBlock.module.scss';
 
 type ArticleCommentsBlockProps = PropsWithChildren<{

@@ -1,11 +1,11 @@
 import { FormEvent, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { Button, ButtonTheme } from '6_shared/ui/Button';
-import { Text, TextTheme } from '6_shared/ui/Text';
-import { Input } from '6_shared/ui/Input';
-import { getClassNames } from '6_shared/utils/classNames';
-import { useAppDispatch, useAsyncReducer } from '6_shared/utils/redux';
+import { Button, ButtonTheme } from '@/6_shared/ui/Button';
+import { Text, TextTheme } from '@/6_shared/ui/Text';
+import { Input } from '@/6_shared/ui/Input';
+import { getClassNames } from '@/6_shared/utils/classNames';
+import { useAppDispatch, useAsyncReducer } from '@/6_shared/utils/redux';
 import { loginSelectors } from '../../model/selectors';
 import { loginActions, loginReducer } from '../../model/slice/loginSlice';
 import { SLICE_NAME } from '../../model/const';

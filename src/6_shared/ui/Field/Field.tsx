@@ -1,5 +1,5 @@
 import { ChangeEvent, InputHTMLAttributes, memo, useState } from 'react';
-import { getClassNames } from '6_shared/utils/classNames/getClassNames';
+import { getClassNames } from '@/6_shared/utils/classNames/getClassNames';
 import style from './Field.module.scss';
 
 export const FieldMode = {

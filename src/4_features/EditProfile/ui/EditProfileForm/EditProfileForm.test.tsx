@@ -1,9 +1,9 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { mockProfile } from '5_entities/Profile';
-import { Country } from '5_entities/Country';
-import { Currency } from '5_entities/Currency';
-import { renderComponent } from '6_shared/utils/tests';
+import { mockProfile } from '@/5_entities/Profile';
+import { Country } from '@/5_entities/Country';
+import { Currency } from '@/5_entities/Currency';
+import { renderComponent } from '@/6_shared/utils/tests';
 import { EditProfileForm } from './EditProfileForm';
 
 const mockHandlers = {

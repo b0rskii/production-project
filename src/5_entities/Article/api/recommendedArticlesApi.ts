@@ -1,4 +1,4 @@
-import { ApiRoutes, rtkApi } from '6_shared/api';
+import { ApiRoutes, rtkApi } from '@/6_shared/api';
 import { Article } from '../model/types/articleSchema';
 
 const recommendedArticlesApi = rtkApi.injectEndpoints({

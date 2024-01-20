@@ -1,4 +1,4 @@
-import { testAsyncThunk } from '6_shared/utils/tests';
+import { testAsyncThunk } from '@/6_shared/utils/tests';
 import { fetchProfileData } from './fetchProfileData';
 import { Profile } from '../../types/profileSchema';
 import { mockProfile } from '../../mocks';

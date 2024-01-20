@@ -1,4 +1,4 @@
-import { testAsyncThunk } from '6_shared/utils/tests';
+import { testAsyncThunk } from '@/6_shared/utils/tests';
 import { fetchArticles } from './fetchArticles';
 import { Article } from '../../types/articleSchema';
 import { mockArticles } from '../../mocks';

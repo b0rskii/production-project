@@ -1,4 +1,4 @@
-import { mockProfile } from '5_entities/Profile';
+import { mockProfile } from '@/5_entities/Profile';
 import { updateProfileData } from '../services/updateProfileData/updateProfileData';
 import { EditProfileSchema } from '../types/editProfileSchema';
 import { ValidateProfileError } from '../const';

@@ -1,10 +1,10 @@
 import { PropsWithChildren, memo } from 'react';
-import { getClassNames } from '6_shared/utils/classNames';
-import { Avatar } from '6_shared/ui/Avatar';
-import { Text } from '6_shared/ui/Text';
-import { AppLink } from '6_shared/ui/AppLink';
-import { Comment } from '6_shared/types/comment';
-import { RoutePath } from '6_shared/config/routing';
+import { getClassNames } from '@/6_shared/utils/classNames';
+import { Avatar } from '@/6_shared/ui/Avatar';
+import { Text } from '@/6_shared/ui/Text';
+import { AppLink } from '@/6_shared/ui/AppLink';
+import { Comment } from '@/6_shared/types/comment';
+import { RoutePath } from '@/6_shared/config/routing';
 import style from './CommentCard.module.scss';
 
 type CommentCardProps = PropsWithChildren<{

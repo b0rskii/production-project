@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { ThemeDecorator } from '6_shared/config/storybook/ThemeDecorator';
-import { Theme } from '6_shared/utils/theme';
+import { ThemeDecorator } from '@/6_shared/config/storybook/ThemeDecorator';
+import { Theme } from '@/6_shared/utils/theme';
 import { mockArticle } from '../../model/mocks';
 import { ArticleDetails } from './ArticleDetails';
 

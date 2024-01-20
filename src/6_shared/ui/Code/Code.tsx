@@ -1,10 +1,10 @@
 import { PropsWithChildren, memo, useState } from 'react';
-import { getClassNames } from '6_shared/utils/classNames';
-import { Timer } from '6_shared/const/timers';
-import { Button, ButtonTheme } from '6_shared/ui/Button';
-import CopyIcon from '6_shared/assets/icons/copy.svg';
-import SuccessIcon from '6_shared/assets/icons/check-mark.svg';
-import ErrorIcon from '6_shared/assets/icons/cross.svg';
+import { getClassNames } from '@/6_shared/utils/classNames';
+import { Timer } from '@/6_shared/const/timers';
+import { Button, ButtonTheme } from '@/6_shared/ui/Button';
+import CopyIcon from '@/6_shared/assets/icons/copy.svg';
+import SuccessIcon from '@/6_shared/assets/icons/check-mark.svg';
+import ErrorIcon from '@/6_shared/assets/icons/cross.svg';
 import style from './Code.module.scss';
 
 type CopyStatus = 'success' | 'error' | 'initial';

@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { ButtonHTMLAttributes, memo } from 'react';
-import { getClassNames } from '6_shared/utils/classNames';
+import { getClassNames } from '@/6_shared/utils/classNames';
 import style from './Button.module.scss';
 
 export enum ButtonTheme {

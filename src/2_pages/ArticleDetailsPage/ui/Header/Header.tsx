@@ -1,11 +1,11 @@
 import { PropsWithChildren, memo, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { EditArticleButton } from '4_features/EditArticle';
-import { I18nNameSpace } from '6_shared/utils/i18n/nameSpace';
-import { getClassNames } from '6_shared/utils/classNames';
-import { RoutePath } from '6_shared/config/routing';
-import { Button, ButtonTheme } from '6_shared/ui/Button';
+import { EditArticleButton } from '@/4_features/EditArticle';
+import { I18nNameSpace } from '@/6_shared/utils/i18n/nameSpace';
+import { getClassNames } from '@/6_shared/utils/classNames';
+import { RoutePath } from '@/6_shared/config/routing';
+import { Button, ButtonTheme } from '@/6_shared/ui/Button';
 import style from './Header.module.scss';
 
 type Props = PropsWithChildren<{

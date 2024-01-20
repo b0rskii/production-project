@@ -1,4 +1,4 @@
-import { ArticleType } from '5_entities/Article';
+import { ArticleType } from '@/5_entities/Article';
 import { filterArticlesReducer, filterArticlesActions } from './filterArticlesSlice';
 import { FilterArticlesSchema } from '../types/filterArticlesSchema';
 

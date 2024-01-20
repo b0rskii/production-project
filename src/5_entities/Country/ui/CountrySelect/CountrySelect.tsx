@@ -1,7 +1,7 @@
 import { memo, PropsWithChildren, useState } from 'react';
-import { SelectOption } from '6_shared/ui/Select';
-import { ListBox } from '6_shared/ui/Popups';
-import { getClassNames } from '6_shared/utils/classNames';
+import { SelectOption } from '@/6_shared/ui/Select';
+import { ListBox } from '@/6_shared/ui/Popups';
+import { getClassNames } from '@/6_shared/utils/classNames';
 import { Country } from '../../model/types/country';
 
 const countries: SelectOption<Country>[] = Object.values(Country)

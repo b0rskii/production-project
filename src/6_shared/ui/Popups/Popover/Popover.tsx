@@ -1,7 +1,7 @@
 import { PropsWithChildren, ReactNode, memo } from 'react';
 import { Popover as UiPopover } from '@headlessui/react';
-import { getClassNames } from '6_shared/utils/classNames';
-import { Direction } from '6_shared/types/common';
+import { getClassNames } from '@/6_shared/utils/classNames';
+import { Direction } from '@/6_shared/types/common';
 import style from './Popover.module.scss';
 import popupStyle from '../popup.module.scss';
 

@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { ThunkAPI } from '1_app/providers/StoreProvider';
-import { ApiRoutes } from '6_shared/api';
+import { ThunkAPI } from '@/1_app/providers/StoreProvider';
+import { ApiRoutes } from '@/6_shared/api';
 import { SLICE_NAME } from '../../const';
 import { Profile } from '../../types/profileSchema';
 

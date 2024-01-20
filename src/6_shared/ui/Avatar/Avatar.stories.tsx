@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { ThemeDecorator } from '6_shared/config/storybook/ThemeDecorator';
-import { Theme } from '6_shared/utils/theme';
+import { ThemeDecorator } from '@/6_shared/config/storybook/ThemeDecorator';
+import { Theme } from '@/6_shared/utils/theme';
 import { Avatar } from './Avatar';
 
 const AVATAR_URL = 'https://pic.rutubelist.ru/user/3b/27/3b2758ad5492a76b578f7ee072e4e894.jpg';

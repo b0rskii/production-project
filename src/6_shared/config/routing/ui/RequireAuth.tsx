@@ -1,8 +1,8 @@
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
-import { ForbiddenPage } from '2_pages/ForbiddenPage';
-import { UserRole, userSelectors } from '5_entities/User';
+import { ForbiddenPage } from '@/2_pages/ForbiddenPage';
+import { UserRole, userSelectors } from '@/5_entities/User';
 import { RoutePath } from '../routing';
 
 type RequireAuthProps = {

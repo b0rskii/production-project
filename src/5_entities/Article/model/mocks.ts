@@ -1,5 +1,5 @@
 import { EntityState } from '@reduxjs/toolkit';
-import { mockUser } from '5_entities/User';
+import { mockUser } from '@/5_entities/User';
 import { Article } from './types/articleSchema';
 import { ArticleBlockType, ArticleType } from './const';
 

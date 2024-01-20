@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
-import { Page } from '3_widgets/Page';
-import { getClassNames } from '6_shared/utils/classNames/getClassNames';
+import { Page } from '@/3_widgets/Page';
+import { getClassNames } from '@/6_shared/utils/classNames/getClassNames';
 import style from './NotFoundPage.module.scss';
 
 type NotFoundProps = {

@@ -1,5 +1,5 @@
 import { ChangeEvent, SelectHTMLAttributes } from 'react';
-import { getClassNames } from '6_shared/utils/classNames';
+import { getClassNames } from '@/6_shared/utils/classNames';
 import style from './Select.module.scss';
 
 export type SelectOption<T extends string> = {

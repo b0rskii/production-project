@@ -1,6 +1,6 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { renderComponent } from '6_shared/utils/tests';
+import { renderComponent } from '@/6_shared/utils/tests';
 import { EditProfileButton } from './EditProfileButton';
 
 describe('4_features/EditProfileButton.test', () => {

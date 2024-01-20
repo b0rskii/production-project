@@ -1,10 +1,10 @@
 import { PropsWithChildren, memo, useCallback, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { ArticleType, articlesActions, fetchArticles } from '5_entities/Article';
-import { getClassNames } from '6_shared/utils/classNames';
-import { useAppDispatch } from '6_shared/utils/redux';
-import { Tab, Tabs } from '6_shared/ui/Tabs';
+import { ArticleType, articlesActions, fetchArticles } from '@/5_entities/Article';
+import { getClassNames } from '@/6_shared/utils/classNames';
+import { useAppDispatch } from '@/6_shared/utils/redux';
+import { Tab, Tabs } from '@/6_shared/ui/Tabs';
 import { filterArticlesSelectors } from '../../model/selectors';
 import { filterArticlesActions } from '../../model/slice/filterArticlesSlice';
 

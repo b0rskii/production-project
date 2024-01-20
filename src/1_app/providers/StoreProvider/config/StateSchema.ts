@@ -7,15 +7,15 @@ import {
   ReducersMapObject,
 } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
-import { UISchema, UI_SLICE } from '3_widgets/Page';
-import { LoginSchema, LOGIN_SLICE } from '4_features/AuthByUsername';
-import { EditProfileSchema, EDIT_PROFILE_SLICE } from '4_features/EditProfile';
-import { AddCommentSchema, ADD_COMMENT_SLICE } from '4_features/AddComment';
-import { SortArticlesSchema, SORT_ARTICLES_SLICE } from '4_features/SortArticles';
-import { FilterArticlesSchema, FILTER_ARTICLES_SLICE } from '4_features/FilterArticles';
-import { EditArticleSchema, EDIT_ARTICLE_SLICE } from '4_features/EditArticle';
-import { ProfileSchema, PROFILE_SLICE } from '5_entities/Profile';
-import { UserSchema, USER_SLICE } from '5_entities/User';
+import { UISchema, UI_SLICE } from '@/3_widgets/Page';
+import { LoginSchema, LOGIN_SLICE } from '@/4_features/AuthByUsername';
+import { EditProfileSchema, EDIT_PROFILE_SLICE } from '@/4_features/EditProfile';
+import { AddCommentSchema, ADD_COMMENT_SLICE } from '@/4_features/AddComment';
+import { SortArticlesSchema, SORT_ARTICLES_SLICE } from '@/4_features/SortArticles';
+import { FilterArticlesSchema, FILTER_ARTICLES_SLICE } from '@/4_features/FilterArticles';
+import { EditArticleSchema, EDIT_ARTICLE_SLICE } from '@/4_features/EditArticle';
+import { ProfileSchema, PROFILE_SLICE } from '@/5_entities/Profile';
+import { UserSchema, USER_SLICE } from '@/5_entities/User';
 import {
   ArticleSchema,
   ARTICLE_SLICE,
@@ -23,11 +23,11 @@ import {
   ARTICLES_SLICE,
   RECOMMENDED_ARTICLES_SLICE,
   RecommendedArticlesSchema,
-} from '5_entities/Article';
+} from '@/5_entities/Article';
 
-import { ArticleCommentsSchema, ARTICLE_COMMENTS_SLICE } from '5_entities/ArticleComment';
-import { TOASTIFY_SLICE, ToastifySchema } from '6_shared/ui/Toastify';
-import { rtkApi } from '6_shared/api';
+import { ArticleCommentsSchema, ARTICLE_COMMENTS_SLICE } from '@/5_entities/ArticleComment';
+import { TOASTIFY_SLICE, ToastifySchema } from '@/6_shared/ui/Toastify';
+import { rtkApi } from '@/6_shared/api';
 
 export type StateSchema = {
   [rtkApi.reducerPath]: ReturnType<typeof rtkApi.reducer>,

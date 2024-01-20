@@ -1,4 +1,4 @@
-import { StateSchema } from '1_app/providers/StoreProvider';
+import { StateSchema } from '@/1_app/providers/StoreProvider';
 import { initialState } from '../slice/articleSlice';
 
 export const getArticle = (state: StateSchema) => state.article?.data || initialState.data;

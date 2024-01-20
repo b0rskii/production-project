@@ -1,5 +1,5 @@
 import { CSSProperties, PropsWithChildren } from 'react';
-import { getClassNames } from '6_shared/utils/classNames';
+import { getClassNames } from '@/6_shared/utils/classNames';
 import style from './Skeleton.module.scss';
 
 type SkeletonProps = PropsWithChildren<{

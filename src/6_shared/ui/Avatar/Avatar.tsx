@@ -1,5 +1,5 @@
 import { CSSProperties, PropsWithChildren, useMemo } from 'react';
-import { getClassNames } from '6_shared/utils/classNames';
+import { getClassNames } from '@/6_shared/utils/classNames';
 import cls from './Avatar.module.scss';
 
 type AvatarProps = PropsWithChildren<{

@@ -1,4 +1,4 @@
-import { StateSchema } from '1_app/providers/StoreProvider';
+import { StateSchema } from '@/1_app/providers/StoreProvider';
 import { initialState } from '../slice/addCommentSlice';
 
 export const getText = (state: StateSchema) => state.addComment?.text || initialState.text;

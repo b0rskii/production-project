@@ -1,9 +1,9 @@
 import { VFC, SVGProps } from 'react';
-import { RoutePath } from '6_shared/config/routing';
-import MainIcon from '6_shared/assets/icons/main.svg';
-import AboutIcon from '6_shared/assets/icons/about.svg';
-import ProfileIcon from '6_shared/assets/icons/profile.svg';
-import ArticleIcon from '6_shared/assets/icons/article.svg';
+import { RoutePath } from '@/6_shared/config/routing';
+import MainIcon from '@/6_shared/assets/icons/main.svg';
+import AboutIcon from '@/6_shared/assets/icons/about.svg';
+import ProfileIcon from '@/6_shared/assets/icons/profile.svg';
+import ArticleIcon from '@/6_shared/assets/icons/article.svg';
 
 export type LinkItem = {
   route: string;

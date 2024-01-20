@@ -8,21 +8,21 @@ import {
   EditProfileForm,
   editProfileSelectors,
   ProfileHandlers,
-} from '4_features/EditProfile';
+} from '@/4_features/EditProfile';
 import {
   ProfileCard,
   PROFILE_SLICE,
   profileReducer,
   fetchProfileData,
   profileSelectors,
-} from '5_entities/Profile';
-import { Country } from '5_entities/Country';
-import { Currency } from '5_entities/Currency';
-import { userSelectors } from '5_entities/User';
-import { Text } from '6_shared/ui/Text';
-import { getClassNames } from '6_shared/utils/classNames';
-import { useAppDispatch, useAsyncReducer } from '6_shared/utils/redux';
-import { I18nNameSpace } from '6_shared/utils/i18n/nameSpace';
+} from '@/5_entities/Profile';
+import { Country } from '@/5_entities/Country';
+import { Currency } from '@/5_entities/Currency';
+import { userSelectors } from '@/5_entities/User';
+import { Text } from '@/6_shared/ui/Text';
+import { getClassNames } from '@/6_shared/utils/classNames';
+import { useAppDispatch, useAsyncReducer } from '@/6_shared/utils/redux';
+import { I18nNameSpace } from '@/6_shared/utils/i18n/nameSpace';
 import style from './ProfileBlock.module.scss';
 
 type ProfileBlockProps = PropsWithChildren<{

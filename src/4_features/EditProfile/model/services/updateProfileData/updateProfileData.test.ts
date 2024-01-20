@@ -1,8 +1,8 @@
-import { testAsyncThunk } from '6_shared/utils/tests';
-import { Profile, mockProfile, profileActions } from '5_entities/Profile';
-import { mockUser } from '5_entities/User';
-import { toastifyActions } from '6_shared/ui/Toastify';
-import { StatusMessage } from '6_shared/const/mocks';
+import { testAsyncThunk } from '@/6_shared/utils/tests';
+import { Profile, mockProfile, profileActions } from '@/5_entities/Profile';
+import { mockUser } from '@/5_entities/User';
+import { toastifyActions } from '@/6_shared/ui/Toastify';
+import { StatusMessage } from '@/6_shared/const/mocks';
 import { updateProfileData } from './updateProfileData';
 import { validateProfileData } from '../validateProfile/validateProfile';
 

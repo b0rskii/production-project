@@ -1,9 +1,9 @@
 import { PropsWithChildren, memo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { getClassNames } from '6_shared/utils/classNames';
-import { RoutePath } from '6_shared/config/routing';
-import { I18nNameSpace } from '6_shared/utils/i18n/nameSpace';
-import { AppLink, AppLinkTheme } from '6_shared/ui/AppLink';
+import { getClassNames } from '@/6_shared/utils/classNames';
+import { RoutePath } from '@/6_shared/config/routing';
+import { I18nNameSpace } from '@/6_shared/utils/i18n/nameSpace';
+import { AppLink, AppLinkTheme } from '@/6_shared/ui/AppLink';
 
 type Props = PropsWithChildren<{
   className?: string;

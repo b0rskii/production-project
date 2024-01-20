@@ -1,7 +1,7 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { ThemeDecorator } from '6_shared/config/storybook/ThemeDecorator';
-import { Theme } from '6_shared/utils/theme';
-import { Input } from '6_shared/ui/Input';
+import { ThemeDecorator } from '@/6_shared/config/storybook/ThemeDecorator';
+import { Theme } from '@/6_shared/utils/theme';
+import { Input } from '@/6_shared/ui/Input';
 import { mockProfile } from '../../model/mocks';
 import { ProfileContent } from './ProfileContent';
 

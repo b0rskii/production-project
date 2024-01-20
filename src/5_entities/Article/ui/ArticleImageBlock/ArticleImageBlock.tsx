@@ -1,6 +1,6 @@
 import { PropsWithChildren, memo } from 'react';
-import { getClassNames } from '6_shared/utils/classNames';
-import { Text } from '6_shared/ui/Text';
+import { getClassNames } from '@/6_shared/utils/classNames';
+import { Text } from '@/6_shared/ui/Text';
 import { ArticleImageBlock as IArticleImageBlock } from '../../model/types/articleSchema';
 import style from './ArticleImageBlock.module.scss';
 

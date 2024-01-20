@@ -1,11 +1,11 @@
 import { PropsWithChildren, memo, useState } from 'react';
-import { getClassNames } from '6_shared/utils/classNames';
-import { DesktopView, MobileView, useIsMobile } from '6_shared/utils/deviceDetection';
-import { Popover } from '6_shared/ui/Popups';
-import { Button, ButtonTheme } from '6_shared/ui/Button';
-import { Icon } from '6_shared/ui/Icon';
-import BellIcon from '6_shared/assets/icons/bell.svg';
-import { Drawer } from '6_shared/ui/Drawer';
+import { getClassNames } from '@/6_shared/utils/classNames';
+import { DesktopView, MobileView, useIsMobile } from '@/6_shared/utils/deviceDetection';
+import { Popover } from '@/6_shared/ui/Popups';
+import { Button, ButtonTheme } from '@/6_shared/ui/Button';
+import { Icon } from '@/6_shared/ui/Icon';
+import BellIcon from '@/6_shared/assets/icons/bell.svg';
+import { Drawer } from '@/6_shared/ui/Drawer';
 import { useGetNotifications } from '../../api/notificationsApi';
 import { NotificationsList } from '../NotificationsList';
 import style from './NotificationsButton.module.scss';

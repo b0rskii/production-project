@@ -1,14 +1,14 @@
 import { HTMLAttributeAnchorTarget, PropsWithChildren, memo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { getClassNames } from '6_shared/utils/classNames';
-import { RoutePath } from '6_shared/config/routing';
-import { Text } from '6_shared/ui/Text';
-import { Icon } from '6_shared/ui/Icon';
-import { Card } from '6_shared/ui/Card';
-import { Avatar } from '6_shared/ui/Avatar';
-import { AppLink, AppLinkTheme } from '6_shared/ui/AppLink';
-import { ListView } from '6_shared/ui/ListViewSwitcher';
-import EyeIcon from '6_shared/assets/icons/eye.svg';
+import { getClassNames } from '@/6_shared/utils/classNames';
+import { RoutePath } from '@/6_shared/config/routing';
+import { Text } from '@/6_shared/ui/Text';
+import { Icon } from '@/6_shared/ui/Icon';
+import { Card } from '@/6_shared/ui/Card';
+import { Avatar } from '@/6_shared/ui/Avatar';
+import { AppLink, AppLinkTheme } from '@/6_shared/ui/AppLink';
+import { ListView } from '@/6_shared/ui/ListViewSwitcher';
+import EyeIcon from '@/6_shared/assets/icons/eye.svg';
 import {
   ArticleTextBlock as ArticleTextBlockType,
   Article as ArticleType,

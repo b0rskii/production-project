@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { AppLink, AppLinkTheme } from '6_shared/ui/AppLink';
-import { getClassNames } from '6_shared/utils/classNames/getClassNames';
+import { AppLink, AppLinkTheme } from '@/6_shared/ui/AppLink';
+import { getClassNames } from '@/6_shared/utils/classNames/getClassNames';
 import { LinkItem as LinkItemType } from '../../model/linkItems';
 import style from './LinkItem.module.scss';
 

@@ -1,8 +1,8 @@
 import { PropsWithChildren, memo } from 'react';
-import { getClassNames } from '6_shared/utils/classNames';
-import { Card } from '6_shared/ui/Card';
-import { Text } from '6_shared/ui/Text';
-import { AppLink } from '6_shared/ui/AppLink';
+import { getClassNames } from '@/6_shared/utils/classNames';
+import { Card } from '@/6_shared/ui/Card';
+import { Text } from '@/6_shared/ui/Text';
+import { AppLink } from '@/6_shared/ui/AppLink';
 import { Notification as TypeNotification } from '../../model/types/notification';
 import style from './Notification.module.scss';
 

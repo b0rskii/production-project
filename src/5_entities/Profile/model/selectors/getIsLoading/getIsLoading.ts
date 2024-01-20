@@ -1,4 +1,4 @@
-import { StateSchema } from '1_app/providers/StoreProvider';
+import { StateSchema } from '@/1_app/providers/StoreProvider';
 import { initialState } from '../../slice/profileSlice';
 
 export const getIsLoading = (state: StateSchema) => (

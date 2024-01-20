@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import { LocalStorageKey } from '6_shared/const/localStorage';
-import { useAppDispatch } from '6_shared/utils/redux';
+import { LocalStorageKey } from '@/6_shared/const/localStorage';
+import { useAppDispatch } from '@/6_shared/utils/redux';
 import { userActions } from '../slice/userSlice';
 
 export const useInitUserData = () => {

@@ -1,6 +1,6 @@
 import { PropsWithChildren, memo } from 'react';
-import { getClassNames } from '6_shared/utils/classNames';
-import { Skeleton } from '6_shared/ui/Skeleton';
+import { getClassNames } from '@/6_shared/utils/classNames';
+import { Skeleton } from '@/6_shared/ui/Skeleton';
 import { Notification as NotificationItem } from '../Notification';
 import { Notification } from '../../model/types/notification';
 import style from './NotificationsList.module.scss';

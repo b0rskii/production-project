@@ -1,5 +1,5 @@
 import { PropsWithChildren, memo } from 'react';
-import { getClassNames } from '6_shared/utils/classNames';
+import { getClassNames } from '@/6_shared/utils/classNames';
 import { Notification, ToastifyItem } from '../Notification';
 import style from './NotificationsList.module.scss';
 

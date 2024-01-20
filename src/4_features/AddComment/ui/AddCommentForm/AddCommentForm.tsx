@@ -1,10 +1,10 @@
 import { FormEvent, PropsWithChildren, memo, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { getClassNames } from '6_shared/utils/classNames';
-import { useAppDispatch, useAsyncReducer } from '6_shared/utils/redux';
-import { Input } from '6_shared/ui/Input';
-import { Button, ButtonTheme } from '6_shared/ui/Button';
+import { getClassNames } from '@/6_shared/utils/classNames';
+import { useAppDispatch, useAsyncReducer } from '@/6_shared/utils/redux';
+import { Input } from '@/6_shared/ui/Input';
+import { Button, ButtonTheme } from '@/6_shared/ui/Button';
 import { addCommentReducer, addCommentActions } from '../../model/slice/addCommentSlice';
 import { SLICE_NAME } from '../../model/const';
 import { addCommentSelectors } from '../../model/selectors';

@@ -1,10 +1,10 @@
 /* eslint-disable react/no-array-index-key */
 import { HTMLAttributeAnchorTarget, PropsWithChildren, memo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { getClassNames } from '6_shared/utils/classNames';
-import { I18nNameSpace } from '6_shared/utils/i18n/nameSpace';
-import { FetchError } from '6_shared/ui/FetchError';
-import { ListView } from '6_shared/ui/ListViewSwitcher';
+import { getClassNames } from '@/6_shared/utils/classNames';
+import { I18nNameSpace } from '@/6_shared/utils/i18n/nameSpace';
+import { FetchError } from '@/6_shared/ui/FetchError';
+import { ListView } from '@/6_shared/ui/ListViewSwitcher';
 import { Article as ArticleType } from '../../model/types/articleSchema';
 import { Article } from '../Article';
 import { ArticleSkeleton } from '../Article/ArticleSkeleton';

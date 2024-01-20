@@ -1,5 +1,5 @@
 import { EntityState } from '@reduxjs/toolkit';
-import { ListView } from '6_shared/ui/ListViewSwitcher';
+import { ListView } from '@/6_shared/ui/ListViewSwitcher';
 import { Article } from './articleSchema';
 
 export interface ArticlesSchema extends EntityState<Article> {

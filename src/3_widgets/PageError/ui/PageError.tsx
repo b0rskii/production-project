@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { getClassNames } from '6_shared/utils/classNames/getClassNames';
-import { Button, ButtonTheme } from '6_shared/ui/Button';
+import { getClassNames } from '@/6_shared/utils/classNames/getClassNames';
+import { Button, ButtonTheme } from '@/6_shared/ui/Button';
 import style from './PageError.module.scss';
 
 type PageErrorProps = {

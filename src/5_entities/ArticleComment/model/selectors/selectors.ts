@@ -1,4 +1,4 @@
-import { StateSchema } from '1_app/providers/StoreProvider';
+import { StateSchema } from '@/1_app/providers/StoreProvider';
 import { articleCommentsAdapter } from '../slice/articleCommentsSlice';
 
 export const getError = (state: StateSchema) => state.articleComments?.error || null;

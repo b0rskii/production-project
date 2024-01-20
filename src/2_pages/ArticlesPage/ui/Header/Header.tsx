@@ -8,7 +8,7 @@ import {
   sortArticlesSelectors,
   TSortingType,
   TSortingOrder,
-} from '4_features/SortArticles';
+} from '@/4_features/SortArticles';
 import {
   ArticlesSearch,
   FILTER_ARTICLES_SLICE,
@@ -16,12 +16,12 @@ import {
   filterArticlesActions,
   filterArticlesSelectors,
   ArticlesFilterTabs,
-} from '4_features/FilterArticles';
-import { articlesActions, articlesSelectors, fetchArticles } from '5_entities/Article';
-import { getClassNames } from '6_shared/utils/classNames';
-import { useAppDispatch, useAsyncReducer } from '6_shared/utils/redux';
-import { useDebounce } from '6_shared/utils/debounce';
-import { ListView, ListViewSwitcher } from '6_shared/ui/ListViewSwitcher';
+} from '@/4_features/FilterArticles';
+import { articlesActions, articlesSelectors, fetchArticles } from '@/5_entities/Article';
+import { getClassNames } from '@/6_shared/utils/classNames';
+import { useAppDispatch, useAsyncReducer } from '@/6_shared/utils/redux';
+import { useDebounce } from '@/6_shared/utils/debounce';
+import { ListView, ListViewSwitcher } from '@/6_shared/ui/ListViewSwitcher';
 import style from './Header.module.scss';
 
 const DEBOUNCE_DELAY = 500;

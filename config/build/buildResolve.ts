@@ -10,6 +10,8 @@ export const buildResolve = ({ paths }: BuildOptions): ResolveOptions => (
       'node_modules',
     ],
     mainFiles: ['index'],
-    alias: {},
+    alias: {
+      '@': paths.src,
+    },
   }
 );

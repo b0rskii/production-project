@@ -1,6 +1,6 @@
 import { PropsWithChildren, memo } from 'react';
-import { getClassNames } from '6_shared/utils/classNames';
-import { Code } from '6_shared/ui/Code';
+import { getClassNames } from '@/6_shared/utils/classNames';
+import { Code } from '@/6_shared/ui/Code';
 import { ArticleCodeBlock as IArticleCodeBlock } from '../../model/types/articleSchema';
 
 type ArticleCodeBlockProps = PropsWithChildren<{

@@ -1,9 +1,9 @@
-import { testAsyncThunk } from '6_shared/utils/tests';
-import { articleCommentsActions } from '5_entities/ArticleComment';
-import { mockArticle } from '5_entities/Article';
-import { mockUser } from '5_entities/User';
-import { toastifyActions } from '6_shared/ui/Toastify';
-import { StatusMessage } from '6_shared/const/mocks';
+import { testAsyncThunk } from '@/6_shared/utils/tests';
+import { articleCommentsActions } from '@/5_entities/ArticleComment';
+import { mockArticle } from '@/5_entities/Article';
+import { mockUser } from '@/5_entities/User';
+import { toastifyActions } from '@/6_shared/ui/Toastify';
+import { StatusMessage } from '@/6_shared/const/mocks';
 import { sendArticleComment } from './sendArticleComment';
 
 const USER_DATA = mockUser(

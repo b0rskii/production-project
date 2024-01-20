@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { useSelector } from 'react-redux';
-import { useAppDispatch } from '6_shared/utils/redux';
-import { Timer } from '6_shared/const/timers';
+import { useAppDispatch } from '@/6_shared/utils/redux';
+import { Timer } from '@/6_shared/const/timers';
 import { toastifySelectors } from '../../model/selectors';
 import { NotificationsList } from '../NotificationsList';
 import { toastifyActions } from '../../model/slice/toastifySlice';

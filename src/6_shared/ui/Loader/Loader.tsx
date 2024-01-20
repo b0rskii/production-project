@@ -1,4 +1,4 @@
-import { getClassNames } from '6_shared/utils/classNames/getClassNames';
+import { getClassNames } from '@/6_shared/utils/classNames/getClassNames';
 import style from './Loader.module.scss';
 
 type LoaderProps = {

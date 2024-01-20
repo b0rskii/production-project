@@ -58,6 +58,9 @@ module.exports = {
     'no-param-reassign': 'off',
     'object-curly-newline': 'off',
     'no-undef': 'off',
+    'no-use-before-define': ['error', {
+      functions: false,
+    }],
     'borskii-fsd/check-path': 'error',
   },
   globals: {

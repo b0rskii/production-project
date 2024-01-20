@@ -1,7 +1,7 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { ThemeDecorator } from '6_shared/config/storybook/ThemeDecorator';
-import { Input } from '6_shared/ui/Input';
-import { Theme } from '6_shared/utils/theme';
+import { ThemeDecorator } from '@/6_shared/config/storybook/ThemeDecorator';
+import { Input } from '@/6_shared/ui/Input';
+import { Theme } from '@/6_shared/utils/theme';
 import { ProfileRow } from './ProfileRow';
 
 const VALUE = 'Вася';

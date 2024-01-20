@@ -1,4 +1,4 @@
-import { StateSchema } from '1_app/providers/StoreProvider';
+import { StateSchema } from '@/1_app/providers/StoreProvider';
 import { initialState } from '../slice/sortArticlesSlice';
 
 export const getSortingType = (state: StateSchema) => (

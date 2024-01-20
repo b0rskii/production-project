@@ -1,4 +1,4 @@
-import { ApiRoutes, rtkApi } from '6_shared/api';
+import { ApiRoutes, rtkApi } from '@/6_shared/api';
 import { Notification } from '../model/types/notification';
 
 const notificationsApi = rtkApi.injectEndpoints({

@@ -1,4 +1,4 @@
-import { mockProfile } from '5_entities/Profile';
+import { mockProfile } from '@/5_entities/Profile';
 import { validateProfileData } from './validateProfile';
 import { AgeLimit, ValidateProfileError } from '../../const';
 

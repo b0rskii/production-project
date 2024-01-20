@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { ThunkAPI } from '1_app/providers/StoreProvider';
-import { ApiRoutes } from '6_shared/api';
+import { ThunkAPI } from '@/1_app/providers/StoreProvider';
+import { ApiRoutes } from '@/6_shared/api';
 import { ArticleComment } from '../../types/articleCommentsSchema';
 import { SLICE_NAME } from '../../const';
 

@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { memo } from 'react';
 import { Link, LinkProps } from 'react-router-dom';
-import { getClassNames } from '6_shared/utils/classNames';
+import { getClassNames } from '@/6_shared/utils/classNames';
 import style from './AppLink.module.scss';
 
 export enum AppLinkTheme {

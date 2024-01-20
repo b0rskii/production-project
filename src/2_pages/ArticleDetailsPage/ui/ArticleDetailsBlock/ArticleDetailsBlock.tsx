@@ -2,9 +2,9 @@ import { PropsWithChildren, memo, useCallback, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import {
   ARTICLE_SLICE, ArticleDetails, articleReducer, articleSelectors, fetchArticleById,
-} from '5_entities/Article';
-import { getClassNames } from '6_shared/utils/classNames';
-import { useAppDispatch, useAsyncReducer } from '6_shared/utils/redux';
+} from '@/5_entities/Article';
+import { getClassNames } from '@/6_shared/utils/classNames';
+import { useAppDispatch, useAsyncReducer } from '@/6_shared/utils/redux';
 import style from './ArticleDetailsBlock.module.scss';
 
 type ArticleDetailsBlockProps = PropsWithChildren<{

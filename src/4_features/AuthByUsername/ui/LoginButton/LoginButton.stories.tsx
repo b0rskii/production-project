@@ -1,9 +1,9 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { mockUser } from '5_entities/User';
-import { StoreDecorator } from '6_shared/config/storybook/StoreDecorator';
-import { ThemeDecorator } from '6_shared/config/storybook/ThemeDecorator';
-import { ButtonTheme } from '6_shared/ui/Button';
-import { Theme } from '6_shared/utils/theme';
+import { mockUser } from '@/5_entities/User';
+import { StoreDecorator } from '@/6_shared/config/storybook/StoreDecorator';
+import { ThemeDecorator } from '@/6_shared/config/storybook/ThemeDecorator';
+import { ButtonTheme } from '@/6_shared/ui/Button';
+import { Theme } from '@/6_shared/utils/theme';
 import { LoginButton } from './LoginButton';
 
 const USER = mockUser();

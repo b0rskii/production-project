@@ -1,4 +1,4 @@
-import { testAsyncThunk } from '6_shared/utils/tests';
+import { testAsyncThunk } from '@/6_shared/utils/tests';
 import { fetchArticleComments } from './fetchArticleComments';
 import { ArticleComment } from '../../types/articleCommentsSchema';
 import { mockArticleComments } from '../../mocks';

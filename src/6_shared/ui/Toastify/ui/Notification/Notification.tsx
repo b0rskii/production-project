@@ -1,5 +1,5 @@
 import { PropsWithChildren, memo, useEffect } from 'react';
-import { getClassNames } from '6_shared/utils/classNames';
+import { getClassNames } from '@/6_shared/utils/classNames';
 import style from './Notification.module.scss';
 
 type NotificationType = 'success' | 'error';

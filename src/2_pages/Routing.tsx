@@ -1,9 +1,9 @@
 import { memo, Suspense } from 'react';
 import { useSelector } from 'react-redux';
 import { Routes, Route, RouteProps } from 'react-router-dom';
-import { PageLoader } from '3_widgets/PageLoader';
-import { userSelectors, UserRole } from '5_entities/User';
-import { RequireAuth, RoutePath } from '6_shared/config/routing';
+import { PageLoader } from '@/3_widgets/PageLoader';
+import { userSelectors, UserRole } from '@/5_entities/User';
+import { RequireAuth, RoutePath } from '@/6_shared/config/routing';
 import { AboutPage } from './AboutPage';
 import { MainPage } from './MainPage';
 import { ProfilePage } from './ProfilePage';

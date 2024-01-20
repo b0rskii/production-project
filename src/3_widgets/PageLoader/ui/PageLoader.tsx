@@ -1,5 +1,5 @@
-import { getClassNames } from '6_shared/utils/classNames/getClassNames';
-import { Loader } from '6_shared/ui/Loader';
+import { getClassNames } from '@/6_shared/utils/classNames/getClassNames';
+import { Loader } from '@/6_shared/ui/Loader';
 import style from './PageLoader.module.scss';
 
 type PageLoaderProps = {

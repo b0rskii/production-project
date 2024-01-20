@@ -1,9 +1,9 @@
 import { MutableRefObject, PropsWithChildren, useLayoutEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import { getClassNames } from '6_shared/utils/classNames';
-import { useInfiniteScroll } from '6_shared/utils/infiniteScroll';
-import { useAppDispatch } from '6_shared/utils/redux';
+import { getClassNames } from '@/6_shared/utils/classNames';
+import { useInfiniteScroll } from '@/6_shared/utils/infiniteScroll';
+import { useAppDispatch } from '@/6_shared/utils/redux';
 import { uiActions } from './model/slice/uiSlice';
 import style from './Page.module.scss';
 import { uiSelectors } from './model/selectors';
