@@ -1,5 +1,5 @@
-import { StateSchema } from '@/1_app/providers/StoreProvider';
 import { createSelector } from '@reduxjs/toolkit';
+import { StateSchema } from '@/1_app/providers/StoreProvider';
 
 export const getIsInited = (state: StateSchema) => state.user.isInited;
 export const getUserAuthData = (state: StateSchema) => state.user.authData;

@@ -1,8 +1,8 @@
+import { useEffect } from 'react';
+import { useStore } from 'react-redux';
 import { Reducer } from '@reduxjs/toolkit';
 import { StoreWithManager } from '@/1_app/providers/StoreProvider';
 import { StateSchemaKey } from '@/1_app/providers/StoreProvider/config/StateSchema';
-import { useEffect } from 'react';
-import { useStore } from 'react-redux';
 import { useAppDispatch } from './useAppDispatch';
 
 export const useAsyncReducer = (
