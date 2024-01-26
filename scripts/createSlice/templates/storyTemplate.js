@@ -1,7 +1,7 @@
 // eslint-disable-next-line max-len
 module.exports = (layer, componentName) => `import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { ThemeDecorator } from '6_shared/config/storybook/ThemeDecorator';
-import { Theme } from '6_shared/utils/theme';
+import { ThemeDecorator } from '@/6_shared/config/storybook/ThemeDecorator';
+import { Theme } from '@/6_shared/utils/theme';
 import { ${componentName} } from './${componentName}';
 
 export default {

@@ -4,21 +4,19 @@ import { Modal } from '@/6_shared/ui/Modal';
 import { LoginFormLazy } from '../LoginForm/LoginForm.lazy';
 
 type LoginModalProps = {
-  isOpen: boolean;
   onClose: () => void;
 };
 
 export const LoginModal = (props: LoginModalProps) => {
-  const { isOpen, onClose } = props;
+  const { onClose } = props;
 
   return (
-    <Modal
-      isOpen={isOpen}
-      onClose={onClose}
-    >
-      <Suspense fallback={<Loader />}>
-        <LoginFormLazy onSuccess={onClose} />
-      </Suspense>
+    <Modal onClose={onClose}>
+      {(closeModal) => (
+        <Suspense fallback={<Loader />}>
+          <LoginFormLazy onSuccess={closeModal} />
+        </Suspense>
+      )}
     </Modal>
   );
 };

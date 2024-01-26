@@ -12,7 +12,7 @@
     pointer-events: none;
   }
 
-  &:hover {
+  &.hasHover:hover {
     opacity: 0.8;
   }
 }

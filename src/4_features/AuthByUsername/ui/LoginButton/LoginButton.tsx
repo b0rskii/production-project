@@ -109,10 +109,7 @@ export const LoginButton = memo((props: LoginButtonProps) => {
         </Button>
       )}
       {isAuthModalOpened && (
-        <LoginModal
-          isOpen={isAuthModalOpened}
-          onClose={onCloseModal}
-        />
+        <LoginModal onClose={onCloseModal} />
       )}
     </>
   );

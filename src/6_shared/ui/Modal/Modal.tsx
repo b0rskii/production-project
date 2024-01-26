@@ -14,13 +14,13 @@ const ANIMATION_MS = 100;
 
 type ModalProps = {
   className?: string;
-  isOpen?: boolean;
-  children: ReactNode;
+  // eslint-disable-next-line no-unused-vars
+  children: (closeModal: () => void) => ReactNode;
   onClose?: () => void;
 };
 
 export const Modal = (props: ModalProps) => {
-  const { className, children, isOpen, onClose } = props;
+  const { className, children, onClose } = props;
 
   const {
     isOpening,
@@ -38,15 +38,13 @@ export const Modal = (props: ModalProps) => {
   useEffect(() => {
     const closingTimeout = closingTimeoutRef.current;
 
-    if (isOpen) {
-      document.addEventListener('keydown', escKeydownHandler);
-    }
+    document.addEventListener('keydown', escKeydownHandler);
 
     return () => {
       clearTimeout(closingTimeout);
       document.removeEventListener('keydown', escKeydownHandler);
     };
-  }, [isOpen, escKeydownHandler, closingTimeoutRef]);
+  }, [escKeydownHandler, closingTimeoutRef]);
 
   const modes = {
     [style.opened]: !isOpening,
@@ -58,7 +56,7 @@ export const Modal = (props: ModalProps) => {
       <div className={getClassNames(style.modal, modes, [className])}>
         <Overlay onClick={closeHandler} />
         <div className={style.content}>
-          {children}
+          {children(closeHandler)}
         </div>
       </div>
     </Portal>

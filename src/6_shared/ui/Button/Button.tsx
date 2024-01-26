@@ -18,6 +18,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
   theme?: ButtonTheme;
   square?: boolean;
+  hasHover?: boolean;
   size?: 'm' | 'l' | 'xl';
   'data-testid'?: string;
 }
@@ -28,6 +29,7 @@ export const Button = memo((props: ButtonProps) => {
     children,
     theme = ButtonTheme.DEFAULT,
     square,
+    hasHover = true,
     size = 'm',
     type = 'button',
     'data-testid': dataTestid = 'Button',
@@ -36,6 +38,7 @@ export const Button = memo((props: ButtonProps) => {
 
   const modes = {
     [style.square]: square,
+    [style.hasHover]: hasHover,
   };
 
   return (

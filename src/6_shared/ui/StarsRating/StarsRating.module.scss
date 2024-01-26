@@ -1,0 +1,19 @@
+.starsRating {
+  display: flex;
+}
+
+.star {
+  & > svg {
+    fill: none;
+  }
+}
+
+.hovered {
+  & > svg {
+    fill: var(--primary-color);
+  }
+}
+
+.selected {
+  cursor: auto;
+}

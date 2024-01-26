@@ -12,14 +12,12 @@ export const useModal = ({ animationMs, onClose }: Props) => {
   const closingTimeoutRef = useRef() as MutableRefObject<ReturnType<typeof setTimeout>>;
 
   const closeHandler = useCallback(() => {
-    if (onClose) {
-      setIsClosing(true);
+    setIsClosing(true);
 
-      closingTimeoutRef.current = setTimeout(() => {
-        onClose();
-        setIsClosing(false);
-      }, animationMs);
-    }
+    closingTimeoutRef.current = setTimeout(() => {
+      onClose?.();
+      setIsClosing(false);
+    }, animationMs);
   }, [onClose, animationMs]);
 
   useEffect(() => {
