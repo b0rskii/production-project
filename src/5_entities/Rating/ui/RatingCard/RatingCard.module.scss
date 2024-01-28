@@ -2,6 +2,13 @@
   width: 100%;
 }
 
-.buttons {
+.buttonsModal,
+.buttonsDrawer {
   margin-top: 20px;
+}
+
+.buttonsDrawer {
+  & > button {
+    width: 100%;
+  }
 }

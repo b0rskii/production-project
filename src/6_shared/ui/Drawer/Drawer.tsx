@@ -9,7 +9,8 @@ const height = window.innerHeight - 100;
 
 type DrawerProps = {
   className?: string;
-  children: ReactNode;
+  // eslint-disable-next-line no-unused-vars
+  children: ReactNode | ((closeDrawer: () => void) => ReactNode);
   onClose?: () => void;
 };
 
@@ -70,7 +71,7 @@ const DrawerContent = (props: DrawerProps) => {
           style={{ display, bottom: `calc(-100vh + ${height - 100}px)`, y }}
           {...bind()}
         >
-          {children}
+          {typeof children === 'function' ? children(close) : children}
         </a.div>
       </div>
     </Portal>

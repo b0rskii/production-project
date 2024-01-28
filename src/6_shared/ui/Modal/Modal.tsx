@@ -15,7 +15,7 @@ const ANIMATION_MS = 100;
 type ModalProps = {
   className?: string;
   // eslint-disable-next-line no-unused-vars
-  children: (closeModal: () => void) => ReactNode;
+  children: ReactNode | ((closeModal: () => void) => ReactNode);
   onClose?: () => void;
 };
 
@@ -56,7 +56,7 @@ export const Modal = (props: ModalProps) => {
       <div className={getClassNames(style.modal, modes, [className])}>
         <Overlay onClick={closeHandler} />
         <div className={style.content}>
-          {children(closeHandler)}
+          {typeof children === 'function' ? children(closeHandler) : children}
         </div>
       </div>
     </Portal>

@@ -7,8 +7,10 @@ import { Text } from '@/6_shared/ui/Text';
 import { StarsRating } from '@/6_shared/ui/StarsRating';
 import { Modal } from '@/6_shared/ui/Modal';
 import { Input } from '@/6_shared/ui/Input';
-import style from './RatingCard.module.scss';
 import { Button, ButtonTheme } from '@/6_shared/ui/Button';
+import { DesktopView, MobileView } from '@/6_shared/utils/deviceDetection';
+import { Drawer } from '@/6_shared/ui/Drawer';
+import style from './RatingCard.module.scss';
 
 type Props = PropsWithChildren<{
   className?: string;
@@ -55,6 +57,18 @@ export const RatingCard = memo((props: Props) => {
     closeModal();
   };
 
+  const ModalContent = (
+    <>
+      <Text title={feedbackTitle} />
+      <Input
+        className={style.input}
+        placeholder={feedbackPlaceholder}
+        autoFocus
+        onChange={handleInputChange}
+      />
+    </>
+  );
+
   return (
     <Card className={getClassNames(style.ratingCard, {}, [className])}>
       <Stack mode="v" gap="m">
@@ -63,34 +77,56 @@ export const RatingCard = memo((props: Props) => {
       </Stack>
 
       {isShowModal && (
-        <Modal onClose={() => setIsShowModal(false)}>
-          {(closeModal) => (
-            <>
-              <Stack mode="v" gap="l" maxWidth>
-                <Text title={feedbackTitle} />
-                <Input
-                  className={style.input}
-                  placeholder={feedbackPlaceholder}
-                  onChange={handleInputChange}
-                />
-              </Stack>
-              <Stack className={style.buttons} gap="m" justify="end">
-                <Button
-                  theme={ButtonTheme.OUTLINE}
-                  onClick={() => handleAcceptButtonClick(closeModal)}
-                >
-                  {t('Отправить')}
-                </Button>
-                <Button
-                  theme={ButtonTheme.OUTLINE_RED}
-                  onClick={() => handleCancelButtonClick(closeModal)}
-                >
-                  {t('Отменить')}
-                </Button>
-              </Stack>
-            </>
-          )}
-        </Modal>
+        <>
+          <DesktopView>
+            <Modal onClose={() => setIsShowModal(false)}>
+              {(closeModal) => (
+                <>
+                  <Stack mode="v" gap="l" maxWidth>
+                    {ModalContent}
+                  </Stack>
+                  <Stack className={style.buttonsModal} gap="m" justify="end">
+                    <Button
+                      theme={ButtonTheme.OUTLINE}
+                      onClick={() => handleAcceptButtonClick(closeModal)}
+                    >
+                      {t('Отправить')}
+                    </Button>
+                    <Button
+                      theme={ButtonTheme.OUTLINE_RED}
+                      onClick={() => handleCancelButtonClick(closeModal)}
+                    >
+                      {t('Отменить')}
+                    </Button>
+                  </Stack>
+                </>
+              )}
+            </Modal>
+          </DesktopView>
+          <MobileView>
+            <Drawer onClose={() => setIsShowModal(false)}>
+              {(closeDrawer) => (
+                <>
+                  {ModalContent}
+                  <Stack className={style.buttonsDrawer} mode="v" gap="s" justify="end">
+                    <Button
+                      theme={ButtonTheme.OUTLINE}
+                      onClick={() => handleAcceptButtonClick(closeDrawer)}
+                    >
+                      {t('Отправить')}
+                    </Button>
+                    <Button
+                      theme={ButtonTheme.OUTLINE_RED}
+                      onClick={() => handleCancelButtonClick(closeDrawer)}
+                    >
+                      {t('Отменить')}
+                    </Button>
+                  </Stack>
+                </>
+              )}
+            </Drawer>
+          </MobileView>
+        </>
       )}
     </Card>
   );
