@@ -1085,5 +1085,64 @@
       "username": "user",
       "avatar": "https://upload.wikimedia.org/wikipedia/ru/3/30/Freeman_face_concept.jpeg"
     }
+  ],
+  "article-ratings": [
+    {
+      "id": "1",
+      "rate": 4,
+      "feedback": "Good!",
+      "userId": "1",
+      "articleId": "1"
+    },
+    {
+      "userId": "1",
+      "articleId": "7",
+      "rate": 3,
+      "feedback": "",
+      "id": "k76DsDq"
+    },
+    {
+      "userId": "2",
+      "articleId": "1",
+      "rate": 5,
+      "feedback": "JS!!!",
+      "id": "d21uGq3"
+    },
+    {
+      "userId": "2",
+      "articleId": "4",
+      "rate": 3,
+      "id": "SlJtVpp"
+    },
+    {
+      "userId": "2",
+      "articleId": "8",
+      "rate": 5,
+      "id": "RyCw38X"
+    },
+    {
+      "userId": "2",
+      "articleId": "7",
+      "rate": 3,
+      "id": "9ekBei7"
+    },
+    {
+      "userId": "2",
+      "articleId": "5",
+      "rate": 4,
+      "id": "coQ-kVz"
+    },
+    {
+      "userId": "2",
+      "articleId": "2",
+      "rate": 1,
+      "id": "nwRqkO0"
+    },
+    {
+      "userId": "2",
+      "articleId": "6",
+      "rate": 4,
+      "id": "5OBSgk-"
+    }
   ]
 }

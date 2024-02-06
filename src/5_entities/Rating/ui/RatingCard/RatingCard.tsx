@@ -14,6 +14,7 @@ import style from './RatingCard.module.scss';
 
 type Props = PropsWithChildren<{
   className?: string;
+  rate?: number;
   title?: string;
   feedbackTitle?: string;
   feedbackPlaceholder?: string;
@@ -25,12 +26,12 @@ type Props = PropsWithChildren<{
 
 export const RatingCard = memo((props: Props) => {
   const {
-    className, title, feedbackTitle, feedbackPlaceholder, hasFeedback, onAccept, onCancel,
+    className, rate = 0, title, feedbackTitle, feedbackPlaceholder, hasFeedback, onAccept, onCancel,
   } = props;
   const { t } = useTranslation();
 
   const [isShowModal, setIsShowModal] = useState(false);
-  const [stars, setStars] = useState(0);
+  const [stars, setStars] = useState(rate);
   const [feedback, setFeedback] = useState('');
 
   const handleStarClick = (stars: number) => {
@@ -52,7 +53,7 @@ export const RatingCard = memo((props: Props) => {
   };
 
   const handleCancelButtonClick = (closeModal: () => void) => {
-    setFeedback('');
+    onAccept?.(stars);
     onCancel?.();
     closeModal();
   };
@@ -72,8 +73,12 @@ export const RatingCard = memo((props: Props) => {
   return (
     <Card className={getClassNames(style.ratingCard, {}, [className])}>
       <Stack mode="v" gap="m">
-        {title && <Text title={title} />}
-        <StarsRating onStarClick={handleStarClick} />
+        {title && (
+          <Text
+            title={stars ? t('Спасибо за вашу оценку!') : title}
+          />
+        )}
+        <StarsRating selectedStars={stars} onStarClick={handleStarClick} />
       </Stack>
 
       {isShowModal && (
@@ -88,6 +93,7 @@ export const RatingCard = memo((props: Props) => {
                   <Stack className={style.buttonsModal} gap="m" justify="end">
                     <Button
                       theme={ButtonTheme.OUTLINE}
+                      disabled={feedback.length === 0}
                       onClick={() => handleAcceptButtonClick(closeModal)}
                     >
                       {t('Отправить')}

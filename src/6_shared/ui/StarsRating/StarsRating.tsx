@@ -17,8 +17,7 @@ type Props = PropsWithChildren<{
 
 export const StarsRating = memo((props: Props) => {
   const { className, size = 30, selectedStars = 0, onStarClick } = props;
-
-  const [currentStars, setCurrentStars] = useState(0);
+  const [currentStars, setCurrentStars] = useState(selectedStars);
   const [isSelected, setIsSelected] = useState(selectedStars > 0);
 
   const handleStarFocus = (star: number) => {
