@@ -5,7 +5,7 @@ import svgrPlugin from 'vite-plugin-svgr';
 export default defineConfig({
   plugins: [
     reactPlugin(),
-    svgrPlugin({ exportAsDefault: true }),
+    svgrPlugin(),
   ],
   resolve: {
     alias: [

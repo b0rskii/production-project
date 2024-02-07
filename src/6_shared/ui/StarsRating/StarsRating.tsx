@@ -2,7 +2,7 @@ import { PropsWithChildren, memo, useState } from 'react';
 import { getClassNames } from '@/6_shared/utils/classNames';
 import { Button, ButtonTheme } from '@/6_shared/ui/Button';
 import { Icon } from '@/6_shared/ui/Icon';
-import StarIcon from '@/6_shared/assets/icons/star.svg';
+import StarIcon from '@/6_shared/assets/icons/star.svg?react';
 import style from './StarsRating.module.scss';
 
 const stars = [1, 2, 3, 4, 5];

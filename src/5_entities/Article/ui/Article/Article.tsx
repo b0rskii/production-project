@@ -8,7 +8,7 @@ import { Card } from '@/6_shared/ui/Card';
 import { Avatar } from '@/6_shared/ui/Avatar';
 import { AppLink, AppLinkTheme } from '@/6_shared/ui/AppLink';
 import { ListView } from '@/6_shared/ui/ListViewSwitcher';
-import EyeIcon from '@/6_shared/assets/icons/eye.svg';
+import EyeIcon from '@/6_shared/assets/icons/eye.svg?react';
 import {
   ArticleTextBlock as ArticleTextBlockType,
   Article as ArticleType,

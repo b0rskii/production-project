@@ -4,7 +4,7 @@ import { DesktopView, MobileView, useIsMobile } from '@/6_shared/utils/deviceDet
 import { Popover } from '@/6_shared/ui/Popups';
 import { Button, ButtonTheme } from '@/6_shared/ui/Button';
 import { Icon } from '@/6_shared/ui/Icon';
-import BellIcon from '@/6_shared/assets/icons/bell.svg';
+import BellIcon from '@/6_shared/assets/icons/bell.svg?react';
 import { Drawer } from '@/6_shared/ui/Drawer';
 import { useGetNotifications } from '../../api/notificationsApi';
 import { NotificationsList } from '../NotificationsList';

@@ -2,8 +2,8 @@ import { PropsWithChildren, memo } from 'react';
 import { getClassNames } from '@/6_shared/utils/classNames';
 import { Button, ButtonTheme } from '@/6_shared/ui/Button';
 import { Card } from '@/6_shared/ui/Card';
-import TilesIcon from '@/6_shared/assets/icons/tiles.svg';
-import ListIcon from '@/6_shared/assets/icons/list.svg';
+import TilesIcon from '@/6_shared/assets/icons/tiles.svg?react';
+import ListIcon from '@/6_shared/assets/icons/list.svg?react';
 import style from './ListViewSwitcher.module.scss';
 
 export type ListView = 'tiles' | 'list';
