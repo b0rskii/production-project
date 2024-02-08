@@ -61,7 +61,7 @@ module.exports = {
     'no-use-before-define': ['error', {
       functions: false,
     }],
-    'borskii-fsd/check-path': 'error',
+    'borskii-fsd/check-path': ['error', { alias: '@' }],
   },
   globals: {
     __IS_DEV__: true,
