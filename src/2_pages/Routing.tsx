@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { Routes, Route, RouteProps } from 'react-router-dom';
 import { PageLoader } from '@/3_widgets/PageLoader';
 import { userSelectors, UserRole } from '@/5_entities/User';
-import { RequireAuth, RoutePath } from '@/6_shared/config/routing';
+import { RoutePath } from '@/6_shared/config/routing';
 import { AboutPage } from './AboutPage';
 import { MainPage } from './MainPage';
 import { ProfilePage } from './ProfilePage';
@@ -12,6 +12,7 @@ import { ArticleDetailsPage } from './ArticleDetailsPage';
 import { ArticleEditPage } from './ArticleEditPage';
 import { AdminPanelPage } from './AdminPanelPage';
 import { NotFoundPage } from './NotFoundPage';
+import { RequireAuth } from './RequireAuth';
 
 type AppRouteProps = RouteProps & {
   authOnly?: boolean;

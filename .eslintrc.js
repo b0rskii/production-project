@@ -62,6 +62,10 @@ module.exports = {
       functions: false,
     }],
     'borskii-fsd/check-path': ['error', { alias: '@' }],
+    'borskii-fsd/layer-imports': ['error', {
+      alias: '@',
+      ignoreImportPatterns: ['**/StoreProvider'],
+    }],
   },
   globals: {
     __IS_DEV__: true,

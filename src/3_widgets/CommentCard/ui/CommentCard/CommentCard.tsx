@@ -1,4 +1,5 @@
 import { PropsWithChildren, memo } from 'react';
+import { User } from '@/5_entities/User';
 import { getClassNames } from '@/6_shared/utils/classNames';
 import { Avatar } from '@/6_shared/ui/Avatar';
 import { Text } from '@/6_shared/ui/Text';
@@ -9,7 +10,7 @@ import style from './CommentCard.module.scss';
 
 type CommentCardProps = PropsWithChildren<{
   className?: string;
-  comment: Comment;
+  comment: Comment<User>;
 }>;
 
 export const CommentCard = memo((props: CommentCardProps) => {

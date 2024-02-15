@@ -1,7 +1,5 @@
-import { User } from '@/5_entities/User';
-
-export interface Comment {
+export interface Comment<T> {
   id: string;
   text: string;
-  user: User;
+  user: T;
 }

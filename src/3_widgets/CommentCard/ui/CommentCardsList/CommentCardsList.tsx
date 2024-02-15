@@ -1,5 +1,6 @@
 import { PropsWithChildren, memo } from 'react';
 import { useTranslation } from 'react-i18next';
+import { User } from '@/5_entities/User';
 import { getClassNames } from '@/6_shared/utils/classNames';
 import { Text } from '@/6_shared/ui/Text';
 import { Loader } from '@/6_shared/ui/Loader';
@@ -11,7 +12,7 @@ import style from './CommentCardsList.module.scss';
 
 type CommentCardsListProps = PropsWithChildren<{
   className?: string;
-  comments: Comment[];
+  comments: Comment<User>[];
   isLoading: boolean;
   error: string | null;
   onRepeatFetch?: () => void;
