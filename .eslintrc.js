@@ -22,6 +22,7 @@ module.exports = {
     'i18next',
     'react-hooks',
     'borskii-fsd',
+    'unused-imports',
   ],
   rules: {
     'react/jsx-indent': [2, 2],
@@ -61,6 +62,7 @@ module.exports = {
     'no-use-before-define': ['error', {
       functions: false,
     }],
+    'unused-imports/no-unused-imports': 'error',
     'borskii-fsd/check-path': ['error', { alias: '@' }],
     'borskii-fsd/layer-imports': ['error', {
       alias: '@',
