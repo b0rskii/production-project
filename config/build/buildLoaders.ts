@@ -11,11 +11,13 @@ export const buildLoaders = (options: BuildOptions): RuleSetRule[] => {
 
   const svgLoader = {
     test: /\.svg$/,
+    exclude: /node_modules/,
     use: ['@svgr/webpack'],
   };
 
   const fileLoader = {
     test: /\.(png|jpe?g|gif|woff|woff2)$/i,
+    exclude: /node_modules/,
     use: [
       {
         loader: 'file-loader',
