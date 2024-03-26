@@ -6,7 +6,6 @@ import {
   useState,
 } from 'react';
 import { getClassNames } from '@/6_shared/utils/classNames';
-import style from './Image.module.scss';
 
 type Props = ImgHTMLAttributes<HTMLImageElement> & {
   className?: string;
@@ -52,7 +51,7 @@ export const AppImage = memo((props: Props) => {
   return (
     <img
       {...otherProps}
-      className={getClassNames(style.image, {}, [className])}
+      className={getClassNames('', {}, [className])}
       src={src}
       alt={alt}
     />

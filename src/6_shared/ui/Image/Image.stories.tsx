@@ -1,7 +1,7 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { ThemeDecorator } from '@/6_shared/config/storybook/ThemeDecorator';
 import { Theme } from '@/6_shared/utils/theme';
-import { Image } from './Image';
+import { AppImage as Image } from './Image';
 
 export default {
   title: '5_entities/Image',

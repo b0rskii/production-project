@@ -4,11 +4,7 @@ module.exports = {
     es2021: true,
     jest: true,
   },
-  extends: [
-    'plugin:react/recommended',
-    'airbnb',
-    'prettier',
-  ],
+  extends: ['plugin:react/recommended', 'airbnb', 'prettier'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
@@ -29,7 +25,10 @@ module.exports = {
     'react/jsx-indent': [2, 2],
     'react/jsx-indent-props': [2, 2],
     indent: [2, 2],
-    'react/jsx-filename-extension': [2, { extensions: ['.js', '.jsx', '.tsx'] }],
+    'react/jsx-filename-extension': [
+      2,
+      { extensions: ['.js', '.jsx', '.tsx'] },
+    ],
     'import/no-unresolved': 'off',
     'import/prefer-default-export': 'off',
     'no-unused-vars': 'warn',
@@ -47,8 +46,18 @@ module.exports = {
       {
         markupOnly: true,
         ignoreAttribute: [
-          'data-testid', 'to', 'size', 'align', 'target', 'TitleTag', 'as', 'mode', 'gap', 'alt',
-          'direction', 'justify',
+          'data-testid',
+          'to',
+          'size',
+          'align',
+          'target',
+          'TitleTag',
+          'as',
+          'mode',
+          'gap',
+          'alt',
+          'direction',
+          'justify',
         ],
       },
     ],
@@ -60,15 +69,21 @@ module.exports = {
     'no-param-reassign': 'off',
     'object-curly-newline': 'off',
     'no-undef': 'off',
-    'no-use-before-define': ['error', {
-      functions: false,
-    }],
+    'no-use-before-define': [
+      'error',
+      {
+        functions: false,
+      },
+    ],
     'unused-imports/no-unused-imports': 'error',
     'borskii-fsd/check-path': ['error', { alias: '@' }],
-    'borskii-fsd/layer-imports': ['error', {
-      alias: '@',
-      ignoreImportPatterns: ['**/StoreProvider'],
-    }],
+    'borskii-fsd/layer-imports': [
+      'error',
+      {
+        alias: '@',
+        ignoreImportPatterns: ['**/StoreProvider'],
+      },
+    ],
   },
   globals: {
     __IS_DEV__: true,
