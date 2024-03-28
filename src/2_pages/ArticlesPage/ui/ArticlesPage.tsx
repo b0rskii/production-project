@@ -29,6 +29,7 @@ const ArticlesPage = (props: ArticlesPageProps) => {
     <Page
       className={getClassNames('', {}, [className])}
       onScrollToPageBottom={scrollToPageBottomHandler}
+      data-testid="ArticlesPage"
     >
       <Header />
       <ArticlesBlock />

@@ -5,11 +5,7 @@ import { I18nNameSpace } from '@/6_shared/utils/i18n/nameSpace';
 function AdminPanelPage() {
   const { t } = useTranslation(I18nNameSpace.AdminPanel);
 
-  return (
-    <Page>
-      {t('Панель администратора')}
-    </Page>
-  );
+  return <Page data-testid="AdminPanelPage">{t('Панель администратора')}</Page>;
 }
 
 export default AdminPanelPage;

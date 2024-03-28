@@ -11,26 +11,34 @@ type RequireAuthProps = {
   requiredRoles?: UserRole[];
 };
 
-export const RequireAuth = ({ children, isAuth, requiredRoles }: RequireAuthProps) => {
+export const RequireAuth = ({
+  children,
+  isAuth,
+  requiredRoles,
+}: RequireAuthProps) => {
   const userRoles = useSelector(userSelectors.getUserRoles);
 
   const hasRequiredRole = useMemo(() => {
     if (!requiredRoles) {
       return true;
     }
-    return requiredRoles.some((requiredRole) => userRoles?.includes(requiredRole));
+
+    return requiredRoles.some((requiredRole) =>
+      userRoles?.includes(requiredRole)
+    );
   }, [requiredRoles, userRoles]);
 
   if (!isAuth) {
     return (
-      <Navigate to={RoutePath.MAIN} replace />
+      <Navigate
+        to={RoutePath.MAIN}
+        replace
+      />
     );
   }
 
   if (!hasRequiredRole) {
-    return (
-      <ForbiddenPage />
-    );
+    return <ForbiddenPage />;
   }
 
   return children;

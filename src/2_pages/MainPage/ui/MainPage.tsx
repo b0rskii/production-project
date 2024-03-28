@@ -5,11 +5,7 @@ import { I18nNameSpace } from '@/6_shared/utils/i18n/nameSpace';
 function MainPage() {
   const { t } = useTranslation(I18nNameSpace.Main);
 
-  return (
-    <Page>
-      {t('Главная страница')}
-    </Page>
-  );
+  return <Page data-testid="MainPage">{t('Главная страница')}</Page>;
 }
 
 export default MainPage;

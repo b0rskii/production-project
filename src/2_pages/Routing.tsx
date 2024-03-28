@@ -77,22 +77,23 @@ export const Routing = memo(() => {
     <Routes>
       {routes.map((route) => {
         const element = (
-          <Suspense fallback={<PageLoader />}>
-            {route.element}
-          </Suspense>
+          <Suspense fallback={<PageLoader />}>{route.element}</Suspense>
         );
 
         return (
           <Route
             path={route.path}
             element={
-              route.authOnly
-                ? (
-                  <RequireAuth isAuth={Boolean(isAuth)} requiredRoles={route.roles}>
-                    {element}
-                  </RequireAuth>
-                )
-                : element
+              route.authOnly ? (
+                <RequireAuth
+                  isAuth={Boolean(isAuth)}
+                  requiredRoles={route.roles}
+                >
+                  {element}
+                </RequireAuth>
+              ) : (
+                element
+              )
             }
             key={route.path}
           />

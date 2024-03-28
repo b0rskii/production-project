@@ -10,7 +10,7 @@ function ArticleEditPage() {
   const isEdit = Boolean(id);
 
   return (
-    <Page>
+    <Page data-testid="ArticleEditPage">
       <Text title={isEdit ? t('Редактировать') : t('Создать')} />
     </Page>
   );

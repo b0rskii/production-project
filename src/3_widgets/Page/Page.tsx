@@ -1,9 +1,15 @@
-import { MutableRefObject, PropsWithChildren, useLayoutEffect, useRef } from 'react';
+import {
+  MutableRefObject,
+  PropsWithChildren,
+  useLayoutEffect,
+  useRef,
+} from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { getClassNames } from '@/6_shared/utils/classNames';
 import { useInfiniteScroll } from '@/6_shared/utils/infiniteScroll';
 import { useAppDispatch } from '@/6_shared/utils/redux';
+import { TestProps } from '@/6_shared/types/forTest';
 import { uiActions } from './model/slice/uiSlice';
 import style from './Page.module.scss';
 import { uiSelectors } from './model/selectors';
@@ -11,7 +17,8 @@ import { uiSelectors } from './model/selectors';
 type PageProps = PropsWithChildren<{
   className?: string;
   onScrollToPageBottom?: () => void;
-}>;
+}> &
+  TestProps;
 
 export const Page = (props: PageProps) => {
   const { className, children, onScrollToPageBottom } = props;
@@ -36,12 +43,14 @@ export const Page = (props: PageProps) => {
     }
 
     return () => {
-      dispatch(uiActions.setScrollData({
-        path: pathname,
-        scrollPosition: scrollPositionRef.current,
-      }));
+      dispatch(
+        uiActions.setScrollData({
+          path: pathname,
+          scrollPosition: scrollPositionRef.current,
+        })
+      );
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const scrollHandler = () => {
@@ -53,6 +62,8 @@ export const Page = (props: PageProps) => {
       className={getClassNames(style.pageWrapper, {}, [className])}
       ref={wrapperRef}
       onScroll={scrollHandler}
+      // eslint-disable-next-line react/destructuring-assignment
+      data-testid={props['data-testid']}
     >
       {children}
       <div ref={triggerRef} />
