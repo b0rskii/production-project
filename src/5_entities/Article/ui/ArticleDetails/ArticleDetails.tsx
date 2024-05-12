@@ -26,16 +26,41 @@ type ArticleDetailsProps = PropsWithChildren<{
 
 export const ArticleDetails = memo((props: ArticleDetailsProps) => {
   const { article, isLoading, error, className, onRepeatFetch } = props;
-  const { t } = useTranslation([I18nNameSpace.Translation, I18nNameSpace.Article]);
+
+  const { t } = useTranslation([
+    I18nNameSpace.Translation,
+    I18nNameSpace.Article,
+  ]);
 
   if (isLoading) {
     return (
       <div className={getClassNames('', {}, [className])}>
-        <Skeleton className={style.avatar} width={200} height={200} borderRadius="50%" />
-        <Skeleton className={style.title} width={300} height={32} />
-        <Skeleton className={style.skeleton} width={600} height={24} />
-        <Skeleton className={style.skeleton} width="100%" height={200} />
-        <Skeleton className={style.skeleton} width="100%" height={200} />
+        <Skeleton
+          className={style.avatar}
+          width={200}
+          height={200}
+          borderRadius="50%"
+        />
+        <Skeleton
+          className={style.title}
+          width={300}
+          height={32}
+        />
+        <Skeleton
+          className={style.skeleton}
+          width={600}
+          height={24}
+        />
+        <Skeleton
+          className={style.skeleton}
+          width="100%"
+          height={200}
+        />
+        <Skeleton
+          className={style.skeleton}
+          width="100%"
+          height={200}
+        />
       </div>
     );
   }
@@ -44,7 +69,9 @@ export const ArticleDetails = memo((props: ArticleDetailsProps) => {
     return (
       <div className={getClassNames('', {}, [className, style.error])}>
         <FetchError
-          message={t('При загрузке статьи произошла ошибка', { ns: I18nNameSpace.Article })}
+          message={t('При загрузке статьи произошла ошибка', {
+            ns: I18nNameSpace.Article,
+          })}
           onRepeat={onRepeatFetch}
         />
       </div>
@@ -72,6 +99,7 @@ export const ArticleDetails = memo((props: ArticleDetailsProps) => {
         title={title}
         text={subtitle}
         size="l"
+        data-testid="ArticleDetailsHeading"
       />
 
       <div className={style.info}>
@@ -85,14 +113,32 @@ export const ArticleDetails = memo((props: ArticleDetailsProps) => {
 
       {blocks.map((block) => {
         switch (block.type) {
-        case ArticleBlockType.TEXT:
-          return <ArticleTextBlock className={style.block} content={block} key={block.id} />;
-        case ArticleBlockType.CODE:
-          return <ArticleCodeBlock className={style.block} content={block} key={block.id} />;
-        case ArticleBlockType.IMAGE:
-          return <ArticleImageBlock className={style.block} content={block} key={block.id} />;
-        default:
-          return null;
+          case ArticleBlockType.TEXT:
+            return (
+              <ArticleTextBlock
+                className={style.block}
+                content={block}
+                key={block.id}
+              />
+            );
+          case ArticleBlockType.CODE:
+            return (
+              <ArticleCodeBlock
+                className={style.block}
+                content={block}
+                key={block.id}
+              />
+            );
+          case ArticleBlockType.IMAGE:
+            return (
+              <ArticleImageBlock
+                className={style.block}
+                content={block}
+                key={block.id}
+              />
+            );
+          default:
+            return null;
         }
       })}
     </div>

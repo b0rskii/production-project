@@ -36,10 +36,20 @@ const ArticleDetailsPage = (props: ArticleDetailsPageProps) => {
     >
       <Header />
       <ArticleDetailsBlock articleId={id} />
-      {id && <RatingBlock className={style.block} articleId={id} />}
+
+      {id && (
+        <RatingBlock
+          className={style.block}
+          articleId={id}
+        />
+      )}
+
       <RecomendationsBlock className={style.block} />
 
-      <section className={style.commentsBlock}>
+      <section
+        className={style.commentsBlock}
+        data-testid="ArticleCommentsBlock"
+      >
         {isCommentsBlockShow && (
           <Suspense>
             <ArticleCommentsBlockLazy articleId={id} />

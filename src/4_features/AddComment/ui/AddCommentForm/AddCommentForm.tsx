@@ -5,7 +5,10 @@ import { getClassNames } from '@/6_shared/utils/classNames';
 import { useAppDispatch, useAsyncReducer } from '@/6_shared/utils/redux';
 import { Input } from '@/6_shared/ui/Input';
 import { Button, ButtonTheme } from '@/6_shared/ui/Button';
-import { addCommentReducer, addCommentActions } from '../../model/slice/addCommentSlice';
+import {
+  addCommentReducer,
+  addCommentActions,
+} from '../../model/slice/addCommentSlice';
 import { SLICE_NAME } from '../../model/const';
 import { addCommentSelectors } from '../../model/selectors';
 import style from './AddCommentForm.module.scss';
@@ -25,9 +28,12 @@ export const AddCommentForm = memo((props: AddCommentFormProps) => {
   const text = useSelector(addCommentSelectors.getText);
   const isLoading = useSelector(addCommentSelectors.getIsLoading);
 
-  const textChangeHandler = useCallback((value: string) => {
-    dispatch(addCommentActions.setText(value));
-  }, [dispatch]);
+  const textChangeHandler = useCallback(
+    (value: string) => {
+      dispatch(addCommentActions.setText(value));
+    },
+    [dispatch]
+  );
 
   const formSubmitHandler = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
@@ -38,6 +44,7 @@ export const AddCommentForm = memo((props: AddCommentFormProps) => {
     <form
       className={getClassNames(style.addCommentForm, {}, [className])}
       onSubmit={formSubmitHandler}
+      data-testid="ArticleAddCommentForm"
     >
       <Input
         className={style.input}
