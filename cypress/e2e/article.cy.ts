@@ -23,6 +23,7 @@ describe('Пользователь заходит на страницу стат
   });
 
   it('Пользователь скролит вниз страницы и появляет блок с комментариями', () => {
+    cy.intercept('GET', '**/articles/*', { fixture: 'article.json' });
     cy.getByTestId('ArticleAddCommentForm').should('not.exist');
     cy.getByTestId('ArticleCommentsBlock').scrollIntoView();
     cy.getByTestId('ArticleAddCommentForm').should('exist');
