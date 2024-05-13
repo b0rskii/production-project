@@ -1,3 +1,5 @@
+import { FeatureFlags } from '@/6_shared/utils/featureFlags';
+
 export type UserRole = 'ADMIN' | 'USER' | 'MANAGER';
 
 export type User = {
@@ -5,6 +7,7 @@ export type User = {
   username: string;
   roles: UserRole[];
   avatar?: string;
+  features?: FeatureFlags;
 };
 
 export type UserSchema = {

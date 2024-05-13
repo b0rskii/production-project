@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { setFeatureFlags } from '@/6_shared/utils/featureFlags';
 import { User, UserSchema } from '../types/userSchema';
 import { SLICE_NAME } from '../const';
 
@@ -15,7 +16,9 @@ export const userSlice = createSlice({
       state.isInited = true;
     },
     setAuthData: (state, action: PayloadAction<User | null>) => {
-      state.authData = action.payload;
+      const user = action.payload;
+      state.authData = user;
+      setFeatureFlags(user?.features);
     },
     logout: (state) => {
       state.authData = null;
@@ -23,7 +26,4 @@ export const userSlice = createSlice({
   },
 });
 
-export const {
-  actions: userActions,
-  reducer: userReducer,
-} = userSlice;
+export const { actions: userActions, reducer: userReducer } = userSlice;

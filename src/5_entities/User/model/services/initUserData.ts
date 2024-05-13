@@ -10,9 +10,7 @@ export const useInitUserData = () => {
     const userLocalData = localStorage.getItem(LocalStorageKey.USER);
 
     if (userLocalData) {
-      dispatch(userActions.setAuthData(
-        JSON.parse(userLocalData),
-      ));
+      dispatch(userActions.setAuthData(JSON.parse(userLocalData)));
     }
 
     dispatch(userActions.initAuthData());
