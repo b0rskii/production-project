@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { Page } from '@/3_widgets/Page';
 import { articleSelectors } from '@/5_entities/Article';
 import { getClassNames } from '@/6_shared/utils/classNames';
-import { getFeatureFlag } from '@/6_shared/utils/featureFlags';
+import { toggleFeature } from '@/6_shared/utils/featureFlags';
 import { Header } from './Header';
 import { ArticleDetailsBlock } from './ArticleDetailsBlock';
 import { RatingBlock } from './RatingBlock';
@@ -19,7 +19,6 @@ type ArticleDetailsPageProps = PropsWithChildren<{
 const ArticleDetailsPage = (props: ArticleDetailsPageProps) => {
   const { className } = props;
   const { id } = useParams();
-  const isArticelRatingEnabled = getFeatureFlag('isArticleRatingEnabled');
 
   const [isCommentsBlockShow, setIsCommentsBlockShow] = useState(false);
 
@@ -39,12 +38,18 @@ const ArticleDetailsPage = (props: ArticleDetailsPageProps) => {
       <Header />
       <ArticleDetailsBlock articleId={id} />
 
-      {id && isArticelRatingEnabled && (
-        <RatingBlock
-          className={style.block}
-          articleId={id}
-        />
-      )}
+      {id &&
+        toggleFeature({
+          name: 'isArticleRatingEnabled',
+          // eslint-disable-next-line react/no-unstable-nested-components
+          on: () => (
+            <RatingBlock
+              className={style.block}
+              articleId={id}
+            />
+          ),
+          off: () => null,
+        })}
 
       <RecomendationsBlock className={style.block} />
 
