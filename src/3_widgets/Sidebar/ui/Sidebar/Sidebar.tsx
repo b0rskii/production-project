@@ -1,6 +1,11 @@
 import { useSelector } from 'react-redux';
 import { memo, useState } from 'react';
-import { userSelectors } from '@/5_entities/User';
+import { useAppDispatch } from '@/6_shared/utils/redux';
+import {
+  userActions,
+  userSelectors,
+  updateJsonSettings,
+} from '@/5_entities/User';
 import { getClassNames } from '@/6_shared/utils/classNames';
 import { ThemeSwitcher } from '@/6_shared/ui/ThemeSwitcher';
 import { LangSwitcher } from '@/6_shared/ui/LangSwitcher';
@@ -15,17 +20,29 @@ type SidebarProps = {
 
 export const Sidebar = memo((props: SidebarProps) => {
   const { className } = props;
+  const dispatch = useAppDispatch();
+
   const [collapsed, setCollapsed] = useState(false);
 
   const userData = useSelector(userSelectors.getUserAuthData);
+  const { theme } = useSelector(userSelectors.getJsonSettings);
 
   const onToggleButtonClick = () => {
     setCollapsed((prev) => !prev);
   };
 
+  const onToggleTheme = () => {
+    dispatch(userActions.toggleTheme());
+    dispatch(updateJsonSettings());
+  };
+
   return (
     <section
-      className={getClassNames(style.sidebar, { [style.collapsed]: collapsed }, [className])}
+      className={getClassNames(
+        style.sidebar,
+        { [style.collapsed]: collapsed },
+        [className]
+      )}
       data-testid="sidebar"
     >
       <Button
@@ -57,7 +74,10 @@ export const Sidebar = memo((props: SidebarProps) => {
       </nav>
 
       <div className={style.switchers}>
-        <ThemeSwitcher />
+        <ThemeSwitcher
+          theme={theme}
+          onToggleTheme={onToggleTheme}
+        />
         <LangSwitcher />
       </div>
     </section>

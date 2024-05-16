@@ -7,17 +7,27 @@ import DarkIcon from '@/6_shared/assets/icons/theme-dark.svg?react';
 
 type ThemeSwitcherProps = {
   className?: string;
+  theme?: Theme;
+  onToggleTheme?: () => void;
 };
 
 export const ThemeSwitcher = memo((props: ThemeSwitcherProps) => {
-  const { className } = props;
-  const { theme, toggleTheme } = useTheme();
+  const { className, theme: priorityTheme, onToggleTheme } = props;
+  const { theme, toggleTheme } = useTheme(priorityTheme);
+
+  const toggleThemeHandler = () => {
+    if (priorityTheme && onToggleTheme) {
+      onToggleTheme();
+    } else {
+      toggleTheme();
+    }
+  };
 
   return (
     <Button
       className={getClassNames('', {}, [className])}
       theme={ButtonTheme.CLEAR}
-      onClick={toggleTheme}
+      onClick={toggleThemeHandler}
     >
       {theme === Theme.LIGHT ? <LightIcon /> : <DarkIcon />}
     </Button>

@@ -5,4 +5,5 @@ export const ApiRoutes = {
   PROFILES: '/profiles',
   NOTIFICATIONS: '/notifications',
   ARTICLE_RATINGS: '/article-ratings',
+  USERS: '/users',
 } as const;

@@ -1,6 +1,12 @@
 import { FeatureFlags } from '@/6_shared/utils/featureFlags';
+import { Theme } from '@/6_shared/utils/theme';
 
 export type UserRole = 'ADMIN' | 'USER' | 'MANAGER';
+
+export type JsonSettings = {
+  isFirstVesit?: boolean;
+  theme?: Theme;
+};
 
 export type User = {
   id: string;
@@ -8,6 +14,7 @@ export type User = {
   roles: UserRole[];
   avatar?: string;
   features?: FeatureFlags;
+  jsonSettings?: JsonSettings;
 };
 
 export type UserSchema = {

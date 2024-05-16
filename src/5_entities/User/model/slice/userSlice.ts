@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { setFeatureFlags } from '@/6_shared/utils/featureFlags';
+import { Theme } from '@/6_shared/utils/theme';
 import { User, UserSchema } from '../types/userSchema';
 import { SLICE_NAME } from '../const';
 
@@ -22,6 +23,14 @@ export const userSlice = createSlice({
     },
     logout: (state) => {
       state.authData = null;
+    },
+    toggleTheme: (state) => {
+      if (state.authData && state.authData.jsonSettings) {
+        const currentTheme = state.authData.jsonSettings.theme;
+
+        state.authData.jsonSettings.theme =
+          currentTheme === Theme.LIGHT ? Theme.DARK : Theme.LIGHT;
+      }
     },
   },
 });

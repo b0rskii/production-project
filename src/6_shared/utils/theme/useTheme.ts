@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useCallback, useContext, useEffect } from 'react';
 import { LOCAL_STORAGE_THEME_KEY, Theme, ThemeContext } from './ThemeContext';
 
 type UseThemeResult = {
@@ -6,19 +6,31 @@ type UseThemeResult = {
   toggleTheme: () => void;
 };
 
-export const useTheme = (): UseThemeResult => {
+export const useTheme = (priorityTheme?: Theme): UseThemeResult => {
   const { theme, setTheme } = useContext(ThemeContext);
 
-  const toggleTheme = () => {
-    const newTheme = theme === Theme.LIGHT ? Theme.DARK : Theme.LIGHT;
+  const toggleTheme = useCallback(() => {
+    let newTheme: Theme;
+
+    if (priorityTheme) {
+      newTheme = priorityTheme;
+    } else {
+      newTheme = theme === Theme.LIGHT ? Theme.DARK : Theme.LIGHT;
+    }
 
     setTheme?.(newTheme);
     document.body.className = newTheme;
     localStorage.setItem(LOCAL_STORAGE_THEME_KEY, newTheme);
-  };
+  }, [theme, setTheme, priorityTheme]);
+
+  useEffect(() => {
+    if (priorityTheme && priorityTheme !== theme) {
+      toggleTheme();
+    }
+  }, [priorityTheme, theme, toggleTheme]);
 
   return {
-    theme: theme || Theme.LIGHT,
+    theme: priorityTheme ?? theme ?? Theme.LIGHT,
     toggleTheme,
   };
 };
