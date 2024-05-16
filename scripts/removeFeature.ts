@@ -1,4 +1,4 @@
-import { Node, Project, SyntaxKind } from 'ts-morph';
+import { JsxAttribute, Node, Project, SyntaxKind } from 'ts-morph';
 
 const featureName = process.argv[2];
 const featureStatus = process.argv[3];
@@ -17,6 +17,8 @@ if (featureStatus !== 'on' && featureStatus !== 'off') {
   );
 }
 
+type FeatureTogglerName = 'toggleFeature' | 'ToggleFeature';
+
 const project = new Project();
 
 project.addSourceFilesAtPaths('src/**/*.ts');
@@ -26,76 +28,111 @@ const files = project.getSourceFiles();
 
 files.forEach((file) => {
   file.forEachDescendant((node: Node) => {
-    if (node.isKind(SyntaxKind.CallExpression) && isToggleFeatureFn(node)) {
-      const objectOptions = node.getFirstDescendantByKind(
-        SyntaxKind.ObjectLiteralExpression
-      );
-
-      if (!objectOptions) return;
-
-      const nameProperty = objectOptions.getProperty('name');
-      const onFnProperty = objectOptions.getProperty('on');
-      const offFnProperty = objectOptions.getProperty('off');
-
-      const name = nameProperty
-        ?.getFirstDescendantByKind(SyntaxKind.StringLiteral)
-        ?.getText()
-        .slice(1, -1);
-
-      if (name !== featureName) {
-        return;
-      }
-
-      const onFnReturnValue = getFunctionnReturnValue(
-        onFnProperty
-          ?.getFirstDescendantByKind(SyntaxKind.ArrowFunction)
-          ?.getBody()
-      );
-      const offFnReturnValue = getFunctionnReturnValue(
-        offFnProperty
-          ?.getFirstDescendantByKind(SyntaxKind.ArrowFunction)
-          ?.getBody()
-      );
-
-      if (featureStatus === 'on' && onFnReturnValue) {
-        node.replaceWithText(onFnReturnValue);
-        return;
-      }
-
-      if (offFnReturnValue) {
-        node.replaceWithText(offFnReturnValue);
-      }
-    }
+    replaceFunctionToggler(node);
+    replaceComponentToggler(node);
   });
 });
 
-function isToggleFeatureFn(node: Node) {
-  let isTrue = false;
+function replaceFunctionToggler(node: Node) {
+  if (
+    node.isKind(SyntaxKind.CallExpression) &&
+    isFeatureToggler(node, 'toggleFeature')
+  ) {
+    const objectOptions = node.getFirstDescendantByKind(
+      SyntaxKind.ObjectLiteralExpression
+    );
 
-  node.forEachChild((childNode) => {
-    if (
-      childNode.isKind(SyntaxKind.Identifier) &&
-      childNode.getText() === 'toggleFeature'
-    ) {
-      isTrue = true;
+    if (!objectOptions) return;
+
+    const nameProperty = objectOptions.getProperty('name');
+    const onFnProperty = objectOptions.getProperty('on');
+    const offFnProperty = objectOptions.getProperty('off');
+
+    const name = nameProperty
+      ?.getFirstDescendantByKind(SyntaxKind.StringLiteral)
+      ?.getText()
+      .slice(1, -1);
+
+    if (name !== featureName) {
+      return;
     }
-  });
 
-  return isTrue;
+    const onFnReturnValue = onFnProperty
+      ?.getFirstDescendantByKind(SyntaxKind.ArrowFunction)
+      ?.getBody()
+      .getText();
+
+    const offFnReturnValue = offFnProperty
+      ?.getFirstDescendantByKind(SyntaxKind.ArrowFunction)
+      ?.getBody()
+      .getText();
+
+    if (featureStatus === 'on' && onFnReturnValue) {
+      node.replaceWithText(onFnReturnValue);
+      return;
+    }
+
+    if (offFnReturnValue) {
+      node.replaceWithText(offFnReturnValue);
+    }
+  }
 }
 
-function getFunctionnReturnValue(fnBody?: Node): string | null {
-  if (!fnBody) return null;
+function replaceComponentToggler(node: Node) {
+  if (
+    node.isKind(SyntaxKind.JsxSelfClosingElement) &&
+    isFeatureToggler(node, 'ToggleFeature')
+  ) {
+    const attributes = node.getDescendantsOfKind(SyntaxKind.JsxAttribute);
 
-  const JSXElement = fnBody.getFirstDescendantByKind(
-    SyntaxKind.JsxSelfClosingElement
-  );
+    if (!attributes) return;
 
-  if (JSXElement) {
-    return JSXElement.getText();
+    const featureNameAttr = getAttributeByName(attributes, 'featureName');
+
+    const name = featureNameAttr
+      ?.getFirstDescendantByKind(SyntaxKind.StringLiteral)
+      ?.getText()
+      .slice(1, -1);
+
+    if (featureName !== name) return;
+
+    const onAttr = getAttributeByName(attributes, 'on');
+    const offAttr = getAttributeByName(attributes, 'off');
+
+    const onComponent = getComponent(onAttr);
+    const offComponent = getComponent(offAttr);
+
+    if (featureStatus === 'on' && onComponent) {
+      node.replaceWithText(onComponent);
+      return;
+    }
+
+    if (offComponent) {
+      node.replaceWithText(offComponent);
+    }
+  }
+}
+
+function isFeatureToggler(node: Node, toggler: FeatureTogglerName) {
+  const identifier = node.getFirstDescendantByKind(SyntaxKind.Identifier);
+  return identifier?.getText() === toggler;
+}
+
+function getAttributeByName(jsxAttributes: JsxAttribute[], name: string) {
+  return jsxAttributes.find((attr) => attr.getName() === name);
+}
+
+function getComponent(attr?: JsxAttribute) {
+  const component = attr
+    ?.getFirstDescendantByKind(SyntaxKind.JsxExpression)
+    ?.getExpression()
+    ?.getText();
+
+  if (component && component.startsWith('(')) {
+    return component.slice(1, -1);
   }
 
-  return fnBody.getText();
+  return component;
 }
 
 project.save();

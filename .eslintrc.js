@@ -59,6 +59,7 @@ module.exports = {
           'alt',
           'direction',
           'justify',
+          'featureName',
         ],
       },
     ],
