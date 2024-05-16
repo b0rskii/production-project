@@ -1,4 +1,5 @@
 import { JsxAttribute, Node, Project, SyntaxKind } from 'ts-morph';
+import { ObjValues } from '../src/6_shared/types/utils';
 
 const featureName = process.argv[2];
 const featureStatus = process.argv[3];
@@ -17,7 +18,12 @@ if (featureStatus !== 'on' && featureStatus !== 'off') {
   );
 }
 
-type FeatureTogglerName = 'toggleFeature' | 'ToggleFeature';
+const FeatureTogglerName = {
+  FUNCTION: 'toggleFeature',
+  COMPONENT: 'ToggleFeature',
+} as const;
+
+type TFeatureTogglerName = ObjValues<typeof FeatureTogglerName>;
 
 const project = new Project();
 
@@ -36,7 +42,7 @@ files.forEach((file) => {
 function replaceFunctionToggler(node: Node) {
   if (
     node.isKind(SyntaxKind.CallExpression) &&
-    isFeatureToggler(node, 'toggleFeature')
+    isFeatureToggler(node, FeatureTogglerName.FUNCTION)
   ) {
     const objectOptions = node.getFirstDescendantByKind(
       SyntaxKind.ObjectLiteralExpression
@@ -81,7 +87,7 @@ function replaceFunctionToggler(node: Node) {
 function replaceComponentToggler(node: Node) {
   if (
     node.isKind(SyntaxKind.JsxSelfClosingElement) &&
-    isFeatureToggler(node, 'ToggleFeature')
+    isFeatureToggler(node, FeatureTogglerName.COMPONENT)
   ) {
     const attributes = node.getDescendantsOfKind(SyntaxKind.JsxAttribute);
 
@@ -113,7 +119,7 @@ function replaceComponentToggler(node: Node) {
   }
 }
 
-function isFeatureToggler(node: Node, toggler: FeatureTogglerName) {
+function isFeatureToggler(node: Node, toggler: TFeatureTogglerName) {
   const identifier = node.getFirstDescendantByKind(SyntaxKind.Identifier);
   return identifier?.getText() === toggler;
 }
