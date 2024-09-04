@@ -1,0 +1,15 @@
+.checkboxGroup {
+  border: none;
+  text-transform: none;
+}
+
+.label {
+  font-size: 18px;
+  text-transform: uppercase;
+}
+
+.checkboxes {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
