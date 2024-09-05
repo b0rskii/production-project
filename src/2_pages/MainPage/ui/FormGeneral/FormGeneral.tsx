@@ -2,19 +2,17 @@
 import { PropsWithChildren, ReactNode, memo } from 'react';
 import { useForm } from 'react-hook-form';
 import { getClassNames } from '@/6_shared/utils/classNames';
-import style from './FormGeneral.module.scss';
-// import { RadioGroup, RadioGroupItem } from '@/6_shared/ui/RadioGroup';
+import { RadioGroup, RadioGroupItem } from '@/6_shared/ui/RadioGroup';
 import { CheckboxGroup, CheckboxGroupItem } from '@/6_shared/ui/CheckboxGroup';
 import { Button, ButtonTheme } from '@/6_shared/ui/Button';
 import { Checkbox } from '@/6_shared/ui/Checkbox';
-
-// const cianPlacements: RadioGroupItem[] = [
-//   { id: '1', name: 'Бесплатное', value: 'free' },
-//   { id: '2', name: 'Платное', value: 'money' },
-//   { id: '3', name: 'Выделение цветом', value: 'colored' },
-//   { id: '4', name: 'Премиум', value: 'premium' },
-//   { id: '5', name: 'ТОП', value: 'top' },
-// ];
+import {
+  CianPlacementRadio,
+  DisplayCheckbox,
+  ObjectGeneralForm,
+  XmlCheckbox,
+} from '../../model/types';
+import style from './FormGeneral.module.scss';
 
 type Props = PropsWithChildren<{
   className?: string;
@@ -22,21 +20,29 @@ type Props = PropsWithChildren<{
 
 export const FormGeneral = memo((props: Props) => {
   const { className } = props;
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit } = useForm<ObjectGeneralForm>();
 
-  const displayCheckboxes: CheckboxGroupItem[] = [
+  const displayCheckboxes: CheckboxGroupItem<DisplayCheckbox>[] = [
     { label: 'Опубликован', name: 'published' },
     { label: 'Главная страница', name: 'mainPage', checked: true },
   ];
 
-  const xmlCheckboxes: CheckboxGroupItem[] = [
+  const xmlCheckboxes: CheckboxGroupItem<XmlCheckbox>[] = [
     { label: 'Яндекс', name: 'xmlYandex', checked: true },
     { label: 'Facebook catalogue', name: 'xmlFacebook' },
     { label: 'Циан', name: 'xmlCian' },
     { label: 'Авито', name: 'xmlAvito' },
   ];
 
-  const onSubmit = (data) => {
+  const cianPlacements: RadioGroupItem<CianPlacementRadio>[] = [
+    { label: 'Бесплатное', value: 'free' },
+    { label: 'Платное', value: 'paid' },
+    { label: 'Выделение цветом', value: 'color' },
+    { label: 'Премиум', value: 'premium' },
+    { label: 'Топ', value: 'top' },
+  ];
+
+  const onSubmit = (data: ObjectGeneralForm) => {
     console.log(data);
   };
 
@@ -70,11 +76,13 @@ export const FormGeneral = memo((props: Props) => {
             />
           ))}
         </CheckboxGroup>
-        {/* <RadioGroup
+        <RadioGroup
           label="Тип размещения Циан"
           data={cianPlacements}
-          name="cianPlacements"
-        /> */}
+          inputsProps={{
+            ...register('cianPlacement'),
+          }}
+        />
       </Fieldset>
 
       <Fieldset title="ОБ ОБЪЕКТЕ" />

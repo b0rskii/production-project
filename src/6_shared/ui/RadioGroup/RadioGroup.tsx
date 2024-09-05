@@ -1,42 +1,55 @@
-import { RadioGroup as Radio } from '@headlessui/react';
+import { InputHTMLAttributes, PropsWithRef, useId } from 'react';
 import { getClassNames } from '@/6_shared/utils/classNames/getClassNames';
 import style from './RadioGroup.module.scss';
 
-export type RadioGroupItem = {
-  id: string;
-  name: string;
-  value: string;
+export type RadioGroupItem<T extends string> = {
+  label?: string;
+  value: T;
 };
 
 type Props = {
   className?: string;
-  name: string;
-  data: RadioGroupItem[];
+  data: RadioGroupItem<string>[];
   label?: string;
-  defaultValue?: RadioGroupItem;
+  defaultValue?: RadioGroupItem<string>;
+  inputsProps?: PropsWithRef<InputHTMLAttributes<HTMLInputElement>>;
 };
 
 export const RadioGroup = ({
   className,
   data,
   label,
-  name,
   defaultValue,
+  inputsProps,
 }: Props) => {
+  const id = useId();
+
   return (
-    <Radio
+    <fieldset
       className={getClassNames(style.radioGroup, {}, [className])}
-      name={name}
-      defaultValue={defaultValue ?? data[0]}
+      id={id}
     >
-      {label && <Radio.Label className={style.label}>{label}</Radio.Label>}
+      {label && (
+        <label className={style.label} htmlFor={id}>
+          {label}
+        </label>
+      )}
       <div className={style.options}>
-        {data.map((item) => (
-          <Radio.Option className={style.option} key={item.id} value={item}>
-            {item.name}
-          </Radio.Option>
+        {data.map(({ label, value }, i) => (
+          <label className={style.option} htmlFor={id + i} key={value}>
+            {label}
+            <input
+              {...inputsProps}
+              id={id + i}
+              type="radio"
+              value={value}
+              defaultChecked={
+                defaultValue ? defaultValue.value === value : i === 0
+              }
+            />
+          </label>
         ))}
       </div>
-    </Radio>
+    </fieldset>
   );
 };

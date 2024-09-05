@@ -14,7 +14,7 @@ export const Checkbox = (props: Props) => {
 
   return (
     <div className={getClassNames(style.checkbox, {}, [className])}>
-      <input id={id} type="checkbox" {...checkboxProps} />
+      <input {...checkboxProps} id={id} type="checkbox" />
       {label && <label htmlFor={id}>{label}</label>}
     </div>
   );

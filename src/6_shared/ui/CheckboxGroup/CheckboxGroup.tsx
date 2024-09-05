@@ -2,8 +2,8 @@ import { ReactNode, useId } from 'react';
 import { getClassNames } from '@/6_shared/utils/classNames/getClassNames';
 import style from './CheckboxGroup.module.scss';
 
-export type CheckboxGroupItem = {
-  name: string;
+export type CheckboxGroupItem<T extends string> = {
+  name: T;
   label?: string;
   checked?: boolean;
 };

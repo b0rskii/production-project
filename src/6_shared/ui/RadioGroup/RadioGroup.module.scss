@@ -1,9 +1,11 @@
 .radioGroup {
-
+  border: none;
+  text-transform: none;
 }
 
 .label {
   font-size: 18px;
+  text-transform: uppercase;
 }
 
 .options {
@@ -19,7 +21,11 @@
   padding: 10px;
   cursor: pointer;
 
-  &:checked {
-    border: 1px solid black;
+  &:has(input:checked) {
+    border: 2px solid black;
+  }
+
+  & > input {
+    display: none;
   }
 }
