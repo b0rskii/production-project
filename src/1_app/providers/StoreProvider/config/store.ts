@@ -1,4 +1,9 @@
-import { configureStore, ReducersMapObject, Reducer, AnyAction } from '@reduxjs/toolkit';
+import {
+  configureStore,
+  ReducersMapObject,
+  Reducer,
+  AnyAction,
+} from '@reduxjs/toolkit';
 import { UI_SLICE, uiReducer } from '@/3_widgets/Page';
 import { userReducer, USER_SLICE } from '@/5_entities/User';
 import { toastifyReducer, TOASTIFY_SLICE } from '@/6_shared/ui/Toastify';
@@ -6,6 +11,7 @@ import { api, rtkApi } from '@/6_shared/api';
 import { createReducerManager } from './reducerManager';
 import { StateSchema } from './StateSchema';
 import { skipThunk } from './middlewares';
+import { objectFormReducer } from '@/2_pages/MainPage';
 
 export const createReduxStore = (
   initialState?: StateSchema,
@@ -17,6 +23,7 @@ export const createReduxStore = (
     [USER_SLICE]: userReducer,
     [TOASTIFY_SLICE]: toastifyReducer,
     [UI_SLICE]: uiReducer,
+    objectForm: objectFormReducer,
   };
 
   const reducerManager = createReducerManager(rootReducer);
@@ -25,15 +32,16 @@ export const createReduxStore = (
     reducer: reducerManager.reduce as Reducer<StateSchema, AnyAction>,
     devTools: __IS_DEV__,
     preloadedState: initialState,
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware({
-      thunk: {
-        extraArgument: {
-          api,
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware({
+        thunk: {
+          extraArgument: {
+            api,
+          },
         },
-      },
-    })
-      .concat(rtkApi.middleware)
-      .concat(skipThunk),
+      })
+        .concat(rtkApi.middleware)
+        .concat(skipThunk),
   });
 
   // @ts-ignore

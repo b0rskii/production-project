@@ -1,0 +1,27 @@
+.uiField {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+}
+
+.label {
+  font-size: 18px;
+  text-transform: uppercase;
+}
+
+.input {
+  border: 1px solid black;
+  border-radius: 5px;
+  background: none;
+  width: 100%;
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+}
+
+.error {
+
+}

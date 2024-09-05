@@ -44,7 +44,7 @@ export const RadioGroup = ({
               type="radio"
               value={value}
               defaultChecked={
-                defaultValue ? defaultValue.value === value : i === 0
+                defaultValue ? defaultValue.value === value : undefined
               }
             />
           </label>

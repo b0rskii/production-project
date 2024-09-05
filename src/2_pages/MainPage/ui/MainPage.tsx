@@ -4,8 +4,9 @@ import { Tab } from '@headlessui/react';
 import { Page } from '@/3_widgets/Page';
 import { I18nNameSpace } from '@/6_shared/utils/i18n/nameSpace';
 import { Text } from '@/6_shared/ui/Text';
-// import { Button, ButtonTheme } from '@/6_shared/ui/Button';
+import { Button, ButtonTheme } from '@/6_shared/ui/Button';
 import { FormGeneral } from './FormGeneral';
+import style from './MainPage.module.scss';
 
 function MainPage() {
   const { t } = useTranslation(I18nNameSpace.Main);
@@ -21,7 +22,7 @@ function MainPage() {
           <Tab>Ответственный агент</Tab>
           <Tab>Ссылки</Tab>
         </Tab.List>
-        <Tab.Panels>
+        <Tab.Panels className={style.tabs}>
           <Tab.Panel>
             <FormGeneral />
           </Tab.Panel>
@@ -31,7 +32,7 @@ function MainPage() {
           <Tab.Panel>Content 5</Tab.Panel>
         </Tab.Panels>
       </Tab.Group>
-      {/* <Button theme={ButtonTheme.OUTLINE}>Отправить на проверку</Button> */}
+      <Button theme={ButtonTheme.OUTLINE}>Отправить на проверку</Button>
     </Page>
   );
 }
