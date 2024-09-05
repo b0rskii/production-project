@@ -1,5 +1,12 @@
+/* eslint-disable no-plusplus */
 /* eslint-disable i18next/no-literal-string */
-import { PropsWithChildren, ReactNode, memo, useEffect } from 'react';
+import {
+  ChangeEvent,
+  PropsWithChildren,
+  ReactNode,
+  memo,
+  useEffect,
+} from 'react';
 import { useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { getClassNames } from '@/6_shared/utils/classNames';
@@ -10,6 +17,7 @@ import {
   CianPlacementRadio,
   DisplayCheckbox,
   ObjectGeneralForm,
+  RealEstateType,
   SoldBy,
   StatusRadio,
   XmlCheckbox,
@@ -22,6 +30,9 @@ import {
   objectFormActions,
   objectFormSelectors,
 } from '../../model/slice/objectFormSlice';
+import { formatCadastrial } from '@/6_shared/utils/formatCadastrial';
+
+let ownerId = 1;
 
 const displayCheckboxes: CheckboxGroupItem<DisplayCheckbox>[] = [
   { label: 'Опубликован', name: 'published' },
@@ -57,6 +68,45 @@ const soldBy: SelectOption<SoldBy>[] = [
   { content: 'Другое агенство', value: 'otherAgency' },
 ];
 
+const owners: SelectOption<string>[] = [
+  { content: 'Роман Игнатьев', value: String(ownerId++) },
+  { content: 'Роман Игнатьев2', value: String(ownerId++) },
+  { content: 'Роман Игнатьев', value: String(ownerId++) },
+  { content: 'Роман Игнатьев2', value: String(ownerId++) },
+  { content: 'Роман Игнатьев', value: String(ownerId++) },
+  { content: 'Роман Игнатьев2', value: String(ownerId++) },
+  { content: 'Роман Игнатьев', value: String(ownerId++) },
+  { content: 'Роман Игнатьев', value: String(ownerId++) },
+  { content: 'Роман Игнатьев2', value: String(ownerId++) },
+  { content: 'Роман Игнатьев', value: String(ownerId++) },
+  { content: 'Роман Игнатьев2', value: String(ownerId++) },
+  { content: 'Роман Игнатьев', value: String(ownerId++) },
+  { content: 'Роман Игнатьев2', value: String(ownerId++) },
+  { content: 'Роман Игнатьев', value: String(ownerId++) },
+  { content: 'Роман Игнатьев', value: String(ownerId++) },
+  { content: 'Роман Игнатьев2', value: String(ownerId++) },
+  { content: 'Роман Игнатьев', value: String(ownerId++) },
+  { content: 'Роман Игнатьев2', value: String(ownerId++) },
+  { content: 'Роман Игнатьев', value: String(ownerId++) },
+  { content: 'Роман Игнатьев2', value: String(ownerId++) },
+  { content: 'Роман Игнатьев', value: String(ownerId++) },
+  { content: 'Роман Игнатьев', value: String(ownerId++) },
+  { content: 'Роман Игнатьев2', value: String(ownerId++) },
+  { content: 'Роман Игнатьев', value: String(ownerId++) },
+  { content: 'Роман Игнатьев2', value: String(ownerId++) },
+  { content: 'Роман Игнатьев', value: String(ownerId++) },
+  { content: 'Роман Игнатьев2', value: String(ownerId++) },
+  { content: 'Роман Игнатьев', value: String(ownerId++) },
+];
+
+const realEstateTypes: RadioGroupItem<RealEstateType>[] = [
+  { label: 'Дом', value: 'house' },
+  { label: 'Участок', value: 'plot' },
+  { label: 'Таунхаус', value: 'townhouse' },
+  { label: 'Квартира', value: 'flat' },
+  { label: 'Апартаменты', value: 'apartments' },
+];
+
 type Props = PropsWithChildren<{
   className?: string;
 }>;
@@ -75,6 +125,10 @@ export const FormGeneral = memo(({ className }: Props) => {
       dispatch(objectFormActions.updateGeneralFormData(getValues()));
     };
   }, [getValues, dispatch]);
+
+  const handleCadastrialInputChange = (evt: ChangeEvent<HTMLInputElement>) => {
+    evt.target.value = formatCadastrial(evt.target.value);
+  };
 
   return (
     <form className={getClassNames(style.formGeneral, {}, [className])}>
@@ -139,11 +193,39 @@ export const FormGeneral = memo(({ className }: Props) => {
         )}
       </Fieldset>
 
-      {/* <Fieldset title="ОБ ОБЪЕКТЕ" />
+      <Fieldset title="ОБ ОБЪЕКТЕ">
+        <UiSelect
+          label="Собственник"
+          options={owners}
+          selectProps={{ ...register('soldBy') }}
+        />
+        <RadioGroup
+          label="тип недвижимости"
+          data={realEstateTypes}
+          inputsProps={{ ...register('realEstateType') }}
+        />
+        <div className={style.block}>
+          <UiField
+            label="Кадастровый номер участка"
+            inputProps={{
+              ...register('cadastralPlotNumber'),
+              onChange: handleCadastrialInputChange,
+            }}
+          />
+          <UiField
+            label="Кадастровый номер дома"
+            inputProps={{
+              pattern: '/[d:]/',
+              ...register('cadastralHouseNumber'),
+              onChange: handleCadastrialInputChange,
+            }}
+          />
+        </div>
+      </Fieldset>
 
-      <Fieldset title="НАЗВАНИЕ И ОПЕИСАНИЕ ДЛЯ САЙТА" />
+      {/* <Fieldset title="НАЗВАНИЕ И ОПЕИСАНИЕ ДЛЯ САЙТА" /> */}
 
-      <Fieldset title="SEO" /> */}
+      {/* <Fieldset title="SEO" /> */}
     </form>
   );
 });

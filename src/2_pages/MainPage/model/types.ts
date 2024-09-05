@@ -9,6 +9,12 @@ export type StatusRadio =
   | 'exclusive'
   | 'building';
 export type SoldBy = 'newMoscowHouse' | 'otherAgency';
+export type RealEstateType =
+  | 'house'
+  | 'plot'
+  | 'townhouse'
+  | 'flat'
+  | 'apartments';
 
 export type ObjectGeneralForm = {
   display: Record<DisplayCheckbox, boolean>;
@@ -18,6 +24,10 @@ export type ObjectGeneralForm = {
   status: StatusRadio;
   soldBy?: SoldBy;
   soldDate?: string;
+  owner: string;
+  realEstateType: RealEstateType;
+  cadastralPlotNumber: string;
+  cadastralHouseNumber: string;
 };
 
 export type ObjectLocationForm = {};
