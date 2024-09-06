@@ -28,6 +28,7 @@ export type ObjectGeneralForm = {
   realEstateType: RealEstateType;
   cadastralPlotNumber: string;
   cadastralHouseNumber: string;
+  price: string;
 };
 
 export type ObjectLocationForm = {};

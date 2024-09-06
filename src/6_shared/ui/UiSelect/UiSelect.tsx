@@ -32,15 +32,15 @@ export const UiSelect = <T extends string>({
           {label}
         </label>
       )}
-      <select {...selectProps} className={style.select} id={id}>
+      <select
+        {...selectProps}
+        className={style.select}
+        id={id}
+        defaultValue={initialValue}
+      >
         {options.map(({ content, value }) => {
           return (
-            <option
-              className={style.option}
-              value={value}
-              defaultValue={initialValue}
-              key={value}
-            >
+            <option className={style.option} value={value} key={value}>
               {content}
             </option>
           );

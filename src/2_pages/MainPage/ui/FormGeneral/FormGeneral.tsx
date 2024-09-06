@@ -31,6 +31,7 @@ import {
   objectFormSelectors,
 } from '../../model/slice/objectFormSlice';
 import { formatCadastrial } from '@/6_shared/utils/formatCadastrial';
+import { formatPrice } from '@/6_shared/utils/formatPrice';
 
 let ownerId = 1;
 
@@ -115,8 +116,14 @@ export const FormGeneral = memo(({ className }: Props) => {
   const dispatch = useAppDispatch();
   const formData = useSelector(objectFormSelectors.getGeneralData);
 
-  const { register, watch, getValues } = useForm<ObjectGeneralForm>({
+  const {
+    register,
+    watch,
+    getValues,
+    formState: { errors },
+  } = useForm<ObjectGeneralForm>({
     defaultValues: formData,
+    mode: 'onBlur',
   });
   const isSoldStatus = watch('status') === 'sold';
 
@@ -130,8 +137,13 @@ export const FormGeneral = memo(({ className }: Props) => {
     evt.target.value = formatCadastrial(evt.target.value);
   };
 
+  const handlePriceInputChange = (evt: ChangeEvent<HTMLInputElement>) => {
+    evt.target.value = formatPrice(evt.target.value);
+  };
+
   return (
     <form className={getClassNames(style.formGeneral, {}, [className])}>
+      {Object.values(errors).map((err) => err.message)}
       <Fieldset title="СТАТУС И ВЫГРУЗКА">
         <CheckboxGroup label="Отображение">
           {displayCheckboxes.map(({ label, name, checked }) => (
@@ -175,7 +187,7 @@ export const FormGeneral = memo(({ className }: Props) => {
           label="Статус"
           data={status}
           inputsProps={{
-            ...register('status'),
+            ...register('status', { required: true }),
           }}
         />
         {isSoldStatus && (
@@ -208,19 +220,35 @@ export const FormGeneral = memo(({ className }: Props) => {
           <UiField
             label="Кадастровый номер участка"
             inputProps={{
-              ...register('cadastralPlotNumber'),
+              ...register('cadastralPlotNumber', {
+                required: {
+                  value: true,
+                  message: 'Кадастровый номер участка обязательное поле',
+                },
+                pattern: {
+                  value: /\d{2}:\d{2}:\d{6,7}:\d{2,}/,
+                  message: 'Кадастровый номер участка имеет неверный формат',
+                },
+              }),
               onChange: handleCadastrialInputChange,
             }}
           />
           <UiField
             label="Кадастровый номер дома"
             inputProps={{
-              pattern: '/[d:]/',
               ...register('cadastralHouseNumber'),
               onChange: handleCadastrialInputChange,
             }}
           />
         </div>
+        <UiField
+          label="Стоимость"
+          inputProps={{
+            className: style.priceInput,
+            ...register('price'),
+            onChange: handlePriceInputChange,
+          }}
+        />
       </Fieldset>
 
       {/* <Fieldset title="НАЗВАНИЕ И ОПЕИСАНИЕ ДЛЯ САЙТА" /> */}
