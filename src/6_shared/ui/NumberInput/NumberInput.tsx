@@ -8,24 +8,24 @@ import {
 type Props = {
   minValue?: number;
   maxValue?: number;
-  decimalRound?: number;
+  decimalScale?: number;
   value: string;
   // eslint-disable-next-line no-unused-vars
   onChange: (value: string) => void;
 };
 
 export const NumberInput = ({
-  minValue,
-  maxValue,
-  decimalRound,
+  decimalScale,
   value,
   onChange,
+  minValue = Number.MIN_SAFE_INTEGER,
+  maxValue = Number.MAX_SAFE_INTEGER,
 }: Props) => {
   const currentValue = useFormattedValueOnMount({
     value,
     minValue,
     maxValue,
-    decimalRound,
+    decimalScale,
   });
 
   const handleChange = (evt: ChangeEvent<HTMLInputElement>) => {
@@ -43,7 +43,7 @@ export const NumberInput = ({
       currentValue,
       minValue,
       maxValue,
-      decimalRound,
+      decimalScale,
     });
     onChange(formatedValue);
   };

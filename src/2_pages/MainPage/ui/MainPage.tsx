@@ -7,7 +7,7 @@ import { NumberInput } from '@/6_shared/ui/NumberInput';
 
 function MainPage() {
   const { t } = useTranslation(I18nNameSpace.Main);
-  const [value, setValue] = useState('1,000000');
+  const [value, setValue] = useState('1,00000');
 
   return (
     <Page data-testid="MainPage">
@@ -15,7 +15,7 @@ function MainPage() {
       <NumberInput
         minValue={0.001}
         maxValue={1}
-        decimalRound={3}
+        decimalScale={3}
         value={value}
         onChange={setValue}
       />

@@ -1,6 +1,3 @@
-export const fixLeadingZeros = (value: string) =>
-  value.replace(/^0+(\d)/, '$1');
-
 export const decimalSeparatorToNumber = (value: string) =>
   value.replace(',', '.');
 export const decimalSeparatorToString = (value: string) =>

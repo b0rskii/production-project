@@ -1,6 +1,5 @@
 import { useRef } from 'react';
 import {
-  fixLeadingZeros,
   decimalSeparatorToNumber,
   decimalSeparatorToString,
   roundNumber,
@@ -8,16 +7,16 @@ import {
 
 type FormattedValueOnMountProps = {
   value: string;
-  minValue?: number;
-  maxValue?: number;
-  decimalRound?: number;
+  minValue: number;
+  maxValue: number;
+  decimalScale?: number;
 };
 
 export const useFormattedValueOnMount = ({
   value,
   minValue,
   maxValue,
-  decimalRound,
+  decimalScale,
 }: FormattedValueOnMountProps) => {
   const isInitialRenderRef = useRef(true);
 
@@ -26,15 +25,17 @@ export const useFormattedValueOnMount = ({
 
     const numValue = Number(decimalSeparatorToNumber(value));
 
-    if (minValue !== undefined && numValue < minValue) {
+    if (numValue < minValue) {
       return decimalSeparatorToString(minValue.toString());
     }
 
-    if (maxValue !== undefined && numValue > maxValue) {
+    if (numValue > maxValue) {
       return decimalSeparatorToString(maxValue.toString());
     }
 
-    return roundNumber(numValue, decimalRound).toString();
+    return decimalSeparatorToString(
+      roundNumber(numValue, decimalScale).toString(),
+    );
   }
 
   return value;
@@ -43,8 +44,8 @@ export const useFormattedValueOnMount = ({
 type OnChangeFormatterProps = {
   newValue: string;
   currentValue: string;
-  minValue?: number;
-  maxValue?: number;
+  minValue: number;
+  maxValue: number;
 };
 
 export const getFormattedValueOnChange = ({
@@ -54,63 +55,66 @@ export const getFormattedValueOnChange = ({
   maxValue,
 }: OnChangeFormatterProps) => {
   const newNumValue = Number(decimalSeparatorToNumber(newValue));
+  const allowNegative = minValue < 0;
 
-  // Если новое значение не число, оставляем текущее значение без изменений
+  // Если новое значение не число и не минус, оставляем текущее значение без изменений.
+  // Если новое значение минус и отрицательные числа допустимы, возвращаем минус.
   if (Number.isNaN(newNumValue)) {
+    return newValue === '-' && allowNegative ? '-' : currentValue;
+  }
+
+  // Если отрицательные значения недопустимы, блокируем их ввод.
+  if (newNumValue < 0 && !allowNegative) {
     return currentValue;
   }
 
-  let formatedValue = fixLeadingZeros(newValue);
-
-  if (minValue !== undefined) {
-    const isMinValueFractionalZero = minValue > 0 && minValue < 1;
-
-    // Автоматическое подставление запятой при вводе нуля, если минимальное значение 0,(...)
-    if (isMinValueFractionalZero && newValue === '0' && currentValue !== '0,') {
-      formatedValue = '0,';
-    }
+  // Автоматическая подстановка запятой при вводе X, если минимальное значение X,(...)
+  if (!Number.isInteger(minValue)) {
+    const integerStrMinValue = Math.trunc(minValue).toString();
+    const integerStrMinValueWithSeparator = `${integerStrMinValue},`;
 
     if (
-      !isMinValueFractionalZero &&
-      newNumValue < minValue &&
-      newValue !== ''
+      newValue === integerStrMinValue &&
+      currentValue !== integerStrMinValueWithSeparator
     ) {
-      formatedValue = minValue.toString();
+      return integerStrMinValueWithSeparator;
     }
   }
 
-  if (maxValue !== undefined && newNumValue >= maxValue) {
-    formatedValue = maxValue.toString();
+  if (newNumValue >= maxValue) {
+    return decimalSeparatorToString(maxValue.toString());
   }
 
-  return decimalSeparatorToString(formatedValue);
+  return decimalSeparatorToString(newValue);
 };
 
 type OnBlurFormatterProps = {
   currentValue: string;
-  minValue?: number;
-  maxValue?: number;
-  decimalRound?: number;
+  minValue: number;
+  maxValue: number;
+  decimalScale?: number;
 };
 
 export const getFormattedValueOnBlur = ({
   currentValue,
   minValue,
   maxValue,
-  decimalRound,
+  decimalScale,
 }: OnBlurFormatterProps) => {
+  if (currentValue === '-' || currentValue === '') {
+    return '';
+  }
+
   const currentNumValue = Number(decimalSeparatorToNumber(currentValue));
-  let formatedNumValue = currentNumValue;
 
-  if (minValue !== undefined && currentNumValue <= minValue) {
-    formatedNumValue = minValue;
+  if (currentNumValue <= minValue) {
+    return decimalSeparatorToString(minValue.toString());
   }
 
-  if (maxValue !== undefined && currentNumValue >= maxValue) {
-    formatedNumValue = maxValue;
+  if (currentNumValue >= maxValue) {
+    return decimalSeparatorToString(maxValue.toString());
   }
 
-  const formatedValue = roundNumber(formatedNumValue, decimalRound).toString();
-
+  const formatedValue = roundNumber(currentNumValue, decimalScale).toString();
   return decimalSeparatorToString(formatedValue);
 };
