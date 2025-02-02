@@ -2,7 +2,7 @@ import { ChangeEvent } from 'react';
 import {
   useFormattedValueOnMount,
   getFormattedValueOnChange,
-  getFormattedValueOnEditingEnd,
+  getFormattedValueOnBlur,
 } from './model';
 
 type Props = {
@@ -34,13 +34,12 @@ export const NumberInput = ({
       currentValue,
       minValue,
       maxValue,
-      decimalRound,
     });
     onChange(formatedValue);
   };
 
   const handleBlur = () => {
-    const formatedValue = getFormattedValueOnEditingEnd({
+    const formatedValue = getFormattedValueOnBlur({
       currentValue,
       minValue,
       maxValue,

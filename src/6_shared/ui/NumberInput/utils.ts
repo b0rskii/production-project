@@ -1,10 +1,10 @@
-export const decimalSeparatorToNumber = (value: string) => {
-  return value.replace(',', '.');
-};
+export const fixLeadingZeros = (value: string) =>
+  value.replace(/^0+(\d)/, '$1');
 
-export const decimalSeparatorToString = (value: string) => {
-  return value.replace('.', ',');
-};
+export const decimalSeparatorToNumber = (value: string) =>
+  value.replace(',', '.');
+export const decimalSeparatorToString = (value: string) =>
+  value.replace('.', ',');
 
 export const roundNumber = (number: number, digits?: number) => {
   if (digits === undefined) return number;

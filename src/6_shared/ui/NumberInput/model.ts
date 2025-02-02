@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import {
+  fixLeadingZeros,
   decimalSeparatorToNumber,
   decimalSeparatorToString,
   roundNumber,
@@ -39,12 +40,11 @@ export const useFormattedValueOnMount = ({
   return value;
 };
 
-type FormatterProps = {
+type OnChangeFormatterProps = {
   newValue: string;
   currentValue: string;
   minValue?: number;
   maxValue?: number;
-  decimalRound?: number;
 };
 
 export const getFormattedValueOnChange = ({
@@ -52,19 +52,15 @@ export const getFormattedValueOnChange = ({
   currentValue,
   minValue,
   maxValue,
-  decimalRound,
-}: FormatterProps) => {
+}: OnChangeFormatterProps) => {
   const newNumValue = Number(decimalSeparatorToNumber(newValue));
-  const isDecimalLimit =
-    decimalRound && newValue.split(',')[1]?.length > decimalRound;
 
-  // Если новое значение не число или превышено ограничение знаков после запятой,
-  // оставляем текущее значение без изменений
-  if (Number.isNaN(newNumValue) || isDecimalLimit) {
+  // Если новое значение не число, оставляем текущее значение без изменений
+  if (Number.isNaN(newNumValue)) {
     return currentValue;
   }
 
-  let formatedValue = newValue;
+  let formatedValue = fixLeadingZeros(newValue);
 
   if (minValue !== undefined) {
     const isMinValueFractionalZero = minValue > 0 && minValue < 1;
@@ -74,7 +70,11 @@ export const getFormattedValueOnChange = ({
       formatedValue = '0,';
     }
 
-    if (!isMinValueFractionalZero && newNumValue < minValue && newValue !== '') {
+    if (
+      !isMinValueFractionalZero &&
+      newNumValue < minValue &&
+      newValue !== ''
+    ) {
       formatedValue = minValue.toString();
     }
   }
@@ -86,12 +86,19 @@ export const getFormattedValueOnChange = ({
   return decimalSeparatorToString(formatedValue);
 };
 
-export const getFormattedValueOnEditingEnd = ({
+type OnBlurFormatterProps = {
+  currentValue: string;
+  minValue?: number;
+  maxValue?: number;
+  decimalRound?: number;
+};
+
+export const getFormattedValueOnBlur = ({
   currentValue,
   minValue,
   maxValue,
   decimalRound,
-}: Omit<FormatterProps, 'newValue'>) => {
+}: OnBlurFormatterProps) => {
   const currentNumValue = Number(decimalSeparatorToNumber(currentValue));
   let formatedNumValue = currentNumValue;
 
