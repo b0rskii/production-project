@@ -5,10 +5,14 @@ import {
   roundNumber,
 } from './utils';
 
+const getDisplayedValue = (value: string, commaDecimalSeparator: boolean) =>
+  commaDecimalSeparator ? decimalSeparatorToString(value) : value;
+
 type UseDisplayedValueProps = {
   value: string;
   minValue: number;
   maxValue: number;
+  commaDecimalSeparator: boolean;
   decimalScale?: number;
 };
 
@@ -16,6 +20,7 @@ export const useDisplayedValue = ({
   value,
   minValue,
   maxValue,
+  commaDecimalSeparator,
   decimalScale,
 }: UseDisplayedValueProps) => {
   const isInitialRenderRef = useRef(true);
@@ -26,19 +31,20 @@ export const useDisplayedValue = ({
     const numValue = Number(decimalSeparatorToNumber(value));
 
     if (numValue < minValue) {
-      return decimalSeparatorToString(minValue.toString());
+      return getDisplayedValue(minValue.toString(), commaDecimalSeparator);
     }
 
     if (numValue > maxValue) {
-      return decimalSeparatorToString(maxValue.toString());
+      return getDisplayedValue(maxValue.toString(), commaDecimalSeparator);
     }
 
-    return decimalSeparatorToString(
+    return getDisplayedValue(
       roundNumber(numValue, decimalScale).toString(),
+      commaDecimalSeparator,
     );
   }
 
-  return decimalSeparatorToString(value);
+  return getDisplayedValue(value, commaDecimalSeparator);
 };
 
 type GetFormattedValueOnChangeProps = {

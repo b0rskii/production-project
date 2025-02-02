@@ -10,6 +10,7 @@ type Props = {
   // eslint-disable-next-line no-unused-vars
   onChange: (value: string) => void;
   decimalScale?: number;
+  commaDecimalSeparator?: boolean;
   minValue?: number;
   maxValue?: number;
 };
@@ -18,6 +19,7 @@ export const NumberInput = ({
   value,
   onChange,
   decimalScale,
+  commaDecimalSeparator = true,
   minValue = Number.MIN_SAFE_INTEGER,
   maxValue = Number.MAX_SAFE_INTEGER,
 }: Props) => {
@@ -26,6 +28,7 @@ export const NumberInput = ({
     minValue,
     maxValue,
     decimalScale,
+    commaDecimalSeparator,
   });
 
   const handleChange = (evt: ChangeEvent<HTMLInputElement>) => {
