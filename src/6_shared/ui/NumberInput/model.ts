@@ -5,19 +5,19 @@ import {
   roundNumber,
 } from './utils';
 
-type FormattedValueOnMountProps = {
+type UseDisplayedValueProps = {
   value: string;
   minValue: number;
   maxValue: number;
   decimalScale?: number;
 };
 
-export const useFormattedValueOnMount = ({
+export const useDisplayedValue = ({
   value,
   minValue,
   maxValue,
   decimalScale,
-}: FormattedValueOnMountProps) => {
+}: UseDisplayedValueProps) => {
   const isInitialRenderRef = useRef(true);
 
   if (isInitialRenderRef.current) {
@@ -38,10 +38,10 @@ export const useFormattedValueOnMount = ({
     );
   }
 
-  return value;
+  return decimalSeparatorToString(value);
 };
 
-type OnChangeFormatterProps = {
+type GetFormattedValueOnChangeProps = {
   newValue: string;
   currentValue: string;
   minValue: number;
@@ -53,25 +53,27 @@ export const getFormattedValueOnChange = ({
   currentValue,
   minValue,
   maxValue,
-}: OnChangeFormatterProps) => {
+}: GetFormattedValueOnChangeProps) => {
   const newNumValue = Number(decimalSeparatorToNumber(newValue));
   const allowNegative = minValue < 0;
 
   // Если новое значение не число и не минус, оставляем текущее значение без изменений.
   // Если новое значение минус и отрицательные числа допустимы, возвращаем минус.
   if (Number.isNaN(newNumValue)) {
-    return newValue === '-' && allowNegative ? '-' : currentValue;
+    return newValue === '-' && allowNegative
+      ? '-'
+      : decimalSeparatorToNumber(currentValue);
   }
 
   // Если отрицательные значения недопустимы, блокируем их ввод.
   if (newNumValue < 0 && !allowNegative) {
-    return currentValue;
+    return decimalSeparatorToNumber(currentValue);
   }
 
   // Автоматическая подстановка запятой при вводе X, если минимальное значение X,(...)
   if (!Number.isInteger(minValue)) {
     const integerStrMinValue = Math.trunc(minValue).toString();
-    const integerStrMinValueWithSeparator = `${integerStrMinValue},`;
+    const integerStrMinValueWithSeparator = `${integerStrMinValue}.`;
 
     if (
       newValue === integerStrMinValue &&
@@ -82,13 +84,13 @@ export const getFormattedValueOnChange = ({
   }
 
   if (newNumValue >= maxValue) {
-    return decimalSeparatorToString(maxValue.toString());
+    return maxValue.toString();
   }
 
-  return decimalSeparatorToString(newValue);
+  return decimalSeparatorToNumber(newValue);
 };
 
-type OnBlurFormatterProps = {
+type GetFormattedValueOnBlurProps = {
   currentValue: string;
   minValue: number;
   maxValue: number;
@@ -100,7 +102,7 @@ export const getFormattedValueOnBlur = ({
   minValue,
   maxValue,
   decimalScale,
-}: OnBlurFormatterProps) => {
+}: GetFormattedValueOnBlurProps) => {
   if (currentValue === '-' || currentValue === '') {
     return '';
   }
@@ -108,13 +110,13 @@ export const getFormattedValueOnBlur = ({
   const currentNumValue = Number(decimalSeparatorToNumber(currentValue));
 
   if (currentNumValue <= minValue) {
-    return decimalSeparatorToString(minValue.toString());
+    return minValue.toString();
   }
 
   if (currentNumValue >= maxValue) {
-    return decimalSeparatorToString(maxValue.toString());
+    return maxValue.toString();
   }
 
   const formatedValue = roundNumber(currentNumValue, decimalScale).toString();
-  return decimalSeparatorToString(formatedValue);
+  return decimalSeparatorToNumber(formatedValue);
 };

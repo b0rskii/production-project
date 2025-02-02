@@ -1,27 +1,27 @@
 import { ChangeEvent } from 'react';
 import {
-  useFormattedValueOnMount,
+  useDisplayedValue,
   getFormattedValueOnChange,
   getFormattedValueOnBlur,
 } from './model';
 
 type Props = {
-  minValue?: number;
-  maxValue?: number;
-  decimalScale?: number;
   value: string;
   // eslint-disable-next-line no-unused-vars
   onChange: (value: string) => void;
+  decimalScale?: number;
+  minValue?: number;
+  maxValue?: number;
 };
 
 export const NumberInput = ({
-  decimalScale,
   value,
   onChange,
+  decimalScale,
   minValue = Number.MIN_SAFE_INTEGER,
   maxValue = Number.MAX_SAFE_INTEGER,
 }: Props) => {
-  const currentValue = useFormattedValueOnMount({
+  const displayedValue = useDisplayedValue({
     value,
     minValue,
     maxValue,
@@ -31,7 +31,7 @@ export const NumberInput = ({
   const handleChange = (evt: ChangeEvent<HTMLInputElement>) => {
     const formatedValue = getFormattedValueOnChange({
       newValue: evt.target.value,
-      currentValue,
+      currentValue: value,
       minValue,
       maxValue,
     });
@@ -40,7 +40,7 @@ export const NumberInput = ({
 
   const handleBlur = () => {
     const formatedValue = getFormattedValueOnBlur({
-      currentValue,
+      currentValue: value,
       minValue,
       maxValue,
       decimalScale,
@@ -49,6 +49,6 @@ export const NumberInput = ({
   };
 
   return (
-    <input value={currentValue} onChange={handleChange} onBlur={handleBlur} />
+    <input value={displayedValue} onChange={handleChange} onBlur={handleBlur} />
   );
 };
