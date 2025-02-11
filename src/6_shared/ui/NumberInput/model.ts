@@ -1,18 +1,18 @@
 import { useRef } from 'react';
 import {
-  decimalSeparatorToNumber,
-  decimalSeparatorToString,
+  decimalSeparatorToDot,
+  decimalSeparatorToComma,
   roundNumber,
 } from './utils';
 
-const getDisplayedValue = (value: string, commaDecimalSeparator: boolean) =>
-  commaDecimalSeparator ? decimalSeparatorToString(value) : value;
+const getDisplayedValue = (value: string, isCommaDecimalSeparator: boolean) =>
+  isCommaDecimalSeparator ? decimalSeparatorToComma(value) : value;
 
 type UseDisplayedValueProps = {
   value: string;
   minValue: number;
   maxValue: number;
-  commaDecimalSeparator: boolean;
+  isCommaDecimalSeparator: boolean;
   decimalScale?: number;
 };
 
@@ -20,7 +20,7 @@ export const useDisplayedValue = ({
   value,
   minValue,
   maxValue,
-  commaDecimalSeparator,
+  isCommaDecimalSeparator,
   decimalScale,
 }: UseDisplayedValueProps) => {
   const isInitialRenderRef = useRef(true);
@@ -28,23 +28,23 @@ export const useDisplayedValue = ({
   if (isInitialRenderRef.current) {
     isInitialRenderRef.current = false;
 
-    const numValue = Number(decimalSeparatorToNumber(value));
+    const numValue = Number(decimalSeparatorToDot(value));
 
     if (numValue < minValue) {
-      return getDisplayedValue(minValue.toString(), commaDecimalSeparator);
+      return getDisplayedValue(minValue.toString(), isCommaDecimalSeparator);
     }
 
     if (numValue > maxValue) {
-      return getDisplayedValue(maxValue.toString(), commaDecimalSeparator);
+      return getDisplayedValue(maxValue.toString(), isCommaDecimalSeparator);
     }
 
     return getDisplayedValue(
       roundNumber(numValue, decimalScale).toString(),
-      commaDecimalSeparator,
+      isCommaDecimalSeparator,
     );
   }
 
-  return getDisplayedValue(value, commaDecimalSeparator);
+  return getDisplayedValue(value, isCommaDecimalSeparator);
 };
 
 type GetFormattedValueOnChangeProps = {
@@ -52,6 +52,7 @@ type GetFormattedValueOnChangeProps = {
   currentValue: string;
   minValue: number;
   maxValue: number;
+  decimalScale?: number;
 };
 
 export const getFormattedValueOnChange = ({
@@ -59,8 +60,9 @@ export const getFormattedValueOnChange = ({
   currentValue,
   minValue,
   maxValue,
+  decimalScale,
 }: GetFormattedValueOnChangeProps) => {
-  const newNumValue = Number(decimalSeparatorToNumber(newValue));
+  const newNumValue = Number(decimalSeparatorToDot(newValue));
   const allowNegative = minValue < 0;
 
   // Если новое значение не число и не минус, оставляем текущее значение без изменений.
@@ -68,12 +70,12 @@ export const getFormattedValueOnChange = ({
   if (Number.isNaN(newNumValue)) {
     return newValue === '-' && allowNegative
       ? '-'
-      : decimalSeparatorToNumber(currentValue);
+      : decimalSeparatorToDot(currentValue);
   }
 
   // Если отрицательные значения недопустимы, блокируем их ввод.
   if (newNumValue < 0 && !allowNegative) {
-    return decimalSeparatorToNumber(currentValue);
+    return decimalSeparatorToDot(currentValue);
   }
 
   // Автоматическая подстановка запятой при вводе X, если минимальное значение X,(...)
@@ -93,7 +95,16 @@ export const getFormattedValueOnChange = ({
     return maxValue.toString();
   }
 
-  return decimalSeparatorToNumber(newValue);
+  if (decimalScale !== undefined) {
+    const newValueWithDotSeparator = decimalSeparatorToDot(newValue);
+
+    if (newValueWithDotSeparator.includes('.')) {
+      const [integer, decimal] = newValueWithDotSeparator.split('.');
+      return `${integer}.${decimal.slice(0, decimalScale)}`;
+    }
+  }
+
+  return decimalSeparatorToDot(newValue);
 };
 
 type GetFormattedValueOnBlurProps = {
@@ -113,7 +124,7 @@ export const getFormattedValueOnBlur = ({
     return '';
   }
 
-  const currentNumValue = Number(decimalSeparatorToNumber(currentValue));
+  const currentNumValue = Number(decimalSeparatorToDot(currentValue));
 
   if (currentNumValue <= minValue) {
     return minValue.toString();
@@ -124,5 +135,5 @@ export const getFormattedValueOnBlur = ({
   }
 
   const formatedValue = roundNumber(currentNumValue, decimalScale).toString();
-  return decimalSeparatorToNumber(formatedValue);
+  return decimalSeparatorToDot(formatedValue);
 };

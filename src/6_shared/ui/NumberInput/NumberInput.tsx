@@ -9,8 +9,10 @@ type Props = {
   value: string;
   // eslint-disable-next-line no-unused-vars
   onChange: (value: string) => void;
+  // eslint-disable-next-line no-unused-vars
+  onBlur?: (value: string) => void;
   decimalScale?: number;
-  commaDecimalSeparator?: boolean;
+  isCommaDecimalSeparator?: boolean;
   minValue?: number;
   maxValue?: number;
 };
@@ -18,8 +20,9 @@ type Props = {
 export const NumberInput = ({
   value,
   onChange,
+  onBlur,
   decimalScale,
-  commaDecimalSeparator = true,
+  isCommaDecimalSeparator = true,
   minValue = Number.MIN_SAFE_INTEGER,
   maxValue = Number.MAX_SAFE_INTEGER,
 }: Props) => {
@@ -28,7 +31,7 @@ export const NumberInput = ({
     minValue,
     maxValue,
     decimalScale,
-    commaDecimalSeparator,
+    isCommaDecimalSeparator,
   });
 
   const handleChange = (evt: ChangeEvent<HTMLInputElement>) => {
@@ -37,6 +40,7 @@ export const NumberInput = ({
       currentValue: value,
       minValue,
       maxValue,
+      decimalScale,
     });
     onChange(formatedValue);
   };
@@ -49,6 +53,7 @@ export const NumberInput = ({
       decimalScale,
     });
     onChange(formatedValue);
+    onBlur?.(formatedValue);
   };
 
   return (

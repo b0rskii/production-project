@@ -14,7 +14,7 @@ function MainPage() {
       {t('Главная страница')}
       <NumberInput
         minValue={0.001}
-        maxValue={1}
+        maxValue={0.5}
         decimalScale={3}
         value={value}
         onChange={setValue}

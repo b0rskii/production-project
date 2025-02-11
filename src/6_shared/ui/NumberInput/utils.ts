@@ -1,6 +1,5 @@
-export const decimalSeparatorToNumber = (value: string) =>
-  value.replace(',', '.');
-export const decimalSeparatorToString = (value: string) =>
+export const decimalSeparatorToDot = (value: string) => value.replace(',', '.');
+export const decimalSeparatorToComma = (value: string) =>
   value.replace('.', ',');
 
 export const roundNumber = (number: number, digits?: number) => {
