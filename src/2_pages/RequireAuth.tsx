@@ -1,9 +1,9 @@
 import { useMemo } from 'react';
-import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
-import { ForbiddenPage } from './ForbiddenPage';
-import { UserRole, userSelectors } from '@/5_entities/User';
+import { observer } from 'mobx-react-lite';
+import { UserRole, userStore } from '@/5_entities/User';
 import { RoutePath } from '@/6_shared/config/routing';
+import { ForbiddenPage } from './ForbiddenPage';
 
 type RequireAuthProps = {
   children: JSX.Element;
@@ -11,35 +11,28 @@ type RequireAuthProps = {
   requiredRoles?: UserRole[];
 };
 
-export const RequireAuth = ({
-  children,
-  isAuth,
-  requiredRoles,
-}: RequireAuthProps) => {
-  const userRoles = useSelector(userSelectors.getUserRoles);
+export const RequireAuth = observer(
+  ({ children, isAuth, requiredRoles }: RequireAuthProps) => {
+    const { userRoles } = userStore;
 
-  const hasRequiredRole = useMemo(() => {
-    if (!requiredRoles) {
-      return true;
+    const hasRequiredRole = useMemo(() => {
+      if (!requiredRoles) {
+        return true;
+      }
+
+      return requiredRoles.some((requiredRole) =>
+        userRoles?.includes(requiredRole),
+      );
+    }, [requiredRoles, userRoles]);
+
+    if (!isAuth) {
+      return <Navigate to={RoutePath.MAIN} replace />;
     }
 
-    return requiredRoles.some((requiredRole) =>
-      userRoles?.includes(requiredRole)
-    );
-  }, [requiredRoles, userRoles]);
+    if (!hasRequiredRole) {
+      return <ForbiddenPage />;
+    }
 
-  if (!isAuth) {
-    return (
-      <Navigate
-        to={RoutePath.MAIN}
-        replace
-      />
-    );
-  }
-
-  if (!hasRequiredRole) {
-    return <ForbiddenPage />;
-  }
-
-  return children;
-};
+    return children;
+  },
+);

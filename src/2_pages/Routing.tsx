@@ -1,8 +1,8 @@
-import { memo, Suspense } from 'react';
-import { useSelector } from 'react-redux';
+import { Suspense } from 'react';
 import { Routes, Route, RouteProps } from 'react-router-dom';
+import { observer } from 'mobx-react-lite';
 import { PageLoader } from '@/3_widgets/PageLoader';
-import { userSelectors, UserRole } from '@/5_entities/User';
+import { UserRole, userStore } from '@/5_entities/User';
 import { RoutePath } from '@/6_shared/config/routing';
 import { AboutPage } from './AboutPage';
 import { MainPage } from './MainPage';
@@ -65,11 +65,10 @@ export const routes: AppRouteProps[] = [
   },
 ];
 
-export const Routing = memo(() => {
-  const isAuthChecked = useSelector(userSelectors.getIsInited);
-  const isAuth = useSelector(userSelectors.getUserAuthData);
+export const Routing = observer(() => {
+  const { authData, isInited } = userStore;
 
-  if (!isAuthChecked) {
+  if (!isInited) {
     return null;
   }
 
@@ -86,7 +85,7 @@ export const Routing = memo(() => {
             element={
               route.authOnly ? (
                 <RequireAuth
-                  isAuth={Boolean(isAuth)}
+                  isAuth={Boolean(authData)}
                   requiredRoles={route.roles}
                 >
                   {element}

@@ -86,6 +86,7 @@ module.exports = {
         ignoreImportPatterns: ['**/StoreProvider'],
       },
     ],
+    'lines-between-class-members': 'off',
   },
   globals: {
     __IS_DEV__: true,

@@ -1,8 +1,7 @@
-import { memo } from 'react';
-import { useSelector } from 'react-redux';
+import { observer } from 'mobx-react-lite';
 import { LoginButton } from '@/4_features/AuthByUsername';
 import { CreateArticleButton } from '@/4_features/EditArticle';
-import { userSelectors } from '@/5_entities/User';
+import { userStore } from '@/5_entities/User';
 import { NotificationsButton } from '@/5_entities/Notification';
 import { Stack } from '@/6_shared/ui/Stack';
 import { ButtonTheme } from '@/6_shared/ui/Button';
@@ -14,13 +13,12 @@ type NavbarProps = {
   className?: string;
 };
 
-export const Navbar = memo((props: NavbarProps) => {
+export const Navbar = observer((props: NavbarProps) => {
   const { className } = props;
-
-  const userData = useSelector(userSelectors.getUserAuthData);
+  const { authData } = userStore;
 
   const getNavigation = () => {
-    if (userData) {
+    if (authData) {
       return (
         <nav className={style.links}>
           <CreateArticleButton />
@@ -43,8 +41,11 @@ export const Navbar = memo((props: NavbarProps) => {
       {getNavigation()}
 
       <Stack gap="l">
-        {userData && <NotificationsButton />}
-        <LoginButton className={style.loginButton} theme={ButtonTheme.OUTLINE_INVERTED} />
+        {authData && <NotificationsButton />}
+        <LoginButton
+          className={style.loginButton}
+          theme={ButtonTheme.OUTLINE_INVERTED}
+        />
       </Stack>
     </header>
   );

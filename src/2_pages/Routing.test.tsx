@@ -7,11 +7,7 @@ describe('Routing', () => {
   it('Должна отрендериться страница соответствующая роуту', async () => {
     renderComponent(<Routing />, {
       route: RoutePath.MAIN,
-      initialState: {
-        user: {
-          isInited: true,
-        },
-      },
+      initialState: {},
     });
 
     const page = await screen.findByTestId('MainPage');
@@ -21,11 +17,7 @@ describe('Routing', () => {
   it('Должна отрендериться страница 404 на неизвестный роут', async () => {
     renderComponent(<Routing />, {
       route: '/greghe4greghtrh56t',
-      initialState: {
-        user: {
-          isInited: true,
-        },
-      },
+      initialState: {},
     });
 
     const page = await screen.findByTestId('NotFoundPage');
@@ -35,11 +27,7 @@ describe('Routing', () => {
   it('Должен произойти редирект на Главную если пользователь неавторизован', async () => {
     renderComponent(<Routing />, {
       route: RoutePath.ARTICLES,
-      initialState: {
-        user: {
-          isInited: true,
-        },
-      },
+      initialState: {},
     });
 
     const page = await screen.findByTestId('MainPage');
@@ -49,15 +37,7 @@ describe('Routing', () => {
   it('Должна отрендериться auth only страница для авторизованного пользователя', async () => {
     renderComponent(<Routing />, {
       route: RoutePath.CREATE_ARTICLE,
-      initialState: {
-        user: {
-          isInited: true,
-          authData: {
-            id: '1',
-            username: 'username',
-          },
-        },
-      },
+      initialState: {},
     });
 
     const page = await screen.findByTestId('ArticleEditPage');
@@ -67,15 +47,7 @@ describe('Routing', () => {
   it('Должна отрендериться ForbiddenPage если пользователь не имеет необходимую роль', async () => {
     renderComponent(<Routing />, {
       route: RoutePath.ADMIN_PANEL,
-      initialState: {
-        user: {
-          isInited: true,
-          authData: {
-            id: '1',
-            username: 'username',
-          },
-        },
-      },
+      initialState: {},
     });
 
     const page = await screen.findByTestId('ForbiddenPage');
@@ -85,16 +57,7 @@ describe('Routing', () => {
   it('Должна отрендериться нужная страница если пользователь имеет необходимую роль', async () => {
     renderComponent(<Routing />, {
       route: RoutePath.ADMIN_PANEL,
-      initialState: {
-        user: {
-          isInited: true,
-          authData: {
-            id: '1',
-            username: 'username',
-            roles: ['ADMIN'],
-          },
-        },
-      },
+      initialState: {},
     });
 
     const page = await screen.findByTestId('AdminPanelPage');

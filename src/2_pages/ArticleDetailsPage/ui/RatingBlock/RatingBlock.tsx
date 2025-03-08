@@ -1,8 +1,8 @@
-import { PropsWithChildren, memo } from 'react';
-import { useSelector } from 'react-redux';
+import { PropsWithChildren } from 'react';
+import { observer } from 'mobx-react-lite';
 import { useTranslation } from 'react-i18next';
 import { useRateArticle } from '@/4_features/RateArticle';
-import { userSelectors } from '@/5_entities/User';
+import { userStore } from '@/5_entities/User';
 import { RatingCard, useGetArticleRating } from '@/5_entities/Rating';
 import { Skeleton } from '@/6_shared/ui/Skeleton';
 import { getClassNames } from '@/6_shared/utils/classNames';
@@ -13,10 +13,15 @@ type Props = PropsWithChildren<{
   articleId: string;
 }>;
 
-export const RatingBlock = memo((props: Props) => {
+export const RatingBlock = observer((props: Props) => {
   const { className, articleId } = props;
-  const { t } = useTranslation([I18nNameSpace.Translation, I18nNameSpace.Article]);
-  const userId = useSelector(userSelectors.getUserId);
+
+  const { t } = useTranslation([
+    I18nNameSpace.Translation,
+    I18nNameSpace.Article,
+  ]);
+
+  const { userId } = userStore;
 
   const { data, isLoading } = useGetArticleRating({
     userId: userId ?? '',
@@ -35,7 +40,9 @@ export const RatingBlock = memo((props: Props) => {
   };
 
   if (isLoading) {
-    return <Skeleton className={getClassNames('', {}, [className])} height={100} />;
+    return (
+      <Skeleton className={getClassNames('', {}, [className])} height={100} />
+    );
   }
 
   const rating = data?.[0];

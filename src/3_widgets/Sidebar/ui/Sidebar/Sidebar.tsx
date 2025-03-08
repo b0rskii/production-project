@@ -1,11 +1,6 @@
-import { useSelector } from 'react-redux';
-import { memo, useState } from 'react';
-import { useAppDispatch } from '@/6_shared/utils/redux';
-import {
-  userActions,
-  userSelectors,
-  updateJsonSettings,
-} from '@/5_entities/User';
+import { useState } from 'react';
+import { observer } from 'mobx-react-lite';
+import { userStore } from '@/5_entities/User';
 import { getClassNames } from '@/6_shared/utils/classNames';
 import { ThemeSwitcher } from '@/6_shared/ui/ThemeSwitcher';
 import { LangSwitcher } from '@/6_shared/ui/LangSwitcher';
@@ -18,22 +13,19 @@ type SidebarProps = {
   className?: string;
 };
 
-export const Sidebar = memo((props: SidebarProps) => {
+export const Sidebar = observer((props: SidebarProps) => {
   const { className } = props;
-  const dispatch = useAppDispatch();
-
   const [collapsed, setCollapsed] = useState(false);
 
-  const userData = useSelector(userSelectors.getUserAuthData);
-  const { theme } = useSelector(userSelectors.getJsonSettings);
+  const { authData, userId, theme } = userStore;
 
   const onToggleButtonClick = () => {
     setCollapsed((prev) => !prev);
   };
 
   const onToggleTheme = () => {
-    dispatch(userActions.toggleTheme());
-    dispatch(updateJsonSettings());
+    userStore.toggleTheme();
+    userStore.updateJsonSettings();
   };
 
   return (
@@ -41,7 +33,7 @@ export const Sidebar = memo((props: SidebarProps) => {
       className={getClassNames(
         style.sidebar,
         { [style.collapsed]: collapsed },
-        [className]
+        [className],
       )}
       data-testid="sidebar"
     >
@@ -58,8 +50,8 @@ export const Sidebar = memo((props: SidebarProps) => {
       </Button>
 
       <nav className={style.linksList}>
-        {getLinkItems(userData?.id).map((linkItem) => {
-          if (!userData && linkItem.authOnly) {
+        {getLinkItems(userId).map((linkItem) => {
+          if (!authData && linkItem.authOnly) {
             return null;
           }
 
@@ -74,10 +66,7 @@ export const Sidebar = memo((props: SidebarProps) => {
       </nav>
 
       <div className={style.switchers}>
-        <ThemeSwitcher
-          theme={theme}
-          onToggleTheme={onToggleTheme}
-        />
+        <ThemeSwitcher theme={theme} onToggleTheme={onToggleTheme} />
         <LangSwitcher />
       </div>
     </section>

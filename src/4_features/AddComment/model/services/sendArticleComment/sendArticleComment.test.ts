@@ -22,12 +22,9 @@ describe('sendArticleComment', () => {
     const thunk = testAsyncThunk(sendArticleComment, {
       addComment: { text: 'comment text' },
       article: { data: mockArticle() },
-      user: { authData: USER_DATA },
     });
 
-    thunk.api.post.mockReturnValue(
-      Promise.resolve({ data: RESPONSE_DATA }),
-    );
+    thunk.api.post.mockReturnValue(Promise.resolve({ data: RESPONSE_DATA }));
 
     const result = await thunk.callThunk(StatusMessage);
 
@@ -35,8 +32,12 @@ describe('sendArticleComment', () => {
 
     expect(thunk.api.post).toHaveBeenCalled();
     expect(result.meta.requestStatus).toBe('fulfilled');
-    expect(thunk.dispatch).toHaveBeenCalledWith(articleCommentsActions.addComment(addedComment));
-    expect(thunk.dispatch).toHaveBeenCalledWith(toastifyActions.notify(StatusMessage.success));
+    expect(thunk.dispatch).toHaveBeenCalledWith(
+      articleCommentsActions.addComment(addedComment),
+    );
+    expect(thunk.dispatch).toHaveBeenCalledWith(
+      toastifyActions.notify(StatusMessage.success),
+    );
     expect(thunk.dispatch).toHaveBeenCalledTimes(4);
     expect(result.payload).toEqual(addedComment);
   });
@@ -45,18 +46,17 @@ describe('sendArticleComment', () => {
     const thunk = testAsyncThunk(sendArticleComment, {
       addComment: { text: 'comment text' },
       article: { data: mockArticle() },
-      user: { authData: USER_DATA },
     });
 
-    thunk.api.post.mockReturnValue(
-      Promise.resolve({ status: 403 }),
-    );
+    thunk.api.post.mockReturnValue(Promise.resolve({ status: 403 }));
 
     const result = await thunk.callThunk(StatusMessage);
 
     expect(thunk.api.post).toHaveBeenCalled();
     expect(result.meta.requestStatus).toBe('rejected');
-    expect(thunk.dispatch).toHaveBeenCalledWith(toastifyActions.notifyError(StatusMessage.error));
+    expect(thunk.dispatch).toHaveBeenCalledWith(
+      toastifyActions.notifyError(StatusMessage.error),
+    );
     expect(thunk.dispatch).toHaveBeenCalledTimes(3);
     expect(result.payload).toBe('error');
   });

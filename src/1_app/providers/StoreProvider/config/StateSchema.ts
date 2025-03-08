@@ -9,13 +9,24 @@ import {
 import { AxiosInstance } from 'axios';
 import { UISchema, UI_SLICE } from '@/3_widgets/Page';
 import { LoginSchema, LOGIN_SLICE } from '@/4_features/AuthByUsername';
-import { EditProfileSchema, EDIT_PROFILE_SLICE } from '@/4_features/EditProfile';
+import {
+  EditProfileSchema,
+  EDIT_PROFILE_SLICE,
+} from '@/4_features/EditProfile';
 import { AddCommentSchema, ADD_COMMENT_SLICE } from '@/4_features/AddComment';
-import { SortArticlesSchema, SORT_ARTICLES_SLICE } from '@/4_features/SortArticles';
-import { FilterArticlesSchema, FILTER_ARTICLES_SLICE } from '@/4_features/FilterArticles';
-import { EditArticleSchema, EDIT_ARTICLE_SLICE } from '@/4_features/EditArticle';
+import {
+  SortArticlesSchema,
+  SORT_ARTICLES_SLICE,
+} from '@/4_features/SortArticles';
+import {
+  FilterArticlesSchema,
+  FILTER_ARTICLES_SLICE,
+} from '@/4_features/FilterArticles';
+import {
+  EditArticleSchema,
+  EDIT_ARTICLE_SLICE,
+} from '@/4_features/EditArticle';
 import { ProfileSchema, PROFILE_SLICE } from '@/5_entities/Profile';
-import { UserSchema, USER_SLICE } from '@/5_entities/User';
 import {
   ArticleSchema,
   ARTICLE_SLICE,
@@ -25,13 +36,15 @@ import {
   RecommendedArticlesSchema,
 } from '@/5_entities/Article';
 
-import { ArticleCommentsSchema, ARTICLE_COMMENTS_SLICE } from '@/5_entities/ArticleComment';
+import {
+  ArticleCommentsSchema,
+  ARTICLE_COMMENTS_SLICE,
+} from '@/5_entities/ArticleComment';
 import { TOASTIFY_SLICE, ToastifySchema } from '@/6_shared/ui/Toastify';
 import { rtkApi } from '@/6_shared/api';
 
 export type StateSchema = {
-  [rtkApi.reducerPath]: ReturnType<typeof rtkApi.reducer>,
-  [USER_SLICE]: UserSchema;
+  [rtkApi.reducerPath]: ReturnType<typeof rtkApi.reducer>;
   [TOASTIFY_SLICE]: ToastifySchema;
   [UI_SLICE]: UISchema;
   [LOGIN_SLICE]?: LoginSchema;

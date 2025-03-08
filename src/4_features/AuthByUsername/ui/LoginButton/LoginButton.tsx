@@ -1,8 +1,8 @@
-import { memo, useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
+import { observer } from 'mobx-react-lite';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { userSelectors, userActions } from '@/5_entities/User';
+import { userStore } from '@/5_entities/User';
 import { profileActions } from '@/5_entities/Profile';
 import { Button, ButtonTheme } from '@/6_shared/ui/Button';
 import { useAppDispatch } from '@/6_shared/utils/redux';
@@ -19,7 +19,7 @@ type LoginButtonProps = {
   theme?: ButtonTheme;
 };
 
-export const LoginButton = memo((props: LoginButtonProps) => {
+export const LoginButton = observer((props: LoginButtonProps) => {
   const { className, theme = ButtonTheme.DEFAULT } = props;
 
   const { t } = useTranslation([
@@ -32,9 +32,7 @@ export const LoginButton = memo((props: LoginButtonProps) => {
   const dispatch = useAppDispatch();
 
   const [isAuthModalOpened, setIsAuthModalOpened] = useState(false);
-  const userAuthData = useSelector(userSelectors.getUserAuthData);
-  const isAdmin = useSelector(userSelectors.isAdmin);
-  const isManager = useSelector(userSelectors.isManager);
+  const { authData, isAdmin, isManager } = userStore;
 
   const hasAccessToAdmin = isAdmin || isManager;
 
@@ -51,51 +49,50 @@ export const LoginButton = memo((props: LoginButtonProps) => {
   }, [navigate]);
 
   const profileMenuItemClickHandler = useCallback(() => {
-    if (!userAuthData) return;
-    navigate(RoutePath.PROFILE(userAuthData.id));
-  }, [navigate, userAuthData]);
+    if (!authData) return;
+    navigate(RoutePath.PROFILE(authData.id));
+  }, [navigate, authData]);
 
   const logoutMenuItemClickHandler = useCallback(() => {
-    dispatch(userActions.logout());
+    userStore.logout();
     dispatch(profileActions.cleanProfile());
     localStorage.removeItem(LocalStorageKey.USER);
   }, [dispatch]);
 
-  const menuItems = useMemo(() => [
-    ...(hasAccessToAdmin ? [
+  const menuItems = useMemo(
+    () => [
+      ...(hasAccessToAdmin
+        ? [
+            {
+              content: t('Админка', { ns: I18nNameSpace.AdminPanel }),
+              onClick: adminMenuItemClickHandler,
+            },
+          ]
+        : []),
       {
-        content: t('Админка', { ns: I18nNameSpace.AdminPanel }),
-        onClick: adminMenuItemClickHandler,
+        content: t('Профиль', { ns: I18nNameSpace.Profile }),
+        onClick: profileMenuItemClickHandler,
       },
-    ] : []),
-    {
-      content: t('Профиль', { ns: I18nNameSpace.Profile }),
-      onClick: profileMenuItemClickHandler,
-    },
-    {
-      content: t('Выйти'),
-      onClick: logoutMenuItemClickHandler,
-    },
-  ], [
-    t,
-    adminMenuItemClickHandler,
-    profileMenuItemClickHandler,
-    logoutMenuItemClickHandler,
-    hasAccessToAdmin,
-  ]);
+      {
+        content: t('Выйти'),
+        onClick: logoutMenuItemClickHandler,
+      },
+    ],
+    [
+      t,
+      adminMenuItemClickHandler,
+      profileMenuItemClickHandler,
+      logoutMenuItemClickHandler,
+      hasAccessToAdmin,
+    ],
+  );
 
   return (
     <>
-      {userAuthData ? (
+      {authData ? (
         <DropDown
           className={className}
-          button={(
-            <Avatar
-              src={userAuthData.avatar}
-              alt="avatar"
-              size={35}
-            />
-          )}
+          button={<Avatar src={authData.avatar} alt="avatar" size={35} />}
           items={menuItems}
           direction="bottom-left"
         />
@@ -108,9 +105,7 @@ export const LoginButton = memo((props: LoginButtonProps) => {
           {t('Войти')}
         </Button>
       )}
-      {isAuthModalOpened && (
-        <LoginModal onClose={onCloseModal} />
-      )}
+      {isAuthModalOpened && <LoginModal onClose={onCloseModal} />}
     </>
   );
 });
