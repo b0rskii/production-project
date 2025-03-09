@@ -1,11 +1,9 @@
 import { makeAutoObservable } from 'mobx';
-
 import { setFeatureFlags } from '@/6_shared/utils/featureFlags';
 import { Theme } from '@/6_shared/utils/theme';
 import { LocalStorageKey } from '@/6_shared/const/localStorage';
-
-import { User } from '../types/userSchema';
 import { api, ApiRoutes } from '@/6_shared/api';
+import { User } from '../types/userSchema';
 
 class UserStore {
   constructor() {

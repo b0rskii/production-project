@@ -6,3 +6,4 @@ export { profileSelectors } from './model/selectors';
 export { ProfileCard } from './ui/ProfileCard';
 export { ProfileContent } from './ui/ProfileContent';
 export { mockProfile } from './model/mocks';
+export { profileQuery } from './model/store/profileQuery';

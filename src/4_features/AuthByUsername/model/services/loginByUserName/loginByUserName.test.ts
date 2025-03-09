@@ -2,6 +2,8 @@ import { User, mockUser, userStore } from '@/5_entities/User';
 import { testAsyncThunk } from '@/6_shared/utils/tests';
 import { loginByUserName } from './loginByUserName';
 
+const mockSetAuthData = jest.spyOn(userStore, 'setAuthData');
+
 describe('loginByUserName', () => {
   it('fulfilled', async () => {
     const RESPONSE_DATA: User = mockUser();
@@ -14,8 +16,8 @@ describe('loginByUserName', () => {
 
     expect(thunk.api.post).toHaveBeenCalled();
     expect(result.meta.requestStatus).toBe('fulfilled');
-    expect(userStore.setAuthData).toHaveBeenCalledWith(RESPONSE_DATA);
-    expect(thunk.dispatch).toHaveBeenCalledTimes(3);
+    expect(mockSetAuthData).toHaveBeenCalledWith(RESPONSE_DATA);
+    expect(thunk.dispatch).toHaveBeenCalledTimes(2);
     expect(result.payload).toEqual(RESPONSE_DATA);
   });
 

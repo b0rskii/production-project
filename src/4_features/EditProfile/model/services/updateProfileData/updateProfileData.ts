@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkAPI } from '@/1_app/providers/StoreProvider';
-import { Profile, profileActions } from '@/5_entities/Profile';
+import { Profile, profileQuery } from '@/5_entities/Profile';
 import { toastifyActions } from '@/6_shared/ui/Toastify';
 import { ApiRoutes } from '@/6_shared/api';
 import { StatusMessage } from '@/6_shared/types/common';
@@ -40,7 +40,7 @@ export const updateProfileData = createAsyncThunk<
         throw new Error();
       }
 
-      dispatch(profileActions.setProfile(data));
+      profileQuery.setData(data);
       dispatch(toastifyActions.notify(statusMessage.success));
 
       return data;

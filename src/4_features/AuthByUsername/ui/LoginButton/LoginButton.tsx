@@ -3,9 +3,8 @@ import { observer } from 'mobx-react-lite';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { userStore } from '@/5_entities/User';
-import { profileActions } from '@/5_entities/Profile';
+import { profileQuery } from '@/5_entities/Profile';
 import { Button, ButtonTheme } from '@/6_shared/ui/Button';
-import { useAppDispatch } from '@/6_shared/utils/redux';
 import { I18nNameSpace } from '@/6_shared/utils/i18n/nameSpace';
 import { LocalStorageKey } from '@/6_shared/const/localStorage';
 import { getClassNames } from '@/6_shared/utils/classNames';
@@ -29,7 +28,6 @@ export const LoginButton = observer((props: LoginButtonProps) => {
   ]);
 
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
 
   const [isAuthModalOpened, setIsAuthModalOpened] = useState(false);
   const { authData, isAdmin, isManager } = userStore;
@@ -55,9 +53,9 @@ export const LoginButton = observer((props: LoginButtonProps) => {
 
   const logoutMenuItemClickHandler = useCallback(() => {
     userStore.logout();
-    dispatch(profileActions.cleanProfile());
+    profileQuery.clearData();
     localStorage.removeItem(LocalStorageKey.USER);
-  }, [dispatch]);
+  }, []);
 
   const menuItems = useMemo(
     () => [

@@ -14,8 +14,7 @@ import {
   ProfileCard,
   PROFILE_SLICE,
   profileReducer,
-  fetchProfileData,
-  profileSelectors,
+  profileQuery,
 } from '@/5_entities/Profile';
 import { Country } from '@/5_entities/Country';
 import { Currency } from '@/5_entities/Currency';
@@ -38,9 +37,7 @@ export const ProfileBlock = observer((props: ProfileBlockProps) => {
 
   useAsyncReducer(PROFILE_SLICE, profileReducer, false);
 
-  const profile = useSelector(profileSelectors.getProfile);
-  const isLoading = useSelector(profileSelectors.getIsLoading);
-  const error = useSelector(profileSelectors.getError);
+  const { data: profile } = profileQuery;
 
   const isCurrentProfile = id === profile?.id;
 
@@ -52,8 +49,9 @@ export const ProfileBlock = observer((props: ProfileBlockProps) => {
 
   const fetchProfile = useCallback(() => {
     if (!id) return;
-    dispatch(fetchProfileData(id));
-  }, [dispatch, id]);
+    profileQuery.fetch(id);
+    // dispatch(fetchProfileData(id));
+  }, [id]);
 
   useEffect(() => {
     if (!isCurrentProfile) {
@@ -114,8 +112,8 @@ export const ProfileBlock = observer((props: ProfileBlockProps) => {
       {isReadonly && (
         <ProfileCard
           profile={profile}
-          isLoading={isLoading}
-          error={error}
+          isLoading={profileQuery.isLoading}
+          error={profileQuery.error}
           onRepeatFetch={fetchProfile}
         />
       )}
