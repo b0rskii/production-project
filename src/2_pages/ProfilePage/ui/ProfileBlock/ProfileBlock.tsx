@@ -1,27 +1,19 @@
 import { PropsWithChildren, useCallback, useEffect, useMemo } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import {
-  editProfileActions,
   EditProfileButton,
   EditProfileForm,
-  editProfileSelectors,
+  editProfileStore,
   ProfileHandlers,
 } from '@/4_features/EditProfile';
-import {
-  ProfileCard,
-  PROFILE_SLICE,
-  profileReducer,
-  profileQuery,
-} from '@/5_entities/Profile';
+import { ProfileCard, profileQuery } from '@/5_entities/Profile';
 import { Country } from '@/5_entities/Country';
 import { Currency } from '@/5_entities/Currency';
 import { userStore } from '@/5_entities/User';
 import { Text } from '@/6_shared/ui/Text';
 import { getClassNames } from '@/6_shared/utils/classNames';
-import { useAppDispatch, useAsyncReducer } from '@/6_shared/utils/redux';
 import { I18nNameSpace } from '@/6_shared/utils/i18n/nameSpace';
 import style from './ProfileBlock.module.scss';
 
@@ -33,24 +25,16 @@ export const ProfileBlock = observer((props: ProfileBlockProps) => {
   const { className } = props;
   const { t } = useTranslation(I18nNameSpace.Profile);
   const { id } = useParams();
-  const dispatch = useAppDispatch();
-
-  useAsyncReducer(PROFILE_SLICE, profileReducer, false);
-
-  const { data: profile } = profileQuery;
-
-  const isCurrentProfile = id === profile?.id;
-
-  const isReadonly = useSelector(editProfileSelectors.getIsReadonly);
-  const isUpdating = useSelector(editProfileSelectors.getIsLoading);
-  const validateErrors = useSelector(editProfileSelectors.getValidateErrors);
 
   const { authData, userId } = userStore;
+  const { data: profile } = profileQuery;
+  const { isReadonly, validateErrors, profileMutation } = editProfileStore;
+
+  const isCurrentProfile = id === profile?.id;
 
   const fetchProfile = useCallback(() => {
     if (!id) return;
     profileQuery.fetch(id);
-    // dispatch(fetchProfileData(id));
   }, [id]);
 
   useEffect(() => {
@@ -59,36 +43,28 @@ export const ProfileBlock = observer((props: ProfileBlockProps) => {
     }
   }, [isCurrentProfile, fetchProfile]);
 
-  const onInputChange = useCallback(
-    (value: string, name?: string) => {
-      if (!name) {
-        return;
-      }
-      dispatch(editProfileActions.updateProfileForm({ [name]: value }));
-    },
-    [dispatch],
-  );
+  useEffect(() => {
+    return () => {
+      editProfileStore.cancelEdit();
+    };
+  }, []);
 
-  const onAgeChange = useCallback(
-    (value: string) => {
-      dispatch(editProfileActions.updateProfileForm({ age: Number(value) }));
-    },
-    [dispatch],
-  );
+  const onInputChange = useCallback((value: string, name?: string) => {
+    if (!name) return;
+    editProfileStore.updateProfileForm({ [name]: value });
+  }, []);
 
-  const onCountryChange = useCallback(
-    (value: Country) => {
-      dispatch(editProfileActions.updateProfileForm({ country: value }));
-    },
-    [dispatch],
-  );
+  const onAgeChange = useCallback((value: string) => {
+    editProfileStore.updateProfileForm({ age: Number(value) });
+  }, []);
 
-  const onCurrencyChange = useCallback(
-    (value: Currency) => {
-      dispatch(editProfileActions.updateProfileForm({ currency: value }));
-    },
-    [dispatch],
-  );
+  const onCountryChange = useCallback((value: Country) => {
+    editProfileStore.updateProfileForm({ country: value });
+  }, []);
+
+  const onCurrencyChange = useCallback((value: Currency) => {
+    editProfileStore.updateProfileForm({ currency: value });
+  }, []);
 
   const profileHandlers: ProfileHandlers = useMemo(
     () => ({
@@ -120,7 +96,7 @@ export const ProfileBlock = observer((props: ProfileBlockProps) => {
       {!isReadonly && (
         <EditProfileForm
           profile={profile}
-          isUpdating={isUpdating}
+          isUpdating={profileMutation.isLoading}
           validateErrors={validateErrors}
           handlers={profileHandlers}
         />

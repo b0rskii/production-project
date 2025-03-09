@@ -1,10 +1,9 @@
 import { makeAutoObservable, runInAction } from 'mobx';
+import { Data, RequestFn } from './types';
 
-// eslint-disable-next-line no-unused-vars
-type QueryFn = (...args: any) => Promise<any>;
-type Data<T extends QueryFn> = Awaited<ReturnType<T>>;
+type OnResultCallback = () => void;
 
-type QueryParams<T extends QueryFn, K extends Data<T>> = {
+type QueryParams<T extends RequestFn, K extends Data<T>> = {
   queryFn: T;
   initialData?: K | null;
   errorMessage?: string | null;
@@ -12,10 +11,10 @@ type QueryParams<T extends QueryFn, K extends Data<T>> = {
   onError?: () => void;
 };
 
-export class Query<T extends QueryFn, K extends Data<T>> {
+export class Query<T extends RequestFn, K extends Data<T>> {
   private queryFn: T;
-  private onSuccess?: () => void;
-  private onError?: () => void;
+  private onSuccess?: OnResultCallback;
+  private onError?: OnResultCallback;
   private errorMessage: string | null;
   private status: 'idle' | 'loading' = 'idle';
 
@@ -62,16 +61,16 @@ export class Query<T extends QueryFn, K extends Data<T>> {
       const data = await this.queryFn(...args);
 
       runInAction(() => {
+        this.status = 'idle';
         this.data = data;
         this.onSuccess?.();
       });
     } catch {
       runInAction(() => {
+        this.status = 'idle';
         this.error = this.errorMessage;
         this.onError?.();
       });
-    } finally {
-      this.status = 'idle';
     }
   }
 }

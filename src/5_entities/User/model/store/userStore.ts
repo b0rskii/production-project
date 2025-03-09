@@ -5,7 +5,7 @@ import { LocalStorageKey } from '@/6_shared/const/localStorage';
 import { api, ApiRoutes } from '@/6_shared/api';
 import { User } from '../types/userSchema';
 
-class UserStore {
+export class UserStore {
   constructor() {
     makeAutoObservable(this);
   }

@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
-import { memo, PropsWithChildren, useMemo } from 'react';
+import { PropsWithChildren, useMemo } from 'react';
+import { observer } from 'mobx-react-lite';
 import { useTranslation } from 'react-i18next';
 import { Profile, ProfileContent } from '@/5_entities/Profile';
 import { Country, CountrySelect } from '@/5_entities/Country';
@@ -13,7 +14,7 @@ import { ValidateProfileError } from '../../model/const';
 import style from './EditProfileForm.module.scss';
 
 export type ProfileHandlers = {
-  onInputChange?: (value: string, name?: string) => void,
+  onInputChange?: (value: string, name?: string) => void;
   onAgeChange?: (value: string) => void;
   onCountryChange: (value: Country) => void;
   onCurrencyChange: (value: Currency) => void;
@@ -27,21 +28,11 @@ type ProfileProps = PropsWithChildren<{
   handlers: ProfileHandlers;
 }>;
 
-export const EditProfileForm = memo((props: ProfileProps) => {
-  const {
-    className,
-    profile,
-    isUpdating,
-    validateErrors,
-    handlers,
-  } = props;
+export const EditProfileForm = observer((props: ProfileProps) => {
+  const { className, profile, isUpdating, validateErrors, handlers } = props;
 
-  const {
-    onInputChange,
-    onAgeChange,
-    onCountryChange,
-    onCurrencyChange,
-  } = handlers;
+  const { onInputChange, onAgeChange, onCountryChange, onCurrencyChange } =
+    handlers;
 
   const { t } = useTranslation(I18nNameSpace.Profile);
 
@@ -63,14 +54,15 @@ export const EditProfileForm = memo((props: ProfileProps) => {
 
   return (
     <>
-      {validateErrors && validateErrors.map((error) => (
-        <Text
-          text={ValidateErrorTranslation[error]}
-          theme={TextTheme.ERROR}
-          key={error}
-          data-testid="EditProfileForm.Error"
-        />
-      ))}
+      {validateErrors &&
+        validateErrors.map((error) => (
+          <Text
+            text={ValidateErrorTranslation[error]}
+            theme={TextTheme.ERROR}
+            key={error}
+            data-testid="EditProfileForm.Error"
+          />
+        ))}
 
       <form
         className={getClassNames(
@@ -81,7 +73,7 @@ export const EditProfileForm = memo((props: ProfileProps) => {
       >
         <ProfileContent
           avatar={profile?.avatar}
-          Firstname={(
+          Firstname={
             <Field
               className={style.input}
               initialValue={profile?.firstname}
@@ -90,8 +82,8 @@ export const EditProfileForm = memo((props: ProfileProps) => {
               disabled={isUpdating}
               data-testid="EditProfileForm.Firstname"
             />
-          )}
-          Lastname={(
+          }
+          Lastname={
             <Field
               className={style.input}
               initialValue={profile?.lastname}
@@ -100,8 +92,8 @@ export const EditProfileForm = memo((props: ProfileProps) => {
               disabled={isUpdating}
               data-testid="EditProfileForm.Lastname"
             />
-          )}
-          Username={(
+          }
+          Username={
             <Field
               className={style.input}
               initialValue={profile?.username}
@@ -110,8 +102,8 @@ export const EditProfileForm = memo((props: ProfileProps) => {
               disabled={isUpdating}
               data-testid="EditProfileForm.Username"
             />
-          )}
-          Age={(
+          }
+          Age={
             <Field
               className={style.input}
               initialValue={profile?.age}
@@ -120,8 +112,8 @@ export const EditProfileForm = memo((props: ProfileProps) => {
               disabled={isUpdating}
               data-testid="EditProfileForm.Age"
             />
-          )}
-          City={(
+          }
+          City={
             <Field
               className={style.input}
               initialValue={profile?.city}
@@ -130,22 +122,22 @@ export const EditProfileForm = memo((props: ProfileProps) => {
               disabled={isUpdating}
               data-testid="EditProfileForm.City"
             />
-          )}
-          Country={(
+          }
+          Country={
             <CountrySelect
               initialValue={profile?.country}
               onChange={onCountryChange}
               disabled={isUpdating}
             />
-          )}
-          Currency={(
+          }
+          Currency={
             <CurrencySelect
               initialValue={profile?.currency}
               onChange={onCurrencyChange}
               disabled={isUpdating}
             />
-          )}
-          AvatarNode={(
+          }
+          AvatarNode={
             <Field
               className={style.input}
               initialValue={profile?.avatar}
@@ -154,7 +146,7 @@ export const EditProfileForm = memo((props: ProfileProps) => {
               disabled={isUpdating}
               data-testid="EditProfileForm.Avatar"
             />
-          )}
+          }
         />
       </form>
     </>
