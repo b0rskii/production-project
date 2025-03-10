@@ -1,24 +1,30 @@
 import { makeAutoObservable, runInAction } from 'mobx';
-import { Data, RequestFn } from './types';
+import { RequestData, RequestFn } from './types';
 
 type OnResultCallback = () => void;
 
-type QueryParams<T extends RequestFn, K extends Data<T>> = {
-  queryFn: T;
-  initialData?: K | null;
+type QueryParams<
+  QueryFn extends RequestFn,
+  Data extends RequestData<QueryFn>,
+> = {
+  queryFn: QueryFn;
+  initialData?: Data | null;
   errorMessage?: string | null;
   onSuccess?: () => void;
   onError?: () => void;
 };
 
-export class Query<T extends RequestFn, K extends Data<T>> {
-  private queryFn: T;
+export class Query<
+  QueryFn extends RequestFn,
+  Data extends RequestData<QueryFn>,
+> {
+  private queryFn: QueryFn;
   private onSuccess?: OnResultCallback;
   private onError?: OnResultCallback;
   private errorMessage: string | null;
   private status: 'idle' | 'loading' = 'idle';
 
-  data: K | null = null;
+  data: Data | null = null;
   error: string | null = null;
 
   get isLoading() {
@@ -35,7 +41,7 @@ export class Query<T extends RequestFn, K extends Data<T>> {
     errorMessage = null,
     onSuccess,
     onError,
-  }: QueryParams<T, K>) {
+  }: QueryParams<QueryFn, Data>) {
     makeAutoObservable(this);
 
     this.data = initialData;
@@ -45,7 +51,7 @@ export class Query<T extends RequestFn, K extends Data<T>> {
     this.onError = onError;
   }
 
-  setData(value: K) {
+  setData(value: Data) {
     this.data = value;
   }
 
@@ -53,7 +59,7 @@ export class Query<T extends RequestFn, K extends Data<T>> {
     this.data = null;
   }
 
-  async fetch(...args: Parameters<T>) {
+  async fetch(...args: Parameters<QueryFn>) {
     this.error = null;
     this.status = 'loading';
 

@@ -1,20 +1,23 @@
 import { makeAutoObservable, runInAction } from 'mobx';
-import { Data, RequestFn } from './types';
+import { RequestData, RequestFn } from './types';
 
 // eslint-disable-next-line no-unused-vars
-type OnResultCallback<T> = (data: T) => void;
+type OnResultCallback<Data> = (data: Data) => void;
 
-type MutationParams<T extends RequestFn> = {
-  mutationFn: T;
+type MutationParams<MutationFn extends RequestFn> = {
+  mutationFn: MutationFn;
   errorMessage?: string | null;
-  onSuccess?: OnResultCallback<Data<T>>;
-  onError?: OnResultCallback<Data<T>>;
+  onSuccess?: OnResultCallback<RequestData<MutationFn>>;
+  onError?: OnResultCallback<RequestData<MutationFn>>;
 };
 
-export class Mutation<T extends RequestFn, K extends Data<T>> {
-  private mutationFn: T;
-  private onSuccess?: OnResultCallback<K>;
-  private onError?: OnResultCallback<K>;
+export class Mutation<
+  MutationFn extends RequestFn,
+  Data extends RequestData<MutationFn>,
+> {
+  private mutationFn: MutationFn;
+  private onSuccess?: OnResultCallback<Data>;
+  private onError?: OnResultCallback<Data>;
   private errorMessage: string | null;
   private status: 'idle' | 'loading' = 'idle';
 
@@ -33,7 +36,7 @@ export class Mutation<T extends RequestFn, K extends Data<T>> {
     errorMessage = null,
     onSuccess,
     onError,
-  }: MutationParams<T>) {
+  }: MutationParams<MutationFn>) {
     makeAutoObservable(this);
 
     this.errorMessage = errorMessage;
@@ -42,11 +45,11 @@ export class Mutation<T extends RequestFn, K extends Data<T>> {
     this.onError = onError;
   }
 
-  async mutate(...args: Parameters<T>) {
+  async mutate(...args: Parameters<MutationFn>) {
     this.error = null;
     this.status = 'loading';
 
-    let data: K;
+    let data: Data;
 
     try {
       data = await this.mutationFn(...args);

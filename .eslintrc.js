@@ -20,6 +20,7 @@ module.exports = {
     'react-hooks',
     'borskii-fsd',
     'unused-imports',
+    'mobx',
   ],
   rules: {
     'arrow-body-style': 'off',
