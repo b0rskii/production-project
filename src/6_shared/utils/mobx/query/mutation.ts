@@ -1,14 +1,11 @@
 import { makeAutoObservable, runInAction } from 'mobx';
-import { RequestData, RequestFn } from './types';
-
-// eslint-disable-next-line no-unused-vars
-type OnResultCallback<Data> = (data: Data) => void;
+import { OnResultCallback, RequestData, RequestFn } from './types';
 
 type MutationParams<MutationFn extends RequestFn> = {
   mutationFn: MutationFn;
   errorMessage?: string | null;
   onSuccess?: OnResultCallback<RequestData<MutationFn>>;
-  onError?: OnResultCallback<RequestData<MutationFn>>;
+  onError?: OnResultCallback<unknown>;
 };
 
 export class Mutation<
@@ -17,7 +14,9 @@ export class Mutation<
 > {
   private mutationFn: MutationFn;
   private onSuccess?: OnResultCallback<Data>;
-  private onError?: OnResultCallback<Data>;
+  private onError?: OnResultCallback<unknown>;
+  private onSuccessLocal?: OnResultCallback<Data>;
+  private onErrorLocal?: OnResultCallback<unknown>;
   private errorMessage: string | null;
   private status: 'idle' | 'loading' = 'idle';
 
@@ -45,25 +44,68 @@ export class Mutation<
     this.onError = onError;
   }
 
-  async mutate(...args: Parameters<MutationFn>) {
+  mutate(...args: Parameters<MutationFn>) {
     this.error = null;
     this.status = 'loading';
 
-    let data: Data;
-
-    try {
-      data = await this.mutationFn(...args);
-
-      runInAction(() => {
-        this.status = 'idle';
-        this.onSuccess?.(data);
+    this.mutationFn(...args)
+      .then((data) => {
+        runInAction(() => {
+          this.status = 'idle';
+          this.onSuccess?.(data);
+          this.onSuccessLocal?.(data);
+        });
+      })
+      .catch((error) => {
+        runInAction(() => {
+          this.status = 'idle';
+          this.error = this.errorMessage;
+          this.onError?.(error);
+          this.onErrorLocal?.(error);
+        });
       });
-    } catch {
-      runInAction(() => {
-        this.status = 'idle';
-        this.error = this.errorMessage;
-        this.onError?.(data);
-      });
-    }
+
+    return {
+      onSuccess: (callback: OnResultCallback<Data>) => {
+        this.onSuccessLocal = callback;
+
+        return {
+          onError: (callback: OnResultCallback<unknown>) => {
+            this.onErrorLocal = callback;
+          },
+        };
+      },
+      onError: (callback: OnResultCallback<unknown>) => {
+        this.onErrorLocal = callback;
+
+        return {
+          onSuccess: (callback: OnResultCallback<Data>) => {
+            this.onSuccessLocal = callback;
+          },
+        };
+      },
+    };
+  }
+
+  mutateAsync(...args: Parameters<MutationFn>) {
+    this.error = null;
+    this.status = 'loading';
+
+    return this.mutationFn(...args)
+      .then((data) => {
+        runInAction(() => {
+          this.status = 'idle';
+          this.onSuccess?.(data);
+        });
+        return data;
+      })
+      .catch((error) => {
+        runInAction(() => {
+          this.status = 'idle';
+          this.error = this.errorMessage;
+          this.onError?.(error);
+        });
+        return error;
+      }) as ReturnType<MutationFn>;
   }
 }

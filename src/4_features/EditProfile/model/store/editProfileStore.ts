@@ -35,7 +35,7 @@ class EditProfileStore {
     };
   }
 
-  async mutateProfileData() {
+  mutateProfileData() {
     const profileErrors = validateProfileData(this.profileForm);
 
     if (profileErrors.length) {

@@ -1,7 +1,5 @@
 import { makeAutoObservable, runInAction } from 'mobx';
-import { RequestData, RequestFn } from './types';
-
-type OnResultCallback = () => void;
+import { OnResultCallback, RequestData, RequestFn } from './types';
 
 type QueryParams<
   QueryFn extends RequestFn,
@@ -10,8 +8,8 @@ type QueryParams<
   queryFn: QueryFn;
   initialData?: Data | null;
   errorMessage?: string | null;
-  onSuccess?: () => void;
-  onError?: () => void;
+  onSuccess?: OnResultCallback<Data>;
+  onError?: OnResultCallback<unknown>;
 };
 
 export class Query<
@@ -19,8 +17,8 @@ export class Query<
   Data extends RequestData<QueryFn>,
 > {
   private queryFn: QueryFn;
-  private onSuccess?: OnResultCallback;
-  private onError?: OnResultCallback;
+  private onSuccess?: OnResultCallback<Data>;
+  private onError?: OnResultCallback<unknown>;
   private errorMessage: string | null;
   private status: 'idle' | 'loading' = 'idle';
 
@@ -63,20 +61,22 @@ export class Query<
     this.error = null;
     this.status = 'loading';
 
-    try {
-      const data = await this.queryFn(...args);
-
-      runInAction(() => {
-        this.status = 'idle';
-        this.data = data;
-        this.onSuccess?.();
-      });
-    } catch {
-      runInAction(() => {
-        this.status = 'idle';
-        this.error = this.errorMessage;
-        this.onError?.();
-      });
-    }
+    return this.queryFn(...args)
+      .then((data) => {
+        runInAction(() => {
+          this.status = 'idle';
+          this.data = data;
+          this.onSuccess?.(data);
+        });
+        return data;
+      })
+      .catch((error) => {
+        runInAction(() => {
+          this.status = 'idle';
+          this.error = this.errorMessage;
+          this.onError?.(error);
+        });
+        return error;
+      }) as ReturnType<QueryFn>;
   }
 }
