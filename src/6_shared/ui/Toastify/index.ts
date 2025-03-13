@@ -5,3 +5,4 @@ export {
   toastifyReducer,
   toastifyActions,
 } from './model/slice/toastifySlice';
+export { ToastifyStore, toastifyStore } from './model/store/tostifyStore';

@@ -15,8 +15,6 @@ export class Mutation<
   private mutationFn: MutationFn;
   private onSuccess?: OnResultCallback<Data>;
   private onError?: OnResultCallback<unknown>;
-  private onSuccessLocal?: OnResultCallback<Data>;
-  private onErrorLocal?: OnResultCallback<unknown>;
   private errorMessage: string | null;
   private status: 'idle' | 'loading' = 'idle';
 
@@ -44,50 +42,11 @@ export class Mutation<
     this.onError = onError;
   }
 
-  mutate(...args: Parameters<MutationFn>) {
-    this.error = null;
-    this.status = 'loading';
-
-    this.mutationFn(...args)
-      .then((data) => {
-        runInAction(() => {
-          this.status = 'idle';
-          this.onSuccess?.(data);
-          this.onSuccessLocal?.(data);
-        });
-      })
-      .catch((error) => {
-        runInAction(() => {
-          this.status = 'idle';
-          this.error = this.errorMessage;
-          this.onError?.(error);
-          this.onErrorLocal?.(error);
-        });
-      });
-
-    return {
-      onSuccess: (callback: OnResultCallback<Data>) => {
-        this.onSuccessLocal = callback;
-
-        return {
-          onError: (callback: OnResultCallback<unknown>) => {
-            this.onErrorLocal = callback;
-          },
-        };
-      },
-      onError: (callback: OnResultCallback<unknown>) => {
-        this.onErrorLocal = callback;
-
-        return {
-          onSuccess: (callback: OnResultCallback<Data>) => {
-            this.onSuccessLocal = callback;
-          },
-        };
-      },
-    };
+  setError(value: string) {
+    this.error = value;
   }
 
-  mutateAsync(...args: Parameters<MutationFn>) {
+  mutate(...args: Parameters<MutationFn>) {
     this.error = null;
     this.status = 'loading';
 

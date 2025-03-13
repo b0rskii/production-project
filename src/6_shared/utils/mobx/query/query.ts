@@ -53,11 +53,16 @@ export class Query<
     this.data = value;
   }
 
-  clearData() {
-    this.data = null;
+  setError(value: string) {
+    this.error = value;
   }
 
-  async fetch(...args: Parameters<QueryFn>) {
+  clearData() {
+    this.data = null;
+    this.error = null;
+  }
+
+  fetch(...args: Parameters<QueryFn>) {
     this.error = null;
     this.status = 'loading';
 

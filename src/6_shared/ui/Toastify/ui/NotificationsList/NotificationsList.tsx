@@ -1,6 +1,7 @@
-import { PropsWithChildren, memo } from 'react';
+import { PropsWithChildren } from 'react';
+import { observer } from 'mobx-react-lite';
 import { getClassNames } from '@/6_shared/utils/classNames';
-import { Notification, ToastifyItem } from '../Notification';
+import { Notification, Toast } from '../Notification';
 import style from './NotificationsList.module.scss';
 
 const DEFAULT_DURATION = 3000;
@@ -8,11 +9,11 @@ const DEFAULT_DURATION = 3000;
 type NotificationsListProps = PropsWithChildren<{
   className?: string;
   duration?: number;
-  notifications: ToastifyItem[];
+  notifications: Toast[];
   onRemoveFirstNotification: () => void;
 }>;
 
-export const NotificationsList = memo((props: NotificationsListProps) => {
+export const NotificationsList = observer((props: NotificationsListProps) => {
   const {
     className,
     notifications,

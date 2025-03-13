@@ -1,5 +1,5 @@
-import { ToastifyItem } from '../../ui/Notification';
+import { Toast } from '../../ui/Notification';
 
 export type ToastifySchema = {
-  data: ToastifyItem[];
+  data: Toast[];
 };

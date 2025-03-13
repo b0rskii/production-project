@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkAPI } from '@/1_app/providers/StoreProvider';
 import { Profile, profileQuery } from '@/5_entities/Profile';
-import { toastifyActions } from '@/6_shared/ui/Toastify';
+import { toastifyStore } from '@/6_shared/ui/Toastify';
 import { ApiRoutes } from '@/6_shared/api';
 import { StatusMessage } from '@/6_shared/types/common';
 import { validateProfileData } from '../validateProfile/validateProfile';
@@ -17,7 +17,7 @@ export const updateProfileData = createAsyncThunk<
   }>
 >(
   `${SLICE_NAME}/updateProfileData`,
-  async (statusMessage, { rejectWithValue, getState, extra, dispatch }) => {
+  async (statusMessage, { rejectWithValue, getState, extra }) => {
     const { api } = extra;
     const { userId } = userStore;
     const profileForm = getState().editProfile?.profileForm;
@@ -41,11 +41,11 @@ export const updateProfileData = createAsyncThunk<
       }
 
       profileQuery.setData(data);
-      dispatch(toastifyActions.notify(statusMessage.success));
+      toastifyStore.notify(statusMessage.success);
 
       return data;
     } catch (error) {
-      dispatch(toastifyActions.notifyError(statusMessage.error));
+      toastifyStore.notifyError(statusMessage.error);
       return rejectWithValue({ validateError: null, serverError: 'error' });
     }
   },

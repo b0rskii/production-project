@@ -5,7 +5,7 @@ import {
   ArticleComment,
   articleCommentsActions,
 } from '@/5_entities/ArticleComment';
-import { toastifyActions } from '@/6_shared/ui/Toastify';
+import { toastifyActions, toastifyStore } from '@/6_shared/ui/Toastify';
 import { StatusMessage } from '@/6_shared/types/common';
 import { ApiRoutes } from '@/6_shared/api';
 import { SLICE_NAME } from '../../const';
@@ -50,7 +50,7 @@ export const sendArticleComment = createAsyncThunk<
       };
 
       dispatch(articleCommentsActions.addComment(addedComment));
-      dispatch(toastifyActions.notify(statusMessage.success));
+      toastifyStore.notify(statusMessage.success);
 
       return addedComment;
     } catch (error) {

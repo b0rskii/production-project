@@ -1,24 +1,19 @@
 import { useCallback } from 'react';
-import { useSelector } from 'react-redux';
-import { useAppDispatch } from '@/6_shared/utils/redux';
+import { observer } from 'mobx-react-lite';
 import { Timer } from '@/6_shared/const/timers';
-import { toastifySelectors } from '../../model/selectors';
 import { NotificationsList } from '../NotificationsList';
-import { toastifyActions } from '../../model/slice/toastifySlice';
+import { toastifyStore } from '../../model/store/tostifyStore';
 
-export const ToastifyContainer = () => {
-  const dispatch = useAppDispatch();
-  const notifications = useSelector(toastifySelectors.getToastify);
-
+export const ToastifyContainer = observer(() => {
   const onRemoveFirstNotification = useCallback(() => {
-    dispatch(toastifyActions.removeFirstNotification());
-  }, [dispatch]);
+    toastifyStore.removeFirstNotification();
+  }, []);
 
   return (
     <NotificationsList
       duration={Timer.NOTIFICATION}
-      notifications={notifications}
+      notifications={toastifyStore.toasts}
       onRemoveFirstNotification={onRemoveFirstNotification}
     />
   );
-};
+});

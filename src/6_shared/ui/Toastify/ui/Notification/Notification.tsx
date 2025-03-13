@@ -1,10 +1,11 @@
-import { PropsWithChildren, memo, useEffect } from 'react';
+import { PropsWithChildren, useEffect } from 'react';
+import { observer } from 'mobx-react-lite';
 import { getClassNames } from '@/6_shared/utils/classNames';
 import style from './Notification.module.scss';
 
 type NotificationType = 'success' | 'error';
 
-export type ToastifyItem = {
+export type Toast = {
   text: string;
   type: NotificationType;
 };
@@ -12,12 +13,13 @@ export type ToastifyItem = {
 type NotificationProps = PropsWithChildren<{
   className?: string;
   duration: number;
-  notification: ToastifyItem;
+  notification: Toast;
   onRemoveFirstNotification: () => void;
 }>;
 
-export const Notification = memo((props: NotificationProps) => {
-  const { className, notification, onRemoveFirstNotification, duration } = props;
+export const Notification = observer((props: NotificationProps) => {
+  const { className, notification, onRemoveFirstNotification, duration } =
+    props;
 
   useEffect(() => {
     setTimeout(() => {

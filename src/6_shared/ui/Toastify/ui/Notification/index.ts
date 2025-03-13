@@ -1,1 +1,1 @@
-export { Notification, type ToastifyItem } from './Notification';
+export { Notification, type Toast } from './Notification';
