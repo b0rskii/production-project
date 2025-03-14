@@ -3,3 +3,4 @@ export type RequestFn = (...args: any) => Promise<any>;
 // eslint-disable-next-line no-unused-vars
 export type OnResultCallback<Data> = (data: Data) => void;
 export type RequestData<T extends RequestFn> = Awaited<ReturnType<T>>;
+export type Status = 'idle' | 'loading' | 'success' | 'error';

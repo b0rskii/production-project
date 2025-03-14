@@ -1,5 +1,5 @@
 import { makeAutoObservable, runInAction } from 'mobx';
-import { OnResultCallback, RequestData, RequestFn } from './types';
+import { OnResultCallback, RequestData, RequestFn, Status } from './types';
 
 type QueryParams<
   QueryFn extends RequestFn,
@@ -20,7 +20,7 @@ export class Query<
   private onSuccess?: OnResultCallback<Data>;
   private onError?: OnResultCallback<unknown>;
   private errorMessage: string | null;
-  private status: 'idle' | 'loading' = 'idle';
+  private status: Status = 'idle';
 
   data: Data | null = null;
   error: string | null = null;
@@ -30,7 +30,7 @@ export class Query<
   }
 
   get isError() {
-    return Boolean(this.error);
+    return this.status === 'error';
   }
 
   constructor({
@@ -69,7 +69,7 @@ export class Query<
     return this.queryFn(...args)
       .then((data) => {
         runInAction(() => {
-          this.status = 'idle';
+          this.status = 'success';
           this.data = data;
           this.onSuccess?.(data);
         });
@@ -77,7 +77,7 @@ export class Query<
       })
       .catch((error) => {
         runInAction(() => {
-          this.status = 'idle';
+          this.status = 'error';
           this.error = this.errorMessage;
           this.onError?.(error);
         });

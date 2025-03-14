@@ -1,5 +1,5 @@
 import { makeAutoObservable, runInAction } from 'mobx';
-import { OnResultCallback, RequestData, RequestFn } from './types';
+import { OnResultCallback, RequestData, RequestFn, Status } from './types';
 
 type MutationParams<MutationFn extends RequestFn> = {
   mutationFn: MutationFn;
@@ -16,7 +16,7 @@ export class Mutation<
   private onSuccess?: OnResultCallback<Data>;
   private onError?: OnResultCallback<unknown>;
   private errorMessage: string | null;
-  private status: 'idle' | 'loading' = 'idle';
+  private status: Status = 'idle';
 
   error: string | null = null;
 
@@ -25,7 +25,7 @@ export class Mutation<
   }
 
   get isError() {
-    return Boolean(this.error);
+    return this.status === 'error';
   }
 
   constructor({
@@ -53,14 +53,14 @@ export class Mutation<
     return this.mutationFn(...args)
       .then((data) => {
         runInAction(() => {
-          this.status = 'idle';
+          this.status = 'success';
           this.onSuccess?.(data);
         });
         return data;
       })
       .catch((error) => {
         runInAction(() => {
-          this.status = 'idle';
+          this.status = 'error';
           this.error = this.errorMessage;
           this.onError?.(error);
         });
