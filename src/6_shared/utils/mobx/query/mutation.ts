@@ -20,8 +20,8 @@ export class Mutation<
 
   error: string | null = null;
 
-  get isLoading() {
-    return this.status === 'loading';
+  get isPending() {
+    return this.status === 'pending';
   }
 
   get isError() {
@@ -48,7 +48,7 @@ export class Mutation<
 
   mutate(...args: Parameters<MutationFn>) {
     this.error = null;
-    this.status = 'loading';
+    this.status = 'pending';
 
     return this.mutationFn(...args)
       .then((data) => {

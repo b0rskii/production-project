@@ -50,7 +50,7 @@ export const EditProfileButton = observer((props: EditProfileProps) => {
         className={getClassNames('', {}, [className])}
         theme={ButtonTheme.OUTLINE_RED}
         onClick={cancelButtonClickHandler}
-        disabled={profileMutation.isLoading}
+        disabled={profileMutation.isPending}
         data-testid="EditProfileButton.CancelEdit"
       >
         {t('Отменить редактирование')}
@@ -59,7 +59,7 @@ export const EditProfileButton = observer((props: EditProfileProps) => {
         className={getClassNames('', {}, [className])}
         theme={ButtonTheme.OUTLINE}
         onClick={saveButtonClickHandler}
-        disabled={profileMutation.isLoading}
+        disabled={profileMutation.isPending}
         data-testid="EditProfileButton.Save"
       >
         {t('Сохранить')}

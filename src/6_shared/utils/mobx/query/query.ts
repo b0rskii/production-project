@@ -26,7 +26,11 @@ export class Query<
   error: string | null = null;
 
   get isLoading() {
-    return this.status === 'loading';
+    return this.data === null && this.status === 'pending';
+  }
+
+  get isPending() {
+    return this.status === 'pending';
   }
 
   get isError() {
@@ -64,7 +68,7 @@ export class Query<
 
   fetch(...args: Parameters<QueryFn>) {
     this.error = null;
-    this.status = 'loading';
+    this.status = 'pending';
 
     return this.queryFn(...args)
       .then((data) => {

@@ -96,7 +96,7 @@ export const ProfileBlock = observer((props: ProfileBlockProps) => {
       {!isReadonly && (
         <EditProfileForm
           profile={profile}
-          isUpdating={profileMutation.isLoading}
+          isUpdating={profileMutation.isPending}
           validateErrors={validateErrors}
           handlers={profileHandlers}
         />
