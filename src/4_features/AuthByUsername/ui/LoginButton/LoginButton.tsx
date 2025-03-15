@@ -1,4 +1,4 @@
-import { memo, useCallback, useMemo, useState } from 'react';
+import { memo, useCallback, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -21,6 +21,8 @@ type LoginButtonProps = {
 
 export const LoginButton = memo((props: LoginButtonProps) => {
   const { className, theme = ButtonTheme.DEFAULT } = props;
+
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   const { t } = useTranslation([
     I18nNameSpace.Translation,
@@ -61,41 +63,40 @@ export const LoginButton = memo((props: LoginButtonProps) => {
     localStorage.removeItem(LocalStorageKey.USER);
   }, [dispatch]);
 
-  const menuItems = useMemo(() => [
-    ...(hasAccessToAdmin ? [
+  const menuItems = useMemo(
+    () => [
+      ...(hasAccessToAdmin
+        ? [
+            {
+              content: t('Админка', { ns: I18nNameSpace.AdminPanel }),
+              onClick: adminMenuItemClickHandler,
+            },
+          ]
+        : []),
       {
-        content: t('Админка', { ns: I18nNameSpace.AdminPanel }),
-        onClick: adminMenuItemClickHandler,
+        content: t('Профиль', { ns: I18nNameSpace.Profile }),
+        onClick: profileMenuItemClickHandler,
       },
-    ] : []),
-    {
-      content: t('Профиль', { ns: I18nNameSpace.Profile }),
-      onClick: profileMenuItemClickHandler,
-    },
-    {
-      content: t('Выйти'),
-      onClick: logoutMenuItemClickHandler,
-    },
-  ], [
-    t,
-    adminMenuItemClickHandler,
-    profileMenuItemClickHandler,
-    logoutMenuItemClickHandler,
-    hasAccessToAdmin,
-  ]);
+      {
+        content: t('Выйти'),
+        onClick: logoutMenuItemClickHandler,
+      },
+    ],
+    [
+      t,
+      adminMenuItemClickHandler,
+      profileMenuItemClickHandler,
+      logoutMenuItemClickHandler,
+      hasAccessToAdmin,
+    ],
+  );
 
   return (
     <>
       {userAuthData ? (
         <DropDown
           className={className}
-          button={(
-            <Avatar
-              src={userAuthData.avatar}
-              alt="avatar"
-              size={35}
-            />
-          )}
+          button={<Avatar src={userAuthData.avatar} alt="avatar" size={35} />}
           items={menuItems}
           direction="bottom-left"
         />
@@ -104,12 +105,13 @@ export const LoginButton = memo((props: LoginButtonProps) => {
           className={getClassNames('', {}, [className])}
           theme={theme}
           onClick={loginButtonClickHandler}
+          elRef={buttonRef}
         >
           {t('Войти')}
         </Button>
       )}
       {isAuthModalOpened && (
-        <LoginModal onClose={onCloseModal} />
+        <LoginModal anchorElRef={buttonRef} onClose={onCloseModal} />
       )}
     </>
   );

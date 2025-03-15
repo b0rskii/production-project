@@ -4,26 +4,29 @@ import { getClassNames } from '@/6_shared/utils/classNames/getClassNames';
 import { Key } from '@/6_shared/const/keys';
 import { Portal } from '@/6_shared/ui/Portal';
 import style from './FloatingModal.module.scss';
-import { useDraggable } from './useDraggable';
+import {
+  useDraggableModal,
+  UseDraggableModalParams,
+} from './useDraggableModal';
 
 const ANIMATION_MS = 100;
 
-type ModalProps = {
+export type FloatingModalProps = {
   className?: string;
   // eslint-disable-next-line no-unused-vars
   children: ReactNode | ((closeModal: () => void) => ReactNode);
   onClose?: () => void;
-};
+} & UseDraggableModalParams;
 
-export const FloatingModal = (props: ModalProps) => {
-  const { className, children, onClose } = props;
+export const FloatingModal = (props: FloatingModalProps) => {
+  const { className, children, anchorElRef, onClose } = props;
 
   const { isOpening, isClosing, closingTimeoutRef, closeHandler } = useModal({
     animationMs: ANIMATION_MS,
     onClose,
   });
 
-  const draggable = useDraggable();
+  const draggable = useDraggableModal({ anchorElRef });
 
   const escKeydownHandler = useCallback(
     (evt: KeyboardEvent) => {

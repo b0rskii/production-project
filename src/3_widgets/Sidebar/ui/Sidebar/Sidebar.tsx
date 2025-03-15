@@ -41,7 +41,7 @@ export const Sidebar = memo((props: SidebarProps) => {
       className={getClassNames(
         style.sidebar,
         { [style.collapsed]: collapsed },
-        [className]
+        [className],
       )}
       data-testid="sidebar"
     >
@@ -74,10 +74,7 @@ export const Sidebar = memo((props: SidebarProps) => {
       </nav>
 
       <div className={style.switchers}>
-        <ThemeSwitcher
-          theme={theme}
-          onToggleTheme={onToggleTheme}
-        />
+        <ThemeSwitcher theme={theme} onToggleTheme={onToggleTheme} />
         <LangSwitcher />
       </div>
     </section>

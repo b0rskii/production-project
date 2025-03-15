@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { ButtonHTMLAttributes, memo } from 'react';
+import { ButtonHTMLAttributes, memo, RefObject } from 'react';
 import { getClassNames } from '@/6_shared/utils/classNames';
 import style from './Button.module.scss';
 
@@ -20,6 +20,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   square?: boolean;
   hasHover?: boolean;
   size?: 'm' | 'l' | 'xl';
+  elRef?: RefObject<HTMLButtonElement>;
   'data-testid'?: string;
 }
 
@@ -32,6 +33,7 @@ export const Button = memo((props: ButtonProps) => {
     hasHover = true,
     size = 'm',
     type = 'button',
+    elRef,
     'data-testid': dataTestid = 'Button',
     ...otherProps
   } = props;
@@ -46,12 +48,13 @@ export const Button = memo((props: ButtonProps) => {
       {...otherProps}
       // eslint-disable-next-line react/button-has-type
       type={type}
-      className={getClassNames(
-        style.button,
-        modes,
-        [className, style[theme], style[`size_${size}`]],
-      )}
+      className={getClassNames(style.button, modes, [
+        className,
+        style[theme],
+        style[`size_${size}`],
+      ])}
       data-testid={dataTestid}
+      ref={elRef}
     >
       {children}
     </button>
