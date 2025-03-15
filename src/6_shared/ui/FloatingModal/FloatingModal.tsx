@@ -1,0 +1,68 @@
+import { ReactNode, useCallback, useEffect } from 'react';
+import { useModal } from '@/6_shared/utils/modal';
+import { getClassNames } from '@/6_shared/utils/classNames/getClassNames';
+import { Key } from '@/6_shared/const/keys';
+import { Portal } from '@/6_shared/ui/Portal';
+import style from './FloatingModal.module.scss';
+import { useDraggable } from './useDraggable';
+
+const ANIMATION_MS = 100;
+
+type ModalProps = {
+  className?: string;
+  // eslint-disable-next-line no-unused-vars
+  children: ReactNode | ((closeModal: () => void) => ReactNode);
+  onClose?: () => void;
+};
+
+export const FloatingModal = (props: ModalProps) => {
+  const { className, children, onClose } = props;
+
+  const { isOpening, isClosing, closingTimeoutRef, closeHandler } = useModal({
+    animationMs: ANIMATION_MS,
+    onClose,
+  });
+
+  const draggable = useDraggable();
+
+  const escKeydownHandler = useCallback(
+    (evt: KeyboardEvent) => {
+      if (evt.key === Key.ESCAPE) {
+        closeHandler();
+      }
+    },
+    [closeHandler],
+  );
+
+  useEffect(() => {
+    const closingTimeout = closingTimeoutRef.current;
+
+    document.addEventListener('keydown', escKeydownHandler);
+
+    return () => {
+      clearTimeout(closingTimeout);
+      document.removeEventListener('keydown', escKeydownHandler);
+    };
+  }, [escKeydownHandler, closingTimeoutRef]);
+
+  const modes = {
+    [style.opened]: !isOpening,
+    [style.closing]: isClosing,
+  };
+
+  return (
+    <Portal>
+      <div
+        className={getClassNames(style.root, modes, [className])}
+        {...draggable}
+      >
+        <div
+          className={style.content}
+          onMouseDown={(evt) => evt.stopPropagation()}
+        >
+          {typeof children === 'function' ? children(closeHandler) : children}
+        </div>
+      </div>
+    </Portal>
+  );
+};

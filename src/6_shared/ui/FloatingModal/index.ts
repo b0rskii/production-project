@@ -1,0 +1,1 @@
+export { FloatingModal } from './FloatingModal';

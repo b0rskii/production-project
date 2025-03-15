@@ -44,7 +44,14 @@ export const Navbar = memo((props: NavbarProps) => {
 
       <Stack gap="l">
         {userData && <NotificationsButton />}
-        <LoginButton className={style.loginButton} theme={ButtonTheme.OUTLINE_INVERTED} />
+        <LoginButton
+          className={style.loginButton}
+          theme={ButtonTheme.OUTLINE_INVERTED}
+        />
+        <LoginButton
+          className={style.loginButton}
+          theme={ButtonTheme.OUTLINE_INVERTED}
+        />
       </Stack>
     </header>
   );
