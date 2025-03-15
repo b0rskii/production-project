@@ -4,8 +4,10 @@ import { OnResultCallback, RequestData, RequestFn, Status } from './types';
 type MutationParams<MutationFn extends RequestFn> = {
   mutationFn: MutationFn;
   errorMessage?: string | null;
-  onSuccess?: OnResultCallback<RequestData<MutationFn>>;
-  onError?: OnResultCallback<unknown>;
+  // eslint-disable-next-line no-unused-vars
+  onSuccess?: (data: RequestData<MutationFn>) => void;
+  // eslint-disable-next-line no-unused-vars
+  onError?: (error: unknown) => void;
 };
 
 export class Mutation<

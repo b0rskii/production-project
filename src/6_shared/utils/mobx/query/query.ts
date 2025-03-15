@@ -8,8 +8,10 @@ type QueryParams<
   queryFn: QueryFn;
   initialData?: Data | null;
   errorMessage?: string | null;
-  onSuccess?: OnResultCallback<Data>;
-  onError?: OnResultCallback<unknown>;
+  // eslint-disable-next-line no-unused-vars
+  onSuccess?: (data: Data) => void;
+  // eslint-disable-next-line no-unused-vars
+  onError?: (error: unknown) => void;
 };
 
 export class Query<
