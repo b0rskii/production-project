@@ -2,6 +2,7 @@ import {
   MouseEvent,
   RefObject,
   useCallback,
+  useEffect,
   useLayoutEffect,
   useRef,
 } from 'react';
@@ -51,7 +52,8 @@ export const useDraggableModal = (params: UseDraggableModalParams) => {
       draggableEl.style.top = `${getLimitedValue(0, top, maxTop)}px`;
       draggableEl.style.left = `${getLimitedValue(0, left, maxLeft)}px`;
     },
-    [modalRef],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [],
   );
 
   const handleMouseUp = () => {
@@ -120,7 +122,30 @@ export const useDraggableModal = (params: UseDraggableModalParams) => {
 
     draggableEl.style.top = `${window.innerHeight / 2 - draggableEl.clientHeight / 2}px`;
     draggableEl.style.left = `${window.innerWidth / 2 - draggableEl.clientWidth / 2}px`;
-  }, [modalRef, anchorRef, positionX, positionY, offset]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const draggableEl = modalRef.current;
+      if (!draggableEl) return;
+
+      const { top, left } = draggableEl.getBoundingClientRect();
+
+      const maxTop = window.innerHeight - draggableEl.clientHeight - 2;
+      const maxLeft = window.innerWidth - draggableEl.clientWidth - 2;
+
+      draggableEl.style.top = `${getLimitedValue(0, top, maxTop)}px`;
+      draggableEl.style.left = `${getLimitedValue(0, left, maxLeft)}px`;
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return {
     [DRAGGABLE_DATA_ATTR]: '',

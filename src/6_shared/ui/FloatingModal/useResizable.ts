@@ -37,7 +37,8 @@ export const useResizable = (params: UseResizableParams) => {
       targetEl.style.width = `${getLimitedValue(minWidth, width, maxWidth)}px`;
       targetEl.style.height = `${getLimitedValue(minHeight, height, maxHeight)}px`;
     },
-    [targetRef, resizeControlRef, minWidth, minHeight],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [],
   );
 
   const handleMouseUp = () => {
