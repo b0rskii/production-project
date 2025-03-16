@@ -45,8 +45,8 @@ export const useDraggableModal = (params: UseDraggableModalParams) => {
       const top = startElTopRef.current + dragY;
       const left = startElLeftRef.current + dragX;
 
-      const maxTop = window.innerHeight - draggableEl.clientHeight;
-      const maxLeft = window.innerWidth - draggableEl.clientWidth;
+      const maxTop = window.innerHeight - draggableEl.clientHeight - 2;
+      const maxLeft = window.innerWidth - draggableEl.clientWidth - 2;
 
       draggableEl.style.top = `${getLimitedValue(0, top, maxTop)}px`;
       draggableEl.style.left = `${getLimitedValue(0, left, maxLeft)}px`;

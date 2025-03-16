@@ -8,6 +8,7 @@ import {
   useDraggableModal,
   UseDraggableModalParams,
 } from './useDraggableModal';
+import { useResizable } from './useResizable';
 
 const ANIMATION_MS = 100;
 
@@ -21,16 +22,24 @@ export type FloatingModalProps = {
 export const FloatingModal = (props: FloatingModalProps) => {
   const { className, children, onClose, ...draggableParams } = props;
 
-  const modalRef = useRef<HTMLDivElement>(null);
-
   const { isOpening, isClosing, closingTimeoutRef, closeHandler } = useModal({
     animationMs: ANIMATION_MS,
     onClose,
   });
 
+  const modalRef = useRef<HTMLDivElement>(null);
+  const resizeControlRef = useRef<HTMLDivElement>(null);
+
   const draggable = useDraggableModal({
     modalRef,
     ...draggableParams,
+  });
+
+  const { resizable, resizeControl } = useResizable({
+    targetRef: modalRef,
+    resizeControlRef,
+    minWidth: 342,
+    minHeight: 209,
   });
 
   const escKeydownHandler = useCallback(
@@ -64,6 +73,7 @@ export const FloatingModal = (props: FloatingModalProps) => {
         className={getClassNames(style.root, modes, [className])}
         ref={modalRef}
         {...draggable}
+        {...resizable}
       >
         <div
           className={style.content}
@@ -71,6 +81,11 @@ export const FloatingModal = (props: FloatingModalProps) => {
         >
           {typeof children === 'function' ? children(closeHandler) : children}
         </div>
+        <div
+          className={style.resizeControl}
+          ref={resizeControlRef}
+          {...resizeControl}
+        />
       </div>
     </Portal>
   );
