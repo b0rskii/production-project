@@ -13,6 +13,7 @@ import { Button, ButtonTheme } from '@/6_shared/ui/Button';
 import { getLinkItems } from '../../model/linkItems';
 import { LinkItem } from '../LinkItem/LinkItem';
 import style from './Sidebar.module.scss';
+import { LoginButton } from '@/4_features/AuthByUsername';
 
 type SidebarProps = {
   className?: string;
@@ -76,6 +77,7 @@ export const Sidebar = memo((props: SidebarProps) => {
       <div className={style.switchers}>
         <ThemeSwitcher theme={theme} onToggleTheme={onToggleTheme} />
         <LangSwitcher />
+        <LoginButton />
       </div>
     </section>
   );

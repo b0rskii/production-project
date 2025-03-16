@@ -1,53 +1,24 @@
-import {
-  MouseEvent,
-  RefObject,
-  useCallback,
-  useLayoutEffect,
-  useRef,
-} from 'react';
+import { MouseEvent, RefObject, useCallback, useEffect, useRef } from 'react';
 import { getLimitedValue } from '@/6_shared/utils/numbers';
+import { getAdjustedInitialCoords } from '@/6_shared/utils/elementsPositioning';
+import { PositionX, PositionY } from '@/6_shared/types/common';
 
 const DRAGGABLE_DATA_ATTR = 'data-draggable-modal';
 const DEFAULT_OFFSET = 16;
 
-// eslint-disable-next-line no-unused-vars
-type СalcInitialCoords = (params: {
-  anchorEl: HTMLElement;
-  targetEl: HTMLElement;
-  offset: number;
-}) => { top: number; left: number };
-
-const calcInitialCoords: СalcInitialCoords = (params) => {
-  const { anchorEl, targetEl, offset } = params;
-
-  const { bottom, left } = anchorEl.getBoundingClientRect();
-
-  let resultTop = bottom + offset;
-  let resultLeft = left - targetEl.clientWidth - offset;
-
-  if (resultTop + targetEl.clientHeight > window.innerHeight) {
-    resultTop = bottom - anchorEl.clientHeight - targetEl.clientHeight - offset;
-  }
-
-  if (resultLeft < 0) {
-    resultLeft = left + anchorEl.clientWidth + offset;
-  }
-
-  return {
-    top: resultTop,
-    left: resultLeft,
-  };
-};
-
 export type UseDraggableModalParams = {
   anchorElRef?: RefObject<HTMLElement>;
+  positionX?: PositionX;
+  positionY?: PositionY;
   offset?: number;
 };
 
-export const useDraggableModal = (params: UseDraggableModalParams) => {
-  const { anchorElRef, offset = DEFAULT_OFFSET } = params;
+export const useDraggableModal = <Element extends HTMLElement>(
+  params: UseDraggableModalParams,
+) => {
+  const { anchorElRef, positionX, positionY, offset = DEFAULT_OFFSET } = params;
 
-  const draggableElRef = useRef<HTMLDivElement>(null);
+  const draggableElRef = useRef<Element>(null);
   const startXRef = useRef(0);
   const startYRef = useRef(0);
   const startElTopRef = useRef(0);
@@ -112,7 +83,7 @@ export const useDraggableModal = (params: UseDraggableModalParams) => {
     startElLeftRef.current = left;
   };
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const draggableEl = draggableElRef.current;
     if (!draggableEl) return;
 
@@ -122,26 +93,25 @@ export const useDraggableModal = (params: UseDraggableModalParams) => {
     const anchorEl = anchorElRef?.current;
 
     if (anchorEl) {
-      const { top, left } = calcInitialCoords({
+      const { top, left } = getAdjustedInitialCoords({
         anchorEl,
         targetEl: draggableEl,
+        positionX,
+        positionY,
         offset,
       });
-
       draggableEl.style.top = `${top}px`;
       draggableEl.style.left = `${left}px`;
-
       return;
     }
 
     draggableEl.style.top = `${window.innerHeight / 2 - draggableEl.clientHeight / 2}px`;
     draggableEl.style.left = `${window.innerWidth / 2 - draggableEl.clientWidth / 2}px`;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [anchorElRef, positionX, positionY, offset]);
 
   return {
     ref: draggableElRef,
-    [DRAGGABLE_DATA_ATTR]: true,
+    [DRAGGABLE_DATA_ATTR]: '',
     onMouseDown: handleMouseDown,
   };
 };

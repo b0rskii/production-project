@@ -4,17 +4,17 @@
   border: 1px solid var(--primary-color);
   color: var(--primary-color);
   border-radius: 12px;
-  transition: 0.1s transform;
-  transform: scale(0.1);
+  transition: 0.2s opacity;
+  opacity: 0;
   max-width: 60%;
 }
 
 .root.opened {
-  transform: scale(1);
+  opacity: 1;
 }
 
 .root.closing {
-  transform: scale(0.1);
+  opacity: 0;
 }
 
 .content {

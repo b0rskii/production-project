@@ -19,14 +19,16 @@ export type FloatingModalProps = {
 } & UseDraggableModalParams;
 
 export const FloatingModal = (props: FloatingModalProps) => {
-  const { className, children, anchorElRef, onClose } = props;
+  const { className, children, onClose, ...draggableParams } = props;
 
   const { isOpening, isClosing, closingTimeoutRef, closeHandler } = useModal({
     animationMs: ANIMATION_MS,
     onClose,
   });
 
-  const draggable = useDraggableModal({ anchorElRef });
+  const draggable = useDraggableModal<HTMLDivElement>({
+    ...draggableParams,
+  });
 
   const escKeydownHandler = useCallback(
     (evt: KeyboardEvent) => {

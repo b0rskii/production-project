@@ -1,0 +1,1 @@
+export { getAdjustedInitialCoords } from './getAdjustedInitialCoords';
