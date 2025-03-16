@@ -1,4 +1,10 @@
-import { MouseEvent, RefObject, useCallback, useEffect, useRef } from 'react';
+import {
+  MouseEvent,
+  RefObject,
+  useCallback,
+  useLayoutEffect,
+  useRef,
+} from 'react';
 import { getLimitedValue } from '@/6_shared/utils/numbers';
 import { getAdjustedInitialCoords } from '@/6_shared/utils/elementsPositioning';
 import { PositionX, PositionY } from '@/6_shared/types/common';
@@ -7,51 +13,58 @@ const DRAGGABLE_DATA_ATTR = 'data-draggable-modal';
 const DEFAULT_OFFSET = 16;
 
 export type UseDraggableModalParams = {
-  anchorElRef?: RefObject<HTMLElement>;
+  modalRef: RefObject<HTMLElement>;
+  anchorRef?: RefObject<HTMLElement>;
   positionX?: PositionX;
   positionY?: PositionY;
   offset?: number;
 };
 
-export const useDraggableModal = <Element extends HTMLElement>(
-  params: UseDraggableModalParams,
-) => {
-  const { anchorElRef, positionX, positionY, offset = DEFAULT_OFFSET } = params;
+export const useDraggableModal = (params: UseDraggableModalParams) => {
+  const {
+    modalRef,
+    anchorRef,
+    positionX,
+    positionY,
+    offset = DEFAULT_OFFSET,
+  } = params;
 
-  const draggableElRef = useRef<Element>(null);
   const startXRef = useRef(0);
   const startYRef = useRef(0);
   const startElTopRef = useRef(0);
   const startElLeftRef = useRef(0);
 
-  const handleMouseMove = useCallback((evt: globalThis.MouseEvent) => {
-    const draggableEl = draggableElRef.current;
-    if (!draggableEl) return;
+  const handleMouseMove = useCallback(
+    (evt: globalThis.MouseEvent) => {
+      const draggableEl = modalRef.current;
+      if (!draggableEl) return;
 
-    const dragX = evt.clientX - startXRef.current;
-    const dragY = evt.clientY - startYRef.current;
+      const dragX = evt.clientX - startXRef.current;
+      const dragY = evt.clientY - startYRef.current;
 
-    const top = startElTopRef.current + dragY;
-    const left = startElLeftRef.current + dragX;
+      const top = startElTopRef.current + dragY;
+      const left = startElLeftRef.current + dragX;
 
-    const maxTop = window.innerHeight - draggableEl.clientHeight;
-    const maxLeft = window.innerWidth - draggableEl.clientWidth;
+      const maxTop = window.innerHeight - draggableEl.clientHeight;
+      const maxLeft = window.innerWidth - draggableEl.clientWidth;
 
-    draggableEl.style.top = `${getLimitedValue(0, top, maxTop)}px`;
-    draggableEl.style.left = `${getLimitedValue(0, left, maxLeft)}px`;
-  }, []);
+      draggableEl.style.top = `${getLimitedValue(0, top, maxTop)}px`;
+      draggableEl.style.left = `${getLimitedValue(0, left, maxLeft)}px`;
+    },
+    [modalRef],
+  );
 
   const handleMouseUp = () => {
     document.removeEventListener('mousemove', handleMouseMove);
 
-    const draggableEl = draggableElRef.current;
+    const draggableEl = modalRef.current;
     if (!draggableEl) return;
 
     draggableEl.style.cursor = 'grab';
   };
 
   const handleMouseDown = (evt: MouseEvent<HTMLDivElement>) => {
-    const draggableEl = draggableElRef.current;
+    const draggableEl = modalRef.current;
     if (!draggableEl) return;
 
     evt.preventDefault();
@@ -83,14 +96,14 @@ export const useDraggableModal = <Element extends HTMLElement>(
     startElLeftRef.current = left;
   };
 
-  useEffect(() => {
-    const draggableEl = draggableElRef.current;
+  useLayoutEffect(() => {
+    const draggableEl = modalRef.current;
     if (!draggableEl) return;
 
     draggableEl.style.position = 'fixed';
     draggableEl.style.cursor = 'grab';
 
-    const anchorEl = anchorElRef?.current;
+    const anchorEl = anchorRef?.current;
 
     if (anchorEl) {
       const { top, left } = getAdjustedInitialCoords({
@@ -107,10 +120,9 @@ export const useDraggableModal = <Element extends HTMLElement>(
 
     draggableEl.style.top = `${window.innerHeight / 2 - draggableEl.clientHeight / 2}px`;
     draggableEl.style.left = `${window.innerWidth / 2 - draggableEl.clientWidth / 2}px`;
-  }, [anchorElRef, positionX, positionY, offset]);
+  }, [modalRef, anchorRef, positionX, positionY, offset]);
 
   return {
-    ref: draggableElRef,
     [DRAGGABLE_DATA_ATTR]: '',
     onMouseDown: handleMouseDown,
   };

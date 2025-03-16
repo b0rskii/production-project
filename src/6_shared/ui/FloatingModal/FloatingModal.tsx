@@ -1,4 +1,4 @@
-import { ReactNode, useCallback, useEffect } from 'react';
+import { ReactNode, useCallback, useEffect, useRef } from 'react';
 import { useModal } from '@/6_shared/utils/modal';
 import { getClassNames } from '@/6_shared/utils/classNames/getClassNames';
 import { Key } from '@/6_shared/const/keys';
@@ -16,17 +16,20 @@ export type FloatingModalProps = {
   // eslint-disable-next-line no-unused-vars
   children: ReactNode | ((closeModal: () => void) => ReactNode);
   onClose?: () => void;
-} & UseDraggableModalParams;
+} & Omit<UseDraggableModalParams, 'modalRef'>;
 
 export const FloatingModal = (props: FloatingModalProps) => {
   const { className, children, onClose, ...draggableParams } = props;
+
+  const modalRef = useRef<HTMLDivElement>(null);
 
   const { isOpening, isClosing, closingTimeoutRef, closeHandler } = useModal({
     animationMs: ANIMATION_MS,
     onClose,
   });
 
-  const draggable = useDraggableModal<HTMLDivElement>({
+  const draggable = useDraggableModal({
+    modalRef,
     ...draggableParams,
   });
 
@@ -59,6 +62,7 @@ export const FloatingModal = (props: FloatingModalProps) => {
     <Portal>
       <div
         className={getClassNames(style.root, modes, [className])}
+        ref={modalRef}
         {...draggable}
       >
         <div
