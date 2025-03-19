@@ -11,12 +11,17 @@ type UseResizableParams = {
 export const useResizable = (params: UseResizableParams) => {
   const { targetRef, resizeControlRef, minWidth = 0, minHeight = 0 } = params;
 
+  // Координаты мыши на момент начала ресайза
   const startXRef = useRef(0);
   const startYRef = useRef(0);
-  const startTargetWidthRef = useRef(0);
-  const startTargetHeightRef = useRef(0);
+
+  // Координаты элемента на момент начала ресайза
   const startTargetTopRef = useRef(0);
   const startTargetLeftRef = useRef(0);
+
+  // Размеры элемента на момент начала ресайза
+  const startTargetWidthRef = useRef(0);
+  const startTargetHeightRef = useRef(0);
 
   const handleMouseMove = useCallback(
     (evt: globalThis.MouseEvent) => {
@@ -25,12 +30,15 @@ export const useResizable = (params: UseResizableParams) => {
 
       if (!targetEl || !controlEl) return;
 
+      // Длина перемещения курсора
       const moveX = evt.clientX - startXRef.current;
       const moveY = evt.clientY - startYRef.current;
 
+      // Новые размеры элемента с учетом длины перемещения курсора
       const width = startTargetWidthRef.current + moveX;
       const height = startTargetHeightRef.current + moveY;
 
+      // Верхние пределы размеров элемента для сохранения его расположения в границах окна браузера
       const maxWidth = window.innerWidth - startTargetLeftRef.current;
       const maxHeight = window.innerHeight - startTargetTopRef.current;
 
@@ -56,14 +64,18 @@ export const useResizable = (params: UseResizableParams) => {
     document.addEventListener('mouseup', handleMouseUp, { once: true });
     document.addEventListener('mousemove', handleMouseMove, { passive: true });
 
+    // Установка координат мыши на момент начала ресайза
     startXRef.current = evt.clientX;
     startYRef.current = evt.clientY;
-    startTargetWidthRef.current = targetEl.clientWidth;
-    startTargetHeightRef.current = targetEl.clientHeight;
 
+    // Установка координат элемента на момент начала ресайза
     const { top, left } = targetEl.getBoundingClientRect();
     startTargetTopRef.current = top;
     startTargetLeftRef.current = left;
+
+    // Установка размеров элемента на момент начала ресайза
+    startTargetWidthRef.current = targetEl.clientWidth;
+    startTargetHeightRef.current = targetEl.clientHeight;
   };
 
   return {

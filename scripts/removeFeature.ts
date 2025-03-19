@@ -14,7 +14,7 @@ if (!featureStatus) {
 
 if (featureStatus !== 'on' && featureStatus !== 'off') {
   throw new Error(
-    'Передан некорректный статус фичи, допустимые значения: "on" или "off"'
+    'Передан некорректный статус фичи, допустимые значения: "on" или "off"',
   );
 }
 
@@ -45,7 +45,7 @@ function replaceFunctionToggler(node: Node) {
     isFeatureToggler(node, FeatureTogglerName.FUNCTION)
   ) {
     const objectOptions = node.getFirstDescendantByKind(
-      SyntaxKind.ObjectLiteralExpression
+      SyntaxKind.ObjectLiteralExpression,
     );
 
     if (!objectOptions) return;
