@@ -56,8 +56,8 @@ export const useDraggableModal = (params: UseDraggableModalParams) => {
       const left = startModalLeftRef.current + dragX;
 
       // Верхние пределы координат модалки для сохранения ее расположения в границах окна браузера
-      const maxTop = window.innerHeight - modalHeightRef.current - 2;
-      const maxLeft = window.innerWidth - modalWidthRef.current - 2;
+      const maxTop = window.innerHeight - modalHeightRef.current;
+      const maxLeft = window.innerWidth - modalWidthRef.current;
 
       modal.style.top = `${getLimitedValue(0, top, maxTop)}px`;
       modal.style.left = `${getLimitedValue(0, left, maxLeft)}px`;
@@ -113,8 +113,8 @@ export const useDraggableModal = (params: UseDraggableModalParams) => {
     startModalLeftRef.current = left;
 
     // Установка размеров модалки на момент начала перемещения
-    modalWidthRef.current = modal.clientWidth;
-    modalHeightRef.current = modal.clientHeight;
+    modalWidthRef.current = modal.offsetWidth;
+    modalHeightRef.current = modal.offsetHeight;
   };
 
   // Определение координат модалки при ее появлении
@@ -124,6 +124,16 @@ export const useDraggableModal = (params: UseDraggableModalParams) => {
 
     modal.style.position = 'fixed';
     modal.style.cursor = 'grab';
+
+    const modalWidth = modal.offsetWidth;
+    const modalHeight = modal.offsetHeight;
+
+    // По умолчанию размещение модалки по центру экрана
+    const centerTop = window.innerHeight / 2 - modalHeight / 2;
+    const centerLeft = window.innerWidth / 2 - modalWidth / 2;
+
+    let initialTop = Math.max(centerTop, 0);
+    let initialLeft = Math.max(centerLeft, 0);
 
     const anchorEl = anchorRef?.current;
 
@@ -136,14 +146,19 @@ export const useDraggableModal = (params: UseDraggableModalParams) => {
         positionY,
         offset,
       });
-      modal.style.top = `${top}px`;
-      modal.style.left = `${left}px`;
-      return;
+      initialTop = Math.max(top, 0);
+      initialLeft = Math.max(left, 0);
     }
 
-    // По умолчанию размещение модалки по центру экрана
-    modal.style.top = `${window.innerHeight / 2 - modal.clientHeight / 2}px`;
-    modal.style.left = `${window.innerWidth / 2 - modal.clientWidth / 2}px`;
+    modal.style.top = `${initialTop}px`;
+    modal.style.left = `${initialLeft}px`;
+
+    // Верхние пределы размеров модалки для сохранения ее расположения в границах окна браузера
+    const maxWidth = window.innerWidth - initialLeft;
+    const maxHeight = window.innerHeight - initialTop;
+
+    modal.style.width = `${Math.min(modalWidth, maxWidth)}px`;
+    modal.style.height = `${Math.min(modalHeight, maxHeight)}px`;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -156,8 +171,8 @@ export const useDraggableModal = (params: UseDraggableModalParams) => {
       const { top, left } = modal.getBoundingClientRect();
 
       // Верхние пределы координат модалки
-      const maxTop = window.innerHeight - modal.clientHeight - 2;
-      const maxLeft = window.innerWidth - modal.clientWidth - 2;
+      const maxTop = window.innerHeight - modal.offsetHeight;
+      const maxLeft = window.innerWidth - modal.offsetWidth;
 
       modal.style.top = `${getLimitedValue(0, top, maxTop)}px`;
       modal.style.left = `${getLimitedValue(0, left, maxLeft)}px`;

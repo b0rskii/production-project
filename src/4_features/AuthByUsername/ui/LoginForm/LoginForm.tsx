@@ -24,20 +24,23 @@ const LoginForm = (props: LoginFormProps) => {
 
   useAsyncReducer(SLICE_NAME, loginReducer);
 
-  const {
-    username,
-    password,
-    isLoading,
-    error,
-  } = useSelector(loginSelectors.getLoginState);
+  const { username, password, isLoading, error } = useSelector(
+    loginSelectors.getLoginState,
+  );
 
-  const usernameChangeHandler = useCallback((value: string) => {
-    dispatch(loginActions.setUsername(value));
-  }, [dispatch]);
+  const usernameChangeHandler = useCallback(
+    (value: string) => {
+      dispatch(loginActions.setUsername(value));
+    },
+    [dispatch],
+  );
 
-  const passwordChangeHandler = useCallback((value: string) => {
-    dispatch(loginActions.setPassword(value));
-  }, [dispatch]);
+  const passwordChangeHandler = useCallback(
+    (value: string) => {
+      dispatch(loginActions.setPassword(value));
+    },
+    [dispatch],
+  );
 
   const formSubmitHandler = async (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
@@ -55,7 +58,9 @@ const LoginForm = (props: LoginFormProps) => {
       onSubmit={formSubmitHandler}
     >
       <Text title={t('Форма авторизации')} />
-      {error && <Text text={t('Неверный логин или пароль')} theme={TextTheme.ERROR} />}
+      {error && (
+        <Text text={t('Неверный логин или пароль')} theme={TextTheme.ERROR} />
+      )}
       <Input
         className={style.input}
         type="text"

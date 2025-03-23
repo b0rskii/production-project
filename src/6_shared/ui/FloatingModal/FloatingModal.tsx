@@ -8,7 +8,7 @@ import {
   useDraggableModal,
   UseDraggableModalParams,
 } from './useDraggableModal';
-import { useResizable } from './useResizable';
+import { useResizable, UseResizableParams } from './useResizable';
 
 const ANIMATION_MS = 100;
 
@@ -17,10 +17,18 @@ export type FloatingModalProps = {
   // eslint-disable-next-line no-unused-vars
   children: ReactNode | ((closeModal: () => void) => ReactNode);
   onClose?: () => void;
-} & Omit<UseDraggableModalParams, 'modalRef'>;
+} & Omit<UseDraggableModalParams, 'modalRef'> &
+  Omit<UseResizableParams, 'targetRef' | 'resizeControlRef'>;
 
 export const FloatingModal = (props: FloatingModalProps) => {
-  const { className, children, onClose, ...draggableParams } = props;
+  const {
+    className,
+    children,
+    onClose,
+    minWidth,
+    minHeight,
+    ...draggableParams
+  } = props;
 
   const { isOpening, isClosing, closingTimeoutRef, closeHandler } = useModal({
     animationMs: ANIMATION_MS,
@@ -38,8 +46,8 @@ export const FloatingModal = (props: FloatingModalProps) => {
   const { resizable, resizeControl } = useResizable({
     targetRef: modalRef,
     resizeControlRef,
-    minWidth: 342,
-    minHeight: 209,
+    minWidth,
+    minHeight,
   });
 
   const escKeydownHandler = useCallback(

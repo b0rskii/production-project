@@ -1,15 +1,19 @@
 import { MouseEvent, RefObject, useCallback, useRef } from 'react';
-import { getLimitedValue } from '@/6_shared/utils/numbers';
 
-type UseResizableParams = {
+export type UseResizableParams = {
   targetRef: RefObject<HTMLElement>;
   resizeControlRef: RefObject<HTMLElement>;
-  minWidth?: number;
-  minHeight?: number;
+  minWidth?: string;
+  minHeight?: string;
 };
 
 export const useResizable = (params: UseResizableParams) => {
-  const { targetRef, resizeControlRef, minWidth = 0, minHeight = 0 } = params;
+  const {
+    targetRef,
+    resizeControlRef,
+    minWidth = '0px',
+    minHeight = '0px',
+  } = params;
 
   // Координаты мыши на момент начала ресайза
   const startXRef = useRef(0);
@@ -42,8 +46,8 @@ export const useResizable = (params: UseResizableParams) => {
       const maxWidth = window.innerWidth - startTargetLeftRef.current;
       const maxHeight = window.innerHeight - startTargetTopRef.current;
 
-      targetEl.style.width = `${getLimitedValue(minWidth, width, maxWidth)}px`;
-      targetEl.style.height = `${getLimitedValue(minHeight, height, maxHeight)}px`;
+      targetEl.style.width = `${Math.min(width, maxWidth)}px`;
+      targetEl.style.height = `${Math.min(height, maxHeight)}px`;
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [],
@@ -74,15 +78,15 @@ export const useResizable = (params: UseResizableParams) => {
     startTargetLeftRef.current = left;
 
     // Установка размеров элемента на момент начала ресайза
-    startTargetWidthRef.current = targetEl.clientWidth;
-    startTargetHeightRef.current = targetEl.clientHeight;
+    startTargetWidthRef.current = targetEl.offsetWidth;
+    startTargetHeightRef.current = targetEl.offsetHeight;
   };
 
   return {
     resizable: {
       style: {
-        minWidth: `${minWidth}px`,
-        minHeight: `${minHeight}px`,
+        minWidth,
+        minHeight,
       },
     },
     resizeControl: {
