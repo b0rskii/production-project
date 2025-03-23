@@ -100,9 +100,7 @@ export const useDraggableModal = (params: UseDraggableModalParams) => {
         maxZIndex = Math.max(maxZIndex, Number(zIndex));
       });
 
-      if (Number(modal.style.zIndex) < maxZIndex) {
-        modal.style.zIndex = `${maxZIndex + 1}`;
-      }
+      modal.style.zIndex = `${maxZIndex + 1}`;
     }
 
     // Установка координат мыши на момент начала перемещения
