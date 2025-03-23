@@ -29,6 +29,7 @@ function MainPage() {
               from: { transform: 'translateX(-150%)', opacity: '0' },
               to: { transform: 'translateX(0)', opacity: '1' },
               time: 500,
+              transitions: ['transform 0.3s', 'opacity'],
             }}
             exit={{
               to: { transform: 'translateX(150%)', opacity: '0' },

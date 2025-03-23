@@ -1,19 +1,9 @@
-import { ReactElement, useLayoutEffect, useRef, useState } from 'react';
+/* eslint-disable consistent-return */
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useLayoutEffect, useMemo, useRef, useState } from 'react';
 
-type TransitionParams = {
-  from: Partial<CSSStyleDeclaration>;
-  to: Partial<CSSStyleDeclaration>;
-  time: number;
-};
-
-type TransitionComponentProps = {
-  isShow?: boolean;
-  intro?: TransitionParams;
-  exit?: Omit<TransitionParams, 'from'>;
-  children: ReactElement;
-  // eslint-disable-next-line no-unused-vars
-  setMounted: (value: boolean) => void;
-};
+import { TransitionComponentProps, TransitionProps } from './types';
+import { getTransitionStringFromParams, setStyles } from './utils';
 
 const TransitionComponent = (props: TransitionComponentProps) => {
   const { isShow, intro, exit, children, setMounted } = props;
@@ -23,43 +13,44 @@ const TransitionComponent = (props: TransitionComponentProps) => {
   const helperElementRef = useRef<HTMLDivElement>(null);
   const elementRef = useRef<HTMLElement | null>();
 
+  const introFromProperties = useMemo(
+    () => (intro ? Object.keys(intro.from) : []),
+    [],
+  );
+  const introToProperties = useMemo(
+    () => (intro ? Object.keys(intro.to) : []),
+    [],
+  );
+  const introTransition = useMemo(
+    () => getTransitionStringFromParams(intro),
+    [],
+  );
+
+  const exitToProperties = useMemo(
+    () => (exit ? Object.keys(exit.to) : []),
+    [],
+  );
+  const exitTransition = useMemo(() => getTransitionStringFromParams(exit), []);
+
   useLayoutEffect(() => {
-    if (isShow) {
+    if (isInitial) {
+      const helperElement = helperElementRef.current;
+      elementRef.current = helperElement?.nextSibling as HTMLElement | null;
       setIsInitial(false);
-
-      if (isInitial) {
-        const helperElement = helperElementRef.current;
-        elementRef.current = helperElement?.nextSibling as HTMLElement | null;
-      }
-
-      const element = elementRef.current;
-      if (!element) return;
-
-      if (intro) {
-        element.style.transition = '';
-
-        const transitions = Object.keys(intro.to);
-
-        transitions.forEach((property) => {
-          // @ts-ignore
-          element.style[property] = intro.from[property];
-        });
-
-        requestAnimationFrame(() => {
-          const transition = transitions
-            .map((tr) => `${tr} ${intro.time}ms`)
-            .join(', ');
-
-          element.style.transition = transition;
-
-          transitions.forEach((property) => {
-            // @ts-ignore
-            element.style[property] = intro.to[property];
-          });
-        });
-      }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+
+    if (!intro || !isShow) return;
+
+    const element = elementRef.current;
+    if (!element) return;
+
+    element.style.transition = '';
+    setStyles(element, introFromProperties, intro.from);
+
+    requestAnimationFrame(() => {
+      element.style.transition = introTransition;
+      setStyles(element, introToProperties, intro.to);
+    });
   }, [isShow]);
 
   useLayoutEffect(() => {
@@ -72,23 +63,12 @@ const TransitionComponent = (props: TransitionComponentProps) => {
       setMounted(false);
     }, exit.time);
 
-    const transitions = Object.keys(exit.to);
+    element.style.transition = exitTransition;
+    setStyles(element, exitToProperties, exit.to);
 
-    const transition = transitions
-      .map((tr) => `${tr} ${exit.time}ms`)
-      .join(', ');
-
-    element.style.transition = transition;
-
-    transitions.forEach((property) => {
-      // @ts-ignore
-      element.style[property] = exit.to[property];
-    });
-    // eslint-disable-next-line consistent-return
     return () => {
       clearTimeout(timeout);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isShow]);
 
   return (
@@ -98,8 +78,6 @@ const TransitionComponent = (props: TransitionComponentProps) => {
     </>
   );
 };
-
-type TransitionProps = Omit<TransitionComponentProps, 'setMounted'>;
 
 export const Transition = (props: TransitionProps) => {
   const { isShow = true, ...otherProps } = props;
