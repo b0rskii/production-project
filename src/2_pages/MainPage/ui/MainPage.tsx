@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Page } from '@/3_widgets/Page';
 import { I18nNameSpace } from '@/6_shared/utils/i18n/nameSpace';
 import { Transition } from '@/6_shared/utils/transition/Transition';
-import { Button } from '@/6_shared/ui/Button';
+import { Button, ButtonTheme } from '@/6_shared/ui/Button';
 
 function MainPage() {
   const { t } = useTranslation(I18nNameSpace.Main);
@@ -22,19 +22,15 @@ function MainPage() {
             width: 'fit-content',
           }}
         >
-          <Button onClick={() => setShow(!show)}>toggle</Button>
+          <Button theme={ButtonTheme.OUTLINE} onClick={() => setShow(!show)}>
+            toggle
+          </Button>
           <Transition
             isShow={show}
-            intro={{
-              from: { transform: 'translateX(-150%)', opacity: '0' },
-              to: { transform: 'translateX(0)', opacity: '1' },
-              time: 500,
-              transitions: ['transform 0.3s', 'opacity'],
-            }}
-            exit={{
-              to: { transform: 'translateX(150%)', opacity: '0' },
-              time: 500,
-            }}
+            enterFrom={{ transform: 'translateX(-150%)', opacity: '0' }}
+            enterTransition="all .5s"
+            leaveTo={{ transform: 'translateX(150%)', opacity: '0' }}
+            leaveTransition="all .5s"
           >
             <div>работает!</div>
           </Transition>
