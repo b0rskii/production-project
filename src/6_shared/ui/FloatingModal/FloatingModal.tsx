@@ -14,6 +14,10 @@ const ANIMATION_MS = 100;
 
 export type FloatingModalProps = {
   className?: string;
+  width?: string;
+  height?: string;
+  minWidth?: string;
+  minHeight?: string;
   // eslint-disable-next-line no-unused-vars
   children: ReactNode | ((closeModal: () => void) => ReactNode);
   onClose?: () => void;
@@ -25,8 +29,10 @@ export const FloatingModal = (props: FloatingModalProps) => {
     className,
     children,
     onClose,
-    minWidth,
-    minHeight,
+    width = '',
+    height = '',
+    minWidth = '300px',
+    minHeight = '300px',
     ...draggableParams
   } = props;
 
@@ -43,11 +49,9 @@ export const FloatingModal = (props: FloatingModalProps) => {
     ...draggableParams,
   });
 
-  const { resizable, resizeControl } = useResizable({
+  const resizeControl = useResizable({
     targetRef: modalRef,
     resizeControlRef,
-    minWidth,
-    minHeight,
   });
 
   const escKeydownHandler = useCallback(
@@ -78,10 +82,10 @@ export const FloatingModal = (props: FloatingModalProps) => {
   return (
     <Portal>
       <div
+        style={{ width, height, minWidth, minHeight }}
         className={getClassNames(style.root, modes, [className])}
         ref={modalRef}
         {...draggable}
-        {...resizable}
       >
         <div
           className={style.content}
