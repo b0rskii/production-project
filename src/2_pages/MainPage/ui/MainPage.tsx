@@ -28,11 +28,12 @@ function MainPage() {
           <Transition
             isShow={show}
             enterFrom={{ transform: 'translateX(-150%)', opacity: '0' }}
-            enterTransition="all .5s"
             leaveTo={{ transform: 'translateX(150%)', opacity: '0' }}
-            leaveTransition="all .5s"
+            transition="all .5s"
           >
-            <div>работает!</div>
+            <Button theme={ButtonTheme.OUTLINE} onClick={() => setShow(!show)}>
+              toggle
+            </Button>
           </Transition>
         </div>
       </div>

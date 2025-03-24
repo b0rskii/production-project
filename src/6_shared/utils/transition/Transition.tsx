@@ -13,6 +13,7 @@ const TransitionComponent = (props: TransitionComponentProps) => {
     enterTransition = '',
     leaveTo,
     leaveTransition = '',
+    transition = '',
     children,
     setMounted,
   } = props;
@@ -58,25 +59,35 @@ const TransitionComponent = (props: TransitionComponentProps) => {
     element.addEventListener('transitionend', resetTransition, { once: true });
 
     requestAnimationFrame(() => {
-      element.style.transition = enterTransition;
+      element.style.transition = enterTransition || transition;
       setStyles(element, enterToProperties, enterTo);
     });
   }, [isShow]);
 
   useLayoutEffect(() => {
-    if (!leaveTo || isShow) return;
+    if (isShow) return;
+
+    const unmount = () => setMounted(false);
+
+    if (!leaveTo) {
+      unmount();
+      return;
+    }
 
     const element = elementRef.current;
     if (!element) return;
 
-    const unmount = () => setMounted(false);
     element.addEventListener('transitionend', unmount, { once: true });
 
-    element.style.transition = leaveTransition;
+    element.style.transition = leaveTransition || transition;
     setStyles(element, leaveToProperties, leaveTo);
 
     return () => {
+      if (!leaveTo) return;
+
       element.removeEventListener('transitionend', unmount);
+      element.style.transition = '';
+      setStyles(element, leaveToProperties);
     };
   }, [isShow]);
 

@@ -7,6 +7,7 @@ export type TransitionComponentProps = {
   enterTransition?: string;
   leaveTo?: Partial<CSSStyleDeclaration>;
   leaveTransition?: string;
+  transition?: string;
   children: ReactElement;
   // eslint-disable-next-line no-unused-vars
   setMounted: (value: boolean) => void;
