@@ -31,8 +31,8 @@ export const FloatingModal = (props: FloatingModalProps) => {
     onClose,
     width = '',
     height = '',
-    minWidth = '300px',
-    minHeight = '300px',
+    minWidth = '',
+    minHeight = '',
     ...draggableParams
   } = props;
 
