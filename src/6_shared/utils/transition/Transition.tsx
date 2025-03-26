@@ -21,7 +21,7 @@ const TransitionComponent = (props: TransitionComponentProps) => {
   const [isInitial, setIsInitial] = useState(true);
 
   const helperElementRef = useRef<HTMLDivElement>(null);
-  const elementRef = useRef<HTMLElement | null>();
+  const elementRef = useRef<HTMLElement | null>(null);
 
   const enterFromProperties = useMemo(
     () => (enterFrom ? Object.keys(enterFrom) : []),
@@ -38,12 +38,13 @@ const TransitionComponent = (props: TransitionComponentProps) => {
   );
 
   useLayoutEffect(() => {
-    if (isInitial) {
-      const helperElement = helperElementRef.current;
-      elementRef.current = helperElement?.nextSibling as HTMLElement | null;
-      setIsInitial(false);
-    }
+    const helperElement = helperElementRef.current;
+    elementRef.current = helperElement?.nextSibling as HTMLElement | null;
+    setIsInitial(false);
+    setMounted(true);
+  }, []);
 
+  useLayoutEffect(() => {
     if (!enterFrom || !isShow) return;
 
     const element = elementRef.current;
@@ -103,11 +104,7 @@ export const Transition = (props: TransitionProps) => {
   const { isShow = true, ...otherProps } = props;
   const [mounted, setMounted] = useState(isShow);
 
-  useLayoutEffect(() => {
-    if (isShow) setMounted(true);
-  }, [isShow]);
-
-  if (!mounted) return null;
+  if (!isShow && !mounted) return null;
 
   return (
     <TransitionComponent
