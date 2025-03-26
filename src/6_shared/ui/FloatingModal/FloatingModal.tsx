@@ -1,4 +1,4 @@
-import { ReactNode, useCallback, useEffect, useRef } from 'react';
+import { ReactNode, useCallback, useEffect } from 'react';
 import { useModal } from '@/6_shared/utils/modal';
 import { getClassNames } from '@/6_shared/utils/classNames/getClassNames';
 import { Key } from '@/6_shared/const/keys';
@@ -8,7 +8,7 @@ import {
   useDraggableModal,
   UseDraggableModalParams,
 } from './useDraggableModal';
-import { useResizable, UseResizableParams } from './useResizable';
+import { useResizable } from './useResizable';
 
 const ANIMATION_MS = 100;
 
@@ -21,8 +21,7 @@ export type FloatingModalProps = {
   // eslint-disable-next-line no-unused-vars
   children: ReactNode | ((closeModal: () => void) => ReactNode);
   onClose?: () => void;
-} & Omit<UseDraggableModalParams, 'modalRef'> &
-  Omit<UseResizableParams, 'targetRef' | 'resizeControlRef'>;
+} & Omit<UseDraggableModalParams, 'modalRef'>;
 
 export const FloatingModal = (props: FloatingModalProps) => {
   const {
@@ -41,18 +40,8 @@ export const FloatingModal = (props: FloatingModalProps) => {
     onClose,
   });
 
-  const modalRef = useRef<HTMLDivElement>(null);
-  const resizeControlRef = useRef<HTMLDivElement>(null);
-
-  const draggable = useDraggableModal({
-    modalRef,
-    ...draggableParams,
-  });
-
-  const resizeControl = useResizable({
-    targetRef: modalRef,
-    resizeControlRef,
-  });
+  const draggable = useDraggableModal<HTMLDivElement>(draggableParams);
+  const { resizable, resizer } = useResizable<HTMLDivElement, HTMLDivElement>();
 
   const escKeydownHandler = useCallback(
     (evt: KeyboardEvent) => {
@@ -84,8 +73,11 @@ export const FloatingModal = (props: FloatingModalProps) => {
       <div
         style={{ width, height, minWidth, minHeight }}
         className={getClassNames(style.root, modes, [className])}
-        ref={modalRef}
-        {...draggable}
+        ref={(element) => {
+          draggable.ref.current = element;
+          resizable.ref.current = element;
+        }}
+        onMouseDown={draggable.onMouseDown}
       >
         <div
           className={style.content}
@@ -93,11 +85,7 @@ export const FloatingModal = (props: FloatingModalProps) => {
         >
           {typeof children === 'function' ? children(closeHandler) : children}
         </div>
-        <div
-          className={style.resizeControl}
-          ref={resizeControlRef}
-          {...resizeControl}
-        />
+        <div className={style.resizeControl} {...resizer} />
       </div>
     </Portal>
   );
