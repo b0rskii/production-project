@@ -3,6 +3,7 @@ import { useModal } from '@/6_shared/utils/modal';
 import { getClassNames } from '@/6_shared/utils/classNames/getClassNames';
 import { Key } from '@/6_shared/const/keys';
 import { Portal } from '@/6_shared/ui/Portal';
+import { useCallbackRef } from '@/6_shared/utils/useCallbackRef';
 import style from './FloatingModal.module.scss';
 import {
   useDraggableModal,
@@ -68,15 +69,14 @@ export const FloatingModal = (props: FloatingModalProps) => {
     [style.closing]: isClosing,
   };
 
+  const modalRefs = useCallbackRef(draggable.ref, resizable.ref);
+
   return (
     <Portal>
       <div
         style={{ width, height, minWidth, minHeight }}
         className={getClassNames(style.root, modes, [className])}
-        ref={(element) => {
-          draggable.ref.current = element;
-          resizable.ref.current = element;
-        }}
+        ref={modalRefs}
         onMouseDown={draggable.onMouseDown}
       >
         <div
