@@ -9,6 +9,7 @@ import {
 import { getLimitedValue } from '@/6_shared/utils/numbers';
 import { getAdjustedInitialCoords } from '@/6_shared/utils/elementsPositioning';
 import { PositionX, PositionY } from '@/6_shared/types/common';
+import { globalCursor } from '@/6_shared/utils/globalCursor';
 
 const DEFAULT_OFFSET = 16;
 
@@ -64,11 +65,7 @@ export const useDraggableModal = <Modal extends HTMLElement>(
 
   const handleMouseUp = () => {
     document.removeEventListener('mousemove', handleMouseMove);
-
-    const modal = modalRef.current;
-    if (!modal) return;
-
-    modal.style.cursor = 'grab';
+    globalCursor.reset();
   };
 
   const handleMouseDown = (evt: MouseEvent<HTMLDivElement>) => {
@@ -80,7 +77,7 @@ export const useDraggableModal = <Modal extends HTMLElement>(
     document.addEventListener('mouseup', handleMouseUp, { once: true });
     document.addEventListener('mousemove', handleMouseMove, { passive: true });
 
-    modal.style.cursor = 'grabbing';
+    globalCursor.set('grabbing');
 
     // Вывод текущей модалки на передний план относительно других открытых модалок
     modal.parentElement?.append(modal);
@@ -166,6 +163,7 @@ export const useDraggableModal = <Modal extends HTMLElement>(
 
     return () => {
       window.removeEventListener('resize', handleResize);
+      globalCursor.reset();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
