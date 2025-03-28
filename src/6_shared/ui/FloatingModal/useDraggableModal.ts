@@ -1,5 +1,5 @@
 import {
-  MouseEvent,
+  PointerEvent,
   RefObject,
   useCallback,
   useEffect,
@@ -39,8 +39,8 @@ export const useDraggableModal = <Modal extends HTMLElement>(
   const modalWidthRef = useRef(0);
   const modalHeightRef = useRef(0);
 
-  const handleMouseMove = useCallback(
-    (evt: globalThis.MouseEvent) => {
+  const handlePointerMove = useCallback(
+    (evt: globalThis.PointerEvent) => {
       const modal = modalRef.current;
       if (!modal) return;
 
@@ -63,21 +63,23 @@ export const useDraggableModal = <Modal extends HTMLElement>(
     [],
   );
 
-  const handleMouseUp = () => {
-    document.removeEventListener('mousemove', handleMouseMove);
+  const handlePointerUp = () => {
+    document.removeEventListener('pointermove', handlePointerMove);
     globalCursor.reset();
   };
 
-  const handleMouseDown = (evt: MouseEvent<HTMLDivElement>) => {
+  const handlePointerDown = (evt: PointerEvent<HTMLDivElement>) => {
     const modal = modalRef.current;
     if (!modal) return;
 
     evt.preventDefault();
     evt.stopPropagation();
-    document.addEventListener('mouseup', handleMouseUp, { once: true });
-    document.addEventListener('mousemove', handleMouseMove, { passive: true });
+    document.addEventListener('pointerup', handlePointerUp, { once: true });
+    document.addEventListener('pointermove', handlePointerMove);
 
-    globalCursor.set('grabbing');
+    if (evt.pointerType === 'mouse') {
+      globalCursor.set('grabbing');
+    }
 
     // Вывод текущей модалки на передний план относительно других открытых модалок
     modal.parentElement?.append(modal);
@@ -103,6 +105,7 @@ export const useDraggableModal = <Modal extends HTMLElement>(
 
     modal.style.position = 'fixed';
     modal.style.cursor = 'grab';
+    modal.style.touchAction = 'none';
 
     const modalWidth = modal.offsetWidth;
     const modalHeight = modal.offsetHeight;
@@ -170,6 +173,6 @@ export const useDraggableModal = <Modal extends HTMLElement>(
 
   return {
     ref: modalRef,
-    onMouseDown: handleMouseDown,
+    onPointerDown: handlePointerDown,
   };
 };

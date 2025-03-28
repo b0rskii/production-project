@@ -77,11 +77,11 @@ export const FloatingModal = (props: FloatingModalProps) => {
         style={{ width, height, minWidth, minHeight }}
         className={getClassNames(style.root, modes, [className])}
         ref={modalRefs}
-        onMouseDown={draggable.onMouseDown}
+        onPointerDown={draggable.onPointerDown}
       >
         <div
           className={style.content}
-          onMouseDown={(evt) => evt.stopPropagation()}
+          onPointerDown={(evt) => evt.stopPropagation()}
         >
           {typeof children === 'function' ? children(closeHandler) : children}
         </div>
