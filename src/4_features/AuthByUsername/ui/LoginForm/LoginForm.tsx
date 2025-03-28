@@ -57,6 +57,12 @@ const LoginForm = (props: LoginFormProps) => {
       className={getClassNames(style.loginForm, {}, [className])}
       onSubmit={formSubmitHandler}
     >
+      <embed
+        src="src/6_shared/assets/example.pdf"
+        type="application/pdf"
+        width={400}
+        height={600}
+      />
       <Text title={t('Форма авторизации')} />
       {error && (
         <Text text={t('Неверный логин или пароль')} theme={TextTheme.ERROR} />

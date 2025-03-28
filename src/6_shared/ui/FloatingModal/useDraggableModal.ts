@@ -10,6 +10,7 @@ import { getLimitedValue } from '@/6_shared/utils/numbers';
 import { getAdjustedInitialCoords } from '@/6_shared/utils/elementsPositioning';
 import { PositionX, PositionY } from '@/6_shared/types/common';
 import { globalCursor } from '@/6_shared/utils/globalCursor';
+import { externalContentElements } from '@/6_shared/utils/externalContentElements';
 
 const DEFAULT_OFFSET = 16;
 
@@ -65,6 +66,7 @@ export const useDraggableModal = <Modal extends HTMLElement>(
 
   const handlePointerUp = () => {
     document.removeEventListener('pointermove', handlePointerMove);
+    externalContentElements.reset();
     globalCursor.reset();
   };
 
@@ -77,9 +79,8 @@ export const useDraggableModal = <Modal extends HTMLElement>(
     document.addEventListener('pointerup', handlePointerUp, { once: true });
     document.addEventListener('pointermove', handlePointerMove);
 
-    if (evt.pointerType === 'mouse') {
-      globalCursor.set('grabbing');
-    }
+    if (evt.pointerType === 'mouse') globalCursor.set('grabbing');
+    externalContentElements.disable();
 
     // Вывод текущей модалки на передний план относительно других открытых модалок
     modal.parentElement?.append(modal);
@@ -166,6 +167,7 @@ export const useDraggableModal = <Modal extends HTMLElement>(
 
     return () => {
       window.removeEventListener('resize', handleResize);
+      externalContentElements.reset();
       globalCursor.reset();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
