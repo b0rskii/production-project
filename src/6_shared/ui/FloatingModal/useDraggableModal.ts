@@ -79,7 +79,10 @@ export const useDraggableModal = <Modal extends HTMLElement>(
     document.addEventListener('pointerup', handlePointerUp, { once: true });
     document.addEventListener('pointermove', handlePointerMove);
 
+    // Фиксирование вида курсора на время перемещения
     if (evt.pointerType === 'mouse') globalCursor.set('grabbing');
+
+    // Блокировка pointer событий на элементах, встраивающих внешний контент, на время перемещения
     externalContentElements.disable();
 
     // Вывод текущей модалки на передний план относительно других открытых модалок
