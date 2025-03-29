@@ -1,6 +1,5 @@
 import { PointerEvent, useCallback, useEffect, useRef } from 'react';
-import { externalContentElements } from '@/6_shared/utils/externalContentElements';
-import { globalCursor } from '@/6_shared/utils/globalCursor';
+import { globalStyles } from '@/6_shared/utils/globalStyles';
 
 export const useResizable = <
   Target extends HTMLElement,
@@ -49,8 +48,7 @@ export const useResizable = <
 
   const handlePointerUp = () => {
     document.removeEventListener('pointermove', handlePointerMove);
-    externalContentElements.reset();
-    globalCursor.reset();
+    globalStyles.reset();
   };
 
   const handlePointerDown = (evt: PointerEvent<HTMLDivElement>) => {
@@ -65,10 +63,11 @@ export const useResizable = <
     document.addEventListener('pointermove', handlePointerMove);
 
     // Фиксирование вида курсора на время ресайза
-    if (evt.pointerType === 'mouse') globalCursor.set('nw-resize');
-
+    if (evt.pointerType === 'mouse') {
+      globalStyles.setCursor('nw-resize');
+    }
     // Блокировка pointer событий на элементах, встраивающих внешний контент, на время ресайза
-    externalContentElements.disable();
+    globalStyles.disableExternalContentElements();
 
     // Установка координат мыши на момент начала ресайза
     startXRef.current = evt.clientX;
@@ -86,8 +85,7 @@ export const useResizable = <
 
   useEffect(() => {
     return () => {
-      externalContentElements.reset();
-      globalCursor.reset();
+      globalStyles.reset();
     };
   }, []);
 

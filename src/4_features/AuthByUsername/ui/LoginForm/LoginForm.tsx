@@ -58,10 +58,15 @@ const LoginForm = (props: LoginFormProps) => {
       onSubmit={formSubmitHandler}
     >
       <embed
+        style={{
+          objectFit: 'cover',
+          objectPosition: 'center',
+          minHeight: 500,
+        }}
         src="src/6_shared/assets/example.pdf"
         type="application/pdf"
-        width={400}
-        height={600}
+        // width={400}
+        // height={600}
       />
       <Text title={t('Форма авторизации')} />
       {error && (
