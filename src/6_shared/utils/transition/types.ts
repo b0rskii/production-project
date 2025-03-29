@@ -8,6 +8,8 @@ export type TransitionComponentProps = {
   leaveTo?: Partial<CSSStyleDeclaration>;
   leaveTransition?: string;
   transition?: string;
+  enterAnimation?: string;
+  leaveAnimation?: string;
   children: ReactElement;
   // eslint-disable-next-line no-unused-vars
   setMounted: (value: boolean) => void;

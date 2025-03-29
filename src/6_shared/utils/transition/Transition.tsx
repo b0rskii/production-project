@@ -14,6 +14,8 @@ const TransitionComponent = (props: TransitionComponentProps) => {
     leaveTo,
     leaveTransition = '',
     transition = '',
+    enterAnimation,
+    leaveAnimation,
     children,
     setMounted,
   } = props;
@@ -45,37 +47,43 @@ const TransitionComponent = (props: TransitionComponentProps) => {
   }, []);
 
   useLayoutEffect(() => {
-    if (!enterFrom || !isShow) return;
+    if (!isShow) return;
 
     const element = elementRef.current;
     if (!element) return;
 
-    const resetTransition = () => {
-      element.style.transition = '';
-    };
+    if (enterFrom) {
+      const resetTransition = () => {
+        element.style.transition = '';
+      };
 
-    resetTransition();
-    setStyles(element, enterFromProperties, enterFrom);
-
-    const handleTransitionEnd = (evt: TransitionEvent) => {
-      if (evt.target !== element) return;
       resetTransition();
-    };
+      setStyles(element, enterFromProperties, enterFrom);
 
-    element.addEventListener('transitionend', handleTransitionEnd, {
-      once: true,
-    });
+      const handleTransitionEnd = (evt: TransitionEvent) => {
+        if (evt.target !== element) return;
+        resetTransition();
+      };
 
-    requestAnimationFrame(() => {
-      element.style.transition = enterTransition || transition;
-      setStyles(element, enterToProperties, enterTo);
-    });
+      element.addEventListener('transitionend', handleTransitionEnd, {
+        once: true,
+      });
+
+      requestAnimationFrame(() => {
+        element.style.transition = enterTransition || transition;
+        setStyles(element, enterToProperties, enterTo);
+      });
+    }
+
+    if (enterAnimation) {
+      element.style.animation = enterAnimation;
+    }
   }, [isShow]);
 
   useLayoutEffect(() => {
     if (isShow) return;
 
-    if (!leaveTo) {
+    if (!leaveTo && !leaveAnimation) {
       setMounted(false);
       return;
     }
@@ -83,24 +91,35 @@ const TransitionComponent = (props: TransitionComponentProps) => {
     const element = elementRef.current;
     if (!element) return;
 
-    const handleTransitionEnd = (evt: TransitionEvent) => {
+    const handleLeaveEnd = (evt: TransitionEvent | AnimationEvent) => {
       if (evt.target !== element) return;
       setMounted(false);
     };
 
-    element.addEventListener('transitionend', handleTransitionEnd, {
-      once: true,
-    });
+    if (leaveTo) {
+      element.addEventListener('transitionend', handleLeaveEnd, {
+        once: true,
+      });
 
-    element.style.transition = leaveTransition || transition;
-    setStyles(element, leaveToProperties, leaveTo);
+      element.style.transition = leaveTransition || transition;
+      setStyles(element, leaveToProperties, leaveTo);
+    }
+
+    if (leaveAnimation) {
+      element.addEventListener('animationend', handleLeaveEnd, {
+        once: true,
+      });
+      element.style.animation = `${leaveAnimation} forwards`;
+    }
 
     return () => {
-      if (!leaveTo) return;
-
-      element.removeEventListener('transitionend', handleTransitionEnd);
-      element.style.transition = '';
-      setStyles(element, leaveToProperties);
+      if (leaveTo) {
+        element.removeEventListener('transitionend', handleLeaveEnd);
+        element.style.transition = '';
+        setStyles(element, leaveToProperties);
+        return;
+      }
+      element.removeEventListener('animationend', handleLeaveEnd);
     };
   }, [isShow]);
 
