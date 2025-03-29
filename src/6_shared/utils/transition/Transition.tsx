@@ -57,7 +57,14 @@ const TransitionComponent = (props: TransitionComponentProps) => {
     resetTransition();
     setStyles(element, enterFromProperties, enterFrom);
 
-    element.addEventListener('transitionend', resetTransition, { once: true });
+    const handleTransitionEnd = (evt: TransitionEvent) => {
+      if (evt.target !== element) return;
+      resetTransition();
+    };
+
+    element.addEventListener('transitionend', handleTransitionEnd, {
+      once: true,
+    });
 
     requestAnimationFrame(() => {
       element.style.transition = enterTransition || transition;
@@ -68,17 +75,22 @@ const TransitionComponent = (props: TransitionComponentProps) => {
   useLayoutEffect(() => {
     if (isShow) return;
 
-    const unmount = () => setMounted(false);
-
     if (!leaveTo) {
-      unmount();
+      setMounted(false);
       return;
     }
 
     const element = elementRef.current;
     if (!element) return;
 
-    element.addEventListener('transitionend', unmount, { once: true });
+    const handleTransitionEnd = (evt: TransitionEvent) => {
+      if (evt.target !== element) return;
+      setMounted(false);
+    };
+
+    element.addEventListener('transitionend', handleTransitionEnd, {
+      once: true,
+    });
 
     element.style.transition = leaveTransition || transition;
     setStyles(element, leaveToProperties, leaveTo);
@@ -86,7 +98,7 @@ const TransitionComponent = (props: TransitionComponentProps) => {
     return () => {
       if (!leaveTo) return;
 
-      element.removeEventListener('transitionend', unmount);
+      element.removeEventListener('transitionend', handleTransitionEnd);
       element.style.transition = '';
       setStyles(element, leaveToProperties);
     };
