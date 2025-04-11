@@ -19,6 +19,8 @@ export type FloatingModalProps = {
   height?: string;
   minWidth?: string;
   minHeight?: string;
+  isOpen?: boolean;
+  keepMounted?: boolean;
   // eslint-disable-next-line no-unused-vars
   children: ReactNode | ((closeModal: () => void) => ReactNode);
   onClose?: () => void;
@@ -29,10 +31,12 @@ export const FloatingModal = (props: FloatingModalProps) => {
     className,
     children,
     onClose,
+    isOpen,
     width = '',
     height = '',
     minWidth = '',
     minHeight = '',
+    keepMounted = false,
     ...draggableParams
   } = props;
 
@@ -41,7 +45,11 @@ export const FloatingModal = (props: FloatingModalProps) => {
     onClose,
   });
 
-  const draggable = useDraggableModal<HTMLDivElement>(draggableParams);
+  const draggable = useDraggableModal<HTMLDivElement>({
+    offset: 16,
+    isOpen: keepMounted ? isOpen : undefined,
+    ...draggableParams,
+  });
   const { resizable, resizer } = useResizable<HTMLDivElement, HTMLDivElement>();
 
   const escKeydownHandler = useCallback(
@@ -65,8 +73,8 @@ export const FloatingModal = (props: FloatingModalProps) => {
   }, [escKeydownHandler, closingTimeoutRef]);
 
   const modes = {
-    [style.opened]: !isOpening,
-    [style.closing]: isClosing,
+    [style.opened]: keepMounted ? isOpen : !isOpening,
+    [style.closing]: keepMounted ? !isOpen : isClosing,
   };
 
   const modalRefs = useCallbackRef(draggable.ref, resizable.ref);

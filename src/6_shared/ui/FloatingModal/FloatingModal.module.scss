@@ -4,13 +4,15 @@
   border: 1px solid var(--primary-color);
   color: var(--primary-color);
   border-radius: 12px;
-  transition: 0.2s opacity;
+  transition: 0.2s opacity, visibility 0.2s;
   opacity: 0;
+  // visibility: hidden;
   overflow: auto;
 }
 
 .root.opened {
   opacity: 1;
+  // visibility: visible;
 }
 
 .root.closing {

@@ -11,19 +11,18 @@ import { getAdjustedInitialCoords } from '@/6_shared/utils/elementsPositioning';
 import { PositionX, PositionY } from '@/6_shared/types/common';
 import { globalStyles } from '@/6_shared/utils/globalStyles';
 
-const DEFAULT_OFFSET = 16;
-
 export type UseDraggableModalParams = {
   anchorRef?: RefObject<HTMLElement>;
   positionX?: PositionX;
   positionY?: PositionY;
   offset?: number;
+  isOpen?: boolean;
 };
 
 export const useDraggableModal = <Modal extends HTMLElement>(
   params: UseDraggableModalParams,
 ) => {
-  const { anchorRef, positionX, positionY, offset = DEFAULT_OFFSET } = params;
+  const { anchorRef, positionX, positionY, offset = 0, isOpen } = params;
 
   const modalRef = useRef<Modal | null>(null);
 
@@ -38,6 +37,10 @@ export const useDraggableModal = <Modal extends HTMLElement>(
   // Размеры модалки на момент начала перемещения
   const modalWidthRef = useRef(0);
   const modalHeightRef = useRef(0);
+
+  // Начальные размеры модалки
+  const initialModalWidthRef = useRef(0);
+  const initialModalHeightRef = useRef(0);
 
   const handlePointerMove = useCallback(
     (evt: globalThis.PointerEvent) => {
@@ -103,17 +106,10 @@ export const useDraggableModal = <Modal extends HTMLElement>(
     modalHeightRef.current = modal.offsetHeight;
   };
 
-  // Определение координат модалки при ее появлении
-  useLayoutEffect(() => {
-    const modal = modalRef.current;
-    if (!modal) return;
-
-    modal.style.position = 'fixed';
-    modal.style.cursor = 'grab';
-    modal.style.touchAction = 'none';
-
-    const modalWidth = modal.offsetWidth;
-    const modalHeight = modal.offsetHeight;
+  // Установка координат модалки при ее появлении
+  const setModalCoords = (modal: Modal) => {
+    const modalWidth = initialModalWidthRef.current;
+    const modalHeight = initialModalHeightRef.current;
 
     let initialTop = 0;
     let initialLeft = 0;
@@ -148,11 +144,49 @@ export const useDraggableModal = <Modal extends HTMLElement>(
 
     modal.style.width = `${Math.min(modalWidth, maxWidth)}px`;
     modal.style.height = `${Math.min(modalHeight, maxHeight)}px`;
+  };
+
+  // Начальные установки при монтировании
+  useLayoutEffect(() => {
+    const modal = modalRef.current;
+    if (!modal) return;
+
+    modal.style.position = 'fixed';
+    modal.style.cursor = 'grab';
+    modal.style.touchAction = 'none';
+
+    // Сохранение начальных размеров, для их восстановления, если требуется постоянное наличие модалки в DOM
+    initialModalWidthRef.current = modal.offsetWidth;
+    initialModalHeightRef.current = modal.offsetHeight;
+
+    setModalCoords(modal);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Если модалка должна всегда находиться в DOM
+  useLayoutEffect(() => {
+    if (isOpen === true) {
+      const modal = modalRef.current;
+      if (!modal) return;
+
+      // Сброс размеров до начальных
+      modal.style.width = `${initialModalWidthRef.current}px`;
+      modal.style.height = `${initialModalHeightRef.current}px`;
+
+      setModalCoords(modal);
+
+      // Вывод текущей модалки на передний план
+      if (modal.nextElementSibling) {
+        modal.parentElement?.append(modal);
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isOpen]);
+
   // Сохранение модалки в границах экрана при изменении размеров окна браузера
   useEffect(() => {
+    if (isOpen === false) return;
+
     const handleResize = () => {
       const modal = modalRef.current;
       if (!modal) return;
@@ -169,12 +203,13 @@ export const useDraggableModal = <Modal extends HTMLElement>(
 
     window.addEventListener('resize', handleResize);
 
+    // eslint-disable-next-line consistent-return
     return () => {
       window.removeEventListener('resize', handleResize);
       globalStyles.reset();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [isOpen]);
 
   return {
     ref: modalRef,
