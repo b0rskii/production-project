@@ -16,7 +16,7 @@ export type UseDraggableModalParams = {
   positionX?: PositionX;
   positionY?: PositionY;
   offset?: number;
-  isOpen?: boolean;
+  isOpen?: boolean | null;
 };
 
 export const useDraggableModal = <Modal extends HTMLElement>(

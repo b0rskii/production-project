@@ -47,7 +47,7 @@ export const FloatingModal = (props: FloatingModalProps) => {
 
   const draggable = useDraggableModal<HTMLDivElement>({
     offset: 16,
-    isOpen: keepMounted ? isOpen : undefined,
+    isOpen: keepMounted ? isOpen : null,
     ...draggableParams,
   });
   const { resizable, resizer } = useResizable<HTMLDivElement, HTMLDivElement>();
