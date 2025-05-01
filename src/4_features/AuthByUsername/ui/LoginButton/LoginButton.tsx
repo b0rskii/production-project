@@ -53,7 +53,7 @@ export const LoginButton = observer((props: LoginButtonProps) => {
 
   const logoutMenuItemClickHandler = useCallback(() => {
     userStore.logout();
-    profileQuery.clearData();
+    profileQuery.reset();
     localStorage.removeItem(LocalStorageKey.USER);
   }, []);
 
