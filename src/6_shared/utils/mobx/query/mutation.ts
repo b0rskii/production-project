@@ -2,23 +2,26 @@ import { makeAutoObservable, runInAction } from 'mobx';
 import { OnResultCallback, RequestData, RequestFn, Status } from './types';
 
 type MutationParams<MutationFn extends RequestFn> = {
-  mutationFn: MutationFn;
   errorMessage?: string | null;
+  mutationFn: MutationFn;
   // eslint-disable-next-line no-unused-vars
   onSuccess?: (data: RequestData<MutationFn>) => void;
   // eslint-disable-next-line no-unused-vars
   onError?: (error: unknown) => void;
+  // eslint-disable-next-line no-unused-vars
+  onSettled?: () => void;
 };
 
 export class Mutation<
   MutationFn extends RequestFn,
   Data extends RequestData<MutationFn>,
 > {
+  private status: Status = 'idle';
+  private errorMessage: string | null;
   private mutationFn: MutationFn;
   private onSuccess?: OnResultCallback<Data>;
   private onError?: OnResultCallback<unknown>;
-  private errorMessage: string | null;
-  private status: Status = 'idle';
+  private onSettled?: OnResultCallback<void>;
 
   error: string | null = null;
 
@@ -37,15 +40,20 @@ export class Mutation<
     this.mutationFn = params.mutationFn;
     this.onSuccess = params.onSuccess;
     this.onError = params.onError;
+    this.onSettled = params.onSettled;
   }
 
   setError(value: string) {
     this.error = value;
   }
 
-  mutate(...args: Parameters<MutationFn>) {
+  reset() {
     this.error = null;
+  }
+
+  mutate(...args: Parameters<MutationFn>) {
     this.status = 'pending';
+    this.error = null;
 
     return this.mutationFn(...args)
       .then((data) => {
@@ -62,6 +70,9 @@ export class Mutation<
           this.onError?.(error);
         });
         return error;
+      })
+      .finally(() => {
+        this.onSettled?.();
       }) as ReturnType<MutationFn>;
   }
 }
