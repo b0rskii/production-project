@@ -1,11 +1,16 @@
-import { PropsWithChildren, memo, useCallback, useEffect } from 'react';
+import { PropsWithChildren, memo, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import {
-  ARTICLE_SLICE, ArticleDetails, articleReducer, articleSelectors, fetchArticleById,
+  ARTICLE_SLICE,
+  ArticleDetails,
+  articleReducer,
+  articleSelectors,
+  fetchArticleById,
 } from '@/5_entities/Article';
 import { getClassNames } from '@/6_shared/utils/classNames';
 import { useAppDispatch, useAsyncReducer } from '@/6_shared/utils/redux';
 import style from './ArticleDetailsBlock.module.scss';
+import { useMountEffect } from '@/6_shared/utils/react/lifeCycle';
 
 type ArticleDetailsBlockProps = PropsWithChildren<{
   className?: string;
@@ -27,12 +32,12 @@ export const ArticleDetailsBlock = memo((props: ArticleDetailsBlockProps) => {
     dispatch(fetchArticleById(articleId));
   }, [articleId, dispatch]);
 
-  useEffect(() => {
-    fetchArticle();
-  }, [fetchArticle]);
+  useMountEffect(fetchArticle);
 
   return (
-    <section className={getClassNames(style.articleDetailsBlock, {}, [className])}>
+    <section
+      className={getClassNames(style.articleDetailsBlock, {}, [className])}
+    >
       <ArticleDetails
         article={article}
         isLoading={isLoading}

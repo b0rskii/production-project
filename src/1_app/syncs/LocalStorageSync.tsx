@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { articlesSelectors } from '@/5_entities/Article';
 import { LocalStorageKey } from '@/6_shared/const/localStorage';
+import { useMountEffect } from '@/6_shared/utils/react/lifeCycle';
 
 let isInit = true;
 
@@ -16,9 +17,9 @@ export const LocalStorageSync = () => {
     localStorage.setItem(LocalStorageKey.ARTICLES_VIEW, articlesView);
   }, [articlesView]);
 
-  useEffect(() => {
+  useMountEffect(() => {
     isInit = false;
-  }, []);
+  });
 
   return null;
 };

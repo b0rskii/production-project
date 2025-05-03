@@ -1,9 +1,13 @@
-import { memo, ReactNode, useEffect } from 'react';
+import { memo, ReactNode } from 'react';
 import { getClassNames } from '@/6_shared/utils/classNames';
-import { AnimationSwipeProvider, useAnimationSwipeContext } from '@/6_shared/utils/animationSwipe';
+import {
+  AnimationSwipeProvider,
+  useAnimationSwipeContext,
+} from '@/6_shared/utils/animationSwipe';
 import { Portal } from '@/6_shared/ui/Portal';
 import { Overlay } from '@/6_shared/ui/Overlay';
 import style from './Drawer.module.scss';
+import { useMountEffect } from '@/6_shared/utils/react/lifeCycle';
 
 const height = window.innerHeight - 100;
 
@@ -24,7 +28,11 @@ const DrawerContent = (props: DrawerProps) => {
   const [{ y }, api] = useSpring(() => ({ y: height }));
 
   const open = ({ canceled }: { canceled?: boolean } = {}) => {
-    api.start({ y: 0, immediate: false, config: canceled ? config.wobbly : config.stiff });
+    api.start({
+      y: 0,
+      immediate: false,
+      config: canceled ? config.wobbly : config.stiff,
+    });
   };
 
   const close = (velocity = 0) => {
@@ -37,7 +45,14 @@ const DrawerContent = (props: DrawerProps) => {
   };
 
   const bind = useDrag(
-    ({ last, velocity: [, vy], direction: [, dy], movement: [, my], cancel, canceled }) => {
+    ({
+      last,
+      velocity: [, vy],
+      direction: [, dy],
+      movement: [, my],
+      cancel,
+      canceled,
+    }) => {
       if (my < -70) cancel();
 
       if (last) {
@@ -51,14 +66,14 @@ const DrawerContent = (props: DrawerProps) => {
       }
     },
     {
-      from: () => [0, y.get()], filterTaps: true, bounds: { top: 0 }, rubberband: true,
+      from: () => [0, y.get()],
+      filterTaps: true,
+      bounds: { top: 0 },
+      rubberband: true,
     },
   );
 
-  useEffect(() => {
-    open();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  useMountEffect(open);
 
   const display = y.to((py) => (py < height ? 'block' : 'none'));
 

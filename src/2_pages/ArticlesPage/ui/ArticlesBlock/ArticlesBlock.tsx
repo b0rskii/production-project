@@ -1,4 +1,4 @@
-import { PropsWithChildren, useCallback, useEffect } from 'react';
+import { PropsWithChildren, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import {
@@ -17,6 +17,7 @@ import { I18nNameSpace } from '@/6_shared/utils/i18n/nameSpace';
 import { ListView } from '@/6_shared/ui/ListViewSwitcher';
 import { Text } from '@/6_shared/ui/Text';
 import style from './ArticlesBlock.module.scss';
+import { useMountEffect } from '@/6_shared/utils/react/lifeCycle';
 
 let isInit = true;
 
@@ -40,19 +41,20 @@ export const ArticlesBlock = (props: ArticlesBlockProps) => {
     dispatch(fetchArticles());
   }, [dispatch]);
 
-  useEffect(() => {
+  useMountEffect(() => {
     if (isInit) {
       const localArticlesView = localStorage.getItem(
         LocalStorageKey.ARTICLES_VIEW,
       ) as ListView | null;
 
-      if (localArticlesView) dispatch(articlesActions.setView(localArticlesView));
+      if (localArticlesView)
+        dispatch(articlesActions.setView(localArticlesView));
 
       getArticles();
 
       isInit = false;
     }
-  }, [dispatch, getArticles]);
+  });
 
   if (!isInit && !isLoading && !error && !articles.length) {
     return (
