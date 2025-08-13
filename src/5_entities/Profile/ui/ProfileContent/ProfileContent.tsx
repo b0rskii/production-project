@@ -21,52 +21,32 @@ type Props = PropsWithChildren<{
 
 export const ProfileContent = memo((props: Props) => {
   const {
-    className, avatar, Firstname, Lastname, Username, Age, City, Country, Currency, AvatarNode,
+    className,
+    avatar,
+    Firstname,
+    Lastname,
+    Username,
+    Age,
+    City,
+    Country,
+    Currency,
+    AvatarNode,
   } = props;
 
   const { t } = useTranslation([I18nNameSpace.Translation, I18nNameSpace.Profile]);
 
   return (
     <Stack className={getClassNames('', {}, [className])} mode="v" align="start" gap="l">
-      {avatar && (
-        <Avatar
-          src={avatar}
-          alt="avatar"
-        />
-      )}
-
-      <ProfileRow name={t('Имя', { ns: I18nNameSpace.Profile })}>
-        {Firstname}
-      </ProfileRow>
-
-      <ProfileRow name={t('Фамилия', { ns: I18nNameSpace.Profile })}>
-        {Lastname}
-      </ProfileRow>
-
-      <ProfileRow name={t('Имя пользователя')}>
-        {Username}
-      </ProfileRow>
-
-      <ProfileRow name={t('Возраст', { ns: I18nNameSpace.Profile })}>
-        {Age}
-      </ProfileRow>
-
-      <ProfileRow name={t('Город', { ns: I18nNameSpace.Profile })}>
-        {City}
-      </ProfileRow>
-
-      <ProfileRow name={t('Страна', { ns: I18nNameSpace.Profile })}>
-        {Country}
-      </ProfileRow>
-
-      <ProfileRow name={t('Валюта', { ns: I18nNameSpace.Profile })}>
-        {Currency}
-      </ProfileRow>
-
+      {avatar && <Avatar src={avatar} alt="avatar" />}
+      <ProfileRow name={t('Имя', { ns: I18nNameSpace.Profile })}>{Firstname}</ProfileRow>
+      <ProfileRow name={t('Фамилия', { ns: I18nNameSpace.Profile })}>{Lastname}</ProfileRow>
+      <ProfileRow name={t('Имя пользователя')}>{Username}</ProfileRow>
+      <ProfileRow name={t('Возраст', { ns: I18nNameSpace.Profile })}>{Age}</ProfileRow>
+      <ProfileRow name={t('Город', { ns: I18nNameSpace.Profile })}>{City}</ProfileRow>
+      <ProfileRow name={t('Страна', { ns: I18nNameSpace.Profile })}>{Country}</ProfileRow>
+      <ProfileRow name={t('Валюта', { ns: I18nNameSpace.Profile })}>{Currency}</ProfileRow>
       {AvatarNode && (
-        <ProfileRow name={t('Аватар', { ns: I18nNameSpace.Profile })}>
-          {AvatarNode}
-        </ProfileRow>
+        <ProfileRow name={t('Аватар', { ns: I18nNameSpace.Profile })}>{AvatarNode}</ProfileRow>
       )}
     </Stack>
   );

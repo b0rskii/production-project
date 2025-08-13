@@ -60,24 +60,36 @@ export const ProfileBlock = (props: ProfileBlockProps) => {
     }
   }, [isCurrentProfile, fetchProfile]);
 
-  const onInputChange = useCallback((value: string, name?: string) => {
-    if (!name) {
-      return;
-    }
-    dispatch(editProfileActions.updateProfileForm({ [name]: value }));
-  }, [dispatch]);
+  const onInputChange = useCallback(
+    (value: string, name?: string) => {
+      if (!name) {
+        return;
+      }
+      dispatch(editProfileActions.updateProfileForm({ [name]: value }));
+    },
+    [dispatch],
+  );
 
-  const onAgeChange = useCallback((value: string) => {
-    dispatch(editProfileActions.updateProfileForm({ age: Number(value) }));
-  }, [dispatch]);
+  const onAgeChange = useCallback(
+    (value: string) => {
+      dispatch(editProfileActions.updateProfileForm({ age: Number(value) }));
+    },
+    [dispatch],
+  );
 
-  const onCountryChange = useCallback((value: Country) => {
-    dispatch(editProfileActions.updateProfileForm({ country: value }));
-  }, [dispatch]);
+  const onCountryChange = useCallback(
+    (value: Country) => {
+      dispatch(editProfileActions.updateProfileForm({ country: value }));
+    },
+    [dispatch],
+  );
 
-  const onCurrencyChange = useCallback((value: Currency) => {
-    dispatch(editProfileActions.updateProfileForm({ currency: value }));
-  }, [dispatch]);
+  const onCurrencyChange = useCallback(
+    (value: Currency) => {
+      dispatch(editProfileActions.updateProfileForm({ currency: value }));
+    },
+    [dispatch],
+  );
 
   const profileHandlers: ProfileHandlers = useMemo(
     () => ({
@@ -86,12 +98,7 @@ export const ProfileBlock = (props: ProfileBlockProps) => {
       onCountryChange,
       onCurrencyChange,
     }),
-    [
-      onInputChange,
-      onAgeChange,
-      onCountryChange,
-      onCurrencyChange,
-    ],
+    [onInputChange, onAgeChange, onCountryChange, onCurrencyChange],
   );
 
   return (
@@ -99,9 +106,7 @@ export const ProfileBlock = (props: ProfileBlockProps) => {
       <div className={style.header}>
         <Text title={t('Профиль')} />
         {profile && userData && profile.id === userData.id && (
-          <EditProfileButton
-            className={style.editButton}
-          />
+          <EditProfileButton className={style.editButton} />
         )}
       </div>
 

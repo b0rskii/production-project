@@ -24,7 +24,7 @@ export const editProfileSlice = createSlice({
       state.isReadonly = true;
       state.validateErrors = null;
     },
-    updateProfileForm: (state, action: PayloadAction<Profile>) => {
+    updateProfileForm: (state, action: PayloadAction<Partial<Profile>>) => {
       state.profileForm = {
         ...state.profileForm,
         ...action.payload,
@@ -56,7 +56,4 @@ export const editProfileSlice = createSlice({
   },
 });
 
-export const {
-  actions: editProfileActions,
-  reducer: editProfileReducer,
-} = editProfileSlice;
+export const { actions: editProfileActions, reducer: editProfileReducer } = editProfileSlice;

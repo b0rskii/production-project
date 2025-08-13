@@ -17,13 +17,7 @@ type ProfileProps = PropsWithChildren<{
 }>;
 
 export const ProfileCard = memo((props: ProfileProps) => {
-  const {
-    className,
-    profile,
-    isLoading,
-    error,
-    onRepeatFetch,
-  } = props;
+  const { className, profile, isLoading, error, onRepeatFetch } = props;
 
   const { t } = useTranslation([I18nNameSpace.Translation, I18nNameSpace.Profile]);
 
@@ -47,9 +41,7 @@ export const ProfileCard = memo((props: ProfileProps) => {
   }
 
   if (!profile) {
-    return (
-      <div className={getClassNames(style.profileCard, {}, [className, style.loading])} />
-    );
+    return <div className={getClassNames(style.profileCard, {}, [className, style.loading])} />;
   }
 
   return (

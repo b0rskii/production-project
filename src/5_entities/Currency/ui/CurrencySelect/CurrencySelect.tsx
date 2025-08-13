@@ -2,13 +2,12 @@ import { memo, PropsWithChildren, useState } from 'react';
 import { SelectOption } from '@/6_shared/ui/Select';
 import { ListBox } from '@/6_shared/ui/Popups';
 import { getClassNames } from '@/6_shared/utils/classNames';
-import { Currency } from '../../model/types/currency';
+import { CurrencyEnum, Currency } from '../../model/types/currency';
 
-const currencies: SelectOption<Currency>[] = Object.values(Currency)
-  .map((currency) => ({
-    value: currency,
-    content: currency,
-  }));
+const currencies: SelectOption<Currency>[] = Object.values(CurrencyEnum).map((currency) => ({
+  value: currency,
+  content: currency,
+}));
 
 type CurrencySelectProps = PropsWithChildren<{
   className?: string;
